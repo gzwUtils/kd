@@ -4,8 +4,7 @@ import lombok.Getter;
 
 /**
  * 异步任务类型枚举类
- * @author ligq
- * @since 2020-05-29
+ * @author gaozhiwei
  */
 @Getter
 public enum AsyncTaskStatusEnum{

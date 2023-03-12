@@ -22,7 +22,6 @@
       <input type="hidden" id ="userName" name="userName" value="${Session['user_key'].account}"/>
       <a  href="http://www.dmanywhere.cn/" target="_blank">pdm在线地址</a>&nbsp;&nbsp;
       <a  href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html" target="_blank">B+树</a>
-      <!--<a  href="https://aibj1.cc/forum.php" target="_blank">妞妞</a>-->
       <a  href="https://mp.weixin.qq.com/s/yhv48jQMqOSWcRkAA2clMA" target="_blank">JVM常用排查工具</a>
       <br/>
       <br/>
@@ -46,6 +45,7 @@
       <el-button type="success"  size="mini" @click="smsSend()">短信发送</el-button>
       <el-button type="success"  size="mini" @click="emailSend()">邮件发送</el-button>
       <el-input v-model="phone" placeholder="手机号" v-if="showPhone"></el-input>
+      <el-input v-model="subject" placeholder="主题" v-if="showEmail"></el-input>
       <el-input v-model="email" placeholder="邮箱" v-if="showEmail"></el-input>
       <br/>
       <br/>
@@ -103,6 +103,7 @@
                 result: '',
                 email: '',
                 tokens: '',
+                subject: '',
                 showPhone: false,
                 showEmail: false,
 
@@ -225,11 +226,11 @@
               },
             emailSend() {
                     this.showEmail = true;
-                    if (this.email === '' || this.email === null) {
+                    if (this.email === '' || this.subject === '') {
                           this.$message.error("请输入....");
                           return;
                     }
-                    axios.post('/pc/sendEmailMessage?email=' + this.email + "&message=" + this.textarea).then(response => {
+                    axios.post('/pc/sendEmailMessage?email=' + this.email + "&message=" + this.textarea+"&subject="+this.subject).then(response => {
                           this.$message.success(response.data.message);
                     });
               }
