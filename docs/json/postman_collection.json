@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "f9ebbc6a-f46a-4808-906d-600d6face9b1",
+		"name": "其他",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "删除菜单",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"首页\",\n\t\"type\":\"view\",\n\t\"menuLevel\":1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8092/wx/deleteMenu",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"wx",
+						"deleteMenu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "创建菜单",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"menuList\":[\n     {\t\n          \"type\":\"view\",\n          \"menuLevel\":1,\n          \"name\":\"首页\",\n          \"url\":\"http://gj2zjm.natappfree.cc/wx/index\"\n      },\n      {\t\n          \"type\":\"view\",\n          \"menuLevel\":1,\n          \"name\":\"代办\",\n          \"url\":\"http://gj2zjm.natappfree.cc/wx/daiban?index=1\"\n      },\n      {\n           \"name\":\"个人中心\",\n           \"menuLevel\":2,\n           \"twoMenuList\":[\n           {\t\n               \"type\":\"view\",\n               \"name\":\"我的合同\",\n               \"url\":\"http://gj2zjm.natappfree.cc/wx/assign?index=2\"\n            },\n            {\n                 \"type\":\"view\",\n                 \"name\":\"我的账号\",\n                 \"url\":\"http://gj2zjm.natappfree.cc/wx/account?index=3\"\n              \n             }]\n       }]\n }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8092/wx/createMultiMenu",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"wx",
+						"createMultiMenu"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "上传",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": []
+						}
+					]
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/pc/upload",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"pc",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "导出",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/pc/export",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"pc",
+						"export"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "异步导出",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idGte\":\"100\",\n\t\"idLte\":\"160\",\n\t\"exportFields\":[\"ip\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/pc/asyncExport",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"pc",
+						"asyncExport"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取唯一ID",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/pc/getUniqueId",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"pc",
+						"getUniqueId"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "下载模版",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/pc/downloadTemplate",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"pc",
+						"downloadTemplate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "qrcode",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/qrt/dyQrCodeWriter",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"qrt",
+						"dyQrCodeWriter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取用户信息",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/pc/getAllUser",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"pc",
+						"getAllUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "redis锁",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/pc/testRedisLock?userId=1024",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"pc",
+						"testRedisLock"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "1024"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "es日志查询",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/es/getAllLog",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"es",
+						"getAllLog"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新正则",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/pc/updateCronTime?cron=0 */1  * * * ?",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"pc",
+						"updateCronTime"
+					],
+					"query": [
+						{
+							"key": "cron",
+							"value": "0 */1  * * * ?"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "入队",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0efeb606-895d-4d0f-8e27-4716f85c66e0",
+						"exec": [
+							"//获取时间戳",
+							"var timestamp = Math.round(new Date().getTime());",
+							"var body = pm.request.body.raw;",
+							"var sign = \"timestamp=\" + timestamp + \"&token=3705564dd0b774b746beeabdf5064640&body=\" + body;",
+							"sign = CryptoJS.MD5(sign).toString();",
+							"pm.environment.set(\"sign\", sign);",
+							"pm.environment.set(\"timestamp\", timestamp);",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "sign",
+						"value": "{{sign}}",
+						"type": "text"
+					},
+					{
+						"key": "timestamp",
+						"value": "{{timestamp}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"size\":5,\n\t\"data\": [\"11\",\"zhs\",\"kyh\",\"zwh\",\"zy\",\"wxm\",\"gzw\",\"12\",\"13\",\"34\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/base/put",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"base",
+						"put"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

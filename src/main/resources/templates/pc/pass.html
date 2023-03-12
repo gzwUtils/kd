@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="renderer" content="webkit">
+<title></title>
+<link rel="stylesheet" href="/assets/pc/css/pintuer.css">
+<link rel="stylesheet" href="/assets/pc/css/admin.css">
+<script src="/assets/pc/js/jquery.js"></script>
+<script type="text/javascript" src="/assets/pc/js/hex.js"></script>
+<script type="text/javascript" src="/assets/pc/js/byteUtil.js"></script>
+<script type="text/javascript" src="/assets/pc/js/core.js"></script>
+<script type="text/javascript" src="/assets/pc/js/md5.js"></script>
+<script type="text/javascript" src="/assets/pc/js/sm3-1.0.js"></script>
+<script type="text/javascript" src="/assets/pc/js/sm4-1.0.js"></script>
+<script type="text/javascript" src="/assets/pc/js/SMAlgoUtil.js"></script>
+<script src="/assets/pc/js/pintuer.js"></script>
+<script>
+
+
+     function showMessage(message, type, time) {
+         let str = ''
+         switch (type) {
+             case 'success':
+                 str = '<div class="success-message" style="width: 300px;height: 40px;text-align: center;background-color:#daf5eb;;color: rgba(103,194,58,0.7);position: fixed;left: 50%;top: 5%;margin-left:-150px;margin-top:-20px;line-height: 40px;border-radius: 5px;z-index: 9999">\n' +
+                     '    <span class="mes-text">' + message + '</span></div>'
+                 break;
+             case 'error':
+                 str = '<div class="error-message" style="width: 300px;height: 40px;text-align: center;background-color: #f5f0e5;color: rgba(238,99,99,0.8);position: fixed;left: 50%;top: 10%;line-height: 40px;margin-left:-150px;margin-top:-20px;border-radius: 5px;;z-index: 9999">\n' +
+                     '    <span class="mes-text">' + message + '</span></div>'
+         }
+         $('body').append(str);
+         setTimeout(function () {
+             $('.' + type + '-message').remove();
+         }, time);
+     }
+
+
+  function check(param) {
+    if (param === '提交') {
+      let pass = document.getElementById("pass").value;
+      let newPass = document.getElementById("newPass").value;
+      if(pass === '' || newPass === '' ){
+        showMessage("请填写密码信息","error",3000);
+         return false;
+      }
+      const timestamp = Number(new Date()).toString();
+      pass = CryptoJS.MD5(pass).toString().toUpperCase();
+	  pass = SMUtils.SM3(pass);
+      let key = pass.substring(0, 32);
+      let iv = pass.substring(pass.length - 32, pass.length);
+      pass = SMUtils.SM4EncryptCBC(timestamp,key,iv);
+
+	  newPass = CryptoJS.MD5(newPass).toString().toUpperCase();
+      const oldPsdSM3 = SMUtils.SM3(pass + timestamp);
+      key = oldPsdSM3.substring(0,32);
+	  iv = oldPsdSM3.substring(oldPsdSM3.length - 32,oldPsdSM3.length);
+	  newPass = SMUtils.SM4EncryptCBC(newPass,key,iv);
+        $.ajax({
+          type: "post",
+          url: "/pc/updatePassword",
+          data: {"pass":pass,"newPass":newPass,"timestamp":timestamp},
+          dataType: "json",
+          success: function (data) {
+            if (data.code === 20000) {
+              showMessage(data.message,"success",3000);
+              window.parent.refresh();
+            } else {
+              showMessage(data.message,"error",3000);
+            }
+          }
+        });
+        return true;
+    }
+  }
+</script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head"><strong><span class="icon-key"></span> 修改会员密码(密码必须是8位以上、必须含有字母、数字、特殊符号)</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="">
+      <div class="form-group">
+        <div class="label">
+          <label for="pass">原始密码：</label>
+        </div>
+        <div class="field">
+          <input type="password" class="input w50" id="pass" name="pass" size="50" placeholder="请输入原始密码" data-validate="required:请输入原始密码" />
+        </div>
+      </div>      
+      <div class="form-group">
+        <div class="label">
+          <label for="newPass">新密码：</label>
+        </div>
+        <div class="field">
+          <input type="password" class="input w50" id="newPass" name="newPass" size="50" placeholder="请输入新密码" data-validate="required:请输入新密码" />
+          <span id="warnPass"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="label">
+          <label for="renewPass">确认新密码：</label>
+        </div>
+        <div class="field">
+          <input type="password" class="input w50" id="renewPass" name="renewPass" size="50" placeholder="请再次输入新密码" data-validate="required:请再次输入新密码,repeat#newPass:两次输入的密码不一致" />
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="label">
+          <label></label>
+        </div>
+        <div class="field">
+          <button class="button bg-main icon-check-square-o" type="button" onclick="return check('提交')"> 提交</button>
+        </div>
+      </div>      
+    </form>
+  </div>
+</div>
+</body>
+</html>

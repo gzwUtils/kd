@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.LogMapper" >
+
+  <select id="getLogInfo"   resultType="com.gzw.kd.vo.output.LogExportOutput">
+      SELECT id, username, operation,  create_time createTime,ip,location,`desc`, `result` FROM log
+      <if test="time!=null">
+          where create_time &lt; #{time}
+      </if>
+  </select>
+
+
+    <select id="getAllOperation"   resultType="com.gzw.kd.common.entity.Log">
+        SELECT id, username, operation,  create_time createTime,ip,location,`desc`, `result` FROM log
+         <if test="name!='admin'"> where username =#{name} </if>
+        order by create_time desc
+    </select>
+
+
+</mapper>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.UserMapper" >
+
+  <select id="getUserByName"   resultType="com.gzw.kd.common.entity.User">
+      SELECT id, password, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  account=#{account}
+  </select>
+
+    <select id="getUserByNameAndPhone"   resultType="com.gzw.kd.common.entity.User">
+        SELECT id, password, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  account=#{account} and  phone=#{phone}
+    </select>
+
+    <select id="getUserByPhone"   resultType="com.gzw.kd.common.entity.User">
+        SELECT id, password, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  phone=#{phone}
+    </select>
+
+    <select id="getAllNames"   resultType="string">
+     select account  from user where status=0
+    </select>
+
+  <insert id="registerUser"  parameterType="com.gzw.kd.common.entity.User">
+
+    insert into user(status, account, password, phone, create_time,email) values(0,#{account},#{password},#{phone},#{createTime},#{email})
+
+  </insert>
+
+  <update id="updateStatusByName">
+         update user Set status=#{status},update_time=now() where account=#{account}
+  </update>
+
+    <update id="updateStatusById">
+        update user Set status=#{status},update_time=now() where id=#{id}
+    </update>
+
+    <update id="updateErrorByName">
+        update user Set error_retry=#{errorRetry},update_time=now() where account=#{account}
+    </update>
+
+
+    <update id="updatePasswordDocById"  parameterType="com.gzw.kd.common.entity.User">
+        update user Set password=#{password},update_time=now() where id=#{id}
+    </update>
+
+    <select id="getAllUsers"   resultType="com.gzw.kd.common.entity.User">
+        SELECT id, password, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user
+    </select>
+</mapper>

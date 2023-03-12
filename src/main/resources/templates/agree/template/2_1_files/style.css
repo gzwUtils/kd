@@ -1,0 +1,109 @@
+﻿.stl_ sup {
+	vertical-align: baseline;
+	position: relative;
+	top: -0.4em;
+}
+.stl_ sub {
+	vertical-align: baseline;
+	position: relative;
+	top: 0.4em;
+}
+.stl_ a:link {text-decoration:none;}
+.stl_ a:visited {text-decoration:none;}
+@media screen and (min-device-pixel-ratio:0), (-webkit-min-device-pixel-ratio:0), (min--moz-device-pixel-ratio: 0) {.stl_view{ font-size:10em; transform:scale(0.1); -moz-transform:scale(0.1); -webkit-transform:scale(0.1); -moz-transform-origin:top left; -webkit-transform-origin:top left; } }
+.stl_layer { }.stl_ie { font-size: 1pt; }
+.stl_ie body { font-size: 12em; }
+@media print{.stl_view {font-size:1em; transform:scale(1);}}
+.stl_grlink { position:relative;width:100%;height:100%;z-index:1000000; }
+.stl_01 {
+	position: absolute;
+	white-space: nowrap;
+}
+.stl_02 {
+	font-size: 1em;
+	line-height: 0.0em;
+	width: 49.58333em;
+	height: 70.08334em;
+	border-style: none;
+	display: block;
+	margin: 0em;
+}
+
+@supports(-ms-ime-align:auto) { .stl_02 {overflow: hidden;}}
+.stl_03 {
+	position: relative;
+}
+.stl_04 {
+	position: absolute;
+	left: 0em;
+	top: 0em;
+}
+.stl_05 {
+	position: relative;
+	width: 49.58333em;
+}
+.stl_06 {
+	height: 7.008333em;
+}
+.stl_ie .stl_06 {
+	height: 70.08334em;
+}
+@font-face {
+	font-family:"HBUVMC+Microsoft YaHei";
+	src:url("../fonts/5dc99754-0000-0000-0000-000000000000.woff") format("woff");
+}
+.stl_07 {
+	font-size: 0.916667em;
+	font-family: "HBUVMC+Microsoft YaHei";
+	color: #000000;
+}
+.stl_08 {
+	line-height: 1.319824em;
+}
+.stl_09 {
+	letter-spacing: -0.0004em;
+}
+
+.stl_ie .stl_09 {
+	letter-spacing: -0.0062px;
+}
+@font-face {
+	font-family:"UFKVNQ+Microsoft YaHei";
+	src:url("../fonts/0d5b444b-0000-0000-0000-000000000000.woff") format("woff");
+}
+.stl_10 {
+	font-size: 0.916667em;
+	font-family: "UFKVNQ+Microsoft YaHei", "Times New Roman";
+	color: #000000;
+}
+.stl_11 {
+	letter-spacing: 0em;
+}
+
+.stl_ie .stl_11 {
+	letter-spacing: 0px;
+}
+.stl_12 {
+	font-size: 1.333333em;
+	font-family: "UFKVNQ+Microsoft YaHei", "Times New Roman";
+	color: #000000;
+}
+.stl_13 {
+	letter-spacing: 0.0001em;
+}
+
+.stl_ie .stl_13 {
+	letter-spacing: 0.0011px;
+}
+@font-face {
+	font-family:"TRGIIV+Times New Roman";
+	src:url("../fonts/22c919f1-0000-0000-0000-000000000000.woff") format("woff");
+}
+.stl_14 {
+	font-size: 0.75em;
+	font-family: "TRGIIV+Times New Roman";
+	color: #000000;
+}
+.stl_15 {
+	line-height: 1.107422em;
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 必须先引入vue，  后使用element-ui -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <el-form :model="dataForm" ref="dataForm" label-width="140px">
+        <el-form-item>
+            <el-upload
+                class="upload-demo"
+                ref="upload"
+                action="/pc/upload"
+                :on-success="handleAvatarSuccess"
+                :show-file-list="false">
+                <el-button slot="trigger" size="small" type="primary">上传文件</el-button>
+            </el-upload>
+            <el-table class="down" :data="dataList" border stripe style="width: 100%;margin-top: 20px;">
+                <el-table-column prop="attachName" label="文件名称"></el-table-column>
+                <el-table-column prop="attachSize" label="文件大小">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.attachSize / 1024 / 1024 < 1">{{(scope.row.attachSize / 1024).toFixed(2) + 'KB'}}</span>
+                        <span v-else>{{(scope.row.attachSize / 1024 / 1024).toFixed(2) + 'MB'}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="uploadTime" label="上传时间"></el-table-column>
+                <el-table-column width="150px" label="操作">
+                    <template slot-scope="scope">
+                        <el-button size="small" type="text">
+                            <a @click="downloadFile(scope.row.attachName,scope.row.attachUrl)">下载</a>
+                        </el-button>
+                        <el-button size="small" type="text" @click="deleteHandle(scope.row.attachName)" disabled="disabled">删除</el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </el-form-item>
+    </el-form>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                dataForm: {
+                    attachName: '',
+                    uploadTime: '',
+                    attachUrl: '',
+                    attachSize: '',
+                },
+                dataList: [],
+            };
+        },
+        mounted () {
+            this.getDataList();
+        },
+        methods: {
+            //获取附件列表
+            getDataList(){
+                axios.post('/pc/getAllUploadInfo').then(response => {
+                    this.dataList = response.data.data.dataList;
+                });
+            },
+            //下载按钮回调
+            downloadFile(name,url){
+                const a = document.createElement('a');
+                const event = new MouseEvent('click');
+                a.download = name;
+                a.href = url;
+                a.dispatchEvent(event);
+            },
+            //成功回调
+            handleAvatarSuccess(res, file) {
+                this.dataForm.attachName = file.name
+                this.dataForm.attachUrl = res.data.url
+                this.dataForm.attachSize = file.size
+                this.dataFormSubmit()
+            },
+            // 删除
+            deleteHandle(attachName) {
+                this.$confirm('是否确认删除该附件', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(function () {
+                    this.$message({
+                        message: '删除成功'
+                    })
+                }).then(data => {
+                    this.$message.success('删除成功')
+                    this.getDataList()
+                })
+            },
+            // 表单提交
+            dataFormSubmit() {
+                this.getDataList();
+            }
+        }
+    })
+</script>
+</html>

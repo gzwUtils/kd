@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.DocMapper" >
+
+  <select id="getDocByNameAndStatus"   resultType="com.gzw.kd.common.entity.Doc">
+     select id, status, `dispatch`,result, appoint, `desc`, issue_date as issueDate, audit, verify, appoint_date as appointDate ,consumer_Name customerName,address from doc  where appoint=#{name} and status=#{status} order by issue_date desc
+  </select>
+
+    <select id="getDocByName"   resultType="com.gzw.kd.common.entity.Doc">
+        SELECT id, status, `dispatch`, appoint, `desc`, issue_date as issueDate, appoint_date as appointDate, audit, verify, `result`, msgId ,consumer_Name customerName,address FROM doc.doc where appoint=#{name}  order by issue_date  desc
+    </select>
+
+    <select id="getDocById"   resultType="com.gzw.kd.common.entity.Doc">
+        SELECT id, status, `dispatch`, appoint, `desc`, issue_date as issueDate, appoint_date as appointDate, audit, verify, `result`, msgId,consumer_Name customerName,address FROM doc.doc where id = #{id}
+    </select>
+
+    <select id="getAllDocs"   resultType="com.gzw.kd.common.entity.Doc">
+        select  id, status, `dispatch`, appoint, `desc`, issue_date as issueDate,  audit, verify ,appoint_date as appointDate,consumer_Name customerName,address   from doc  where 1=1
+        <if test="status!=null" >
+           and   status=#{status}
+        </if>
+        <if test="verify!=null" >
+            and  verify=#{verify}
+        </if>
+
+        <if test="appoint!=null" >
+           and  verify=#{verify}
+        </if>
+        <if test="desc!=null" >
+          and   desc  like concat('%',#{desc},'%')
+        </if>
+          order by issue_date  desc
+    </select>
+
+  <insert id="addDoc" parameterType="com.gzw.kd.common.entity.Doc" useGeneratedKeys="true" keyProperty="id">
+
+    insert into doc(id,status,dispatch,appoint,issue_date,`desc`,appoint_date,consumer_Name,address) values(null,#{status},#{dispatch},#{appoint},#{issueDate},#{desc},#{appointDate},#{customerName},#{address})
+
+  </insert>
+
+  <update id="updateDocNameForDocById"  parameterType="com.gzw.kd.common.entity.Doc">
+         update doc Set DocName=#{docName} where ID=#{id}
+  </update>
+
+    <update id="updatePdfNameForDocById"  parameterType="com.gzw.kd.common.entity.Doc">
+         update doc Set PdfName==#{pdfName} where ID=#{id}
+  </update>
+
+    <update id="updateStatusForDocById"  parameterType="com.gzw.kd.common.entity.Doc">
+         update doc set status=#{status},issue_date=#{issueDate}
+          <if test="audit!=null" >
+              , audit=#{audit}
+          </if>
+        <if test="verify!=null" >
+            , verify=#{verify}
+        </if>
+        where ID=#{id}
+  </update>
+
+    <update id="updateResultForMsgId"  parameterType="string">
+        update doc set result=#{result}   where msgId=#{msgId}
+    </update>
+
+</mapper>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>登录</title>
+    <link rel="stylesheet" href="/assets/pc/css/pintuer.css">
+    <link rel="stylesheet" href="/assets/pc/css/admin.css">
+    <link rel="stylesheet" href="/assets/pc/css/styleDemo.css" media="screen" type="text/css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/hex.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/byteUtil.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/core.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/md5.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/sm3-1.0.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/sm4-1.0.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/SMAlgoUtil.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/login.js"></script>
+    <script src="/assets/pc/js/pintuer.js"></script>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script src='/assets/pc/js/dat.gui.min.js'></script>
+<script src="/assets/pc/js/index.js"></script>
+<div class="title"></div>
+<div class="bg2"></div>
+<div class="container">
+    <div class="line ">
+        <div class="xs6 xm4 xs3-move xm4-move">
+            <div style="height:150px;"></div>
+            <div class="media media-y margin-big-bottom">
+            </div>
+            <form action="" method="post">
+            <div class="panel login-box">
+                <div class="text-center margin-big padding-big-top"><h1 style="color:mediumseagreen">后台系统</h1></div>
+                <div class="panel-body" style="padding:30px; padding-bottom:10px; padding-top:10px;">
+                    <div class="form-group">
+                        <div class="field field-icon-right">
+                            <input type="text" id="userName" name="userName" class="input input-big"  placeholder="登录账号" data-validate="required:请填写账号"/>
+                            <span class="icon icon-user margin-small"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="field field-icon-right">
+                            <input type="password" id="password" name="password" class="input input-big"  placeholder="登录密码" data-validate="required:请填写密码" />
+                            <span class="icon icon-key margin-small"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="field">
+                            <input type="text" class="input input-big" name="code" id="code" placeholder="填写右侧的验证码" data-validate="required:请填写右侧的验证码"/>
+                            <img id="codeImg" src="/pc/getCode" onclick="refresh()" alt="" width="100" height="32" class="passcode" style="height:43px;cursor:pointer;" >
+                        </div>
+                    </div>
+                </div>
+                <div style="padding:30px;"><input type="button"   id="loginButton" class="button button-block bg-main text-big input-big" value="登录" onclick="return login()">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/pc/register">注册</a><a href="/pc/phoneLogin">&nbsp;手机号登录</a></div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

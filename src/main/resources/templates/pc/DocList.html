@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>流转列表</title>
+    <link rel="stylesheet" href="/assets/pc/css/pintuer.css">
+    <link rel="stylesheet" href="/assets/pc/css/admin.css">
+    <script src="/assets/pc/js/jquery.js"></script>
+    <script src="/assets/pc/js/pintuer.js"></script>
+</head>
+<body>
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder">流转列表</strong></div>
+        <table class="table table-hover text-center">
+            <tr>
+                <th width="10%">发起人</th>
+                <th width="10%">指派人</th>
+                <th width="10%">指派时间</th>
+                <th width="20%">描述信息</th>
+                <th width="10%">更新时间</th>
+                <th width="15%">审批人</th>
+                <th width="15%">核稿人</th>
+                <th width="10%">流转状态</th>
+            </tr>
+            <#list docs as doc>
+            <tr>
+                <td>${doc.dispatch!""}</td>
+                <td>${doc.appoint!""}</td>
+                <td>${doc.appointDates!""}</td>
+                <td>${doc.desc!""}</td>
+                <td>${doc.issueDate}</td>
+                <td>${doc.audit!""}</td>
+                <td>${doc.verify!""}</td>
+                <td>${doc.statusName!""}</td>
+            </tr>
+            </#list>
+        </table>
+    </div>
+<script type="text/javascript">
+</script>
+</body>
+</html>

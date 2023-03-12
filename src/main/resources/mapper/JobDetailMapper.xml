@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.JobDetailMapper">
+    <resultMap id="BaseResultMap" type="com.gzw.kd.common.entity.JobDetail">
+        <id column="SCHED_NAME" jdbcType="VARCHAR" property="schedulerName"/>
+        <id column="JOB_NAME" jdbcType="VARCHAR" property="jobName"/>
+        <id column="JOB_GROUP" jdbcType="VARCHAR" property="jobGroup"/>
+        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description"/>
+        <result column="JOB_CLASS_NAME" jdbcType="VARCHAR" property="jobClassName"/>
+        <result column="IS_DURABLE" jdbcType="VARCHAR" property="isDurable"/>
+        <result column="IS_NONCONCURRENT" jdbcType="VARCHAR" property="isNonConcurrent"/>
+        <result column="IS_UPDATE_DATA" jdbcType="VARCHAR" property="isUpdateData"/>
+        <result column="REQUESTS_RECOVERY" jdbcType="VARCHAR" property="requestsRecovery"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gzw.kd.common.entity.JobDetail">
+        <result column="JOB_DATA" jdbcType="VARBINARY" property="jobData"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        SCHED_NAME
+        , JOB_NAME, JOB_GROUP, DESCRIPTION, JOB_CLASS_NAME, IS_DURABLE, IS_NONCONCURRENT,
+        IS_UPDATE_DATA, REQUESTS_RECOVERY
+    </sql>
+    <sql id="Blob_Column_List">
+        JOB_DATA
+    </sql>
+
+    <select id="getJobAndTriggerDetails" resultType="com.gzw.kd.common.entity.JobAndTrigger">
+        SELECT DISTINCT
+        detail.JOB_NAME,
+        detail.JOB_GROUP,
+        detail.JOB_CLASS_NAME,
+        tragger.TRIGGER_NAME,
+        tragger.TRIGGER_GROUP,
+        cron.CRON_EXPRESSION,
+        cron.TIME_ZONE_ID
+        FROM
+        qrtz_job_details detail
+        LEFT JOIN qrtz_triggers tragger ON tragger.TRIGGER_GROUP = detail.JOB_GROUP
+        LEFT JOIN qrtz_cron_triggers cron ON detail.JOB_NAME = tragger.JOB_NAME
+        WHERE
+        tragger.TRIGGER_NAME = cron.TRIGGER_NAME
+        AND tragger.TRIGGER_GROUP = cron.TRIGGER_GROUP
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="com.gzw.kd.common.entity.JobDetailKey" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from qrtz_job_details
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and JOB_NAME = #{jobName,jdbcType=VARCHAR}
+        and JOB_GROUP = #{jobGroup,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.gzw.kd.common.entity.JobDetailKey">
+        delete
+        from qrtz_job_details
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and JOB_NAME = #{jobName,jdbcType=VARCHAR}
+        and JOB_GROUP = #{jobGroup,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.gzw.kd.common.entity.JobDetail">
+        insert into qrtz_job_details (SCHED_NAME, JOB_NAME, JOB_GROUP,
+        DESCRIPTION, JOB_CLASS_NAME, IS_DURABLE,
+        IS_NONCONCURRENT, IS_UPDATE_DATA, REQUESTS_RECOVERY,
+        JOB_DATA)
+        values (#{schedulerName,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR}, #{jobClassName,jdbcType=VARCHAR}, #{isDurable,jdbcType=VARCHAR},
+        #{isNonConcurrent,jdbcType=VARCHAR}, #{isUpdateData,jdbcType=VARCHAR},
+        #{requestsRecovery,jdbcType=VARCHAR},
+        #{jobData,jdbcType=VARBINARY})
+    </insert>
+    <insert id="insertSelective" parameterType="com.gzw.kd.common.entity.JobDetail">
+        insert into qrtz_job_details
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schedulerName != null">
+                SCHED_NAME,
+            </if>
+            <if test="jobName != null">
+                JOB_NAME,
+            </if>
+            <if test="jobGroup != null">
+                JOB_GROUP,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="jobClassName != null">
+                JOB_CLASS_NAME,
+            </if>
+            <if test="isDurable != null">
+                IS_DURABLE,
+            </if>
+            <if test="isNonConcurrent != null">
+                IS_NONCONCURRENT,
+            </if>
+            <if test="isUpdateData != null">
+                IS_UPDATE_DATA,
+            </if>
+            <if test="requestsRecovery != null">
+                REQUESTS_RECOVERY,
+            </if>
+            <if test="jobData != null">
+                JOB_DATA,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="schedulerName != null">
+                #{schedulerName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobName != null">
+                #{jobName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobGroup != null">
+                #{jobGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="jobClassName != null">
+                #{jobClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="isDurable != null">
+                #{isDurable,jdbcType=VARCHAR},
+            </if>
+            <if test="isNonConcurrent != null">
+                #{isNonConcurrent,jdbcType=VARCHAR},
+            </if>
+            <if test="isUpdateData != null">
+                #{isUpdateData,jdbcType=VARCHAR},
+            </if>
+            <if test="requestsRecovery != null">
+                #{requestsRecovery,jdbcType=VARCHAR},
+            </if>
+            <if test="jobData != null">
+                #{jobData,jdbcType=VARBINARY},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gzw.kd.common.entity.JobDetail">
+        update qrtz_job_details
+        <set>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="jobClassName != null">
+                JOB_CLASS_NAME = #{jobClassName,jdbcType=VARCHAR},
+            </if>
+            <if test="isDurable != null">
+                IS_DURABLE = #{isDurable,jdbcType=VARCHAR},
+            </if>
+            <if test="isNonConcurrent != null">
+                IS_NONCONCURRENT = #{isNonConcurrent,jdbcType=VARCHAR},
+            </if>
+            <if test="isUpdateData != null">
+                IS_UPDATE_DATA = #{isUpdateData,jdbcType=VARCHAR},
+            </if>
+            <if test="requestsRecovery != null">
+                REQUESTS_RECOVERY = #{requestsRecovery,jdbcType=VARCHAR},
+            </if>
+            <if test="jobData != null">
+                JOB_DATA = #{jobData,jdbcType=VARBINARY},
+            </if>
+        </set>
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and JOB_NAME = #{jobName,jdbcType=VARCHAR}
+        and JOB_GROUP = #{jobGroup,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gzw.kd.common.entity.JobDetail">
+        update qrtz_job_details
+        set DESCRIPTION       = #{description,jdbcType=VARCHAR},
+        JOB_CLASS_NAME    = #{jobClassName,jdbcType=VARCHAR},
+        IS_DURABLE        = #{isDurable,jdbcType=VARCHAR},
+        IS_NONCONCURRENT  = #{isNonConcurrent,jdbcType=VARCHAR},
+        IS_UPDATE_DATA    = #{isUpdateData,jdbcType=VARCHAR},
+        REQUESTS_RECOVERY = #{requestsRecovery,jdbcType=VARCHAR},
+        JOB_DATA          = #{jobData,jdbcType=VARBINARY}
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and JOB_NAME = #{jobName,jdbcType=VARCHAR}
+        and JOB_GROUP = #{jobGroup,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gzw.kd.common.entity.JobDetail">
+        update qrtz_job_details
+        set DESCRIPTION       = #{description,jdbcType=VARCHAR},
+        JOB_CLASS_NAME    = #{jobClassName,jdbcType=VARCHAR},
+        IS_DURABLE        = #{isDurable,jdbcType=VARCHAR},
+        IS_NONCONCURRENT  = #{isNonConcurrent,jdbcType=VARCHAR},
+        IS_UPDATE_DATA    = #{isUpdateData,jdbcType=VARCHAR},
+        REQUESTS_RECOVERY = #{requestsRecovery,jdbcType=VARCHAR}
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and JOB_NAME = #{jobName,jdbcType=VARCHAR}
+        and JOB_GROUP = #{jobGroup,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>发起流程</title>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 必须先引入vue，  后使用element-ui -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+</head>
+<body>
+<div ><strong><span></span>发起流程</strong></div>
+<div></div>
+<div></div>
+<br/>
+<br/>
+<div id="add">
+        <el-form :model="ruleForm" :rules="rules" ref="ruleForm"  label-width="80px">
+                    <el-form-item label="信息" prop="desc">
+                    <el-input v-model="ruleForm.desc"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="审批" prop="appoint">
+                       <el-select v-model="ruleForm.appoint" placeholder="请选择" style="width: auto">
+                           <#list names as name>
+                           <el-option label="${name}" value="${name}"></el-option>
+                           </#list>
+                       </el-select>
+                    </el-form-item>
+                    <el-form-item label="客户姓名" prop="customerName">
+                       <el-select v-model="ruleForm.customerName" placeholder="请选择" style="width: auto" @change="GetCurAddress()">
+                           <#list customerNames as customerName>
+                           <el-option label="${customerName}" value="${customerName}"></el-option>
+                           </#list>
+                       </el-select>
+                    </el-form-item>
+                    <el-form-item label="客户地址" prop="address">
+                        <el-input v-model="ruleForm.address" :disabled="true"></el-input>
+                    </el-form-item>
+                    <el-form-item label="指派日期" prop="appointDate">
+                    <el-date-picker
+                            v-model="ruleForm.appointDate"
+                            type="datetime"
+                            placeholder="选择日期时间"
+                            align="right"
+                            value-format="yyyy-MM-dd HH:mm:ss"
+                            :picker-options="pickerOptions">
+                    </el-date-picker>
+                   </el-form-item>
+                    <el-form-item label="日期" prop="issueDate">
+                    <el-date-picker
+                            v-model="ruleForm.issueDate"
+                            type="datetime"
+                            value-format="yyyy-MM-dd HH:mm:ss"
+                            :disabled="true">
+                    </el-date-picker>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary"  @click="submitForm('ruleForm')" :disabled="btnShow">提交</el-button>
+                        <el-button @click="resetForm('ruleForm')">重置</el-button>
+                    </el-form-item>
+        </el-form>
+</div>
+
+
+<script type="text/javascript">
+
+    new Vue({
+        el: "#add",
+        data() {
+            return {
+                btnShow: false,
+                ruleForm: {
+                    appointDate: '',
+                    appoint: '',
+                    address: '',
+                    customerName: '',
+                    desc: '',
+                    issueDate: moment().format("YYYY-MM-DD HH:mm:ss")
+                },
+                pickerOptions: {
+                    disabledDate(time) {
+                      return time.getTime() < Date.now();
+                    },
+                    shortcuts: [{
+                        text: '今天',
+                        onClick(picker) {
+                            picker.$emit('appointDate', new Date());
+                        }
+                    }, {
+                        text: '明天',
+                        onClick(picker) {
+                            var date = new Date();
+                            date.setTime(date.getTime() + 3600 * 1000 * 24);
+                            picker.$emit('appointDate', date);
+                        }
+                    }, {
+                        text: '三天后',
+                        onClick(picker) {
+                            var date = new Date();
+                            date.setTime(date.getTime() + 3600 * 1000 * 24 * 3);
+                            picker.$emit('appointDate', date);
+                        }
+                    }, {
+                        text: '一周后',
+                        onClick(picker) {
+                            var date = new Date();
+                            date.setTime(date.getTime() + 3600 * 1000 * 24 * 7);
+                            picker.$emit('appointDate', date);
+                        }
+                    }]
+                },
+                rules: {
+                    desc: [
+                        { required: true, message: '请输入活动描述', trigger: 'blur' },
+                        { min: 5, max: 50, message: '长度在 5 到 50 个字', trigger: 'blur' }
+                    ],
+                    appoint: [
+                        { required: true, message: '请选择指派人', trigger: 'change' }
+                    ],
+                    appointDate: [
+                        { required: true, message: '请选择日期', trigger: 'change' }
+                    ],
+                    customerName: [
+                        { required: true, message: '请选择客户姓名', trigger: 'change' }
+                    ],
+                    address: [
+                        { required: true, message: '请选择客户地址', trigger: 'blur' }
+                    ]
+                }
+            };
+        },
+
+    methods: {
+        submitForm(formName) {
+            let that = this
+            this.$refs[formName].validate((valid) => {
+                if (valid) {
+                    this.btnShow = true;
+                    this.intervalShowButton();
+                    axios.post('http://localhost:8092/pc/addDoc', that.ruleForm).then(res => {
+                        let data = res.data;
+                        if (data.code === 20000) {
+                            that.$message({
+                                message: data.message,
+                                type: 'success'
+                            })
+                            that.resetForm("ruleForm");
+                        }else {
+                            this.$message.error(data.message);
+                        }
+                    })
+                } else {
+                    return false;
+                }
+            });
+        },
+        resetForm(formName) {
+            this.$refs[formName].resetFields();
+        },
+
+        intervalShowButton() {
+        let _this = this;
+        this.timer = setTimeout(() => {
+        _this.btnShow = false;
+        }, 5000);
+       },
+        GetCurAddress() {
+           let customerName= this.ruleForm.customerName;
+           axios.get('http://localhost:8092/pc/getAddress?customerName='+customerName).then(res => {
+           let data = res.data;
+           if (data.code === 20000) {
+                 this.ruleForm.address = data.data.address;
+           }else {
+                 that.$alert({
+                     message: data.message,
+                     code: data.code
+                 })
+           }
+          });
+        },
+    }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>流转说明</title>
+    <link rel="stylesheet" href="/assets/pc/css/pintuer.css">
+    <link rel="stylesheet" href="/assets/pc/css/admin.css">
+    <link rel="stylesheet" href="/assets/pc/css/ystep.css" type="text/css" />
+    <script src="/assets/pc/js/jquery.js"></script>
+    <script src="/assets/pc/js/pintuer.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/ystep.js"></script>
+</head>
+<body>
+<div class="panel admin-panel">
+  <div class="panel-head"><strong><span class="icon-pencil-square-o"></span>流转说明</strong></div>
+  <div class="body-content">
+    <form method="post" class="form-x" action="">
+      <div class="form-group">
+        <div style="text-align: center;">
+            <div class="step_y" style="margin: 30px;"></div>
+            <br/>
+            <p>我们的梦想来自内心深处的孤独</p>
+        </div>
+
+      </div>
+     
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+    $(".step_y").loadStep({
+        size: "large",
+        color: "blue",
+        steps: [{
+            title: "发起",
+            content: <#if steps["1"]?exists>${steps["1"]}<#else>"0"</#if>
+        },{
+            title: "审批",
+            content: <#if steps["2"]?exists>${steps["2"]}<#else>"0"</#if>
+        },{
+            title: "确认",
+            content: <#if steps["3"]?exists>${steps["3"]}<#else>"0"</#if>
+        },{
+            title: "结束",
+            content: <#if steps["4"]?exists>${steps["4"]}<#else>"0"</#if>
+        }]
+    });
+
+    $(".step_y").setStep(${step});
+
+</script>
+</body></html>

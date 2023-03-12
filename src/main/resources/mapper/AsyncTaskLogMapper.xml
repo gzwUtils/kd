@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.AsyncTasksLogMapper">
+    <sql id="Base_Column_List">
+        id, params, status, errorMsg, `type`, fromMenu, creator, create_time createTime, updater, update_time updateTime, exportName, numberOfSuccesses, numberOfFailed,file_path filePath
+    </sql>
+    <select id="selectAll" parameterType="int" resultType="com.gzw.kd.common.entity.AsyncTasksEntity">
+        select
+        <include refid="Base_Column_List" />
+        from async_task
+        where status = #{status} limit #{size}
+    </select>
+
+    <insert id="insertOne" parameterType="com.gzw.kd.common.entity.AsyncTasksEntity">
+        INSERT INTO doc.async_task
+        (params, status, errorMsg, `type`, fromMenu, creator, create_time, updater, update_time, exportName, numberOfSuccesses, numberOfFailed,file_path)
+        VALUES(#{params}, 0, '', 0, '', #{creator}, #{createTime}, #{updater}, #{updateTime}, #{exportName}, #{numberOfSuccesses}, #{numberOfFailed},#{filePath});
+    </insert>
+
+    <update id="updateOne" parameterType="com.gzw.kd.common.entity.AsyncTasksEntity">
+        update async_task set status = #{status}, errorMsg = #{errorMsg},numberOfSuccesses =#{numberOfSuccesses},numberOfFailed = #{numberOfFailed}, exportName = #{exportName},file_path = #{filePath} where id = #{id}
+    </update>
+</mapper>

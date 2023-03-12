@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.WxUserMapper" >
+
+  <select id="getUserByOpenId"   resultType="com.gzw.kd.common.entity.WxUserInfo">
+      SELECT id, subscribe, openId, nickname,name, sex, headimgurl, phone, `language`, subscribe_time, unionid, remark, subscribe_scene, groupid, tagid_list
+      FROM doc.wx_user  where   openId=#{openid}
+  </select>
+
+  <insert id="registerUser"  parameterType="com.gzw.kd.common.entity.WxUserInfo">
+
+      INSERT INTO doc.wx_user(subscribe, openId, nickname, sex, headimgurl, phone, `language`, subscribe_time, unionid, remark, subscribe_scene, groupid, tagid_list)
+      VALUES(#{subscribe}, #{openid}, #{nickname}, #{sex}, #{headimgurl}, #{phone}, #{language}, #{subscribe_time}, #{unionid}, #{remark}, #{subscribe_scene}, 0, #{tagIdlist});
+  </insert>
+
+  <update id="updatePhoneByOpenId"  parameterType="com.gzw.kd.common.entity.WxUserInfo">
+      UPDATE doc.wx_user
+      <set>
+      <if test="nickname!=null" >
+          nickname=#{nickname},
+      </if>
+      <if test="headimgurl!=null" >
+          headimgurl=#{headimgurl},
+      </if>
+      <if test="subscribe!=null" >
+          subscribe=#{subscribe},
+      </if>
+      </set>
+     <where> openId = #{openid}</where>
+  </update>
+
+    <update id="updatePhone" parameterType="string">
+        UPDATE doc.wx_user set phone = #{phone}, name = #{name}  where openId=#{openId}
+    </update>
+
+    <select id="getAllNames" resultType="string">
+        select name from wx_user where subscribe = 1 and phone is not null
+    </select>
+    <select id="getUserByName" resultType="com.gzw.kd.common.entity.WxUserInfo">
+        select * from wx_user where subscribe = 1 and name = #{name}
+    </select>
+
+</mapper>

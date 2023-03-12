@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cn" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>操作记录</title>
+    <link rel="stylesheet" href="/assets/pc/css/pintuer.css">
+    <link rel="stylesheet" href="/assets/pc/css/admin.css">
+    <script src="/assets/pc/js/jquery.js"></script>
+    <script src="/assets/pc/js/pintuer.js"></script>
+</head>
+<body>
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder">操作记录</strong>
+        </div>
+        <table class="table table-hover text-center">
+            <tr>
+                <th width="7%">访问编号</th>
+                <th width="5%">用户</th>
+                <th width="15%">地址</th>
+                <th width="15%">地点</th>
+                <th width="8%">操作</th>
+                <th width="10%">描述</th>
+                <th width="20%">结果</th>
+                <th width="20%">时间</th>
+            </tr>
+            <#list allOperation as ops>
+            <tr>
+                <td>${ops.id!""}</td>
+                <td>${ops.userName!""}</td>
+                <td>${ops.ip!""}</td>
+                <td>${ops.location!""}</td>
+                <td>${ops.operation!""}</td>
+                <td>${ops.desc!""}</td>
+                <td>${ops.result!""}</td>
+                <td>${ops.createTime!""}</td>
+            </tr>
+            </#list>
+        </table>
+    </div>
+<script type="text/javascript">
+</script>
+</body>
+</html>

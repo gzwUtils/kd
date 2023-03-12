@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>确认文档列表</title>
+    <link rel="stylesheet" href="/assets/pc/css/pintuer.css">
+    <link rel="stylesheet" href="/assets/pc/css/admin.css">
+    <script src="/assets/pc/js/jquery.js"></script>
+    <script src="/assets/pc/js/pintuer.js"></script>
+</head>
+<body>
+<form method="post" action="">
+    <div class="panel admin-panel">
+        <div class="panel-head"><strong class="icon-reorder">确认文档列表</strong>
+        </div>
+        <table class="table table-hover text-center">
+            <tr>
+                <th width="10%">发起人</th>
+                <th width="30%">描述信息</th>
+                <th width="10%">指派时间</th>
+                <th width="15%">审批人</th>
+                <th width="15%">确认人</th>
+                <th width="20%">操作</th>
+            </tr>
+            <#if docs?exists>
+            <#list docs as doc>
+            <#if (doc.id)!=0 &&(doc.status)==2>
+            <tr>
+                <td style="text-align:left; padding-left:20px;">${doc.dispatch!""}</td>
+                <td>${doc.desc!""}</td>
+                <td>${doc.appointDates}</td>
+                <td>${doc.audit!""}</td>
+                <td>${doc.verify!""}</td>
+                <td>
+                    <div class="button-group">
+                        <a class="button border-green" onclick="return check(${doc.id})"><span
+                                class="icon-adjust"></span>确认</a>
+                    </div>
+                </td>
+            </tr>
+            </#if>
+            </#list>
+            <#else>
+            <tr>
+                <td colspan="6" style="font-size: 14px;text-align: center;">无文档</td>
+            </tr>
+        </#if>
+        </table>
+    </div>
+</form>
+<script type="text/javascript">
+    //流转
+    function check(param) {
+         if (confirm("您确定要结束嘛")) {
+         $.ajax({
+               type: "POST",
+               url: "/pc/setDocStatus?status=4&id="+param,
+               dataType: "json",
+               success: function (data) {
+                      if (data.code === 20000) {
+                           window.parent.refresh();
+                      } else {
+                        alert(data.message);
+                      }
+               }
+               });
+         }
+}
+</script>
+</body>
+</html>

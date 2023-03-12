@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>实时监控</title>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 必须先引入vue，  后使用element-ui -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+      <el-link type="success">页面观看人数:</el-link>
+      <input type="text" id="online" disabled="disabled" size="10px"/>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <input type="hidden" id ="userName" name="userName" value="${Session['user_key'].account}"/>
+      <a  href="http://www.dmanywhere.cn/" target="_blank">pdm在线地址</a>&nbsp;&nbsp;
+      <a  href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html" target="_blank">B+树</a>
+      <!--<a  href="https://aibj1.cc/forum.php" target="_blank">妞妞</a>-->
+      <a  href="https://mp.weixin.qq.com/s/yhv48jQMqOSWcRkAA2clMA" target="_blank">JVM常用排查工具</a>
+      <br/>
+      <br/>
+      <el-button type="primary" icon="el-icon-search" size="mini" @click="getUniqueId()">获取ID</el-button>
+      <el-input v-model="input" placeholder="请输入内容"></el-input>
+      <br/>
+      <br/>
+      <el-button type="primary" icon="el-icon-search" size="mini" @click="testRedisLock()">redisLock</el-button>
+      <el-input v-model="result" placeholder="请输入入参"></el-input>
+      <br/>
+      <br/>
+      <el-button type="primary" icon="el-icon-search" size="mini" @click="excelDownload()">Excel模版下载</el-button>
+      <el-button type="primary" icon="el-icon-search" size="mini" @click="exports()">Excel导出</el-button>
+      <el-button type="primary" icon="el-icon-search" size="mini" @click="asyncExport()">asyncExcel导出</el-button>
+      <el-input v-model="exportResult" placeholder="请输入参数"></el-input>
+      <br/>
+      <br/>
+      <br/>
+      <el-tag type="success">情感语录..</el-tag>
+      <el-button type="success"  size="mini" @click="otherSave()">保存</el-button>
+      <el-button type="success"  size="mini" @click="smsSend()">短信发送</el-button>
+      <el-button type="success"  size="mini" @click="emailSend()">邮件发送</el-button>
+      <el-input v-model="phone" placeholder="手机号" v-if="showPhone"></el-input>
+      <el-input v-model="email" placeholder="邮箱" v-if="showEmail"></el-input>
+      <br/>
+      <br/>
+      <el-input type="textarea" autosize  placeholder="有一个可以想念的人，就是幸福 生命是短暂的 爱情是永恒的  你好吗？ 我很好"  v-model="textarea"></el-input>
+      <br/>
+      <br/>
+      <el-button type="success"  size="mini" @click="lpush()">生产</el-button><br/>
+      <el-select v-model="value" placeholder="队列大小">
+            <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.value">
+            </el-option>
+      </el-select>
+      <el-input v-model="tokens" placeholder="tokens" ></el-input>
+      <el-input v-model="interParams" placeholder="入参" ></el-input>
+      <br/>
+      <br/>
+      <el-button type="success"  size="mini" @click="brpop()">消费</el-button><br/>
+      <el-input v-model="takePop" placeholder="出参" disabled="disabled"></el-input>
+      <el-button type="success"  size="mini" @click="l_clear()">clear</el-button><br/>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                  options: [{
+                        value: '10',
+                        label: '10'
+                  }, {
+                        value: '2',
+                        label: '2'
+                  }, {
+                        value: '3',
+                        label: '3'
+                  }, {
+                        value: '4',
+                        label: '4'
+                  }, {
+                        value: '5',
+                        label: '5'
+                  }],
+                phone:'',
+                takePop: '',
+                uniqueId: '',
+                interParams: '',
+                value: '',
+                input: '',
+                userName: '',
+                exportResult: '',
+                textarea: '',
+                result: '',
+                email: '',
+                tokens: '',
+                showPhone: false,
+                showEmail: false,
+
+            }
+        },
+        mounted () {
+              const name = document.getElementById("userName").value;
+              axios.post('/pc/getUserText?userName=' +name).then(response => {
+                    this.textarea = response.data.data.msg;
+              });
+        },
+        methods: {
+            asyncExport(){
+                const name = this.exportResult == null ? 'kd' : this.exportResult;
+                axios.post('/pc/asyncExport?exportName='+name).then(response => {
+                    this.exportResult = response.data.message;
+                });
+            },
+            getUniqueId(){
+                axios.post('/pc/getUniqueId').then(response => {
+                    this.input = response.data.data.uniqueId;
+                });
+            },
+            excelDownload(){
+                axios.post('/pc/downloadTemplate').then(response => {
+                    const link = document.createElement('a')
+                    let blob = new Blob([response]);
+                    link.href = URL.createObjectURL(blob);
+                    link.download = 'log_template.xlsx';
+                    document.body.appendChild(link);
+                    link.click();
+                    URL.revokeObjectURL(link.href);
+                    document.body.removeChild(link);
+                });
+            },
+            exports(){
+                axios.post('/pc/export').then(res => {
+                    let blob = new Blob([res], { type: "application/vnd.ms-excel" });
+                    let objectUrl = URL.createObjectURL(blob);
+                    window.location.href = objectUrl;
+                    this.$message.success("导出成功");
+                });
+            },
+            testRedisLock(){
+                if(this.result === ''){
+                    this.$message.error("请输入参数");
+                    return;
+                }
+                axios.post('/pc/testRedisLock?userId='+this.result).then(response => {
+                    this.result = this.result + response.data.message;
+                });
+            },
+            lpush () {
+                    if(this.interParams === ''){
+                          this.$message.error("请输入参数");
+                          return;
+                    }
+                  let data = this.interParams.split(",");
+                    let body = {'data':data};
+                    if(this.value  !== ''){
+                          body = {'data':data,'size':this.value};
+                    }
+                  let timestamp = Math.round(new Date().getTime());
+                  let sign = 'timestamp='+timestamp+"&token="+this.tokens+"&body="+JSON.stringify(body);
+                  const headers = {
+                        'Content-Type': 'application/json',
+                        'timestamp': timestamp,
+                        'sign': CryptoJS.MD5(sign).toString(),
+                  }
+                    axios.post('/base/put',body,{headers}).then(response => {
+                          if(response.data.data.pushs !==''){
+                                this.interParams =  response.data.data.pushs;
+                          }
+
+                    });
+            },
+            brpop () {
+                    if(this.interParams === ''){
+                          this.$message.error("请输入参数");
+                          return;
+                    }
+                    let body = {};
+                    let timestamp = Math.round(new Date().getTime());
+                    let sign = 'timestamp='+timestamp+"&token="+this.tokens+"&body="+JSON.stringify(body);
+                    const headers = {
+                          'Content-Type': 'application/json',
+                          'timestamp': timestamp,
+                          'sign': CryptoJS.MD5(sign).toString(),
+                    }
+                    axios.post('/base/take',body,{headers}).then(response => {
+                          if(response.data.data.takes !==''){
+                                this.takePop =  response.data.data.takes;
+                          }
+                    });
+              },
+            otherSave (){
+                  if (this.textarea === '' || this.textarea === null) {
+                        this.$message.error("请输入....");
+                        return;
+                  }
+                  const name = document.getElementById("userName").value;
+                  axios.post('/pc/otherSave?userName=' +name +"&text="+this.textarea).then(response => {
+                        this.$message.success(response.data.message);
+                  });
+            },
+            smsSend() {
+                    this.showPhone = true;
+                    if (this.phone === '' || this.phone === null) {
+                          this.$message.error("请输入....");
+                          return;
+                    }
+                    axios.post('/pc/sendMessage?phone=' + this.phone + "&message=" + this.textarea).then(response => {
+                          this.$message.success(response.data.message);
+                    });
+              },
+            l_clear() {
+                    axios.post('/base/clear').then(response => {
+                          this.$message.success(response.data.message);
+                    });
+              },
+            emailSend() {
+                    this.showEmail = true;
+                    if (this.email === '' || this.email === null) {
+                          this.$message.error("请输入....");
+                          return;
+                    }
+                    axios.post('/pc/sendEmailMessage?email=' + this.email + "&message=" + this.textarea).then(response => {
+                          this.$message.success(response.data.message);
+                    });
+              }
+        }
+    })
+
+    function getUUID(){
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function (c){
+            const r = Math.random() * 16 | 0;
+            const v = c === 'x'?r:(r & 0x3 | 0x8);
+            return v.toString(16);
+        })
+    }
+
+    const websocket = new WebSocket("ws://localhost:8092/websocket/" + getUUID());
+
+    websocket.onopen = function (){
+        websocket.send("connect success ......");
+    }
+
+    websocket.onmessage = function (msg){
+        const server = msg.data;
+        document.getElementById("online").value = server;
+        console.log(server);
+    }
+
+    websocket.onclose = function (){
+        alert("通道已关闭 请检查！！！！ ")
+        document.getElementById("online").value = '0';
+        console.log('websocket close');
+    }
+
+    websocket.onerror = function (){
+        alert("通道发生错误 请检查！！！！ ")
+        console.log('websocket error');
+    }
+</script>
+</html>

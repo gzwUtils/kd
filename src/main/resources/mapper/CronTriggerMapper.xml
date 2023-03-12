@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.CronTriggerMapper">
+    <resultMap id="BaseResultMap" type="com.gzw.kd.common.entity.CronTrigger">
+        <id column="SCHED_NAME" jdbcType="VARCHAR" property="schedulerName" />
+        <id column="TRIGGER_NAME" jdbcType="VARCHAR" property="triggerName" />
+        <id column="TRIGGER_GROUP" jdbcType="VARCHAR" property="triggerGroup" />
+        <result column="CRON_EXPRESSION" jdbcType="VARCHAR" property="cronExpression" />
+        <result column="TIME_ZONE_ID" jdbcType="VARCHAR" property="timeZoneId" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        SCHED_NAME, TRIGGER_NAME, TRIGGER_GROUP, CRON_EXPRESSION, TIME_ZONE_ID
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="com.gzw.kd.common.entity.CronTriggerKey" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from qrtz_cron_triggers
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR}
+        and TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.gzw.kd.common.entity.CronTriggerKey">
+        delete from qrtz_cron_triggers
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR}
+        and TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.gzw.kd.common.entity.CronTrigger">
+        insert into qrtz_cron_triggers (SCHED_NAME, TRIGGER_NAME, TRIGGER_GROUP,
+        CRON_EXPRESSION, TIME_ZONE_ID)
+        values (#{schedulerName,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroup,jdbcType=VARCHAR},
+        #{cronExpression,jdbcType=VARCHAR}, #{timeZoneId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.gzw.kd.common.entity.CronTrigger">
+        insert into qrtz_cron_triggers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schedulerName != null">
+                SCHED_NAME,
+            </if>
+            <if test="triggerName != null">
+                TRIGGER_NAME,
+            </if>
+            <if test="triggerGroup != null">
+                TRIGGER_GROUP,
+            </if>
+            <if test="cronExpression != null">
+                CRON_EXPRESSION,
+            </if>
+            <if test="timeZoneId != null">
+                TIME_ZONE_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="schedulerName != null">
+                #{schedulerName,jdbcType=VARCHAR},
+            </if>
+            <if test="triggerName != null">
+                #{triggerName,jdbcType=VARCHAR},
+            </if>
+            <if test="triggerGroup != null">
+                #{triggerGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="cronExpression != null">
+                #{cronExpression,jdbcType=VARCHAR},
+            </if>
+            <if test="timeZoneId != null">
+                #{timeZoneId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gzw.kd.common.entity.CronTrigger">
+        update qrtz_cron_triggers
+        <set>
+            <if test="cronExpression != null">
+                CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+            </if>
+            <if test="timeZoneId != null">
+                TIME_ZONE_ID = #{timeZoneId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR}
+        and TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gzw.kd.common.entity.CronTrigger">
+        update qrtz_cron_triggers
+        set CRON_EXPRESSION = #{cronExpression,jdbcType=VARCHAR},
+        TIME_ZONE_ID = #{timeZoneId,jdbcType=VARCHAR}
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR}
+        and TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR}
+    </update>
+</mapper>

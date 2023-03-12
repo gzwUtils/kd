@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>支付宝二维码付款</title>
+    <script type="text/javascript" src="/assets/pc/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="http://cdn.staticfile.org/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+</head>
+<body>
+<a href="javascript:void(0);"></a>
+<div id="box">
+    <div id="OrCode_div"></div>
+</div>
+<input type="hidden" id = "code" value = "${code}">
+</body>
+
+<style>
+  #box {
+	margin: 0 auto;
+	padding: 0;
+	width: 400px;
+	border: 1px solid red;
+	background-color: #ccc;
+	padding: 200px;
+  }
+</style>
+<script type="application/javascript">
+
+     $(function (){
+     var codes = document.getElementById("code").value;
+     createQrcode(codes);
+    })
+
+    function createQrcode(url){
+        zfbQRCode=$('#OrCode_div').qrcode({
+            width: 168,
+            height: 168,
+            text:url
+        });
+    }
+</script>
+</html>

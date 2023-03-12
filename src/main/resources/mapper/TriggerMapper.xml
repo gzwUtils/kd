@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.TriggerMapper">
+    <resultMap id="BaseResultMap" type="com.gzw.kd.common.entity.Trigger">
+        <id column="SCHED_NAME" jdbcType="VARCHAR" property="schedulerName" />
+        <id column="TRIGGER_NAME" jdbcType="VARCHAR" property="triggerName" />
+        <id column="TRIGGER_GROUP" jdbcType="VARCHAR" property="triggerGroup" />
+        <result column="JOB_NAME" jdbcType="VARCHAR" property="jobName" />
+        <result column="JOB_GROUP" jdbcType="VARCHAR" property="jobGroup" />
+        <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+        <result column="NEXT_FIRE_TIME" jdbcType="BIGINT" property="nextFireTime" />
+        <result column="PREV_FIRE_TIME" jdbcType="BIGINT" property="prevFireTime" />
+        <result column="PRIORITY" jdbcType="INTEGER" property="priority" />
+        <result column="TRIGGER_STATE" jdbcType="VARCHAR" property="triggerState" />
+        <result column="TRIGGER_TYPE" jdbcType="VARCHAR" property="triggerType" />
+        <result column="START_TIME" jdbcType="BIGINT" property="startTime" />
+        <result column="END_TIME" jdbcType="BIGINT" property="endTime" />
+        <result column="CALENDAR_NAME" jdbcType="VARCHAR" property="calendarName" />
+        <result column="MISFIRE_INSTR" jdbcType="SMALLINT" property="misfireInstr" />
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.gzw.kd.common.entity.Trigger">
+        <result column="JOB_DATA" jdbcType="VARBINARY" property="jobData" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        SCHED_NAME, TRIGGER_NAME, TRIGGER_GROUP, JOB_NAME, JOB_GROUP, DESCRIPTION, NEXT_FIRE_TIME,
+        PREV_FIRE_TIME, PRIORITY, TRIGGER_STATE, TRIGGER_TYPE, START_TIME, END_TIME, CALENDAR_NAME,
+        MISFIRE_INSTR
+    </sql>
+    <sql id="Blob_Column_List">
+        JOB_DATA
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="com.gzw.kd.common.entity.TriggerKey" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from qrtz_triggers
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR}
+        and TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.gzw.kd.common.entity.TriggerKey">
+        delete from qrtz_triggers
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR}
+        and TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.gzw.kd.common.entity.Trigger">
+        insert into qrtz_triggers (SCHED_NAME, TRIGGER_NAME, TRIGGER_GROUP,
+        JOB_NAME, JOB_GROUP, DESCRIPTION,
+        NEXT_FIRE_TIME, PREV_FIRE_TIME, PRIORITY,
+        TRIGGER_STATE, TRIGGER_TYPE, START_TIME,
+        END_TIME, CALENDAR_NAME, MISFIRE_INSTR,
+        JOB_DATA)
+        values (#{schedulerName,jdbcType=VARCHAR}, #{triggerName,jdbcType=VARCHAR}, #{triggerGroup,jdbcType=VARCHAR},
+        #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR},
+        #{nextFireTime,jdbcType=BIGINT}, #{prevFireTime,jdbcType=BIGINT}, #{priority,jdbcType=INTEGER},
+        #{triggerState,jdbcType=VARCHAR}, #{triggerType,jdbcType=VARCHAR}, #{startTime,jdbcType=BIGINT},
+        #{endTime,jdbcType=BIGINT}, #{calendarName,jdbcType=VARCHAR}, #{misfireInstr,jdbcType=SMALLINT},
+        #{jobData,jdbcType=VARBINARY})
+    </insert>
+    <insert id="insertSelective" parameterType="com.gzw.kd.common.entity.Trigger">
+        insert into qrtz_triggers
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schedulerName != null">
+                SCHED_NAME,
+            </if>
+            <if test="triggerName != null">
+                TRIGGER_NAME,
+            </if>
+            <if test="triggerGroup != null">
+                TRIGGER_GROUP,
+            </if>
+            <if test="jobName != null">
+                JOB_NAME,
+            </if>
+            <if test="jobGroup != null">
+                JOB_GROUP,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="nextFireTime != null">
+                NEXT_FIRE_TIME,
+            </if>
+            <if test="prevFireTime != null">
+                PREV_FIRE_TIME,
+            </if>
+            <if test="priority != null">
+                PRIORITY,
+            </if>
+            <if test="triggerState != null">
+                TRIGGER_STATE,
+            </if>
+            <if test="triggerType != null">
+                TRIGGER_TYPE,
+            </if>
+            <if test="startTime != null">
+                START_TIME,
+            </if>
+            <if test="endTime != null">
+                END_TIME,
+            </if>
+            <if test="calendarName != null">
+                CALENDAR_NAME,
+            </if>
+            <if test="misfireInstr != null">
+                MISFIRE_INSTR,
+            </if>
+            <if test="jobData != null">
+                JOB_DATA,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="schedulerName != null">
+                #{schedulerName,jdbcType=VARCHAR},
+            </if>
+            <if test="triggerName != null">
+                #{triggerName,jdbcType=VARCHAR},
+            </if>
+            <if test="triggerGroup != null">
+                #{triggerGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="jobName != null">
+                #{jobName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobGroup != null">
+                #{jobGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="nextFireTime != null">
+                #{nextFireTime,jdbcType=BIGINT},
+            </if>
+            <if test="prevFireTime != null">
+                #{prevFireTime,jdbcType=BIGINT},
+            </if>
+            <if test="priority != null">
+                #{priority,jdbcType=INTEGER},
+            </if>
+            <if test="triggerState != null">
+                #{triggerState,jdbcType=VARCHAR},
+            </if>
+            <if test="triggerType != null">
+                #{triggerType,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                #{startTime,jdbcType=BIGINT},
+            </if>
+            <if test="endTime != null">
+                #{endTime,jdbcType=BIGINT},
+            </if>
+            <if test="calendarName != null">
+                #{calendarName,jdbcType=VARCHAR},
+            </if>
+            <if test="misfireInstr != null">
+                #{misfireInstr,jdbcType=SMALLINT},
+            </if>
+            <if test="jobData != null">
+                #{jobData,jdbcType=VARBINARY},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gzw.kd.common.entity.Trigger">
+        update qrtz_triggers
+        <set>
+            <if test="jobName != null">
+                JOB_NAME = #{jobName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobGroup != null">
+                JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="nextFireTime != null">
+                NEXT_FIRE_TIME = #{nextFireTime,jdbcType=BIGINT},
+            </if>
+            <if test="prevFireTime != null">
+                PREV_FIRE_TIME = #{prevFireTime,jdbcType=BIGINT},
+            </if>
+            <if test="priority != null">
+                PRIORITY = #{priority,jdbcType=INTEGER},
+            </if>
+            <if test="triggerState != null">
+                TRIGGER_STATE = #{triggerState,jdbcType=VARCHAR},
+            </if>
+            <if test="triggerType != null">
+                TRIGGER_TYPE = #{triggerType,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                START_TIME = #{startTime,jdbcType=BIGINT},
+            </if>
+            <if test="endTime != null">
+                END_TIME = #{endTime,jdbcType=BIGINT},
+            </if>
+            <if test="calendarName != null">
+                CALENDAR_NAME = #{calendarName,jdbcType=VARCHAR},
+            </if>
+            <if test="misfireInstr != null">
+                MISFIRE_INSTR = #{misfireInstr,jdbcType=SMALLINT},
+            </if>
+            <if test="jobData != null">
+                JOB_DATA = #{jobData,jdbcType=VARBINARY},
+            </if>
+        </set>
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR}
+        and TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.gzw.kd.common.entity.Trigger">
+        update qrtz_triggers
+        set JOB_NAME = #{jobName,jdbcType=VARCHAR},
+        JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+        NEXT_FIRE_TIME = #{nextFireTime,jdbcType=BIGINT},
+        PREV_FIRE_TIME = #{prevFireTime,jdbcType=BIGINT},
+        PRIORITY = #{priority,jdbcType=INTEGER},
+        TRIGGER_STATE = #{triggerState,jdbcType=VARCHAR},
+        TRIGGER_TYPE = #{triggerType,jdbcType=VARCHAR},
+        START_TIME = #{startTime,jdbcType=BIGINT},
+        END_TIME = #{endTime,jdbcType=BIGINT},
+        CALENDAR_NAME = #{calendarName,jdbcType=VARCHAR},
+        MISFIRE_INSTR = #{misfireInstr,jdbcType=SMALLINT},
+        JOB_DATA = #{jobData,jdbcType=VARBINARY}
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR}
+        and TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.gzw.kd.common.entity.Trigger">
+        update qrtz_triggers
+        set JOB_NAME = #{jobName,jdbcType=VARCHAR},
+        JOB_GROUP = #{jobGroup,jdbcType=VARCHAR},
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+        NEXT_FIRE_TIME = #{nextFireTime,jdbcType=BIGINT},
+        PREV_FIRE_TIME = #{prevFireTime,jdbcType=BIGINT},
+        PRIORITY = #{priority,jdbcType=INTEGER},
+        TRIGGER_STATE = #{triggerState,jdbcType=VARCHAR},
+        TRIGGER_TYPE = #{triggerType,jdbcType=VARCHAR},
+        START_TIME = #{startTime,jdbcType=BIGINT},
+        END_TIME = #{endTime,jdbcType=BIGINT},
+        CALENDAR_NAME = #{calendarName,jdbcType=VARCHAR},
+        MISFIRE_INSTR = #{misfireInstr,jdbcType=SMALLINT}
+        where SCHED_NAME = #{schedulerName,jdbcType=VARCHAR}
+        and TRIGGER_NAME = #{triggerName,jdbcType=VARCHAR}
+        and TRIGGER_GROUP = #{triggerGroup,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>绑定手机号</title>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 必须先引入vue，  后使用element-ui -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/assets/pc/js/jquery.js"></script>
+</head>
+<body>
+
+<div class="registerClass" id="register">
+    <section class="form_container">
+        <div class="title">手机号绑定</div>
+    <el-form  :model="ruleForm" :rules="rules" ref="ruleForm"    label-width="60px" status-icon class="registerForm">
+        <el-form-item prop="phone">
+            <el-input type="type" placeholder="手机号" v-model="ruleForm.phone" autocomplete="off">
+                <i slot="prefix" class="el-icon-phone"></i>
+            </el-input>
+        </el-form-item>
+        <el-form-item prop="name">
+            <el-input type="type" placeholder="真实姓名" v-model="ruleForm.name" autocomplete="off">
+            </el-input>
+        </el-form-item>
+        <el-form-item prop="openId">
+            <el-input type="hidden"  value="${openId}" id="openId" v-model="ruleForm.openId"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="doRegister('ruleForm')" class="login-submit">绑定</el-button>
+        </el-form-item>
+    </el-form>
+    </section>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#register",
+        data() {
+
+            return {
+                ruleForm: {},
+                rules: {
+                 name: [
+                        { required: true, message: '请输入姓名', trigger: 'blur' },
+                        { min: 2, max: 10, message: '长度在 2 到 10 个字符', trigger: 'blur' },
+                        { required: true,pattern: /^[\u4e00-\u9fa5_a-zA-Z0-9.·-]+$/,message: '姓名不支持特殊字符',trigger: 'blur' }
+                    ],
+                    phone: [
+                        { required: true, message: '请输入手机号', trigger: 'blur' ,},
+                        { pattern: /^1[3|4|5|7|8][0-9]{9}$/, message: '手机号码格式有误' }
+                    ]
+                }
+            };
+        },
+
+        methods: {
+            doRegister(formName) {
+                let that = this
+                that.$refs.ruleForm.validate((valid) => {
+                    if (valid) {
+                    this.ruleForm.openId=$("#openId").val();
+                    axios.post('/wx/updateAction',that.ruleForm).then(res => {
+                            let data = res.data;
+                            debugger;
+                            if (data.code === 20000) {
+                                that.$message({
+                                    message: '绑定成功'
+                                })
+                                that.resetForm("ruleForm");
+                                window.parent.refresh();
+                            }else {
+                                that.$message({
+                                    message: '绑定失败'
+                                })
+                            }
+                        })
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            }
+        }
+    })
+</script>
+
+
+<style>
+
+    .registerClass {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: url(/assets/pc/images/13.jpg);
+        background-size: 100% 100%;
+    }
+    .form_container {
+        width: 500px;
+        height: 400px;
+        position: absolute;
+        top: 20%;
+        left: 25%;
+        padding: 25px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .registerForm {
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 20px 40px 20px 20px;
+        border-radius: 5px;
+    }
+
+    .title {
+        font-family: "Microsoft YaHei";
+        font-weight: bold;
+        font-size: 26px;
+    }
+</style>
+
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="renderer" content="webkit">
+    <title>后台服务系统</title>
+    <meta name="keywords" content="简单,实用,网站后台,后台管理,管理系统,网站模板"/>
+    <meta name="description" content="简单实用网站后台管理系统网站模板下载。"/>
+    <link rel="stylesheet" href="/assets/pc/css/pintuer.css">
+    <link rel="stylesheet" href="/assets/pc/css/admin.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/hex.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/byteUtil.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/core.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/md5.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/sm3-1.0.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/sm4-1.0.js"></script>
+    <script type="text/javascript" src="/assets/pc/js/SMAlgoUtil.js"></script>
+</head>
+<body>
+<div class="header bg-main">
+    <div class="logo margin-big-left fadein-top">
+        <h1><img src="/assets/pc/images/y.jpg" class="radius-circle" height="50" alt=""/>后台服务系统</h1>
+    </div>
+    <div class="head-l"> &nbsp;&nbsp;
+        <span style="font-style: normal;font-size: 15px;color:white;">当前登录用户：<#if Session["user_key"]?exists>${Session["user_key"].account}</#if>
+        </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a class="button button-little bg-red" href="/pc/logout"><span class="icon-power-off"></span> 退出登录</a>
+    </div>
+</div>
+<div class="leftnav">
+    <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
+    <h2><span class="icon-user"></span>基本设置</h2>
+    <ul style="display:block">
+        <li><a href="/pc/info" target="right"><span class="icon-caret-right"></span>流转说明</a></li>
+        <li><a href="/pc/pass" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
+        <li><a href="" target="right" onclick="lockSystem()"><span class="icon-caret-right"></span>锁定系统</a></li>
+    </ul>
+    <h2><span class="icon-pencil-square-o"></span>文档管理</h2>
+    <#if Session["user_key"]?exists>
+    <ul  id="menu_list" style="display:block">
+        <#if Session["user_key"].isAdmin == 1>
+           <li><a href="/pc/userInfo" target="right"><span class="icon-caret-right"></span>用户信息</a></li>
+           <li><a href="/pc/showAddUi" target="right"><span class="icon-caret-right"></span>开始</a></li>
+           <li><a href="/pc/getAllDocs" target="right"><span class="icon-caret-right"></span>流转列表</a></li>
+         <#else>
+        <li>
+            <a href="/pc/showDocListUi?flg=2" target="right"><span class="icon-caret-right"></span>待办文档
+            </a>
+        </li>
+        <li>
+            <a href="/pc/showDocListUi?flg=3" target="right"><span class="icon-caret-right"></span>确认
+            </a>
+        </li>
+        <li>
+            <a href="/pc/showDocListUi?flg=4" target="right"><span class="icon-caret-right"></span>结束
+            </a>
+        </li>
+        </#if>
+        <li><a href="/pc/uploadFile" target="right"><span class="icon-caret-right"></span>文件上传</a></li>
+        <li><a href="/pc/other" target="right"><span class="icon-caret-right"></span>其他</a></li>
+        <li><a href="/pc/word" target="right"><span class="icon-caret-right"></span>word</a></li>
+        <li><a href="/pc/getAllOperatorLog" target="right"><span class="icon-caret-right"></span>操作记录</a></li>
+    </ul>
+    </#if>
+</div>
+
+<ul class="bread">
+    <li><a href="/pc/info" target="right" class="icon-home">首页</a></li>
+    <li><a href="##" id="a_leader_txt">网站信息</a></li>
+    <li><b>当前语言：</b><span style="color:gray;">中文</span></li>
+</ul>
+
+
+<div class="admin">
+    <iframe scrolling="auto" rameborder="0" src="/pc/info" id="right" name="right" width="100%" height="100%"></iframe>
+</div>
+
+
+<!--锁定系统-->
+<div id="lockSystemModal" class="modal fade " data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <input type="hidden" id="isLock" name="isLock" value="${isLock}">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">锁定系统</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" id="lockSystemForm">
+                    <label class="col-lg-4 col-md-4 col-sm-4 control-label">登录密码</label>
+                    <div class="form-group">
+                        <div class="col-lg-7 col-md-7 col-sm-7">
+                            <input type="password" class="form-control" name="lockSystemPassword" id="lockSystemPassword" placeholder="请输入登录密码" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="lockSystemLogin" class="btn btn-primary">解锁</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 提示消息 -->
+<div id="DialogHintMessageDiv" class="modal fade bs-example-modal-sm" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">提示消息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label" id="hintMessageLabel"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function (){
+        const isLock = document.getElementById("isLock").value;
+        if(isLock === "1"){
+            $("#lockSystemModal").modal();
+        } else {
+            $("#lockSystemModal").modal("hide");
+        }
+    })
+
+        // 锁定系统
+		function lockSystem(){
+			$.ajax({
+				type:"post",
+				url:"/pc/lockSystem",
+				dataType: "json",
+				success: function(data){
+					if(data.code === 20000){
+						showMessage(data.message,'success',3000);
+						$("#lockSystemModal").modal();
+						window.location.href = "/pc/index";
+					} else {
+						showMessage(data.message,'error',3000);
+					}
+				}
+			});
+		}
+
+        //解锁系统
+	    $("#lockSystemLogin").click(function(){
+		     var lockSystemPassword = $("#lockSystemPassword").val();
+		     if(lockSystemPassword === ''){
+		      showMessage('请输入密码','error',5000);
+		      return false;
+		     }
+		     var timestamp = Number(new Date()).toString();
+		     var pad = CryptoJS.MD5(lockSystemPassword).toString().toUpperCase();
+		     var sm3HashHex = SMUtils.SM3(pad);
+		     var key = sm3HashHex.substring(0,32);
+		     var iv = sm3HashHex.substring(sm3HashHex.length - 32,sm3HashHex.length);
+		     lockSystemPassword = SMUtils.SM4EncryptCBC(timestamp,key,iv);
+		     $("#lockSystemPassword").val(lockSystemPassword);
+		        $.ajax({
+			      type:"post",
+			      url:"/pc/unlockSystem",
+			      data:{
+				      password: lockSystemPassword,
+				      timestamp: timestamp
+			       },
+			    success: function(data){
+				    if(data.code === 20000){
+				        showMessage(data.message,'success',5000);
+					    $("#lockSystemModal").modal("hide");
+				    } else {
+					    showMessage(data.message,'error',5000);
+				    }
+			   }
+		});
+	});
+
+
+	function showMessage(message, type, time) {
+         let str = ''
+         switch (type) {
+             case 'success':
+                 str = '<div class="success-message" style="width: 300px;height: 40px;text-align: center;background-color:#daf5eb;;color: rgba(103,194,58,0.7);position: fixed;left: 50%;top: 5%;margin-left:-150px;margin-top:-20px;line-height: 40px;border-radius: 5px;z-index: 9999">\n' +
+                     '    <span class="mes-text">' + message + '</span></div>'
+                 break;
+             case 'error':
+                 str = '<div class="error-message" style="width: 300px;height: 40px;text-align: center;background-color: #f5f0e5;color: rgba(238,99,99,0.8);position: fixed;left: 50%;top: 10%;line-height: 40px;margin-left:-150px;margin-top:-20px;border-radius: 5px;;z-index: 9999">\n' +
+                     '    <span class="mes-text">' + message + '</span></div>'
+         }
+         $('body').append(str);
+         setTimeout(function () {
+             $('.' + type + '-message').remove();
+         }, time);
+     }
+</script>
+</body>
+</html>
