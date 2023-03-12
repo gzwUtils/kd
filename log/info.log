@@ -5210,3 +5210,408 @@ kd.d8c642bd300d46cc 2023-03-12 15:05:45.426 [http-nio-8092-exec-7] INFO  com.gzw
  2023-03-12 15:09:59.403 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closing...
  2023-03-12 15:09:59.404 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closed
  2023-03-12 15:09:59.434 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+ 2023-03-12 19:52:49.571 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.4 (v2.7.4) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-03-12 19:52:49.665 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-03-12 19:52:49.696 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei.local with PID 61517 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-03-12 19:52:49.697 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "dev"
+ 2023-03-12 19:52:52.120 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-03-12 19:52:52.126 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-03-12 19:52:52.201 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 45 ms. Found 0 Redis repository interfaces.
+ 2023-03-12 19:52:52.833 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=b0941244-7cec-34b2-98ae-3d178cd50a2a
+ 2023-03-12 19:52:54.261 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-03-12 19:52:54.280 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-03-12 19:52:54.280 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-03-12 19:52:54.281 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.65]
+ 2023-03-12 19:52:54.586 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-03-12 19:52:54.586 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4805 ms
+ 2023-03-12 19:52:54.736 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.8209218068859137905/]
+ 2023-03-12 19:52:54.796 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2023-03-12 19:52:54.842 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2023-03-12 19:52:57.040 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-03-12 19:52:57.205 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2023-03-12 19:52:57.327 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2023-03-12 19:52:57.895 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+ 2023-03-12 19:52:57.967 [main] INFO  o.flywaydb.core.internal.database.DatabaseFactory - Database: jdbc:mysql://127.0.0.1:3306/doc (MySQL 8.0)
+ 2023-03-12 19:52:58.307 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 6 migrations (execution time 00:00.097s)
+ 2023-03-12 19:52:58.327 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `doc`: 1.0.5
+ 2023-03-12 19:52:58.328 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `doc` is up to date. No migration necessary.
+ 2023-03-12 19:52:58.439 [main] INFO  com.gzw.kd.common.utils.AESCrypt - 初始化成功了
+ 2023-03-12 19:52:58.579 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+ 2023-03-12 19:52:58.584 [main] INFO  org.quartz.simpl.SimpleThreadPool - Job execution threads will use class loader of thread: main
+ 2023-03-12 19:52:58.602 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+ 2023-03-12 19:52:58.602 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+ 2023-03-12 19:52:58.603 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Using thread monitor-based data access locking (synchronization).
+ 2023-03-12 19:52:58.604 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - JobStoreTX initialized.
+ 2023-03-12 19:52:58.605 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'kd_DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is not clustered.
+
+ 2023-03-12 19:52:58.605 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'kd_DefaultQuartzScheduler' initialized from an externally provided properties instance.
+ 2023-03-12 19:52:58.605 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+ 2023-03-12 19:52:58.624 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@7d551ec6
+ 2023-03-12 19:52:58.940 [main] INFO  com.gzw.kd.scheduletask.AsyncTaskJobHandler - Async task impl list: [com.gzw.kd.export.service.LogExportAsyncTask@dbda472]
+ 2023-03-12 19:52:59.745 [main] INFO  com.gzw.kd.config.ExecutorConfiguration - start asyncTaskExecutor
+ 2023-03-12 19:53:00.409 [main] INFO  o.f.s.b.a.AppEngineAutoConfiguration$$EnhancerBySpringCGLIB$$bf04ccdb - No deployment resources were found for autodeployment
+ 2023-03-12 19:53:00.578 [main] INFO  o.f.s.b.ProcessEngineAutoConfiguration$$EnhancerBySpringCGLIB$$e7221480 - No deployment resources were found for autodeployment
+ 2023-03-12 19:53:00.864 [main] INFO  o.f.s.b.c.CmmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$f9bd521 - No deployment resources were found for autodeployment
+ 2023-03-12 19:53:01.066 [main] INFO  o.f.s.b.d.DmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$671d1713 - No deployment resources were found for autodeployment
+ 2023-03-12 19:53:01.148 [main] INFO  o.f.s.b.f.FormEngineAutoConfiguration$$EnhancerBySpringCGLIB$$ab429181 - No deployment resources were found for autodeployment
+ 2023-03-12 19:53:01.228 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 6 Engine Configurators in total:
+ 2023-03-12 19:53:01.228 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2023-03-12 19:53:01.228 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2023-03-12 19:53:01.228 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2023-03-12 19:53:01.228 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2023-03-12 19:53:01.229 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2023-03-12 19:53:01.229 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.cmmn.spring.configurator.SpringCmmnEngineConfigurator (priority:500000)
+ 2023-03-12 19:53:01.229 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2023-03-12 19:53:01.235 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2023-03-12 19:53:01.237 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2023-03-12 19:53:01.240 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2023-03-12 19:53:01.243 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2023-03-12 19:53:01.246 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.cmmn.spring.configurator.SpringCmmnEngineConfigurator (priority:500000)
+ 2023-03-12 19:53:02.222 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2023-03-12 19:53:02.598 [main] INFO  org.flowable.engine.impl.ProcessEngineImpl - ProcessEngine default created
+ 2023-03-12 19:53:02.611 [main] INFO  o.f.j.s.impl.asyncexecutor.AbstractAsyncExecutor - Starting up the async job executor [org.flowable.spring.job.service.SpringAsyncExecutor].
+ 2023-03-12 19:53:02.612 [Thread-3] INFO  o.f.j.s.i.a.AcquireAsyncJobsDueRunnable - starting to acquire async jobs due
+ 2023-03-12 19:53:02.612 [Thread-4] INFO  o.f.j.s.i.asyncexecutor.AcquireTimerJobsRunnable - starting to acquire async jobs due
+ 2023-03-12 19:53:02.612 [Thread-5] INFO  o.f.j.s.i.asyncexecutor.ResetExpiredJobsRunnable - starting to reset expired jobs
+ 2023-03-12 19:53:02.669 [main] INFO  org.flowable.engine.impl.cmd.ValidateV5EntitiesCmd - Total of v5 deployments found: 0
+ 2023-03-12 19:53:02.680 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2023-03-12 19:53:02.714 [main] INFO  org.flowable.idm.engine.impl.IdmEngineImpl - IdmEngine default created
+ 2023-03-12 19:53:02.716 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2023-03-12 19:53:03.445 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 19:53:04.479 [main] INFO  liquibase.changelog - Reading from doc.ACT_DMN_DATABASECHANGELOG
+ 2023-03-12 19:53:04.587 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 19:53:04.588 [main] INFO  org.flowable.dmn.engine.impl.DmnEngineImpl - DmnEngine default created
+ 2023-03-12 19:53:04.590 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2023-03-12 19:53:04.636 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 19:53:04.834 [main] INFO  liquibase.changelog - Reading from doc.ACT_FO_DATABASECHANGELOG
+ 2023-03-12 19:53:04.862 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 19:53:04.862 [main] INFO  org.flowable.form.engine.impl.FormEngineImpl - FormEngine default created
+ 2023-03-12 19:53:04.864 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2023-03-12 19:53:04.871 [main] INFO  o.f.content.engine.ContentEngineConfiguration - Content file system root : /Users/gaozhiwei/content
+ 2023-03-12 19:53:04.904 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 19:53:05.071 [main] INFO  liquibase.changelog - Reading from doc.ACT_CO_DATABASECHANGELOG
+ 2023-03-12 19:53:05.106 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 19:53:05.107 [main] INFO  org.flowable.content.engine.impl.ContentEngineImpl - ContentEngine default created
+ 2023-03-12 19:53:05.108 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.cmmn.spring.configurator.SpringCmmnEngineConfigurator (priority:500000)
+ 2023-03-12 19:53:05.226 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 19:53:05.401 [main] INFO  liquibase.changelog - Reading from doc.ACT_CMMN_DATABASECHANGELOG
+ 2023-03-12 19:53:05.444 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 19:53:05.445 [main] INFO  org.flowable.cmmn.engine.impl.CmmnEngineImpl - CmmnEngine default created
+ 2023-03-12 19:53:05.491 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 19:53:05.658 [main] INFO  liquibase.changelog - Reading from doc.ACT_APP_DATABASECHANGELOG
+ 2023-03-12 19:53:05.684 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 19:53:05.685 [main] INFO  org.flowable.app.engine.impl.AppEngineImpl - AppEngine default created
+ 2023-03-12 19:53:07.120 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8092"]
+ 2023-03-12 19:53:07.147 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8092 (http) with context path ''
+ 2023-03-12 19:53:07.543 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+ 2023-03-12 19:53:07.547 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+ 2023-03-12 19:53:07.612 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Freed 0 triggers from 'acquired' / 'blocked' state.
+ 2023-03-12 19:53:07.624 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Recovering 0 jobs that were in-progress at the time of the last shut-down.
+ 2023-03-12 19:53:07.624 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Recovery complete.
+ 2023-03-12 19:53:07.626 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Removed 0 'complete' triggers.
+ 2023-03-12 19:53:07.630 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Removed 0 stale fired job entries.
+ 2023-03-12 19:53:07.632 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED started.
+ 2023-03-12 19:53:07.656 [canalClient-thread] INFO  com.gzw.kd.canal.component.CanalClient - =============> Start to connect destination: canaltest <=============
+ 2023-03-12 19:53:07.674 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+ 2023-03-12 19:53:07.690 [main] INFO  com.gzw.kd.KdApplication - Started KdApplication in 19.137 seconds (JVM running for 20.884)
+ 2023-03-12 19:53:07.912 [canalClient-thread] INFO  com.gzw.kd.canal.component.CanalClient - =============> Start to subscribe destination: canaltest <=============
+ 2023-03-12 19:53:07.941 [canalClient-thread] INFO  com.gzw.kd.canal.component.CanalClient - =============> Subscribe destination: canaltest succeed <=============
+ 2023-03-12 19:53:10.703 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:53:15.707 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:53:20.712 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:53:25.716 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:53:30.717 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:53:35.718 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:53:40.723 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:53:45.726 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:53:50.727 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:53:55.732 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:00.731 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:00.857 [Thread-9] INFO  com.gzw.kd.learn.thread.MyMusicIndex - music play start----------------------------------------------------向往神鹰.mp3 
+ 2023-03-12 19:54:00.857 [pool-5-thread-1] INFO  com.gzw.kd.scheduletask.ScheduleTask - current time 2023-03-12T19:54:00.857
+ 2023-03-12 19:54:05.740 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:10.738 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:15.738 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:20.742 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:22.501 [http-nio-8092-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+ 2023-03-12 19:54:22.505 [http-nio-8092-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+ 2023-03-12 19:54:22.661 [http-nio-8092-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 156 ms
+ 2023-03-12 19:54:25.745 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:30.749 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:35.752 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:40.755 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:45.760 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:50.764 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:54:55.767 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:00.768 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:05.772 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+kd.d0d383fdd1d448e5 2023-03-12 19:55:10.512 [http-nio-8092-exec-10] INFO  com.gzw.kd.listener.MsgListener - 用户:admin 上线,时间:2023-03-12 19:55:10 在线人数:1
+ 2023-03-12 19:55:10.774 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:15.776 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:19.939 [http-nio-8092-exec-1] INFO  com.gzw.kd.websocket.WebsocketServer -  uid : ad320c50-40bf-4616-80b3-154fb4198681 链接加入 online num 1,
+ 2023-03-12 19:55:19.947 [http-nio-8092-exec-1] INFO  com.gzw.kd.websocket.WebsocketServer - 收到来自窗口的信息:connect success ......
+ 2023-03-12 19:55:20.778 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:25.781 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:30.784 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:35.785 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:40.788 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:45.791 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:50.793 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:55:55.798 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:56:00.802 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:56:05.802 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+kd.d58c602da10c4fc7 2023-03-12 19:56:10.247 [http-nio-8092-exec-9] INFO  com.gzw.kd.config.ResubmitInterceptor - ===checkVisitNum key:VISIT_LIMIT:SERVICE.127.0.0.1./pc/getUniqueId url:/pc/getUniqueId
+kd.d58c602da10c4fc7 2023-03-12 19:56:10.272 [http-nio-8092-exec-9] INFO  com.gzw.kd.controller.PCController - getUniqueId success id:1-1678622170271-EO8pg6jP 耗时:1
+ 2023-03-12 19:56:10.806 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:56:15.809 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:56:19.932 [http-nio-8092-exec-6] INFO  com.gzw.kd.websocket.WebsocketServer -  uid : ad320c50-40bf-4616-80b3-154fb4198681 链接退出 online num 0,
+ 2023-03-12 19:56:20.814 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:56:24.196 [http-nio-8092-exec-2] INFO  com.gzw.kd.websocket.WebsocketServer -  uid : 44f490a9-5402-4e66-a5a2-9e3a0df23d0f 链接加入 online num 1,
+ 2023-03-12 19:56:24.196 [http-nio-8092-exec-2] INFO  com.gzw.kd.websocket.WebsocketServer - 收到来自窗口的信息:connect success ......
+ 2023-03-12 19:56:25.817 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:56:29.119 [http-nio-8092-exec-3] INFO  com.gzw.kd.websocket.WebsocketServer -  uid : 44f490a9-5402-4e66-a5a2-9e3a0df23d0f 链接退出 online num 0,
+ 2023-03-12 19:56:30.820 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:56:35.824 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+kd.97de4ea8c3d448d7 2023-03-12 19:56:37.512 [http-nio-8092-exec-6] INFO  com.gzw.kd.listener.MsgListener - 用户:admin 离线,时间:2023-03-12 19:55:10-2023-03-12 19:56:37 在线人数:0
+ 2023-03-12 19:56:40.828 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+kd.45183689cc5b43e2 2023-03-12 19:56:43.237 [http-nio-8092-exec-10] INFO  com.gzw.kd.listener.MsgListener - 用户:gzw 上线,时间:2023-03-12 19:56:43 在线人数:1
+ 2023-03-12 19:56:45.833 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:56:50.837 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:56:55.840 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:00.844 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:05.846 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:10.847 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:15.850 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:20.855 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:25.859 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:30.861 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:35.865 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:40.870 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:45.873 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:50.877 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:55.882 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:57:57.049 [http-nio-8092-exec-2] INFO  com.gzw.kd.websocket.WebsocketServer -  uid : 7575ee3e-235f-4b26-a838-104188e21a04 链接加入 online num 1,
+ 2023-03-12 19:57:57.052 [http-nio-8092-exec-2] INFO  com.gzw.kd.websocket.WebsocketServer - 收到来自窗口的信息:connect success ......
+ 2023-03-12 19:58:00.884 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:05.887 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:10.892 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:15.895 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:20.899 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:25.903 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:30.909 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:35.909 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:40.911 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:45.915 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:50.916 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:58:55.921 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:00.926 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:05.934 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:10.933 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:15.935 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:20.939 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:25.939 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:30.944 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:35.946 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:40.946 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:45.952 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:50.955 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 19:59:55.955 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:00:00.153 [pool-5-thread-1] INFO  com.gzw.kd.scheduletask.ScheduleTask - current time 2023-03-12T20:00:00.152
+ 2023-03-12 20:00:00.958 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:00:05.959 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:00:07.955 [Thread-9] INFO  com.gzw.kd.learn.thread.MyMusicIndex - music play end---------------------------------------------------- 
+kd.fe22427c7849431f 2023-03-12 20:00:08.100 [http-nio-8092-exec-7] INFO  com.gzw.kd.listener.MsgListener - 用户:gzw 离线,时间:2023-03-12 19:56:43-2023-03-12 20:00:08 在线人数:0
+ 2023-03-12 20:00:08.351 [http-nio-8092-exec-4] INFO  com.gzw.kd.websocket.WebsocketServer -  uid : 7575ee3e-235f-4b26-a838-104188e21a04 链接退出 online num 0,
+ 2023-03-12 20:00:10.962 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:00:15.962 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:00:16.092 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closing...
+ 2023-03-12 20:00:16.124 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closed
+ 2023-03-12 20:00:16.163 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+ 2023-03-12 20:05:10.103 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.4 (v2.7.4) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-03-12 20:05:10.187 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-03-12 20:05:10.222 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei.local with PID 61894 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-03-12 20:05:10.223 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "dev"
+ 2023-03-12 20:05:12.310 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-03-12 20:05:12.315 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-03-12 20:05:12.401 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 60 ms. Found 0 Redis repository interfaces.
+ 2023-03-12 20:05:13.234 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=b0941244-7cec-34b2-98ae-3d178cd50a2a
+ 2023-03-12 20:05:14.771 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-03-12 20:05:14.791 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-03-12 20:05:14.791 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-03-12 20:05:14.792 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.65]
+ 2023-03-12 20:05:15.045 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-03-12 20:05:15.046 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4746 ms
+ 2023-03-12 20:05:15.194 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.5556053318168088940/]
+ 2023-03-12 20:05:15.253 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2023-03-12 20:05:15.299 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2023-03-12 20:05:17.364 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-03-12 20:05:17.518 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2023-03-12 20:05:17.616 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2023-03-12 20:05:18.136 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+ 2023-03-12 20:05:18.205 [main] INFO  o.flywaydb.core.internal.database.DatabaseFactory - Database: jdbc:mysql://127.0.0.1:3306/doc (MySQL 8.0)
+ 2023-03-12 20:05:18.455 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 6 migrations (execution time 00:00.079s)
+ 2023-03-12 20:05:18.472 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `doc`: 1.0.5
+ 2023-03-12 20:05:18.474 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `doc` is up to date. No migration necessary.
+ 2023-03-12 20:05:18.595 [main] INFO  com.gzw.kd.common.utils.AESCrypt - 初始化成功了
+ 2023-03-12 20:05:18.737 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+ 2023-03-12 20:05:18.742 [main] INFO  org.quartz.simpl.SimpleThreadPool - Job execution threads will use class loader of thread: main
+ 2023-03-12 20:05:18.758 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+ 2023-03-12 20:05:18.758 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+ 2023-03-12 20:05:18.759 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Using thread monitor-based data access locking (synchronization).
+ 2023-03-12 20:05:18.760 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - JobStoreTX initialized.
+ 2023-03-12 20:05:18.761 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'kd_DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is not clustered.
+
+ 2023-03-12 20:05:18.761 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'kd_DefaultQuartzScheduler' initialized from an externally provided properties instance.
+ 2023-03-12 20:05:18.761 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+ 2023-03-12 20:05:18.764 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@7d551ec6
+ 2023-03-12 20:05:19.123 [main] INFO  com.gzw.kd.scheduletask.AsyncTaskJobHandler - Async task impl list: [com.gzw.kd.export.service.LogExportAsyncTask@70e1aa20]
+ 2023-03-12 20:05:19.999 [main] INFO  com.gzw.kd.config.ExecutorConfiguration - start asyncTaskExecutor
+ 2023-03-12 20:05:20.817 [main] INFO  o.f.s.b.a.AppEngineAutoConfiguration$$EnhancerBySpringCGLIB$$bf04ccdb - No deployment resources were found for autodeployment
+ 2023-03-12 20:05:21.038 [main] INFO  o.f.s.b.ProcessEngineAutoConfiguration$$EnhancerBySpringCGLIB$$e7221480 - No deployment resources were found for autodeployment
+ 2023-03-12 20:05:21.387 [main] INFO  o.f.s.b.c.CmmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$f9bd521 - No deployment resources were found for autodeployment
+ 2023-03-12 20:05:21.571 [main] INFO  o.f.s.b.d.DmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$671d1713 - No deployment resources were found for autodeployment
+ 2023-03-12 20:05:21.654 [main] INFO  o.f.s.b.f.FormEngineAutoConfiguration$$EnhancerBySpringCGLIB$$ab429181 - No deployment resources were found for autodeployment
+ 2023-03-12 20:05:21.771 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 6 Engine Configurators in total:
+ 2023-03-12 20:05:21.771 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2023-03-12 20:05:21.771 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2023-03-12 20:05:21.771 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2023-03-12 20:05:21.771 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2023-03-12 20:05:21.771 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2023-03-12 20:05:21.772 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.cmmn.spring.configurator.SpringCmmnEngineConfigurator (priority:500000)
+ 2023-03-12 20:05:21.772 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2023-03-12 20:05:21.779 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2023-03-12 20:05:21.782 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2023-03-12 20:05:21.784 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2023-03-12 20:05:21.787 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2023-03-12 20:05:21.790 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.cmmn.spring.configurator.SpringCmmnEngineConfigurator (priority:500000)
+ 2023-03-12 20:05:22.744 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2023-03-12 20:05:23.085 [main] INFO  org.flowable.engine.impl.ProcessEngineImpl - ProcessEngine default created
+ 2023-03-12 20:05:23.104 [main] INFO  o.f.j.s.impl.asyncexecutor.AbstractAsyncExecutor - Starting up the async job executor [org.flowable.spring.job.service.SpringAsyncExecutor].
+ 2023-03-12 20:05:23.105 [Thread-4] INFO  o.f.j.s.i.asyncexecutor.AcquireTimerJobsRunnable - starting to acquire async jobs due
+ 2023-03-12 20:05:23.105 [Thread-5] INFO  o.f.j.s.i.asyncexecutor.ResetExpiredJobsRunnable - starting to reset expired jobs
+ 2023-03-12 20:05:23.105 [Thread-3] INFO  o.f.j.s.i.a.AcquireAsyncJobsDueRunnable - starting to acquire async jobs due
+ 2023-03-12 20:05:23.177 [main] INFO  org.flowable.engine.impl.cmd.ValidateV5EntitiesCmd - Total of v5 deployments found: 0
+ 2023-03-12 20:05:23.186 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2023-03-12 20:05:23.235 [main] INFO  org.flowable.idm.engine.impl.IdmEngineImpl - IdmEngine default created
+ 2023-03-12 20:05:23.237 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2023-03-12 20:05:24.049 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 20:05:24.707 [main] INFO  liquibase.changelog - Reading from doc.ACT_DMN_DATABASECHANGELOG
+ 2023-03-12 20:05:24.820 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 20:05:24.821 [main] INFO  org.flowable.dmn.engine.impl.DmnEngineImpl - DmnEngine default created
+ 2023-03-12 20:05:24.822 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2023-03-12 20:05:24.869 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 20:05:25.537 [main] INFO  liquibase.changelog - Reading from doc.ACT_FO_DATABASECHANGELOG
+ 2023-03-12 20:05:25.566 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 20:05:25.566 [main] INFO  org.flowable.form.engine.impl.FormEngineImpl - FormEngine default created
+ 2023-03-12 20:05:25.568 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2023-03-12 20:05:25.574 [main] INFO  o.f.content.engine.ContentEngineConfiguration - Content file system root : /Users/gaozhiwei/content
+ 2023-03-12 20:05:25.606 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 20:05:25.827 [main] INFO  liquibase.changelog - Reading from doc.ACT_CO_DATABASECHANGELOG
+ 2023-03-12 20:05:25.863 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 20:05:25.864 [main] INFO  org.flowable.content.engine.impl.ContentEngineImpl - ContentEngine default created
+ 2023-03-12 20:05:25.865 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.cmmn.spring.configurator.SpringCmmnEngineConfigurator (priority:500000)
+ 2023-03-12 20:05:25.994 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 20:05:26.200 [main] INFO  liquibase.changelog - Reading from doc.ACT_CMMN_DATABASECHANGELOG
+ 2023-03-12 20:05:26.246 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 20:05:26.247 [main] INFO  org.flowable.cmmn.engine.impl.CmmnEngineImpl - CmmnEngine default created
+ 2023-03-12 20:05:26.300 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-03-12 20:05:26.475 [main] INFO  liquibase.changelog - Reading from doc.ACT_APP_DATABASECHANGELOG
+ 2023-03-12 20:05:26.503 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-03-12 20:05:26.504 [main] INFO  org.flowable.app.engine.impl.AppEngineImpl - AppEngine default created
+ 2023-03-12 20:05:27.377 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8092"]
+ 2023-03-12 20:05:27.407 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8092 (http) with context path ''
+ 2023-03-12 20:05:27.811 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Starting Quartz Scheduler now
+ 2023-03-12 20:05:27.816 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+ 2023-03-12 20:05:27.852 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Freed 0 triggers from 'acquired' / 'blocked' state.
+ 2023-03-12 20:05:27.859 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Recovering 0 jobs that were in-progress at the time of the last shut-down.
+ 2023-03-12 20:05:27.859 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Recovery complete.
+ 2023-03-12 20:05:27.861 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Removed 0 'complete' triggers.
+ 2023-03-12 20:05:27.863 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Removed 0 stale fired job entries.
+ 2023-03-12 20:05:27.864 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED started.
+ 2023-03-12 20:05:27.881 [canalClient-thread] INFO  com.gzw.kd.canal.component.CanalClient - =============> Start to connect destination: canaltest <=============
+ 2023-03-12 20:05:27.897 [main] INFO  o.s.s.a.ScheduledAnnotationBeanPostProcessor - No TaskScheduler/ScheduledExecutorService bean found for scheduled processing
+ 2023-03-12 20:05:27.911 [main] INFO  com.gzw.kd.KdApplication - Started KdApplication in 18.55 seconds (JVM running for 19.156)
+ 2023-03-12 20:05:28.071 [canalClient-thread] INFO  com.gzw.kd.canal.component.CanalClient - =============> Start to subscribe destination: canaltest <=============
+ 2023-03-12 20:05:28.090 [canalClient-thread] INFO  com.gzw.kd.canal.component.CanalClient - =============> Subscribe destination: canaltest succeed <=============
+ 2023-03-12 20:05:30.923 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:05:35.925 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:05:40.928 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:05:43.971 [http-nio-8092-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+ 2023-03-12 20:05:43.982 [http-nio-8092-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+ 2023-03-12 20:05:44.036 [http-nio-8092-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 53 ms
+ 2023-03-12 20:05:45.928 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:05:50.937 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:05:55.936 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:00.595 [pool-5-thread-1] INFO  com.gzw.kd.scheduletask.ScheduleTask - current time 2023-03-12T20:06:00.594
+ 2023-03-12 20:06:00.589 [Thread-10] INFO  com.gzw.kd.learn.thread.MyMusicIndex - music play start----------------------------------------------------向往神鹰.mp3 
+ 2023-03-12 20:06:00.941 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+kd.a23ca0dc888a44d3 2023-03-12 20:06:03.856 [http-nio-8092-exec-5] INFO  com.gzw.kd.listener.MsgListener - 用户:gzw 上线,时间:2023-03-12 20:06:03 在线人数:1
+ 2023-03-12 20:06:05.948 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:10.829 [http-nio-8092-exec-10] INFO  com.gzw.kd.websocket.WebsocketServer -  uid : d03bfda6-1f3f-4a13-a769-098b9b43acea 链接加入 online num 1,
+ 2023-03-12 20:06:10.843 [http-nio-8092-exec-10] INFO  com.gzw.kd.websocket.WebsocketServer - 收到来自窗口的信息:connect success ......
+ 2023-03-12 20:06:10.946 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:15.951 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:20.955 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:25.960 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:30.962 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:35.966 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:40.971 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:45.973 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:50.980 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:06:55.983 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:07:00.984 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:07:05.989 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:07:10.998 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:07:15.996 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+kd.873028f59c184c12 2023-03-12 20:07:18.833 [http-nio-8092-exec-4] INFO  com.gzw.kd.listener.MsgListener - 用户:gzw 离线,时间:2023-03-12 20:06:03-2023-03-12 20:07:18 在线人数:0
+ 2023-03-12 20:07:19.027 [http-nio-8092-exec-3] INFO  com.gzw.kd.websocket.WebsocketServer -  uid : d03bfda6-1f3f-4a13-a769-098b9b43acea 链接退出 online num 0,
+ 2023-03-12 20:07:21.000 [TaskEngine-pool-1] INFO  com.gzw.kd.scheduletask.ScheduleTaskTwo - ------------------------------- gzw -------- timeTask-----------------------------------
+ 2023-03-12 20:07:22.943 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closing...
+ 2023-03-12 20:07:22.945 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closed
+ 2023-03-12 20:07:22.982 [SpringApplicationShutdownHook] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+ 2023-03-12 20:07:23.088 [SpringApplicationShutdownHook] INFO  o.f.j.s.impl.asyncexecutor.AbstractAsyncExecutor - Shutting down the async job executor [org.flowable.spring.job.service.SpringAsyncExecutor].
+ 2023-03-12 20:07:23.088 [flowable-acquire-timer-jobs] INFO  o.f.j.s.i.asyncexecutor.AcquireTimerJobsRunnable - stopped async job due acquisition
+ 2023-03-12 20:07:23.088 [flowable-acquire-async-jobs] INFO  o.f.j.s.i.a.AcquireAsyncJobsDueRunnable - stopped async job due acquisition
+ 2023-03-12 20:07:23.089 [flowable-reset-expired-jobs] INFO  o.f.j.s.i.asyncexecutor.ResetExpiredJobsRunnable - stopped resetting expired jobs

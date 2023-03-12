@@ -894,8 +894,8 @@ public class PCController {
     @OperatorLog(value = "邮箱发送",description = "邮箱发送")
     @PostMapping("/sendEmailMessage")
     @ResponseBody
-    public R sendEmailMessage(@RequestParam("email") String email,@RequestParam("message") String  message) throws Exception {
-        MailUtil.getMailSend().sendEmail(message.substring(0,message.indexOf(" ")),message,new String[]{email},true,"pc/email.html");
+    public R sendEmailMessage(@RequestParam("subject") String subject,@RequestParam("email") String email,@RequestParam("message") String  message) throws Exception {
+        MailUtil.getMailSend().sendEmail(subject,message,new String[]{email},true,"pc/email.html");
         return R.ok();
     }
 
