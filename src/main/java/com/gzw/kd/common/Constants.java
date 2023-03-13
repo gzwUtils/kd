@@ -605,9 +605,6 @@ public interface Constants {
 
    public static final String SYSTEM_MAIL_PASSWORD = "ftaaokyudgztdeah";
 
-   public static final String [] mails = new String[]{"private_gzw1314@163.com"};
-
-
     /**
      * SMS
      */

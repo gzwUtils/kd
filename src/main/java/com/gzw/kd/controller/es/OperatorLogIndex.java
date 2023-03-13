@@ -59,14 +59,16 @@ public class OperatorLogIndex {
         List<EsLogSearchIndex> esLogSearchIndexList = new ArrayList<>();
         BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
         if(StringUtils.isNotBlank(whereLog.getUserName())){
-            BoolQueryBuilder shouldBoolean = QueryBuilders.boolQuery();
-            shouldBoolean.should(QueryBuilders.termsQuery("username", whereLog.getUserName()));
-            queryBuilder.must(shouldBoolean);
+            queryBuilder.must(QueryBuilders.termQuery("username", whereLog.getUserName()));
         }
-        if(whereLog.getLocation()!=null){
-            BoolQueryBuilder shouldBoolean = QueryBuilders.boolQuery();
-            shouldBoolean.should(QueryBuilders.termsQuery("location", whereLog.getLocation()));
-            queryBuilder.must(shouldBoolean);
+        if(StringUtils.isNotBlank(whereLog.getLocation())){
+            queryBuilder.must(QueryBuilders.termQuery("location", whereLog.getLocation()));
+        }
+        if(StringUtils.isNotBlank(whereLog.getCreateTimeStart()) && StringUtils.isNotBlank(whereLog.getCreateTimeEnd())){
+            queryBuilder.must(QueryBuilders.rangeQuery("create_time")
+                    .from(whereLog.getCreateTimeStart())
+                    .to(whereLog.getCreateTimeEnd())
+                    );
         }
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         int size = whereLog.getSize() == 0 ? defaultSize:whereLog.getSize();
