@@ -14,4 +14,8 @@ import lombok.experimental.Accessors;
 public class OperatorLogInput extends Log {
 
     private  int size  ;
+
+    private String createTimeStart;
+
+    private String createTimeEnd;
 }

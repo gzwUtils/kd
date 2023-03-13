@@ -50,7 +50,7 @@ public class SMSUtils {
         map.put("account",account);
         map.put("password",smsPassword);
         map.put("mobile",phone);
-        map.put("content",message);
+        map.put("content","亲爱的"+message+"，虽然经历了岁月的洗礼，但真挚的感情没有磨灭。愿我们友谊长存。");
         map.put("format","json");
         String result = HttpUtil.post(SMS_SEND_URL, map);
         SmsResult smsResult = JSONObject.parseObject(result, SmsResult.class);
