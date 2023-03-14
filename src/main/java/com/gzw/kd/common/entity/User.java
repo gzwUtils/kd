@@ -37,7 +37,7 @@ public class User implements Serializable {
     /**
      * 邮箱
      */
-
+    @PrivacyEncrypt(type = PrivacyTypeEnum.EMAIL)
     private String email;
 
     /**
