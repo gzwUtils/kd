@@ -3,15 +3,15 @@
 <mapper namespace="com.gzw.kd.mapper.UserMapper" >
 
   <select id="getUserByName"   resultType="com.gzw.kd.common.entity.User">
-      SELECT id, password, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  account=#{account}
+      SELECT id, password,email, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  account=#{account}
   </select>
 
     <select id="getUserByNameAndPhone"   resultType="com.gzw.kd.common.entity.User">
-        SELECT id, password, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  account=#{account} and  phone=#{phone}
+        SELECT id, password, account,email, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  account=#{account} and  phone=#{phone}
     </select>
 
     <select id="getUserByPhone"   resultType="com.gzw.kd.common.entity.User">
-        SELECT id, password, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  phone=#{phone}
+        SELECT id, password, account,email, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  phone=#{phone}
     </select>
 
     <select id="getAllNames"   resultType="string">
@@ -42,6 +42,6 @@
     </update>
 
     <select id="getAllUsers"   resultType="com.gzw.kd.common.entity.User">
-        SELECT id, password, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user
+        SELECT id, password, account,email, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user
     </select>
 </mapper>
