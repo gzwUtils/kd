@@ -2,7 +2,7 @@ package com.gzw.kd.common.entity;
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.gzw.kd.common.annotation.PrivacyEncrypt;
 import com.gzw.kd.common.enums.PrivacyTypeEnum;
-import java.util.Date;
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -27,7 +27,7 @@ public class Log  {
     private String ip;
 
     @JSONField(name = "create_time")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private String location;
 
