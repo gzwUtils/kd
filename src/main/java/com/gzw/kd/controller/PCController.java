@@ -863,7 +863,7 @@ public class PCController {
         return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
     }
 
-
+    @OperatorLog(value = "redis lock ",description = "redis lock ")
     @RedisLockAnnotation(typeEnum = RedisLockTypeEnum.TEST, lockTime = 5)
     @PostMapping("/testRedisLock")
     @ResponseBody

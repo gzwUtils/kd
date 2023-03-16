@@ -33,6 +33,10 @@
       <el-input v-model="result" placeholder="请输入入参"></el-input>
       <br/>
       <br/>
+      <el-button type="primary" icon="el-icon-search" size="mini" @click="redisFlow()">redisFlow</el-button>
+      <el-input v-model="redisLimitResult" disabled="disabled"></el-input>
+      <br/>
+      <br/>
       <el-button type="primary" icon="el-icon-search" size="mini" @click="excelDownload()">Excel模版下载</el-button>
       <el-button type="primary" icon="el-icon-search" size="mini" @click="exports()">Excel导出</el-button>
       <el-button type="primary" icon="el-icon-search" size="mini" @click="asyncExport()">asyncExcel导出</el-button>
@@ -104,6 +108,7 @@
                 email: '',
                 tokens: '',
                 subject: '',
+                redisLimitResult: '',
                 showPhone: false,
                 showEmail: false,
 
@@ -127,6 +132,11 @@
                     this.input = response.data.data.uniqueId;
                 });
             },
+            redisFlow(){
+                    axios.post('/base/limitFlow').then(response => {
+                          this.redisLimitResult = response.data.message;
+                    });
+           },
             excelDownload(){
                 axios.post('/pc/downloadTemplate').then(response => {
                     const link = document.createElement('a')
