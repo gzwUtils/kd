@@ -8,11 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * @author 高志伟
  */
-
+@EnableDiscoveryClient
 @ServletComponentScan
 @EnableScheduling
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
