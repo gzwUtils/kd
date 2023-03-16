@@ -36,8 +36,6 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/pc/phoneLogin",
                 "/pc/phoneCheckLogin",
                 "/pc/getCode",
-                "/pc/asyncExport",
-                "/pc/export",
                 "/wx/**",
                 "/es/**",
                 "/pc/unknown",

@@ -1,8 +1,10 @@
 package com.gzw.kd.controller;
 import com.alibaba.fastjson2.JSONObject;
 import com.gzw.kd.common.R;
+import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.utils.MyLinkedBlockQueue;
 import com.gzw.kd.common.entity.MyQueue;
+import com.gzw.kd.common.utils.RedisLimitFlow;
 import io.swagger.annotations.Api;
 import java.util.ArrayList;
 import java.util.List;
@@ -85,5 +87,11 @@ public class BaseController {
         put_list.clear();
         take_list.clear();
         return R.ok();
+    }
+
+    @OperatorLog(value = "redis limit flow ",description = "redis 限流")
+    @RequestMapping(value = "/limitFlow",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public  R limitFlow (){
+        return RedisLimitFlow.limitFlow(60000l,5);
     }
 }
