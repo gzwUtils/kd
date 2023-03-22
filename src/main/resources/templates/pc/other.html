@@ -46,8 +46,8 @@
       <br/>
       <el-tag type="success">情感语录..</el-tag>
       <el-button type="success"  size="mini" @click="otherSave()">保存</el-button>
-      <el-button type="success"  size="mini" @click="smsSend()">短信发送</el-button>
-      <el-button type="success"  size="mini" @click="emailSend()">邮件发送</el-button>
+      <el-button type="success"  size="mini" @click="smsSend()">短信</el-button>
+      <el-button type="success"  size="mini" @click="emailSend()">邮件</el-button>
       <el-input v-model="phone" placeholder="手机号" v-if="showPhone"></el-input>
       <el-input v-model="subject" placeholder="主题" v-if="showEmail"></el-input>
       <el-input v-model="email" placeholder="邮箱" v-if="showEmail"></el-input>

@@ -45,10 +45,6 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/zfb/**",
                 "/base/**",
                 "/qrt/dyQrCodeWriter",
-                "/swagger-resources/**",
-                "/webjars/**",
-                "/v2/**",
-                "/swagger-ui.html/**",
                 "/assets/**");
         registry.addInterceptor(resubmitInterceptor).addPathPatterns("/**");
 
