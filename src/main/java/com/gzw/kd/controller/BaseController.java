@@ -5,10 +5,12 @@ import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.utils.MyLinkedBlockQueue;
 import com.gzw.kd.common.entity.MyQueue;
 import com.gzw.kd.common.utils.RedisLimitFlow;
+import com.gzw.kd.learn.model.model.GzwThreadDemo;
 import io.swagger.annotations.Api;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,6 +33,10 @@ public class BaseController {
 
     @Resource
     private MyLinkedBlockQueue<Object> linkedBlockQueue;
+
+
+    @Autowired
+    private GzwThreadDemo gzwThreadDemo;
 
 
     private static List<String> put_list = new ArrayList<>();
@@ -93,5 +99,12 @@ public class BaseController {
     @RequestMapping(value = "/limitFlow",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public  R limitFlow (){
         return RedisLimitFlow.limitFlow(60000l,5);
+    }
+
+
+    @RequestMapping(value = "/gzwThreadDemo",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public  R gzwThreadDemo (){
+        gzwThreadDemo.start();
+        return R.ok();
     }
 }

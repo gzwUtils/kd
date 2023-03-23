@@ -8,6 +8,7 @@ import com.gzw.kd.common.utils.MyLinkedBlockQueue;
 import com.gzw.kd.common.utils.SM4Utils;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterChain;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterStage;
+import com.gzw.kd.learn.model.model.GzwThreadDemo;
 import com.gzw.kd.scheduletask.ScheduleTask;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,9 @@ class KdApplicationTests {
 
     @Autowired
     private DemoGzwFilterChain demoGzwFilterChain;
+
+    @Autowired
+    private GzwThreadDemo gzwThreadDemo;
 
     @Test
     void contextLoads() throws GlobalException {
@@ -91,5 +95,11 @@ class KdApplicationTests {
         DemoGzwFilterStage stage = demoGzwFilterChain.doFilter(demoGzwFilterStage);
         List<Map<String, Object>> result = stage.getStageHandlerResult();
         log.info("chain end {}", JSON.toJSONString(result));
+    }
+
+
+    @Test
+    void gzwThreadDemo() {
+       gzwThreadDemo.start();
     }
 }
