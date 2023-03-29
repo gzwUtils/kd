@@ -103,8 +103,14 @@ public class BaseController {
 
 
     @RequestMapping(value = "/gzwThreadDemo",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public  R gzwThreadDemo (){
+    public  R start (){
         gzwThreadDemo.start();
+        return R.ok();
+    }
+
+    @RequestMapping(value = "/shutdown", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R shutdown() {
+        gzwThreadDemo.shutdown();
         return R.ok();
     }
 }

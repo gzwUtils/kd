@@ -42,8 +42,8 @@ public abstract class GzwThread implements Runnable{
         if(!started.compareAndSet(false,true)){
             return;
         }
+        this.stopped = false;
         this.thread = new Thread(this,getServiceName());
-
         this.thread.setDaemon(isDaemon);
         this.thread.start();
     }
