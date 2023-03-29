@@ -675,14 +675,10 @@ public class PCController {
      * 导出日志接口
      */
     @PostMapping("/export")
-    public void export(HttpServletResponse response,LocalDateTime time ) {
-        try {
-            ExportFileMeta export = logService.export(time);
-            if (export.getIsSucceed()) {
-                export.writeResponse(response);
-            }
-        } catch (Exception e) {
-            throw new GlobalException(ResultCodeEnum.UNKNOWN_ERROR.getCode(), e.getMessage(), e);
+    public void export(HttpServletResponse response, LocalDateTime time) throws IOException {
+        ExportFileMeta export = logService.export(time);
+        if (export.getIsSucceed()) {
+            export.writeResponse(response);
         }
     }
 
@@ -693,13 +689,9 @@ public class PCController {
     @ResponseBody
     @PostMapping("/asyncExport")
     public R asyncExport(HttpServletResponse response, @RequestBody @Validated LogSearchInput logSearchInput) {
-        try {
             final LocalDateTime generateTime = LocalDateTime.now();
             asyncTaskLogService.addOne(logSearchInput, AsyncTaskTypeEnum.ALL_LOG_EXPORT, logSearchInput.getExportFileName(), generateTime);
             return R.ok();
-        } catch (Exception e) {
-            throw new GlobalException(ResultCodeEnum.UNKNOWN_ERROR.getCode(), e.getMessage(), e);
-        }
     }
 
 

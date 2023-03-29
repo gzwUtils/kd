@@ -1,62 +1,23 @@
- 2023-03-23 15:25:54.923 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
- 2023-03-23 15:25:54.929 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
- 2023-03-23 15:25:54.981 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
- 2023-03-23 15:25:54.995 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
- 2023-03-23 16:21:24.005 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 16:21:24.020 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 16:43:11.431 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
- 2023-03-23 16:43:11.434 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
- 2023-03-23 16:43:11.435 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
- 2023-03-23 16:43:11.457 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
- 2023-03-23 17:22:05.078 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
- 2023-03-23 17:27:00.773 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:27:00.785 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:27:22.604 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:27:22.615 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:29:57.162 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:29:57.175 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:37:00.083 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:37:00.096 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:37:12.171 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:12.174 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:12.174 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:12.783 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:12.783 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.803 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.803 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.804 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.804 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.804 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.804 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.804 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.804 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.804 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.804 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.804 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.805 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.805 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.805 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.805 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.805 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.805 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.805 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.805 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.806 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:13.806 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:37:16.579 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
- 2023-03-23 17:41:09.163 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
- 2023-03-23 17:41:09.122 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
- 2023-03-23 17:41:09.221 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
- 2023-03-23 17:41:09.342 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
- 2023-03-23 17:51:25.036 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:51:25.049 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:56:12.509 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
- 2023-03-23 17:56:12.513 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
- 2023-03-23 17:56:12.516 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
- 2023-03-23 17:56:12.526 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
- 2023-03-23 17:58:39.183 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 17:58:39.196 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-03-23 18:01:17.324 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
- 2023-03-23 18:01:17.324 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
- 2023-03-23 18:01:17.335 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
- 2023-03-23 18:01:17.346 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-03-29 01:04:55.799 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 01:04:55.835 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 20:40:50.970 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 20:40:50.982 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 21:26:01.470 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 21:26:01.483 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 21:36:11.758 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-03-29 21:36:11.760 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-03-29 21:36:11.765 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-03-29 21:36:11.777 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-03-29 21:38:03.457 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 21:38:03.473 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 21:40:03.532 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-03-29 21:40:03.531 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-03-29 21:40:03.535 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-03-29 21:40:03.546 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-03-29 21:45:14.894 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 21:45:14.907 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-03-29 21:48:03.247 [async-task-executor-thread-1] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&scroll=50000ms&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-03-29 21:48:03.501 [async-task-executor-thread-1] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&scroll=50000ms&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-03-29 21:51:46.532 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-03-29 21:51:46.535 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-03-29 21:51:46.539 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end

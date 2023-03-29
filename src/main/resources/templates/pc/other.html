@@ -122,8 +122,10 @@
         },
         methods: {
             asyncExport(){
-                const name = this.exportResult == null ? 'kd' : this.exportResult;
-                axios.post('/pc/asyncExport?exportName='+name).then(response => {
+                const name = this.exportResult === '' ? 'kd' : this.exportResult;
+                let  exportFields =['result','username','ip'];
+                let body = {'exportFileName':name,'exportFields':exportFields};
+                axios.post('/pc/asyncExport',body).then(response => {
                     this.exportResult = response.data.message;
                 });
             },
