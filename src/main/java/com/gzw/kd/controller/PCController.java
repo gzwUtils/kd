@@ -146,6 +146,11 @@ public class PCController {
         return "/pc/login";
     }
 
+    @RequestMapping("/chatGpt")
+    public String chatGpt() {
+        return "/pc/chat";
+    }
+
     @RequestMapping("/userInfo")
     public String userInfo() {
         return "/pc/userInfo";

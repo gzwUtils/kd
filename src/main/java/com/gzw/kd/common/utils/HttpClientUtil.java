@@ -9,8 +9,8 @@ import com.alibaba.fastjson2.JSONObject;
 import com.gzw.kd.common.R;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -22,6 +22,7 @@ import java.util.Map;
 public class HttpClientUtil {
 
 
+    @Autowired
     private OkHttpClient okHttpClient;
 
     private static OkHttpClient httpClient;
@@ -35,6 +36,7 @@ public class HttpClientUtil {
     @PostConstruct
     public void init() {
         httpClient = this.okHttpClient;
+        log.info("http client init success ....................");
     }
 
 
