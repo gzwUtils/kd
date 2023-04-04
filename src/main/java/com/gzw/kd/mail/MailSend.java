@@ -30,7 +30,7 @@ public class MailSend {
 		try {
 			if(html){
 				Map<String, Object> map = new HashMap<>();
-				map.put("message",content);
+				map.put("message",content+STRING_EMPTY);
 				content = FreemarkerUtils.freeMarkerRender(map, "/src/main/resources/templates/error/500.html");
 			}
 			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
