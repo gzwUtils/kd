@@ -34,6 +34,9 @@ public class ChartGptServiceImpl implements ChartGptService {
     @Value("${ChatGPT.model}")
     private String model;
 
+    @Value("${ChatGPT.host}")
+    private String host;
+
 
     @Override
     public String send(String prompt) throws IOException {
@@ -41,7 +44,7 @@ public class ChartGptServiceImpl implements ChartGptService {
         bodyJson.put("prompt", prompt);
         bodyJson.put("max_tokens", Integer.parseInt(maxTokens));
         bodyJson.put("temperature", Double.parseDouble(temperature));
-        HttpResponse execute = HttpUtil.createPost("https://openai.geekr.cool/v1/engines/" + model + "/completions")
+        HttpResponse execute = HttpUtil.createPost(host+"/v1/engines/" + model + "/completions")
                 .header(Header.AUTHORIZATION, "Bearer " + apiKey).body(JSONUtil.toJsonStr(bodyJson)).execute();
         log.info("resStr: {}", execute.body());
         GptOutput gptResponse = JSONUtil.toBean(execute.body(), GptOutput.class);

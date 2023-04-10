@@ -16,7 +16,7 @@ import java.io.InputStream;
 @Slf4j
 public class MyMusicIndex extends JFrame implements Runnable {
 
-    private static final String[] MUSICS = {"鬼迷心窍.mp3","landing guy.mp3","共你痴痴爱在.mp3", "手心里的温柔.mp3", "tg.mp3", "经过.mp3"};
+    private static final String[] MUSICS = {"鬼迷心窍.mp3","landing guy.mp3","共你痴痴爱在.mp3", "手心里的温柔.mp3", "焰火青年.mp3"};
 
     private static Player player;
 

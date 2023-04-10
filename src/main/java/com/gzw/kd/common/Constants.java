@@ -610,5 +610,5 @@ public interface Constants {
      */
   public static final String SMS_SEND_URL = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";
 
-  public static final String FILE_SUFFIX = ".jpg,.xlsx,.txt,.doc,.png,.pdf,.xls,.docx,.sh,pptx,.mp4,.zip,.sql,.mp3";
+  public static final String FILE_SUFFIX = ".jpg,.jpeg,.xlsx,.txt,.doc,.png,.pdf,.xls,.docx,.sh,pptx,.mp4,.zip,.sql,.mp3";
 }
