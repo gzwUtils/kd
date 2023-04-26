@@ -1,10 +1,150 @@
- 2023-04-26 11:40:44.656 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
- 2023-04-26 11:40:44.656 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
- 2023-04-26 11:40:44.713 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
- 2023-04-26 11:40:44.733 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
- 2023-04-26 18:21:47.367 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-04-26 18:21:47.380 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
- 2023-04-26 18:24:27.819 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
- 2023-04-26 18:24:27.819 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
- 2023-04-26 18:24:27.820 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
- 2023-04-26 18:24:27.821 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:00:11.994 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:00:12.004 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:01:50.426 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:01:50.427 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:01:50.428 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:01:50.432 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:02:20.305 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:02:20.317 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:03:28.010 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:03:28.011 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:03:28.011 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:03:28.012 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:11:58.288 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:11:58.301 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:12:44.165 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:12:44.166 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:12:44.167 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:12:44.168 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:16:58.972 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:16:58.983 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:18:02.846 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:18:02.848 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:18:02.849 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:18:02.849 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:18:49.877 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:18:49.887 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:20:05.138 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:20:05.139 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:20:05.140 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:20:05.141 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:20:43.631 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:20:43.644 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:22:09.850 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:22:09.850 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:22:09.852 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:22:09.853 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:25:38.999 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:25:39.011 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:37:49.679 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:37:49.690 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+kd.96df147dc3bf4d1a 2023-04-27 00:41:11.427 [http-nio-8092-exec-3] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-04-27 00:45:08.623 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:45:08.638 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:45:35.932 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:45:35.933 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:45:35.934 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:45:35.941 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:46:17.073 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:46:17.085 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:48:37.522 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:48:37.523 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:48:37.524 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:48:37.525 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:49:27.005 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:49:27.017 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:52:42.648 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:52:42.647 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:52:42.652 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:52:42.665 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:53:15.106 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:53:15.119 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:56:19.700 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 00:56:19.699 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 00:56:19.702 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 00:56:19.705 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 00:58:20.480 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 00:58:20.493 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:01:08.876 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:01:08.877 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:01:08.877 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:01:08.879 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:01:49.420 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:01:49.431 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:08:19.041 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:08:19.053 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:09:19.120 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:09:19.120 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:09:19.121 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:09:19.121 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:09:47.119 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:09:47.131 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+kd.1540c51fc2df4d93 2023-04-27 01:13:45.856 [http-nio-8092-exec-9] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.b698feec4e324b74 2023-04-27 01:13:47.646 [http-nio-8092-exec-4] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.53ca419bc9b94a4b 2023-04-27 01:13:49.191 [http-nio-8092-exec-5] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.c42eba6077474a73 2023-04-27 01:19:42.514 [http-nio-8092-exec-7] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.5b12ec74a83e4460 2023-04-27 01:21:00.709 [http-nio-8092-exec-6] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-04-27 01:26:03.723 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:26:03.723 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:26:03.725 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:26:03.732 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:27:32.159 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:27:32.171 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+kd.d2fa58b34acc4c17 2023-04-27 01:28:21.529 [http-nio-8092-exec-10] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-04-27 01:28:28.403 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:28:28.403 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:28:28.405 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:28:28.407 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:30:54.021 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:30:54.032 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+kd.572114082fc6457e 2023-04-27 01:31:39.476 [http-nio-8092-exec-8] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.a7947021caa441bf 2023-04-27 01:31:45.277 [http-nio-8092-exec-1] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.56ea423c80a149f0 2023-04-27 01:32:45.423 [http-nio-8092-exec-4] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.fb564661a3f54722 2023-04-27 01:34:11.599 [http-nio-8092-exec-7] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-04-27 01:34:23.538 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:34:23.538 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:34:23.540 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:34:23.544 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:38:35.835 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:38:35.854 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:39:46.195 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:39:46.195 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:39:46.200 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:39:46.203 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:40:59.343 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:40:59.356 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+kd.86cf5c1241644ad5 2023-04-27 01:41:31.682 [http-nio-8092-exec-8] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.738843f5218f46f7 2023-04-27 01:41:43.367 [http-nio-8092-exec-10] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.8fd1f07e71d94efd 2023-04-27 01:43:31.533 [http-nio-8092-exec-6] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-04-27 01:44:22.392 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:44:22.392 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:44:22.396 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:44:22.401 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:45:01.846 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:45:01.859 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:45:26.407 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:45:26.407 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:45:26.408 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:45:26.408 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:45:45.165 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:45:45.175 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+kd.da82f94cfaea4f54 2023-04-27 01:46:16.106 [http-nio-8092-exec-9] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-04-27 01:47:56.531 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:47:56.531 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:47:56.535 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:47:56.538 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:48:14.078 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:48:14.092 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+kd.6b2a9838134e4272 2023-04-27 01:48:42.855 [http-nio-8092-exec-9] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-04-27 01:51:40.575 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:51:40.575 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:51:40.576 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:51:40.579 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-04-27 01:52:46.144 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-04-27 01:52:46.155 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+kd.9c698d1af8c04e5a 2023-04-27 01:53:13.890 [http-nio-8092-exec-6] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+kd.4d91eea756b6468e 2023-04-27 01:54:08.296 [http-nio-8092-exec-10] WARN  org.elasticsearch.client.RestClient - request [POST http://127.0.0.1:9200/log_data_all/_search?typed_keys=true&ignore_unavailable=false&expand_wildcards=open&allow_no_indices=true&ignore_throttled=true&search_type=query_then_fetch&batched_reduce_size=512&ccs_minimize_roundtrips=true] returned 1 warnings: [299 Elasticsearch-8.6.2-2d58d0f136141f03239816a4e360a8d17b6d8f29 "[ignore_throttled] parameter is deprecated because frozen indices have been deprecated. Consider cold or frozen tiers in place of frozen indices."]
+ 2023-04-27 01:54:30.213 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-04-27 01:54:30.213 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-04-27 01:54:30.214 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-04-27 01:54:30.216 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end

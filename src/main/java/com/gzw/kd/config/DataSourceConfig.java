@@ -5,7 +5,6 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import javax.sql.DataSource;
-
 import com.gzw.kd.config.datasource.DynamicDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +12,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
 import static com.gzw.kd.common.Constants.INT_THREE;
 
 /**
