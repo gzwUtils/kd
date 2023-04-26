@@ -31,7 +31,7 @@ public class User implements Serializable {
 
     @NotBlank(message="姓名不能为空")
     @Length(min = 2, max = 10, message = "name 姓名长度必须在 {min} - {max} 之间")
-    @PrivacyEncrypt(type = PrivacyTypeEnum.CUSTOMER,prefixNoMaskLen = 2,suffixNoMaskLen = 0,symbol = "h")
+    @PrivacyEncrypt(type = PrivacyTypeEnum.NAME)
     private String  account;
 
     /**

@@ -1,16 +1,20 @@
 package com.gzw.kd.controller;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
+import com.gzw.kd.common.annotation.Resubmit;
 import com.gzw.kd.common.utils.MyLinkedBlockQueue;
 import com.gzw.kd.common.entity.MyQueue;
 import com.gzw.kd.common.utils.RedisLimitFlow;
 import com.gzw.kd.learn.model.model.GzwThreadDemo;
+import com.gzw.kd.vo.input.ValidTest;
 import io.swagger.annotations.Api;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -111,6 +115,14 @@ public class BaseController {
     @RequestMapping(value = "/shutdown", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R shutdown() {
         gzwThreadDemo.shutdown();
+        return R.ok();
+    }
+
+
+    @Resubmit
+    @RequestMapping(value = "/valid", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R valid(@RequestBody @Validated ValidTest validTest){
+        log.info("valid ........{}", JSON.toJSONString(validTest));
         return R.ok();
     }
 }
