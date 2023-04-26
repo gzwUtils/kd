@@ -1,0 +1,219 @@
+ 2023-04-17 22:31:44.443 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.4 (v2.7.4) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-04-17 22:31:44.518 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-04-17 22:31:44.566 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei.local with PID 3411 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-04-17 22:31:44.568 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "dev"
+ 2023-04-17 22:31:46.574 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-04-17 22:31:46.578 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-04-17 22:31:46.632 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 35 ms. Found 0 Redis repository interfaces.
+ 2023-04-17 22:31:47.140 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=eba8df4b-1afa-3cc5-945e-3864c19c0e59
+ 2023-04-17 22:31:48.215 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-04-17 22:31:48.229 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-04-17 22:31:48.230 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-04-17 22:31:48.231 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.65]
+ 2023-04-17 22:31:48.522 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-04-17 22:31:48.522 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3866 ms
+ 2023-04-17 22:31:48.648 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.6450920046947932456/]
+ 2023-04-17 22:31:48.700 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2023-04-17 22:31:48.741 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2023-04-17 22:31:54.519 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-04-17 22:31:54.553 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2023-04-17 22:31:54.568 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2023-04-17 22:35:51.694 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.4 (v2.7.4) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-04-17 22:35:51.770 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-04-17 22:35:51.812 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei.local with PID 3511 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-04-17 22:35:51.813 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "dev"
+ 2023-04-17 22:35:53.524 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-04-17 22:35:53.527 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-04-17 22:35:53.590 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 0 Redis repository interfaces.
+ 2023-04-17 22:35:54.052 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=eba8df4b-1afa-3cc5-945e-3864c19c0e59
+ 2023-04-17 22:35:55.112 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-04-17 22:35:55.130 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-04-17 22:35:55.131 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-04-17 22:35:55.132 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.65]
+ 2023-04-17 22:35:55.428 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-04-17 22:35:55.428 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3546 ms
+ 2023-04-17 22:35:55.537 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.1724501447845226824/]
+ 2023-04-17 22:35:55.584 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2023-04-17 22:35:55.621 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2023-04-17 22:36:01.232 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-04-17 22:36:01.260 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2023-04-17 22:36:01.276 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2023-04-17 22:52:47.908 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.4 (v2.7.4) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-04-17 22:52:47.987 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-04-17 22:52:48.032 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei.local with PID 4080 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-04-17 22:52:48.033 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "dev"
+ 2023-04-17 22:52:50.144 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-04-17 22:52:50.149 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-04-17 22:52:50.226 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 55 ms. Found 0 Redis repository interfaces.
+ 2023-04-17 22:52:50.812 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=eba8df4b-1afa-3cc5-945e-3864c19c0e59
+ 2023-04-17 22:52:52.031 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-04-17 22:52:52.049 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-04-17 22:52:52.050 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-04-17 22:52:52.050 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.65]
+ 2023-04-17 22:52:52.372 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-04-17 22:52:52.372 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4244 ms
+ 2023-04-17 22:52:52.531 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.59297413262594522/]
+ 2023-04-17 22:52:52.596 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2023-04-17 22:52:52.639 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2023-04-17 22:52:54.564 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-04-17 22:52:54.641 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2023-04-17 22:52:54.686 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2023-04-17 22:52:55.157 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+ 2023-04-17 22:52:55.218 [main] INFO  o.flywaydb.core.internal.database.DatabaseFactory - Database: jdbc:mysql://127.0.0.1:3306/doc (MySQL 8.0)
+ 2023-04-17 22:52:55.302 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 6 migrations (execution time 00:00.045s)
+ 2023-04-17 22:52:55.314 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `doc`: 1.0.5
+ 2023-04-17 22:52:55.315 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `doc` is up to date. No migration necessary.
+ 2023-04-17 22:52:56.031 [main] INFO  com.gzw.kd.common.utils.AESCrypt - 初始化成功了
+ 2023-04-17 22:52:56.223 [main] INFO  com.gzw.kd.common.utils.HttpClientUtil - http client init success ....................
+ 2023-04-17 22:52:56.308 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+ 2023-04-17 22:52:56.313 [main] INFO  org.quartz.simpl.SimpleThreadPool - Job execution threads will use class loader of thread: main
+ 2023-04-17 22:52:56.329 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+ 2023-04-17 22:52:56.329 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+ 2023-04-17 22:52:56.330 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Using thread monitor-based data access locking (synchronization).
+ 2023-04-17 22:52:56.331 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - JobStoreTX initialized.
+ 2023-04-17 22:52:56.332 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'kd_DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is not clustered.
+
+ 2023-04-17 22:52:56.333 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'kd_DefaultQuartzScheduler' initialized from an externally provided properties instance.
+ 2023-04-17 22:52:56.333 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+ 2023-04-17 22:52:56.335 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@3d5b2c1e
+ 2023-04-17 22:52:56.660 [main] INFO  com.gzw.kd.scheduletask.AsyncTaskJobHandler - Async task impl list: [com.gzw.kd.export.service.LogExportAsyncTask@1142843c]
+ 2023-04-17 22:52:57.542 [main] INFO  com.gzw.kd.config.ExecutorConfiguration - start asyncTaskExecutor
+ 2023-04-17 22:52:57.657 [main] INFO  com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+ 2023-04-17 22:52:57.668 [main] INFO  com.netflix.config.sources.URLConfigurationSource - To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+ 2023-04-17 22:52:58.363 [main] INFO  o.f.s.b.a.AppEngineAutoConfiguration$$EnhancerBySpringCGLIB$$bf223ed1 - No deployment resources were found for autodeployment
+ 2023-04-17 22:52:58.527 [main] INFO  o.f.s.b.ProcessEngineAutoConfiguration$$EnhancerBySpringCGLIB$$e73f8676 - No deployment resources were found for autodeployment
+ 2023-04-17 22:52:58.782 [main] INFO  o.f.s.b.c.CmmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$fb94717 - No deployment resources were found for autodeployment
+ 2023-04-17 22:52:58.927 [main] INFO  o.f.s.b.d.DmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$673a8909 - No deployment resources were found for autodeployment
+ 2023-04-17 22:52:59.003 [main] INFO  o.f.s.b.f.FormEngineAutoConfiguration$$EnhancerBySpringCGLIB$$ab600377 - No deployment resources were found for autodeployment
+ 2023-04-17 22:52:59.082 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 6 Engine Configurators in total:
+ 2023-04-17 22:52:59.083 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2023-04-17 22:52:59.083 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2023-04-17 22:52:59.083 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2023-04-17 22:52:59.083 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2023-04-17 22:52:59.083 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2023-04-17 22:52:59.083 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.cmmn.spring.configurator.SpringCmmnEngineConfigurator (priority:500000)
+ 2023-04-17 22:52:59.084 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2023-04-17 22:52:59.090 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2023-04-17 22:52:59.092 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2023-04-17 22:52:59.095 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2023-04-17 22:52:59.098 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2023-04-17 22:52:59.101 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.cmmn.spring.configurator.SpringCmmnEngineConfigurator (priority:500000)
+ 2023-04-17 22:53:00.072 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2023-04-17 22:53:00.360 [main] INFO  org.flowable.engine.impl.ProcessEngineImpl - ProcessEngine default created
+ 2023-04-17 22:53:00.373 [main] INFO  o.f.j.s.impl.asyncexecutor.AbstractAsyncExecutor - Starting up the async job executor [org.flowable.spring.job.service.SpringAsyncExecutor].
+ 2023-04-17 22:53:00.374 [Thread-5] INFO  o.f.j.s.i.a.AcquireAsyncJobsDueRunnable - starting to acquire async jobs due
+ 2023-04-17 22:53:00.374 [Thread-6] INFO  o.f.j.s.i.asyncexecutor.AcquireTimerJobsRunnable - starting to acquire async jobs due
+ 2023-04-17 22:53:00.375 [Thread-7] INFO  o.f.j.s.i.asyncexecutor.ResetExpiredJobsRunnable - starting to reset expired jobs
+ 2023-04-17 22:53:00.419 [main] INFO  org.flowable.engine.impl.cmd.ValidateV5EntitiesCmd - Total of v5 deployments found: 0
+ 2023-04-17 22:53:00.426 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2023-04-17 22:53:00.457 [main] INFO  org.flowable.idm.engine.impl.IdmEngineImpl - IdmEngine default created
+ 2023-04-17 22:53:00.458 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2023-04-17 22:53:01.131 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-04-17 22:53:01.972 [main] INFO  liquibase.changelog - Reading from doc.ACT_DMN_DATABASECHANGELOG
+ 2023-04-17 22:53:02.092 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-04-17 22:53:02.094 [main] INFO  org.flowable.dmn.engine.impl.DmnEngineImpl - DmnEngine default created
+ 2023-04-17 22:53:02.097 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2023-04-17 22:53:02.148 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-04-17 22:53:02.349 [main] INFO  liquibase.changelog - Reading from doc.ACT_FO_DATABASECHANGELOG
+ 2023-04-17 22:53:02.377 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-04-17 22:53:02.378 [main] INFO  org.flowable.form.engine.impl.FormEngineImpl - FormEngine default created
+ 2023-04-17 22:53:02.380 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2023-04-17 22:53:02.386 [main] INFO  o.f.content.engine.ContentEngineConfiguration - Content file system root : /Users/gaozhiwei/content
+ 2023-04-17 22:53:02.416 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-04-17 22:53:02.590 [main] INFO  liquibase.changelog - Reading from doc.ACT_CO_DATABASECHANGELOG
+ 2023-04-17 22:53:02.614 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-04-17 22:53:02.615 [main] INFO  org.flowable.content.engine.impl.ContentEngineImpl - ContentEngine default created
+ 2023-04-17 22:53:02.617 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.cmmn.spring.configurator.SpringCmmnEngineConfigurator (priority:500000)
+ 2023-04-17 22:53:02.720 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-04-17 22:53:02.894 [main] INFO  liquibase.changelog - Reading from doc.ACT_CMMN_DATABASECHANGELOG
+ 2023-04-17 22:53:02.926 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-04-17 22:53:02.927 [main] INFO  org.flowable.cmmn.engine.impl.CmmnEngineImpl - CmmnEngine default created
+ 2023-04-17 22:53:02.960 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2023-04-17 22:53:03.128 [main] INFO  liquibase.changelog - Reading from doc.ACT_APP_DATABASECHANGELOG
+ 2023-04-17 22:53:03.151 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2023-04-17 22:53:03.151 [main] INFO  org.flowable.app.engine.impl.AppEngineImpl - AppEngine default created
+ 2023-04-17 22:53:05.107 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+ 2023-04-17 22:53:05.107 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+ 2023-04-17 22:53:06.597 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8092"]
+ 2023-04-17 22:53:06.628 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8092 (http) with context path ''
+ 2023-04-17 22:53:06.953 [main] INFO  o.f.j.s.impl.asyncexecutor.AbstractAsyncExecutor - Shutting down the async job executor [org.flowable.spring.job.service.SpringAsyncExecutor].
+ 2023-04-17 22:53:06.953 [flowable-acquire-timer-jobs] INFO  o.f.j.s.i.asyncexecutor.AcquireTimerJobsRunnable - stopped async job due acquisition
+ 2023-04-17 22:53:06.953 [flowable-acquire-async-jobs] INFO  o.f.j.s.i.a.AcquireAsyncJobsDueRunnable - stopped async job due acquisition
+ 2023-04-17 22:53:06.953 [flowable-reset-expired-jobs] INFO  o.f.j.s.i.asyncexecutor.ResetExpiredJobsRunnable - stopped resetting expired jobs
+ 2023-04-17 22:53:07.588 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+ 2023-04-17 22:53:07.589 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+ 2023-04-17 22:53:07.947 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+ 2023-04-17 22:53:07.948 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+ 2023-04-17 22:53:07.948 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+ 2023-04-17 22:53:07.949 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+ 2023-04-17 22:53:07.949 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+ 2023-04-17 22:53:07.953 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closing ...
+ 2023-04-17 22:53:07.966 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closed
+ 2023-04-17 22:53:07.966 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2023-04-17 22:53:07.967 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2023-04-17 22:53:07.968 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2023-04-17 22:53:07.968 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2023-04-17 22:53:07.996 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8092"]
+ 2023-04-17 22:53:07.996 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2023-04-17 22:53:07.999 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8092"]
+ 2023-04-17 22:53:08.002 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-8092"]
+ 2023-04-17 22:53:08.014 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2023-04-17 22:53:09.021 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closing...
+ 2023-04-17 22:53:09.021 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closed

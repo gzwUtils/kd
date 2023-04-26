@@ -97,7 +97,7 @@ public class GlobalExceptionHandler {
         if(mailIsEnabled){
             MailUtil.getMailSend().sendEmail(path,e.getMessage(),mails,mailtoHtml);
         }
-        return R.error().code(ResultCodeEnum.PARAM_ERROR.getCode()).message(e.getMessage());
+        return R.error().code(ResultCodeEnum.PARAM_ERROR.getCode()).message(e.getBindingResult().getFieldError().getDefaultMessage());
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)

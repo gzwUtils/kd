@@ -1,0 +1,87 @@
+ 2023-04-18 11:53:07.217 [canalClient-thread] ERROR com.gzw.kd.canal.component.CanalClient - process error!
+com.alibaba.otter.canal.protocol.exception.CanalClientException: java.net.ConnectException: Connection refused
+	at com.alibaba.otter.canal.client.impl.SimpleCanalConnector.doConnect(SimpleCanalConnector.java:200)
+	at com.alibaba.otter.canal.client.impl.SimpleCanalConnector.connect(SimpleCanalConnector.java:116)
+	at com.gzw.kd.canal.component.CanalClient.process(CanalClient.java:176)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused
+	at sun.nio.ch.Net.connect0(Native Method)
+	at sun.nio.ch.Net.connect(Net.java:454)
+	at sun.nio.ch.Net.connect(Net.java:446)
+	at sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:648)
+	at com.alibaba.otter.canal.client.impl.SimpleCanalConnector.doConnect(SimpleCanalConnector.java:152)
+	... 3 common frames omitted
+ 2023-04-18 11:55:48.144 [canal-adapter-pool-1] ERROR c.g.k.c.service.impl.ElasticsearchSyncServiceImpl - fire exception Connection refused
+com.gzw.kd.common.exception.GlobalException: Connection refused
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl.upsert(ElasticsearchSyncServiceImpl.java:156)
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl.fire(ElasticsearchSyncServiceImpl.java:89)
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl$$FastClassBySpringCGLIB$$a4935521.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386)
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704)
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl$$EnhancerBySpringCGLIB$$c9270548.fire(<generated>)
+	at com.gzw.kd.canal.adapter.ElasticsearchAdapter.lambda$sync$1(ElasticsearchAdapter.java:90)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.gzw.kd.canal.adapter.ElasticsearchAdapter.sync(ElasticsearchAdapter.java:72)
+	at com.gzw.kd.canal.component.CanalClient.lambda$null$5(CanalClient.java:267)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused
+	at org.elasticsearch.client.RestClient.extractAndWrapCause(RestClient.java:932)
+	at org.elasticsearch.client.RestClient.performRequest(RestClient.java:300)
+	at org.elasticsearch.client.RestClient.performRequest(RestClient.java:288)
+	at org.elasticsearch.client.RestHighLevelClient.internalPerformRequest(RestHighLevelClient.java:1454)
+	at org.elasticsearch.client.RestHighLevelClient.performRequest(RestHighLevelClient.java:1424)
+	at org.elasticsearch.client.RestHighLevelClient.performRequestAndParseEntity(RestHighLevelClient.java:1394)
+	at org.elasticsearch.client.RestHighLevelClient.bulk(RestHighLevelClient.java:492)
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl.upsert(ElasticsearchSyncServiceImpl.java:151)
+	... 15 common frames omitted
+Caused by: java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.http.impl.nio.reactor.DefaultConnectingIOReactor.processEvent(DefaultConnectingIOReactor.java:174)
+	at org.apache.http.impl.nio.reactor.DefaultConnectingIOReactor.processEvents(DefaultConnectingIOReactor.java:148)
+	at org.apache.http.impl.nio.reactor.AbstractMultiworkerIOReactor.execute(AbstractMultiworkerIOReactor.java:351)
+	at org.apache.http.impl.nio.conn.PoolingNHttpClientConnectionManager.execute(PoolingNHttpClientConnectionManager.java:221)
+	at org.apache.http.impl.nio.client.CloseableHttpAsyncClientBase$1.run(CloseableHttpAsyncClientBase.java:64)
+	... 1 common frames omitted
+ 2023-04-18 23:06:30.661 [canal-adapter-pool-1] ERROR c.g.k.c.service.impl.ElasticsearchSyncServiceImpl - fire exception Connection refused
+com.gzw.kd.common.exception.GlobalException: Connection refused
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl.upsert(ElasticsearchSyncServiceImpl.java:156)
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl.fire(ElasticsearchSyncServiceImpl.java:89)
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl$$FastClassBySpringCGLIB$$a4935521.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218)
+	at org.springframework.aop.framework.CglibAopProxy.invokeMethod(CglibAopProxy.java:386)
+	at org.springframework.aop.framework.CglibAopProxy.access$000(CglibAopProxy.java:85)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:704)
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl$$EnhancerBySpringCGLIB$$8d9fafd0.fire(<generated>)
+	at com.gzw.kd.canal.adapter.ElasticsearchAdapter.lambda$sync$1(ElasticsearchAdapter.java:90)
+	at java.util.ArrayList.forEach(ArrayList.java:1257)
+	at com.gzw.kd.canal.adapter.ElasticsearchAdapter.sync(ElasticsearchAdapter.java:72)
+	at com.gzw.kd.canal.component.CanalClient.lambda$null$5(CanalClient.java:267)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.ConnectException: Connection refused
+	at org.elasticsearch.client.RestClient.extractAndWrapCause(RestClient.java:932)
+	at org.elasticsearch.client.RestClient.performRequest(RestClient.java:300)
+	at org.elasticsearch.client.RestClient.performRequest(RestClient.java:288)
+	at org.elasticsearch.client.RestHighLevelClient.internalPerformRequest(RestHighLevelClient.java:1454)
+	at org.elasticsearch.client.RestHighLevelClient.performRequest(RestHighLevelClient.java:1424)
+	at org.elasticsearch.client.RestHighLevelClient.performRequestAndParseEntity(RestHighLevelClient.java:1394)
+	at org.elasticsearch.client.RestHighLevelClient.bulk(RestHighLevelClient.java:492)
+	at com.gzw.kd.canal.service.impl.ElasticsearchSyncServiceImpl.upsert(ElasticsearchSyncServiceImpl.java:151)
+	... 15 common frames omitted
+Caused by: java.net.ConnectException: Connection refused
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at org.apache.http.impl.nio.reactor.DefaultConnectingIOReactor.processEvent(DefaultConnectingIOReactor.java:174)
+	at org.apache.http.impl.nio.reactor.DefaultConnectingIOReactor.processEvents(DefaultConnectingIOReactor.java:148)
+	at org.apache.http.impl.nio.reactor.AbstractMultiworkerIOReactor.execute(AbstractMultiworkerIOReactor.java:351)
+	at org.apache.http.impl.nio.conn.PoolingNHttpClientConnectionManager.execute(PoolingNHttpClientConnectionManager.java:221)
+	at org.apache.http.impl.nio.client.CloseableHttpAsyncClientBase$1.run(CloseableHttpAsyncClientBase.java:64)
+	... 1 common frames omitted

@@ -26,6 +26,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -73,6 +74,13 @@ public class OperatorLogIndex {
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         int size = whereLog.getSize() == 0 ? defaultSize:whereLog.getSize();
         sourceBuilder.query(queryBuilder).size(size).sort("create_time", SortOrder.DESC);
+        // 高亮查询
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.preTags("<span style='color:red'>");
+        highlightBuilder.postTags("</span>");
+        highlightBuilder.requireFieldMatch(false);
+        highlightBuilder.field("*");
+        sourceBuilder.highlighter(highlightBuilder);
         SearchRequest searchRequest = new SearchRequest(logIndex).source(sourceBuilder);
         SearchResponse response;
         try {
