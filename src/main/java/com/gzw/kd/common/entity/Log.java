@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 public class Log  {
 
     @JSONField(name = "username")
-    @PrivacyEncrypt(type = PrivacyTypeEnum.CUSTOMER,prefixNoMaskLen = 2,suffixNoMaskLen = 0,symbol = "h")
+    @PrivacyEncrypt(type = PrivacyTypeEnum.CUSTOMER,prefixNoMaskLen = 2,suffixNoMaskLen = 0,symbol = "1")
     private String userName;
 
     private String operation;
