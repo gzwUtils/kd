@@ -17,14 +17,21 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @SuppressWarnings("all")
 public class ApiOutput<T> {
+
     /** 状态码 */
-    private String status;
+    private int status;
+
     /** 消息 */
     private String msg;
+
     /** 请求状态，true正常、false异常 */
     private boolean success;
+
     /** 返回的结果对象 */
     private T result;
+
+
+
 
 
     public static ApiOutput<?> success(){
@@ -36,10 +43,10 @@ public class ApiOutput<T> {
     }
 
     public static ApiOutput<?> failure(String errorMsg) {
-        return new ApiOutput().setMsg(errorMsg).setStatus(String.valueOf(ResultCodeEnum.UNKNOWN_ERROR.getCode()));
+        return new ApiOutput().setMsg(errorMsg).setStatus(ResultCodeEnum.UNKNOWN_ERROR.getCode());
     }
 
-    public static <T> ApiOutput<T> failure(String status, String errorMsg) {
+    public static <T> ApiOutput<T> failure(int status, String errorMsg) {
         return new ApiOutput().setStatus(status).setMsg(errorMsg);
     }
 }

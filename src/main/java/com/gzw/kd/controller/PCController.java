@@ -31,6 +31,7 @@ import com.gzw.kd.vo.input.OperatorLogInput;
 import com.gzw.kd.vo.output.EsLogSearchIndex;
 import com.gzw.kd.vo.output.FileOutput;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -172,7 +173,6 @@ public class PCController {
 
         return "/pc/other";
     }
-
 
     @RequestMapping("/word")
     public String word () {
@@ -881,6 +881,7 @@ public class PCController {
     }
 
 
+    @ApiOperation(value = "短信发送")
     @OperatorLog(value = "短信发送",description = "短信发送")
     @PostMapping("/sendMessage")
     @ResponseBody
@@ -888,6 +889,7 @@ public class PCController {
         return smsUtils.sendMessage(phone, message);
     }
 
+    @ApiOperation(value = "邮箱发送")
     @OperatorLog(value = "邮箱发送",description = "邮箱发送")
     @PostMapping("/sendEmailMessage")
     @ResponseBody

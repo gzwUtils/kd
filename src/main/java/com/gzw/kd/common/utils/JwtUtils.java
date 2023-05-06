@@ -24,10 +24,10 @@ public class JwtUtils {
     /**
      * 生成token字符串的方法
      * @param id
-     * @param nickname
+     * @param user
      * @return
      */
-    public static String getJwtToken(String id,String nickname){
+    public static String getJwtToken(String id,String user){
         String JwtToken = Jwts.builder()
                 //JWT头信息
                 .setHeaderParam("typ", "JWT")
@@ -38,7 +38,7 @@ public class JwtUtils {
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRE))
                 //设置token主体信息，存储用户信息
                 .claim("id", id)
-                .claim("nickname", nickname)
+                .claim("user", user)
                 .signWith(SignatureAlgorithm.HS256, SECRET)
                 .compact();
         return JwtToken;
