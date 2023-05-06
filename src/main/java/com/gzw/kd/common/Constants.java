@@ -611,4 +611,16 @@ public interface Constants {
   public static final String SMS_SEND_URL = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";
 
   public static final String FILE_SUFFIX = ".jpg,.jpeg,.xlsx,.txt,.doc,.png,.pdf,.xls,.docx,.sh,pptx,.mp4,.zip,.sql,.mp3";
+
+
+    /**
+     *  other http  request token
+     */
+
+
+    public static final String   HTTP_USER_TOKEN =  "other-token";
+
+    public static final String KEY_TOKEN_FILTER = "tokenFilter";
+
+    public static final String URL_PATTERN_ALL = "/base/*";
 }

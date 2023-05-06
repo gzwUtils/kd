@@ -1,10 +1,10 @@
 package com.gzw.kd.config;
 
+import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -20,9 +20,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * @Date 2022/10/12
  * @dec
  */
+@EnableSwaggerBootstrapUI
 @EnableSwagger2
 @Configuration
-@ConditionalOnProperty(prefix = "kd",value = "enable",havingValue = "true")
+@ConditionalOnProperty(prefix = "kd.swagger",value = "enable",havingValue = "true")
 public class SwaggerConfig {
 
     @Value("${spring.application.name:}")
@@ -31,11 +32,11 @@ public class SwaggerConfig {
 
     @Bean
     public Docket docket(){
-        return new Docket(DocumentationType.OAS_30).groupName(applicationName).apiInfo(apiInfo())
+        return new Docket(DocumentationType.SWAGGER_2).groupName(applicationName).apiInfo(apiInfo())
                 .select()
                 //这里指定Controller扫描包路径
                 .apis(RequestHandlerSelectors
-                        .withClassAnnotation(RestController.class))
+                        .basePackage("com.gzw.kd.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -45,7 +46,7 @@ public class SwaggerConfig {
                 .title("API接口文档")
                 .version("1.0")
                 .contact(new Contact("kd", "http://localhost:8092/pc/login", "2876533492@qq.com"))
-                .description("Demo Service")
+                .description("用于学习")
                 .build();
     }
 }

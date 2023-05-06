@@ -123,7 +123,7 @@
         methods: {
             asyncExport(){
                 const name = this.exportResult === '' ? 'kd' : this.exportResult;
-                let  exportFields =['result','username','ip'];
+                let  exportFields =['result','username','ip','operation','desc'];
                 let body = {'exportFileName':name,'exportFields':exportFields};
                 axios.post('/pc/asyncExport',body).then(response => {
                     this.exportResult = response.data.message;

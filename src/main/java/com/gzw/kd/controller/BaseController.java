@@ -10,6 +10,9 @@ import com.gzw.kd.common.utils.RedisLimitFlow;
 import com.gzw.kd.learn.model.model.GzwThreadDemo;
 import com.gzw.kd.vo.input.ValidTest;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +32,7 @@ import static com.gzw.kd.common.Constants.*;
  * @dec
  */
 @Slf4j
-@Api(value = "base")
+@Api(tags = "学习")
 @RequestMapping("/base")
 @RestController
 @SuppressWarnings("all")
@@ -119,6 +122,8 @@ public class BaseController {
     }
 
 
+    @ApiImplicitParams({@ApiImplicitParam(name = "Accept-Language", value = "语言", paramType = "header", dataTypeClass = String.class, required = false),@ApiImplicitParam(name = "other-token", value = "token校验", paramType = "header", dataTypeClass = String.class, required = true),@ApiImplicitParam(name = "sign", value = "签名", paramType = "header", dataTypeClass = String.class, required = true),@ApiImplicitParam(name = "timestamp", value = "时间戳", paramType = "header", dataTypeClass = String.class, required = true)})
+    @ApiOperation(value = "参数校验")
     @Resubmit
     @RequestMapping(value = "/valid", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R valid(@RequestBody @Validated ValidTest validTest){

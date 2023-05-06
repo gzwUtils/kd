@@ -2,9 +2,7 @@ package com.gzw.kd.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import javax.annotation.Resource;
 
 
@@ -45,21 +43,10 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/quartz/**",
                 "/zfb/**",
                 "/base/**",
-                "/qrt/dyQrCodeWriter",
+                "/qrt/**",
                 "/assets/**");
         registry.addInterceptor(resubmitInterceptor).addPathPatterns("/**");
 
 
-
-    }
-
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        //swagger增加url映射
-        registry.addResourceHandler("swagger-ui.html")
-                .addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**")
-                .addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }

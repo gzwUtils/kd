@@ -2,6 +2,7 @@ package com.gzw.kd.common.exception;
 
 
 import com.gzw.kd.common.enums.ResultCodeEnum;
+import com.gzw.kd.common.utils.MessageUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -31,6 +32,12 @@ public class GlobalException extends RuntimeException {
     public  GlobalException(ResultCodeEnum resultCodeEnum){
         super(resultCodeEnum.getMessage());
         this.code = resultCodeEnum.getCode();
+    }
+
+
+    public GlobalException(Integer code) {
+        super(MessageUtils.getMessage(code));
+        this.code = code;
     }
 
     @Override

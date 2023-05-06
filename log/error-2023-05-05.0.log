@@ -1,0 +1,21 @@
+ 2023-05-05 12:23:53.137 [canalClient-thread] ERROR com.gzw.kd.canal.component.CanalClient - process error!
+com.alibaba.otter.canal.protocol.exception.CanalClientException: java.io.IOException: Broken pipe
+	at com.alibaba.otter.canal.client.impl.SimpleCanalConnector.getWithoutAck(SimpleCanalConnector.java:334)
+	at com.alibaba.otter.canal.client.impl.SimpleCanalConnector.getWithoutAck(SimpleCanalConnector.java:303)
+	at com.gzw.kd.canal.component.CanalClient.process(CanalClient.java:186)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.io.IOException: Broken pipe
+	at sun.nio.ch.FileDispatcherImpl.write0(Native Method)
+	at sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:47)
+	at sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:93)
+	at sun.nio.ch.IOUtil.write(IOUtil.java:65)
+	at sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:471)
+	at java.nio.channels.Channels.writeFullyImpl(Channels.java:78)
+	at java.nio.channels.Channels.writeFully(Channels.java:98)
+	at java.nio.channels.Channels.access$000(Channels.java:61)
+	at java.nio.channels.Channels$1.write(Channels.java:174)
+	at java.nio.channels.Channels$WritableByteChannelImpl.write(Channels.java:458)
+	at com.alibaba.otter.canal.client.impl.SimpleCanalConnector.writeWithHeader(SimpleCanalConnector.java:405)
+	at com.alibaba.otter.canal.client.impl.SimpleCanalConnector.writeWithHeader(SimpleCanalConnector.java:393)
+	at com.alibaba.otter.canal.client.impl.SimpleCanalConnector.getWithoutAck(SimpleCanalConnector.java:319)
+	... 3 common frames omitted
