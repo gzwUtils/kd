@@ -59,7 +59,7 @@ public class QuartzManager{
     public void addJob(String jName, String jGroup, String tName, String tGroup, String cron, Class jobClass) {
         try {
             JobDetail jobDetail = JobBuilder.newJob(jobClass)
-                    .withIdentity(jName, jGroup)
+                    .withIdentity(jName, jGroup).storeDurably()
                     .build();
             CronTrigger trigger = TriggerBuilder.newTrigger()
                     .withIdentity(tName, tGroup)
