@@ -4,18 +4,22 @@ import com.gzw.kd.common.enums.ResultCodeEnum;
 import com.gzw.kd.common.exception.GlobalException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.validation.constraints.NotNull;
+import org.flowable.engine.HistoryService;
+import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.task.api.Task;
-import java.util.HashMap;
 import org.flowable.engine.ProcessEngine;
 import org.flowable.engine.RuntimeService;
 import org.flowable.engine.TaskService;
 import org.flowable.engine.runtime.ProcessInstance;
+import org.springframework.stereotype.Component;
 
 /**
  * @author gzw
  * @description：flowable工具
  */
+@Component
 @SuppressWarnings("all")
 public class FlowableUtils {
 
@@ -35,6 +39,12 @@ public class FlowableUtils {
      */
     private final ProcessEngine processEngine;
 
+    /**
+     * 历史任务
+     */
+
+    private final HistoryService historyService;
+
 
     /**
      * 初始化获取实例
@@ -42,6 +52,7 @@ public class FlowableUtils {
     public FlowableUtils() {
         runtimeService = ApplicationContextUtils.getBean(RuntimeService.class);
         taskService = ApplicationContextUtils.getBean(TaskService.class);
+        historyService = ApplicationContextUtils.getBean(HistoryService.class);
         processEngine = ApplicationContextUtils.getBean(ProcessEngine.class);
     }
 
@@ -53,7 +64,7 @@ public class FlowableUtils {
      * @param map         参数键值对
      * @return 流程实例ID
      */
-    public String start(String processKey, String businessKey, HashMap<String, Object> map) {
+    public String start(String processKey, String businessKey, Map<String, Object> map) {
 
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(processKey, businessKey, map);
         return processInstance.getId();
@@ -105,7 +116,7 @@ public class FlowableUtils {
      * @param taskId 任务ID
      * @param map    变量键值对
      */
-    public void complete(String taskId, HashMap<String, Object> map) {
+    public void complete(String taskId, Map<String, Object> map) {
 
         Task task = taskService.createTaskQuery().taskId(taskId).singleResult();
         if (task == null) {
@@ -139,7 +150,7 @@ public class FlowableUtils {
      * @param businessKey 业务key
      * @param map         变量键值对
      */
-    public void startAndComplete(String processKey, String businessKey, HashMap<String, Object> map) {
+    public void startAndComplete(String processKey, String businessKey, Map<String, Object> map) {
 
         String processInstanceId = start(processKey, businessKey, map);
         Task task = processEngine.getTaskService().createTaskQuery().processInstanceId(processInstanceId).singleResult();
@@ -163,4 +174,19 @@ public class FlowableUtils {
         runtimeService.createChangeActivityStateBuilder().processInstanceId(currentTask.getProcessInstanceId()).moveActivityIdsToSingleActivityId(currentTaskKeys, targetTaskKey);
     }
 
+    /**
+     * 获取指定流程实例的历史信息
+     * @param processInstanceId  流程实例ID
+     * @return
+     */
+
+    public List<HistoricActivityInstance>  getHistoryList(String processInstanceId){
+        List<HistoricActivityInstance> activities = historyService.createHistoricActivityInstanceQuery()
+                .processInstanceId(processInstanceId)
+                .finished()
+                .orderByHistoricActivityInstanceEndTime().asc()
+                .list();
+
+        return activities;
+    }
 }

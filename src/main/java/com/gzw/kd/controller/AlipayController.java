@@ -9,6 +9,7 @@ import com.gzw.kd.common.utils.ToolUtil;
 import com.gzw.kd.common.entity.Assign;
 import com.gzw.kd.common.entity.ZFBFaceToFaceModel;
 import com.gzw.kd.service.CustomerService;
+import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -26,6 +27,7 @@ import static com.gzw.kd.common.Constants.*;
 /**
  * @author 高志伟
  */
+@Api(tags = "支付宝")
 @Slf4j
 @Controller
 @RequestMapping("/ali")

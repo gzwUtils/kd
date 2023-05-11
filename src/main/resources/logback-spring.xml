@@ -217,9 +217,10 @@
         <logger name="com.gzw.kd" level="info"/> <!-- 测试环境, 指定某包日志为info级 -->
     </springProfile>
 
-    <springProfile name="pro">
+    <springProfile name="prd">
         <root level="info">
             <!-- 生产环境最好不配置console写文件 -->
+            <appender-ref ref="CONSOLE" />
             <appender-ref ref="DEBUG_FILE" />
             <appender-ref ref="INFO_FILE" />
             <appender-ref ref="WARN_FILE" />

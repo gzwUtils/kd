@@ -1,0 +1,229 @@
+ 2023-05-07 00:01:17.511 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...690 :
+ 2023-05-07 00:01:18.822 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...382 :
+ 2023-05-07 00:01:19.938 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...963 :
+ 2023-05-07 00:01:20.439 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...125 :
+ 2023-05-07 00:01:22.658 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:01:24.812 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...110 :
+ 2023-05-07 00:01:26.644 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:01:29.485 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:01:31.911 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:01:34.140 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:01:36.791 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:01:39.263 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:01:41.280 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:02:55.456 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...651 :
+ 2023-05-07 00:02:56.361 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...215 :
+ 2023-05-07 00:02:57.395 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...880 :
+ 2023-05-07 00:02:59.551 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:03:02.803 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:03:05.575 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:03:08.598 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:03:10.971 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:03:13.434 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:03:15.368 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:03:17.109 [main] WARN  o.s.w.context.support.GenericWebApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'serverEndpointExporter' defined in class path resource [com/gzw/kd/config/WebsocketConfig.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available
+ 2023-05-07 00:24:29.166 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...189 :
+ 2023-05-07 00:24:32.175 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...748 :
+ 2023-05-07 00:24:33.123 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...229 :
+ 2023-05-07 00:24:34.110 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...882 :
+ 2023-05-07 00:24:34.499 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...115 :
+ 2023-05-07 00:24:35.641 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:24:35.662 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:24:45.239 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...7614 :
+ 2023-05-07 00:24:49.525 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...210 :
+ 2023-05-07 00:27:03.499 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 00:27:03.499 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 00:27:03.499 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 00:27:03.500 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 00:27:17.146 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...204 :
+ 2023-05-07 00:27:20.052 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...657 :
+ 2023-05-07 00:27:20.862 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...188 :
+ 2023-05-07 00:27:21.654 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...706 :
+ 2023-05-07 00:27:23.072 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:27:23.083 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:27:29.979 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5200 :
+ 2023-05-07 00:31:37.130 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 00:31:37.131 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 00:31:37.131 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 00:31:37.132 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 00:31:47.366 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...183 :
+ 2023-05-07 00:31:49.726 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...572 :
+ 2023-05-07 00:31:50.405 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...161 :
+ 2023-05-07 00:31:51.201 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...716 :
+ 2023-05-07 00:31:52.465 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:31:52.472 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:31:58.155 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4300 :
+ 2023-05-07 00:31:59.373 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:dmnRepositoryService time...1079 :
+ 2023-05-07 00:46:40.662 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 00:46:40.662 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 00:46:40.673 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 00:46:40.674 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 00:48:57.397 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...208 :
+ 2023-05-07 00:49:00.219 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...627 :
+ 2023-05-07 00:49:01.017 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...206 :
+ 2023-05-07 00:49:01.806 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...707 :
+ 2023-05-07 00:49:03.218 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:49:03.230 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:49:09.775 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5009 :
+ 2023-05-07 00:49:10.372 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...111 :
+ 2023-05-07 00:53:35.975 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 00:53:35.975 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 00:53:35.978 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 00:53:35.985 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 00:54:28.741 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...160 :
+ 2023-05-07 00:54:31.036 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...616 :
+ 2023-05-07 00:54:31.800 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...203 :
+ 2023-05-07 00:54:32.558 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...676 :
+ 2023-05-07 00:54:33.919 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:54:33.930 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 00:54:40.296 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4747 :
+kd.39b60c88f8394fc4 2023-05-07 09:30:35.096 [http-nio-8092-exec-9] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:/pc/operatorLog time...138 :
+ 2023-05-07 09:30:58.143 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 09:30:58.143 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 09:30:58.156 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 09:30:58.178 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 09:35:28.376 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...1970-01-01 08:00:00 :
+ 2023-05-07 09:35:31.081 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...1970-01-01 08:00:00 :
+ 2023-05-07 09:35:31.950 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...1970-01-01 08:00:00 :
+ 2023-05-07 09:35:32.912 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...1970-01-01 08:00:00 :
+ 2023-05-07 09:35:34.366 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 09:35:34.377 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 09:35:40.634 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...1970-01-01 08:00:04 :
+ 2023-05-07 09:35:41.350 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...1970-01-01 08:00:00 :
+ 2023-05-07 09:36:10.873 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 09:36:10.874 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 09:36:10.874 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 09:36:10.875 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 09:36:53.684 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...417 :
+ 2023-05-07 09:36:56.549 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:redisConnectionFactory time...101 :
+ 2023-05-07 09:36:56.961 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:applicationConfigMonitor time...168 :
+ 2023-05-07 09:36:58.212 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...983 :
+ 2023-05-07 09:36:59.340 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...273 :
+ 2023-05-07 09:37:00.247 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...823 :
+ 2023-05-07 09:37:00.579 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...101 :
+ 2023-05-07 09:37:01.684 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 09:37:01.694 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 09:37:07.709 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4555 :
+ 2023-05-07 09:37:08.567 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:loadBalancedAsyncRestTemplateInitializer time...234 :
+ 2023-05-07 09:56:46.766 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 09:56:46.766 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 09:56:46.768 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 09:56:46.773 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 10:04:42.819 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...188 :
+ 2023-05-07 10:04:44.364 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:redisConnectionFactory time...101 :
+ 2023-05-07 10:04:45.280 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...559 :
+ 2023-05-07 10:04:46.156 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...219 :
+ 2023-05-07 10:04:47.112 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...887 :
+ 2023-05-07 10:04:48.495 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 10:04:48.506 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 10:04:48.873 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:requestMappingHandlerAdapter time...101 :
+ 2023-05-07 10:04:54.647 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4755 :
+ 2023-05-07 10:09:25.032 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 10:09:25.032 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 10:09:25.032 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 10:09:25.033 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 10:18:56.632 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...209 :
+ 2023-05-07 10:18:58.054 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...516 :
+ 2023-05-07 10:19:00.229 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...195 :
+ 2023-05-07 10:19:01.045 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...736 :
+ 2023-05-07 10:19:08.055 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4895 :
+ 2023-05-07 10:19:08.434 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 10:19:08.445 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 10:19:09.653 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...103 :
+ 2023-05-07 10:20:19.837 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 10:20:19.837 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 10:20:19.839 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 10:20:19.840 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 11:02:11.308 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...202 :
+ 2023-05-07 11:02:12.792 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...553 :
+ 2023-05-07 11:02:15.516 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...285 :
+ 2023-05-07 11:02:16.437 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...842 :
+ 2023-05-07 11:02:23.923 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5185 :
+ 2023-05-07 11:02:24.399 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 11:02:24.411 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 11:02:26.650 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...112 :
+ 2023-05-07 11:04:14.281 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 11:04:14.281 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 11:04:14.282 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 11:04:14.283 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 11:22:28.354 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...190 :
+ 2023-05-07 11:22:29.557 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...433 :
+ 2023-05-07 11:22:31.855 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...182 :
+ 2023-05-07 11:22:32.801 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...859 :
+ 2023-05-07 11:22:33.124 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...104 :
+ 2023-05-07 11:22:33.535 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 11:22:33.546 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 11:22:39.844 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4502 :
+ 2023-05-07 11:23:34.948 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 11:23:34.948 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 11:23:34.949 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 11:23:34.950 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 22:58:22.899 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...325 :
+ 2023-05-07 22:58:24.317 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...526 :
+ 2023-05-07 22:58:26.817 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...242 :
+ 2023-05-07 22:58:27.764 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...869 :
+ 2023-05-07 22:58:28.145 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...119 :
+ 2023-05-07 22:58:34.708 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4511 :
+ 2023-05-07 22:58:35.261 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 22:58:35.275 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 22:58:37.188 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:org.flowable.spring.boot.idm.IdmEngineServicesAutoConfiguration$AlreadyInitializedAppEngineConfiguration time...1050 :
+ 2023-05-07 22:58:37.802 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...124 :
+ 2023-05-07 23:02:18.911 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 23:02:18.911 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 23:02:18.913 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 23:02:18.914 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 23:09:59.453 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...193 :
+ 2023-05-07 23:10:00.780 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...481 :
+ 2023-05-07 23:10:03.016 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...244 :
+ 2023-05-07 23:10:03.920 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...838 :
+ 2023-05-07 23:10:21.277 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...15185 :
+ 2023-05-07 23:10:21.646 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 23:10:21.657 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 23:12:38.903 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 23:12:38.903 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 23:12:38.903 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 23:12:38.905 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 23:14:19.900 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...222 :
+ 2023-05-07 23:14:21.232 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...486 :
+ 2023-05-07 23:14:23.737 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...255 :
+ 2023-05-07 23:14:24.729 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...864 :
+ 2023-05-07 23:14:43.027 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...15804 :
+ 2023-05-07 23:14:43.468 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 23:14:43.480 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 23:17:05.070 [http-nio-8092-exec-8] WARN  com.gzw.kd.config.FilterConfig$UnifiedTokenFilter - kd tokenFiler validate token: [null] failed 
+ 2023-05-07 23:17:05.072 [http-nio-8092-exec-8] WARN  com.gzw.kd.common.utils.MessageUtils - locale zh
+ 2023-05-07 23:17:05.250 [http-nio-8092-exec-9] WARN  com.gzw.kd.config.FilterConfig$UnifiedTokenFilter - kd tokenFiler validate token: [null] failed 
+ 2023-05-07 23:17:05.251 [http-nio-8092-exec-9] WARN  com.gzw.kd.common.utils.MessageUtils - locale zh
+ 2023-05-07 23:17:05.418 [http-nio-8092-exec-1] WARN  com.gzw.kd.config.FilterConfig$UnifiedTokenFilter - kd tokenFiler validate token: [null] failed 
+ 2023-05-07 23:17:05.418 [http-nio-8092-exec-1] WARN  com.gzw.kd.common.utils.MessageUtils - locale zh
+ 2023-05-07 23:17:05.636 [http-nio-8092-exec-10] WARN  com.gzw.kd.config.FilterConfig$UnifiedTokenFilter - kd tokenFiler validate token: [null] failed 
+ 2023-05-07 23:17:05.636 [http-nio-8092-exec-10] WARN  com.gzw.kd.common.utils.MessageUtils - locale zh
+ 2023-05-07 23:17:06.107 [http-nio-8092-exec-4] WARN  com.gzw.kd.config.FilterConfig$UnifiedTokenFilter - kd tokenFiler validate token: [null] failed 
+ 2023-05-07 23:17:06.107 [http-nio-8092-exec-4] WARN  com.gzw.kd.common.utils.MessageUtils - locale zh
+ 2023-05-07 23:17:24.050 [http-nio-8092-exec-2] WARN  com.gzw.kd.config.FilterConfig$UnifiedTokenFilter - kd tokenFiler validate token: [null] failed 
+ 2023-05-07 23:17:24.050 [http-nio-8092-exec-2] WARN  com.gzw.kd.common.utils.MessageUtils - locale zh
+ 2023-05-07 23:20:36.888 [http-nio-8092-exec-3] WARN  com.gzw.kd.config.FilterConfig$UnifiedTokenFilter - kd tokenFiler validate token: [null] failed 
+ 2023-05-07 23:20:36.890 [http-nio-8092-exec-3] WARN  com.gzw.kd.common.utils.MessageUtils - locale zh
+ 2023-05-07 23:24:29.190 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 23:24:29.191 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 23:24:29.192 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 23:24:29.196 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 23:38:40.282 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...196 :
+ 2023-05-07 23:38:41.468 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...429 :
+ 2023-05-07 23:38:43.514 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...227 :
+ 2023-05-07 23:38:44.319 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...735 :
+ 2023-05-07 23:39:01.233 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...14848 :
+ 2023-05-07 23:39:01.697 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 23:39:01.707 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 23:39:03.378 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration time...560 :
+ 2023-05-07 23:42:15.073 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-07 23:42:15.073 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-07 23:42:15.076 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-07 23:42:15.076 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-07 23:44:05.407 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...183 :
+ 2023-05-07 23:44:06.700 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...436 :
+ 2023-05-07 23:44:09.093 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...238 :
+ 2023-05-07 23:44:10.167 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...985 :
+ 2023-05-07 23:44:27.825 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...15210 :
+ 2023-05-07 23:44:28.221 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-07 23:44:28.232 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.

@@ -17,6 +17,8 @@ import com.gzw.kd.listener.event.MsgEvent;
 import com.gzw.kd.service.CustomerService;
 import com.gzw.kd.service.DocService;
 import com.gzw.kd.service.WxUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
@@ -51,6 +53,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since：2022/11/1 02:16
  */
 
+@Api(tags = "微信")
 @Slf4j
 @SuppressWarnings("all")
 @Controller
@@ -90,6 +93,7 @@ public class WxIndexController {
     private String natAppUrl;
 
 
+    @ApiOperation(value = "注册")
     @RequestMapping("/register")
     public String register(HttpServletRequest request) {
         String openId = request.getParameter("openId");
@@ -98,17 +102,20 @@ public class WxIndexController {
     }
 
 
+    @ApiOperation(value = "支付宝二维码")
     @RequestMapping("/zfbQrCode")
     public String zfbQrCode(HttpServletRequest request) {
         return "/zfb/zfbQrCode";
     }
 
+    @ApiOperation(value = "首页")
     @RequestMapping("/index")
     public String index(HttpServletRequest request) {
         return "/wx/index";
     }
 
 
+    @ApiOperation(value = "详情")
     @RequestMapping("/xq")
     public String xq(HttpServletRequest request) throws Exception {
         String id = request.getParameter("id");
@@ -120,6 +127,7 @@ public class WxIndexController {
         return "/wx/xq";
     }
 
+    @ApiOperation(value = "账户")
     @RequestMapping("/account")
     public String account(HttpServletRequest request) throws Exception {
         //TODO
@@ -131,6 +139,7 @@ public class WxIndexController {
         return "/wx/account";
     }
 
+    @ApiOperation(value = "签署")
     @RequestMapping("/assign")
     public String assign(HttpServletRequest request) throws Exception {
         String openId = request.getParameter("openId");
@@ -160,6 +169,7 @@ public class WxIndexController {
         return "/wx/assign";
     }
 
+    @ApiOperation(value = "代办")
     @RequestMapping("/daiban")
     public String daiban(HttpServletRequest request) throws Exception {
         String openId = request.getParameter("openId");
@@ -176,6 +186,7 @@ public class WxIndexController {
         return "/wx/daiBanDocList";
     }
 
+    @ApiOperation(value = "更新")
     @RequestMapping("/updateStatus")
     @ResponseBody
     public R updateStatus(String status, String id, String openId) throws Exception {
@@ -213,7 +224,7 @@ public class WxIndexController {
     private void daiban(Doc doc) {
         ApplicationContext context = ApplicationContextUtils.getApplicationContext();
         Map<String, TemplateDataStyle> data = new HashMap<>();
-        data.put("user",new TemplateDataStyle("保洁人员"+doc.getAudit()+"已审批,请您确认:"+doc.getCustomerName()));
+        data.put("user",new TemplateDataStyle("客户"+doc.getAudit()+"已审批,请您确认:"+doc.getCustomerName()));
         data.put("address",new TemplateDataStyle(doc.getAddress()));
         data.put("desc",new TemplateDataStyle(doc.getDesc()));
         data.put("issueDate",new TemplateDataStyle(doc.getIssueDate().format(DATE_TIME_FORMAT_S)));
