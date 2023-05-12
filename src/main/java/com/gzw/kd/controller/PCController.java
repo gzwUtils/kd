@@ -647,7 +647,6 @@ public class PCController {
     @OperatorLog(value = "获取ID",description = "获取ID")
     @RequestMapping(value = "/getUniqueId",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
     @ResponseBody
-    @Resubmit
     public R getUniqueId() throws GlobalException {
         StopWatch watch = new StopWatch();
         watch.start();

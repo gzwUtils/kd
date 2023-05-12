@@ -150,12 +150,6 @@
             <!--日志文档保留天数-->
             <maxHistory>15</maxHistory>
         </rollingPolicy>
-        <!-- 此日志文档记录除了DEBUG级别的其它高于DEBUG的 -->
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>DEBUG</level>
-            <onMatch>DENY</onMatch>
-            <onMismatch>ACCEPT</onMismatch>
-        </filter>
     </appender>
 
     <!--
@@ -196,11 +190,6 @@
     <springProfile name="dev">
         <root level="info">
             <appender-ref ref="CONSOLE" />
-            <appender-ref ref="DEBUG_FILE" />
-            <appender-ref ref="INFO_FILE" />
-            <appender-ref ref="WARN_FILE" />
-            <appender-ref ref="ERROR_FILE" />
-            <appender-ref ref="ALL_FILE" />
         </root>
         <logger name="com.gzw.kd" level="info"/> <!-- 开发环境, info -->
     </springProfile>

@@ -389,7 +389,9 @@ public interface Constants {
 
     public static final String TRACE_ID = "TRACE_ID";
 
-    public static final String TRACE_ID_FLAG = "kd.";
+    public static final String TRACE_ID_FLAG = "kd_";
+
+    public static final String REQUEST_ID_HEADER = "RequestId";
 
     public static final String TRACE_ID_EXECUTOR_FLAG = "kd.executor.";
 
