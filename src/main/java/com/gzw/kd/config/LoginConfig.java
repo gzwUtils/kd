@@ -18,13 +18,9 @@ public class LoginConfig implements WebMvcConfigurer {
     @Resource
     private LoginInterceptor loginInterceptor;
 
-    @Resource
-    private LogInterceptor logInterceptor;
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 
-        registry.addInterceptor(logInterceptor).addPathPatterns("/**");
 
         registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(
                 "/pc/register",
@@ -36,13 +32,11 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/pc/getCode",
                 "/chatGpt/**",
                 "/wx/**",
-                "/es/**",
                 "/pc/unknown",
                 "/pc/error",
                 "/pc/loginAction",
                 "/quartz/**",
                 "/zfb/**",
-                "/base/**",
                 "/qrt/**",
                 "/assets/**");
         registry.addInterceptor(resubmitInterceptor).addPathPatterns("/**");

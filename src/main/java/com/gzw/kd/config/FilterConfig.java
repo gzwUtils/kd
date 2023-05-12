@@ -41,6 +41,18 @@ public class FilterConfig {
         return registration;
     }
 
+
+    @Bean
+    public FilterRegistrationBean<LoggingFilter> loggingFilterRegistration() {
+        FilterRegistrationBean<LoggingFilter> registration = new FilterRegistrationBean<>();
+        registration.setDispatcherTypes(DispatcherType.REQUEST);
+        registration.setFilter(new LoggingFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName("logFilter");
+        registration.setOrder(Constants.INT_ONE);
+        return registration;
+    }
+
     @Bean
     public FilterRegistrationBean<UnifiedTokenFilter> tokenFilterNewRegister() {
         FilterRegistrationBean<UnifiedTokenFilter> registration = new FilterRegistrationBean<>();
@@ -48,7 +60,7 @@ public class FilterConfig {
         registration.setFilter(new UnifiedTokenFilter());
         registration.addUrlPatterns(Constants.URL_PATTERN_ALL);
         registration.setName(Constants.KEY_TOKEN_FILTER);
-        registration.setOrder(Constants.INT_ONE);
+        registration.setOrder(Constants.INT_TWO);
         return registration;
     }
 

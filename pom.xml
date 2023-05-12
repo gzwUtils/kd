@@ -405,7 +405,6 @@
 			<version>2.14.0</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>com.googlecode.soundlibs</groupId>
 			<artifactId>mp3spi</artifactId>

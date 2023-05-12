@@ -1,14 +1,13 @@
 package com.gzw.kd.controller;
 
 import com.gzw.kd.common.R;
-import com.gzw.kd.common.generators.SnowFlakeIdGenerator;
+import com.gzw.kd.common.generators.SnowIdGenerator;
+import com.gzw.kd.common.utils.SnowFlakeIdUtils;
 import com.gzw.kd.controller.es.OperatorLogIndex;
 import com.gzw.kd.vo.input.OperatorLogInput;
 import com.gzw.kd.vo.output.EsLogSearchIndex;
 import com.itextpdf.xmp.impl.Base64;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import javax.annotation.Resource;
@@ -48,12 +47,17 @@ public class EsController {
         return R.ok().data("code",decode);
     }
 
-    @ApiImplicitParams({@ApiImplicitParam(name = "datacenterId", value = "数据中心ID", paramType = "query", dataTypeClass = Long.class, required = true),@ApiImplicitParam(name = "workerId", value = "工作ID", paramType = "query", dataTypeClass = Long.class, required = true)})
     @ApiOperation(value = "雪花ID生成")
     @RequestMapping(value = "/snoIdGenerator", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public R snoIdGenerator(long datacenterId,long workerId){
-        SnowFlakeIdGenerator idGenerator = new SnowFlakeIdGenerator(workerId, datacenterId);
-        System.out.println(System.currentTimeMillis());
-        return R.ok().data("id",idGenerator.nextId());
+    public R snoIdGenerator(){
+        Long generatorId = SnowFlakeIdUtils.generatorId();
+        return R.ok().data("id",generatorId);
+    }
+
+    @ApiOperation(value = "ID生成")
+    @RequestMapping(value = "/idGenerator", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R idGenerator(@RequestParam(value = "bizTypePrefix") String bizTypePrefix,@RequestParam(value = "dateFormat",defaultValue = "yyyyMMdd",required = false) String dateFormat,@RequestParam(value = "length",defaultValue = "20",required = false) Integer length){
+        SnowIdGenerator idGenerator = new SnowIdGenerator(bizTypePrefix, dateFormat);
+        return R.ok().data("id",idGenerator.generate(length));
     }
 }

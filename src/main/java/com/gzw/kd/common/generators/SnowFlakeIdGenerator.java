@@ -11,8 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 public class SnowFlakeIdGenerator{
 
 
-    /** 开始时间截 (2015-01-01) */
-    private final long twepoch = 1420041600000L;
+    /** 开始时间截 (2023-01-01) */
+    private final long twepoch = 1672502400000L;
 
     /** 机器id所占的位数 */
     private final long workerIdBits = 5L;
@@ -48,12 +48,11 @@ public class SnowFlakeIdGenerator{
     private long datacenterId;
 
     /** 毫秒内序列(0~4095) */
-    private long sequence = 0L;
+    private long sequence = 10L;
 
     /** 上次生成ID的时间截 */
     private long lastTimestamp = -1L;
 
-    // ==============================Constructors=====================================
     /**
      * 构造函数
      *
