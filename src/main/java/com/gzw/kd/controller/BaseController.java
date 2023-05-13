@@ -3,7 +3,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
-import com.gzw.kd.common.annotation.Resubmit;
 import com.gzw.kd.common.utils.MyLinkedBlockQueue;
 import com.gzw.kd.common.entity.MyQueue;
 import com.gzw.kd.common.utils.RedisLimitFlow;
@@ -124,7 +123,7 @@ public class BaseController {
 
     @ApiImplicitParams({@ApiImplicitParam(name = "Accept-Language", value = "语言", paramType = "header", dataTypeClass = String.class, required = false),@ApiImplicitParam(name = "other-token", value = "token校验", paramType = "header", dataTypeClass = String.class, required = true),@ApiImplicitParam(name = "sign", value = "签名", paramType = "header", dataTypeClass = String.class, required = true),@ApiImplicitParam(name = "timestamp", value = "时间戳", paramType = "header", dataTypeClass = String.class, required = true)})
     @ApiOperation(value = "参数校验")
-    @Resubmit
+    @OperatorLog(value = "责任链模式",description = "学习")
     @RequestMapping(value = "/valid", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R valid(@RequestBody @Validated ValidTest validTest){
         log.info("valid ........{}", JSON.toJSONString(validTest));

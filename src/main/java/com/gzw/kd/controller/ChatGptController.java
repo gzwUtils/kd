@@ -1,5 +1,6 @@
 package com.gzw.kd.controller;
 import com.gzw.kd.common.R;
+import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.service.ChartGptService;
 import com.gzw.kd.vo.input.GptInput;
 import io.swagger.annotations.Api;
@@ -31,6 +32,7 @@ public class ChatGptController {
      * @return 出参对象
      */
     @ApiOperation(value = "提问")
+    @OperatorLog(value = "提问",description = "learn")
     @RequestMapping(value = "/askAi",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public R askAi(@RequestBody GptInput gptInput) throws IOException {
 

@@ -1,8 +1,8 @@
 package com.gzw.kd.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson2.JSON;
 import static com.gzw.kd.common.Constants.*;
-
 import cn.hutool.json.JSONUtil;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.entity.*;
@@ -12,7 +12,6 @@ import com.gzw.kd.common.generators.RandomIdGenerator;
 import com.gzw.kd.common.utils.AESCrypt;
 import com.gzw.kd.common.utils.AliPayUtils;
 import com.gzw.kd.common.utils.ApplicationContextUtils;
-import com.gzw.kd.common.utils.ToolUtil;
 import com.gzw.kd.listener.event.MsgEvent;
 import com.gzw.kd.service.CustomerService;
 import com.gzw.kd.service.DocService;
@@ -142,17 +141,19 @@ public class WxIndexController {
     @ApiOperation(value = "签署")
     @RequestMapping("/assign")
     public String assign(HttpServletRequest request) throws Exception {
+        Assign assign = new Assign();
         String openId = request.getParameter("openId");
-        Assign byOpenId = customerService.getUserByOpenId(openId);
         String redisAssign = redisTemplate.opsForValue().get(ASSIGN_INFO_KEY_);
-        List<?> list = ToolUtil.jsonToList(redisAssign, Assign.class);
-        Assign assign1 = (Assign) list.get(0);
-        byOpenId = ObjectUtil.isEmpty(byOpenId)?assign1:byOpenId;
-        if(ObjectUtil.isNotEmpty(byOpenId)){
-            if(byOpenId.getStatus()==INT_ZERO){
+        if(StringUtils.isBlank(redisAssign)){
+            assign = customerService.getUserByOpenId(openId);
+        } else {
+            assign = JSON.parseObject(redisAssign, Assign.class);
+        }
+        if(ObjectUtil.isNotEmpty(assign)){
+            if(assign.getStatus()==INT_ZERO){
                 ZFBFaceToFaceModel model = new ZFBFaceToFaceModel();
                 String generate = randomIdGenerator.generate(16);
-                model.setOutTradeNo(generate).setTotalAmount(byOpenId.getBalance()).setSubject("佳一品").setBody("佳一品家政服务有限公司");
+                model.setOutTradeNo(generate).setTotalAmount(assign.getBalance()).setSubject("test").setBody("kd");
                 R order = aliPayUtils.newAliOrder(model);
                 if(!order.getSuccess()){
                     return "/error/500";
