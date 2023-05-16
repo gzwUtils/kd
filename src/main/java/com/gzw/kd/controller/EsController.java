@@ -74,9 +74,9 @@ public class EsController {
     @ApiOperation(value = "ID生成")
     @OperatorLog(value = "ID生成",description = "学习")
     @RequestMapping(value = "/idGenerator", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public R idGenerator(@RequestParam(value = "bizTypePrefix") String bizTypePrefix,@RequestParam(value = "dateFormat",defaultValue = "yyyyMMdd",required = false) String dateFormat,@RequestParam(value = "length",defaultValue = "20",required = false) Integer length){
+    public R idGenerator(@RequestParam(value = "bizTypePrefix") String bizTypePrefix,@RequestParam(value = "dateFormat",defaultValue = "yyMMdd",required = false) String dateFormat){
         SnowIdGenerator idGenerator = new SnowIdGenerator(bizTypePrefix, dateFormat);
-        return R.ok().data("id",idGenerator.generate(length));
+        return R.ok().data("id",idGenerator.generate());
     }
 
 

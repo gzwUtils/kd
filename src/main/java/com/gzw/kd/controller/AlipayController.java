@@ -11,6 +11,7 @@ import com.gzw.kd.common.entity.ZFBFaceToFaceModel;
 import com.gzw.kd.service.CustomerService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Controller;
@@ -67,13 +68,19 @@ public class AlipayController {
     @RequestMapping(value = "/qrcode", method = RequestMethod.GET)
     public String qrCode(HttpServletRequest request) throws Exception {
         String openId = request.getParameter("openId");
-        Assign userByOpenId = customerService.getUserByOpenId(openId);
-        ZFBFaceToFaceModel model = new ZFBFaceToFaceModel();
-        String generate = randomIdGenerator.generate(16);
-        model.setOutTradeNo(generate).setTotalAmount(userByOpenId.getBalance()).setSubject("kd").setBody("gzw..");
-        R order = aliPayUtils.newAliOrder(model);
-        request.setAttribute("code",order.getData().get("code"));
-        return "/zfb/zfbQrCode";
+        String redisAssign = redisTemplate.opsForValue().get(ASSIGN_INFO_KEY_+openId);
+        if(StringUtils.isNotBlank(redisAssign)){
+            Assign assign = JSON.parseObject(redisAssign, Assign.class);
+            ZFBFaceToFaceModel model = new ZFBFaceToFaceModel();
+            String generate = randomIdGenerator.generate(16);
+            model.setOutTradeNo(generate).setTotalAmount(assign.getServiceBalance()).setSubject("kd").setBody("gzw..");
+            R order = aliPayUtils.newAliOrder(model);
+            request.setAttribute("code",order.getData().get("code"));
+            return "/zfb/zfbQrCode";
+        } else {
+            return "/error/500";
+        }
+
     }
 
     /**支付宝回调接口*/

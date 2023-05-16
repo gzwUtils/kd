@@ -504,6 +504,9 @@ public interface Constants {
     public final static long ORDER_INFO_EXPIRE_TIME = 3600 * 6;
 
 
+    public final static String SERVICE_COFIG = "service_config_key_";
+
+
 
     public final static String CONTENT_DISPOSITION_NAME="Content-Disposition";
 

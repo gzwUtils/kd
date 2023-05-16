@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.ConfigMapper" >
+
+  <select id="getConfigs"   resultType="com.gzw.kd.common.entity.Configs">
+      SELECT id,annual_balance annualBalance, year_balance yearBalance,extra_balance extraBalance,other_balance otherBalance from config
+  </select>
+
+  <insert id="addDoc"  parameterType="com.gzw.kd.common.entity.Configs">
+
+      INSERT INTO config ( annual_balance, year_balance, extra_balance, other_balance)
+      VALUES(#{annualBalance}, #{yearBalance}, #{extraBalance}, #{otherBalance});
+  </insert>
+
+  <update id="updateConfigsForById"  parameterType="com.gzw.kd.common.entity.Configs">
+      UPDATE config
+      <set>
+      <if test="annualBalance!=null" >
+          annual_balance=#{annualBalance},
+      </if>
+      <if test="yearBalance!=null" >
+          year_balance=#{yearBalance},
+      </if>
+      </set>
+     <where> id = #{id}</where>
+  </update>
+
+</mapper>

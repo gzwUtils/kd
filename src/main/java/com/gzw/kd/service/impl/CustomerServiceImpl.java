@@ -7,7 +7,6 @@ import com.gzw.kd.service.CustomerService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -38,18 +37,13 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Integer updatePhoneByOpenId(Assign user) throws Exception {
-        return customerMapper.updatePhoneByOpenId(user);
+    public Integer updateAssignByOpenId(Assign user) throws Exception {
+        return customerMapper.updateAssignByOpenId(user);
     }
 
     @Override
     public Integer updatePhone(String openId,String phone,String name) throws Exception {
         return customerMapper.updatePhone(openId,phone,name);
-    }
-
-    @Override
-    public Integer updateBalance(String openId, BigDecimal balance, int coupon, BigDecimal couponBalance) throws Exception {
-        return customerMapper.updateBalance(openId,balance,coupon,couponBalance);
     }
 
     @Override

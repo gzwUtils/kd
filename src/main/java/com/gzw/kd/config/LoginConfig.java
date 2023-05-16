@@ -36,7 +36,7 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/pc/error",
                 "/pc/loginAction",
                 "/quartz/**",
-                "/zfb/**",
+                "/ali/**",
                 "/qrt/**",
                 "/assets/**");
         registry.addInterceptor(resubmitInterceptor).addPathPatterns("/**");

@@ -1,0 +1,501 @@
+ 2023-05-15 08:14:19.440 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...254 :
+ 2023-05-15 08:14:21.600 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...748 :
+ 2023-05-15 08:14:21.748 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:twoDatasource time...117 :
+ 2023-05-15 08:14:21.890 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:threeDatasource time...112 :
+ 2023-05-15 08:14:23.943 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:redisConnectionFactory time...125 :
+ 2023-05-15 08:14:24.279 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:applicationConfigMonitor time...114 :
+ 2023-05-15 08:14:25.562 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...507 :
+ 2023-05-15 08:14:26.760 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...1083 :
+ 2023-05-15 08:14:34.505 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...6447 :
+ 2023-05-15 08:14:35.008 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...122 :
+ 2023-05-15 08:14:36.847 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 08:14:36.868 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 08:14:39.294 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...117 :
+ 2023-05-15 08:47:34.034 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 08:47:34.032 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 08:47:34.050 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 08:47:34.076 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 10:20:06.081 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...182 :
+ 2023-05-15 10:20:07.620 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...614 :
+ 2023-05-15 10:20:10.501 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...357 :
+ 2023-05-15 10:20:11.762 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...1178 :
+ 2023-05-15 10:20:18.104 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5363 :
+ 2023-05-15 10:20:18.500 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...104 :
+ 2023-05-15 10:20:19.927 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 10:20:19.939 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 10:20:21.235 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...103 :
+ 2023-05-15 10:28:13.668 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 10:28:13.668 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 10:28:13.670 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 10:28:13.670 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 10:28:43.107 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...217 :
+ 2023-05-15 10:28:44.706 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...535 :
+ 2023-05-15 10:28:47.498 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...287 :
+ 2023-05-15 10:28:48.518 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...929 :
+ 2023-05-15 10:28:54.279 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4643 :
+ 2023-05-15 10:28:54.717 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...119 :
+ 2023-05-15 10:28:57.419 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 10:28:57.433 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 10:28:58.750 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...112 :
+ 2023-05-15 10:30:19.063 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 10:30:19.063 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 10:30:19.064 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 10:30:19.064 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 10:30:27.409 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...161 :
+ 2023-05-15 10:30:28.506 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...455 :
+ 2023-05-15 10:30:30.908 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...210 :
+ 2023-05-15 10:30:31.771 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...776 :
+ 2023-05-15 10:30:37.227 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4503 :
+ 2023-05-15 10:30:38.657 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 10:30:38.665 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 11:10:01.923 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 11:10:01.934 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 11:10:01.932 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 11:10:01.963 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 15:38:38.116 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...183 :
+ 2023-05-15 15:38:39.715 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...604 :
+ 2023-05-15 15:38:39.988 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:twoDatasource time...247 :
+ 2023-05-15 15:38:40.149 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:threeDatasource time...125 :
+ 2023-05-15 15:38:42.780 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...363 :
+ 2023-05-15 15:38:43.819 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...955 :
+ 2023-05-15 15:38:50.055 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5395 :
+ 2023-05-15 15:38:51.740 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 15:38:51.752 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 15:38:53.109 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...109 :
+kd_81_10 2023-05-15 15:44:01.129 [http-nio-8092-exec-7] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:/wx/assign time...124 :
+ 2023-05-15 15:56:58.145 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 15:56:58.147 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 15:56:58.149 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 15:56:58.206 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 18:24:09.441 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...211 :
+ 2023-05-15 18:24:11.113 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...618 :
+ 2023-05-15 18:24:13.576 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...283 :
+ 2023-05-15 18:24:14.306 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...619 :
+ 2023-05-15 18:24:20.198 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5014 :
+ 2023-05-15 18:24:21.439 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:requestMappingHandlerMapping time...246 :
+ 2023-05-15 18:24:22.070 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:24:22.082 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:24:23.687 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...452 :
+ 2023-05-15 18:24:30.187 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 18:24:30.187 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 18:24:30.188 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 18:24:30.189 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 18:24:57.139 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...179 :
+ 2023-05-15 18:24:58.386 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...401 :
+ 2023-05-15 18:25:00.713 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...204 :
+ 2023-05-15 18:25:01.627 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...825 :
+ 2023-05-15 18:25:08.097 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5256 :
+ 2023-05-15 18:25:09.758 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:25:09.770 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:25:10.628 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:dmnHistoryService time...123 :
+ 2023-05-15 18:25:11.143 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...103 :
+ 2023-05-15 18:25:15.751 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 18:25:15.751 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 18:25:15.752 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 18:25:15.753 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 18:33:06.115 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...206 :
+ 2023-05-15 18:35:49.800 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...235 :
+ 2023-05-15 18:35:51.286 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...482 :
+ 2023-05-15 18:35:53.847 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...240 :
+ 2023-05-15 18:35:54.891 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...952 :
+ 2023-05-15 18:36:00.179 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4366 :
+ 2023-05-15 18:36:00.576 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...125 :
+ 2023-05-15 18:36:03.187 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:36:03.201 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:36:04.612 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...127 :
+ 2023-05-15 18:36:10.937 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 18:36:10.938 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 18:36:10.938 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 18:36:10.939 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 18:46:23.008 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...190 :
+ 2023-05-15 18:46:24.288 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...491 :
+ 2023-05-15 18:46:26.727 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...219 :
+ 2023-05-15 18:46:27.599 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...785 :
+ 2023-05-15 18:46:32.972 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4532 :
+ 2023-05-15 18:46:33.420 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...114 :
+ 2023-05-15 18:46:34.980 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:logMapper time...1277 :
+ 2023-05-15 18:46:36.121 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:46:36.133 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:46:42.364 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 18:46:42.364 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 18:46:42.366 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 18:46:42.367 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 18:47:25.746 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...226 :
+ 2023-05-15 18:47:27.148 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...514 :
+ 2023-05-15 18:47:29.712 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...226 :
+ 2023-05-15 18:47:30.791 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...988 :
+ 2023-05-15 18:47:36.976 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5246 :
+ 2023-05-15 18:47:39.669 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:sslSocketFactory time...2275 :
+ 2023-05-15 18:47:39.920 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...117 :
+ 2023-05-15 18:47:42.668 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:47:42.748 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:47:43.519 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:jsonMixinModule time...131 :
+ 2023-05-15 18:47:43.792 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:jacksonObjectMapper time...127 :
+ 2023-05-15 18:47:44.119 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:requestMappingHandlerAdapter time...130 :
+ 2023-05-15 18:47:46.128 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...186 :
+ 2023-05-15 18:49:57.121 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 18:49:57.122 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 18:49:57.124 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 18:49:57.134 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 18:50:05.661 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...187 :
+ 2023-05-15 18:50:07.089 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...513 :
+ 2023-05-15 18:50:09.863 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...318 :
+ 2023-05-15 18:50:10.625 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...678 :
+ 2023-05-15 18:50:15.281 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...3909 :
+ 2023-05-15 18:50:17.584 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:50:17.593 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:53:15.299 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 18:53:15.307 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 18:53:15.311 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 18:53:15.321 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 18:54:11.246 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...225 :
+ 2023-05-15 18:54:12.719 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...452 :
+ 2023-05-15 18:54:15.017 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...208 :
+ 2023-05-15 18:54:15.832 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...734 :
+ 2023-05-15 18:54:21.958 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5308 :
+ 2023-05-15 18:54:22.365 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...117 :
+ 2023-05-15 18:54:23.785 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:54:23.798 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:54:25.143 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...145 :
+ 2023-05-15 18:58:11.549 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 18:58:11.551 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 18:58:11.556 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 18:58:11.572 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 18:58:26.935 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...208 :
+ 2023-05-15 18:58:28.194 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...452 :
+ 2023-05-15 18:58:30.623 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...215 :
+ 2023-05-15 18:58:31.422 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...714 :
+ 2023-05-15 18:58:37.146 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4691 :
+ 2023-05-15 18:58:39.913 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:58:39.921 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 18:58:41.302 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...114 :
+ 2023-05-15 19:02:11.448 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:02:11.448 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:02:11.451 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:02:11.457 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:05:15.601 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...245 :
+ 2023-05-15 19:05:17.043 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...475 :
+ 2023-05-15 19:05:19.422 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...220 :
+ 2023-05-15 19:05:20.326 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...821 :
+ 2023-05-15 19:05:25.857 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4672 :
+ 2023-05-15 19:05:27.426 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:05:27.437 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:05:28.070 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:spring.freemarker-org.springframework.boot.autoconfigure.freemarker.FreeMarkerProperties time...182 :
+ 2023-05-15 19:05:28.934 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...104 :
+ 2023-05-15 19:07:57.575 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:07:57.575 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:07:57.594 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:07:57.614 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:08:21.060 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...214 :
+ 2023-05-15 19:08:22.341 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...449 :
+ 2023-05-15 19:08:24.626 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...233 :
+ 2023-05-15 19:08:25.569 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...859 :
+ 2023-05-15 19:08:32.012 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5600 :
+ 2023-05-15 19:08:33.682 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:08:33.695 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:08:34.995 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...113 :
+ 2023-05-15 19:09:56.251 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:09:56.251 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:09:56.252 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:09:56.253 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:10:30.386 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...199 :
+ 2023-05-15 19:10:31.749 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...544 :
+ 2023-05-15 19:10:34.237 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...245 :
+ 2023-05-15 19:10:35.023 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...692 :
+ 2023-05-15 19:10:40.161 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4258 :
+ 2023-05-15 19:10:41.453 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:swaggerConfig time...902 :
+ 2023-05-15 19:10:42.645 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:10:42.657 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:12:13.458 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:12:13.459 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:12:13.459 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:12:13.461 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:12:23.185 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...206 :
+ 2023-05-15 19:13:39.894 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...212 :
+ 2023-05-15 19:13:41.314 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...546 :
+ 2023-05-15 19:13:44.061 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...257 :
+ 2023-05-15 19:13:45.055 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...888 :
+ 2023-05-15 19:13:50.945 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4855 :
+ 2023-05-15 19:13:51.303 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...104 :
+ 2023-05-15 19:13:53.787 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:13:53.800 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:13:55.184 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...123 :
+ 2023-05-15 19:23:32.794 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:23:32.803 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:23:32.806 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:23:32.823 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:23:45.720 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...212 :
+ 2023-05-15 19:23:47.080 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...494 :
+ 2023-05-15 19:23:49.339 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...257 :
+ 2023-05-15 19:23:50.211 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...794 :
+ 2023-05-15 19:23:55.749 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4691 :
+ 2023-05-15 19:23:57.535 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...1494 :
+ 2023-05-15 19:23:59.326 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:23:59.335 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:24:00.779 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...155 :
+ 2023-05-15 19:28:46.481 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:28:46.481 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:28:46.488 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:28:46.500 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:29:02.817 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...234 :
+ 2023-05-15 19:29:04.145 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...476 :
+ 2023-05-15 19:29:06.619 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...283 :
+ 2023-05-15 19:29:07.459 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...741 :
+ 2023-05-15 19:29:13.944 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5652 :
+ 2023-05-15 19:29:15.847 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:29:15.860 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:29:16.248 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:requestMappingHandlerAdapter time...102 :
+ 2023-05-15 19:29:17.370 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...101 :
+ 2023-05-15 19:29:23.422 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:29:23.422 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:29:23.423 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:29:23.424 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:29:52.348 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...171 :
+ 2023-05-15 19:29:53.338 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...337 :
+ 2023-05-15 19:29:55.348 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...172 :
+ 2023-05-15 19:29:56.214 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...782 :
+ 2023-05-15 19:30:01.428 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4438 :
+ 2023-05-15 19:30:04.086 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:30:04.095 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:30:11.976 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:30:11.976 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:30:11.977 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:30:11.978 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:31:23.667 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...210 :
+ 2023-05-15 19:31:25.050 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...438 :
+ 2023-05-15 19:31:27.372 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...194 :
+ 2023-05-15 19:31:28.241 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...785 :
+ 2023-05-15 19:31:33.541 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4361 :
+ 2023-05-15 19:31:35.939 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:31:35.950 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:31:37.234 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...118 :
+ 2023-05-15 19:34:01.389 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:34:01.389 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:34:01.393 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:34:01.395 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:34:44.524 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...239 :
+ 2023-05-15 19:34:46.074 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...517 :
+ 2023-05-15 19:34:48.831 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...225 :
+ 2023-05-15 19:34:49.824 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...898 :
+ 2023-05-15 19:34:55.933 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5142 :
+ 2023-05-15 19:34:56.296 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...107 :
+ 2023-05-15 19:34:58.606 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:pathSanitizer time...928 :
+ 2023-05-15 19:34:58.809 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:34:58.823 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:35:00.317 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...131 :
+ 2023-05-15 19:40:12.090 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 19:40:12.092 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 19:40:12.093 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 19:40:12.097 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 19:43:50.380 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...210 :
+ 2023-05-15 19:43:51.647 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...440 :
+ 2023-05-15 19:43:53.860 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...212 :
+ 2023-05-15 19:43:54.727 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...781 :
+ 2023-05-15 19:44:00.846 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5178 :
+ 2023-05-15 19:44:01.184 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...105 :
+ 2023-05-15 19:44:02.571 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:44:02.582 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 19:44:04.018 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...103 :
+ 2023-05-15 21:41:32.112 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...203 :
+ 2023-05-15 21:41:33.725 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...526 :
+ 2023-05-15 21:41:35.693 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:redisConnectionFactory time...126 :
+ 2023-05-15 21:41:36.036 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:applicationConfigMonitor time...122 :
+ 2023-05-15 21:41:37.167 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...472 :
+ 2023-05-15 21:41:38.727 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...1424 :
+ 2023-05-15 21:41:45.609 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5746 :
+ 2023-05-15 21:41:47.349 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...1373 :
+ 2023-05-15 21:41:48.814 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 21:41:48.826 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 21:41:50.067 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...105 :
+ 2023-05-15 21:41:56.098 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 21:41:56.098 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 21:41:56.099 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 21:41:56.100 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 21:43:41.213 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...184 :
+ 2023-05-15 21:43:42.321 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...383 :
+ 2023-05-15 21:43:44.431 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...192 :
+ 2023-05-15 21:43:45.296 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...781 :
+ 2023-05-15 21:43:50.154 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4040 :
+ 2023-05-15 21:43:50.515 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...124 :
+ 2023-05-15 21:43:51.848 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:templateMapper time...966 :
+ 2023-05-15 21:43:52.742 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 21:43:52.753 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 21:43:53.932 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...101 :
+ 2023-05-15 21:43:59.245 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 21:43:59.245 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 21:43:59.246 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 21:43:59.247 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 21:45:00.436 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...180 :
+ 2023-05-15 21:45:01.569 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...373 :
+ 2023-05-15 21:45:03.651 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...194 :
+ 2023-05-15 21:45:04.566 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...832 :
+ 2023-05-15 21:45:09.475 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...3970 :
+ 2023-05-15 21:45:10.970 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:orderServiceImpl time...859 :
+ 2023-05-15 21:45:11.978 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 21:45:11.991 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 21:45:13.216 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...103 :
+ 2023-05-15 21:54:44.446 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 21:54:44.448 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 21:54:44.498 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 21:54:44.566 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 21:58:43.698 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...201 :
+ 2023-05-15 21:58:45.273 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...587 :
+ 2023-05-15 21:58:47.043 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:redisConnectionFactory time...105 :
+ 2023-05-15 21:58:48.144 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...308 :
+ 2023-05-15 21:58:48.937 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...699 :
+ 2023-05-15 21:58:55.273 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5065 :
+ 2023-05-15 21:58:56.982 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 21:58:56.995 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 21:58:57.441 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:requestMappingHandlerAdapter time...102 :
+ 2023-05-15 21:58:58.457 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...118 :
+ 2023-05-15 21:59:41.065 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 21:59:41.067 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 21:59:41.069 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 21:59:41.075 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 22:52:01.510 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...197 :
+ 2023-05-15 22:52:03.321 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...696 :
+ 2023-05-15 22:52:04.952 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:redisConnectionFactory time...107 :
+ 2023-05-15 22:52:06.117 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...295 :
+ 2023-05-15 22:52:07.045 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...827 :
+ 2023-05-15 22:52:12.701 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4728 :
+ 2023-05-15 22:52:13.081 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...107 :
+ 2023-05-15 22:52:15.651 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 22:52:15.662 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 22:52:17.045 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...115 :
+ 2023-05-15 22:52:23.164 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 22:52:23.165 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 22:52:23.168 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 22:52:45.023 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...191 :
+ 2023-05-15 22:52:46.440 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...549 :
+ 2023-05-15 22:52:48.920 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...204 :
+ 2023-05-15 22:52:49.825 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...811 :
+ 2023-05-15 22:52:55.267 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4429 :
+ 2023-05-15 22:52:56.407 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:okHttpClient time...947 :
+ 2023-05-15 22:52:57.861 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 22:52:57.873 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 22:52:59.220 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...111 :
+ 2023-05-15 22:53:04.608 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 22:53:04.608 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 22:53:04.608 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 22:53:04.609 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 22:53:54.972 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...194 :
+ 2023-05-15 22:53:56.106 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...387 :
+ 2023-05-15 22:53:58.336 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...193 :
+ 2023-05-15 22:53:59.212 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...793 :
+ 2023-05-15 22:54:04.815 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4766 :
+ 2023-05-15 22:54:06.390 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 22:54:06.401 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 22:54:07.554 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...101 :
+ 2023-05-15 23:27:59.599 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 23:27:59.599 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 23:28:17.285 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...305 :
+ 2023-05-15 23:28:18.934 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...535 :
+ 2023-05-15 23:28:20.629 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:redisConnectionFactory time...104 :
+ 2023-05-15 23:28:21.775 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...282 :
+ 2023-05-15 23:28:22.859 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...980 :
+ 2023-05-15 23:28:30.291 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...6356 :
+ 2023-05-15 23:28:30.686 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...102 :
+ 2023-05-15 23:28:32.279 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:28:32.291 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:28:33.159 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:nacosProperties time...303 :
+ 2023-05-15 23:28:34.139 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...136 :
+ 2023-05-15 23:32:05.686 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 23:32:05.686 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 23:32:05.689 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 23:32:05.697 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 23:32:18.568 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...220 :
+ 2023-05-15 23:32:19.839 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...432 :
+ 2023-05-15 23:32:22.208 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...212 :
+ 2023-05-15 23:32:23.207 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...900 :
+ 2023-05-15 23:32:28.586 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4439 :
+ 2023-05-15 23:32:31.589 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:logEsMapper time...2096 :
+ 2023-05-15 23:32:33.192 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:32:33.205 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:32:34.788 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...133 :
+ 2023-05-15 23:37:18.758 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 23:37:18.772 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 23:37:18.785 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 23:37:18.825 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 23:37:31.021 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...210 :
+ 2023-05-15 23:37:32.318 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...470 :
+ 2023-05-15 23:37:34.418 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...202 :
+ 2023-05-15 23:37:35.259 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...757 :
+ 2023-05-15 23:37:40.701 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4652 :
+ 2023-05-15 23:37:42.238 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:37:42.246 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:39:56.474 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 23:39:56.474 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 23:39:56.476 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 23:39:56.478 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 23:42:24.887 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...201 :
+ 2023-05-15 23:42:26.264 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...497 :
+ 2023-05-15 23:42:28.017 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:redisConnectionFactory time...115 :
+ 2023-05-15 23:42:29.147 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...256 :
+ 2023-05-15 23:42:30.120 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...872 :
+ 2023-05-15 23:42:35.706 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4613 :
+ 2023-05-15 23:42:36.059 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...104 :
+ 2023-05-15 23:42:37.441 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:templateMapper time...986 :
+ 2023-05-15 23:42:37.450 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:templateMapper time...1684165356464 :
+ 2023-05-15 23:42:38.472 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:42:38.484 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:44:05.857 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 23:44:05.858 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 23:44:05.860 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 23:44:05.861 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 23:45:44.274 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...238 :
+ 2023-05-15 23:45:45.603 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...442 :
+ 2023-05-15 23:45:47.896 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...194 :
+ 2023-05-15 23:45:48.784 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...806 :
+ 2023-05-15 23:45:54.844 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5182 :
+ 2023-05-15 23:45:56.362 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:45:56.373 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:45:57.566 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...109 :
+ 2023-05-15 23:48:21.590 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 23:48:21.593 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 23:48:21.594 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 23:48:21.605 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 23:48:32.498 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...199 :
+ 2023-05-15 23:48:33.728 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...384 :
+ 2023-05-15 23:48:35.761 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...183 :
+ 2023-05-15 23:48:36.544 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...703 :
+ 2023-05-15 23:48:42.328 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...5048 :
+ 2023-05-15 23:48:43.823 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:48:43.832 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:50:14.456 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 23:50:14.456 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 23:50:14.458 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 23:50:14.460 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 23:50:46.317 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...257 :
+ 2023-05-15 23:50:47.904 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...497 :
+ 2023-05-15 23:50:50.390 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...213 :
+ 2023-05-15 23:50:51.240 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...745 :
+ 2023-05-15 23:50:57.095 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4925 :
+ 2023-05-15 23:50:59.762 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:50:59.775 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:51:01.172 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...121 :
+ 2023-05-15 23:52:31.879 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 23:52:31.879 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 23:52:31.880 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 23:52:31.884 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 23:54:27.502 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...196 :
+ 2023-05-15 23:54:28.765 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...442 :
+ 2023-05-15 23:54:31.200 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...211 :
+ 2023-05-15 23:54:32.107 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...826 :
+ 2023-05-15 23:54:37.126 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...4217 :
+ 2023-05-15 23:54:38.596 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...1203 :
+ 2023-05-15 23:54:39.974 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:54:39.985 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:54:41.190 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...104 :
+ 2023-05-15 23:54:46.536 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2023-05-15 23:54:46.536 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2023-05-15 23:54:46.537 [Thread-9] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2023-05-15 23:54:46.537 [Thread-12] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
+ 2023-05-15 23:56:30.093 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...205 :
+ 2023-05-15 23:56:31.500 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...461 :
+ 2023-05-15 23:56:33.738 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...191 :
+ 2023-05-15 23:56:34.659 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:AESCrypt time...843 :
+ 2023-05-15 23:56:39.341 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...3879 :
+ 2023-05-15 23:56:41.319 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:vendorExtensionsMapperImpl time...1079 :
+ 2023-05-15 23:56:42.342 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:56:42.355 [main] WARN  com.netflix.config.sources.URLConfigurationSource - No URLs will be polled as dynamic configuration sources.
+ 2023-05-15 23:56:43.724 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:freeMarkerConfigurer time...122 :
