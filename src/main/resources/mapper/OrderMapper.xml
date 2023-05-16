@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.OrderMapper" >
+
+  <select id="getOrderById"   resultType="com.gzw.kd.common.entity.OrderInfo">
+      SELECT id, service_year serviceYear, first_service_time firstServiceTime,floor_area floorArea,style,number, service_time serviceTime, start_time startTime, end_time endTime, extra_desc extraDesc, service_balance serviceBalance, `status`, coupon,coupon_balance couponBalance
+      FROM doc.service  where   id=#{id}
+  </select>
+
+  <insert id="registerOrder"  parameterType="com.gzw.kd.common.entity.OrderInfo">
+
+      INSERT INTO service (service_year, start_time, end_time, floor_area, style, number, first_service_time,
+                          service_time, extra_desc, service_balance, status, coupon, coupon_balance)
+      VALUES(#{serviceYear}, #{startTime}, #{endTime}, #{floorArea}, #{style}, #{number}, #{firstServiceTime}, #{serviceTime}, #{extraDesc},  #{serviceBalance},#{status}, #{coupon}, #{couponBalance});
+  </insert>
+</mapper>

@@ -1,7 +1,4 @@
 package com.gzw.kd.service;
-
-import java.io.IOException;
-
 /**
  * @author gzw
  * @description：
@@ -11,11 +8,12 @@ public interface ChartGptService {
 
 
     /**
-     *  ai send
+     *  gpt ai
      * @param prompt 问题
-     * @return
+     * @return answer
+     * @throws Exception err
      */
 
-    String send(String prompt) throws IOException;
+    String send(String prompt) throws Exception;
 
 }

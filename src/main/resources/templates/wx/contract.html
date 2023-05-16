@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="renderer" content="webkit">
+    <title>合同</title>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 必须先引入vue，  后使用element-ui -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/assets/pc/js/jquery.js"></script>
+</head>
+<body>
+
+<div class="registerClass" id="register">
+    <section class="form_container">
+        <div class="title">服务信息</div>
+        <#if contract?exists>
+        <#if  contract.status == 1>
+    <el-form  :model="ruleForm" :rules="rules" ref="ruleForm"    label-width="120px" status-icon class="registerForm">
+        <el-form-item label="手机号:" prop="phone">
+            <el-input type="type" placeholder="手机号" value="${contract.phone}" autocomplete="off" >
+                <i slot="prefix" class="el-icon-phone"></i>
+            </el-input>
+        </el-form-item>
+        <el-form-item label="真实姓名:" prop="customerName">
+            <el-input type="type" placeholder="真实姓名" value="${contract.customerName}" autocomplete="off">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="地址:"  prop="address">
+            <el-input type="type" placeholder="地址" value="${contract.address}" autocomplete="off">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="房屋建筑面积:" prop="floorArea">
+            <el-input type="type" placeholder="房屋建筑面积" value="${contract.floorArea}" autocomplete="off">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="服务方式:" prop="style">
+            <el-select  placeholder="服务方式" style="width: 100%" value="${contract.style}">
+            </el-select>
+        </el-form-item>
+        <el-form-item label="服务次数:" prop="number">
+            <el-select  placeholder="服务次数" style="width: 100%" value="${contract.number}"></el-select>
+        </el-form-item>
+        <el-form-item label="第一次日期:" prop="firstServiceTime">
+                <el-date-picker
+                        type="date"
+                        value="${contract.firstServiceTime}"
+                        style="width: 55%"
+                        placeholder="选择日期"
+                        align="left"
+                        format="yyyy 年 MM 月 dd 日"
+                        value-format="yyyy-MM-dd">
+                </el-date-picker>
+                <el-select  placeholder="请选择" style="width: 40%" value="${contract.endDay}"></el-select>
+        </el-form-item>
+        <el-form-item label="固定日期:" prop="serviceTime">
+            <el-date-picker
+                    value="${contract.serviceTime}"
+                    type="date"
+                    placeholder="选择日期"
+                    style="width: 55%"
+                    align="left"
+                    format="dd 日"
+                    value-format="dd">
+            </el-date-picker>
+            <el-select  placeholder="请选择" style="width: 40%" value="${contract.serviceEndDay}"></el-select>
+        </el-form-item>
+        <el-form-item label="特许附加项目:" prop="extraDesc">
+            <el-input type="type" placeholder="特许附加服务项目" value="${contract.extraDesc}" autocomplete="off">
+            </el-input>
+        </el-form-item>
+        <el-form-item label="优惠劵额度:" prop="couponBalance">
+            <el-input type="type" placeholder="优惠劵额度" value="${contract.couponBalance}" autocomplete="off" :disabled="true">
+            </el-input>
+        </el-form-item>
+        <el-form-item prop="openId">
+            <el-input type="hidden"  value="${contract.openId}" id="openId"></el-input>
+        </el-form-item>
+    </el-form>
+    </#if>
+    </#if>
+    </section>
+</div>
+<script type="text/javascript">
+    new Vue({
+        el: "#register",
+        data() {
+            return {
+            };
+        },
+        methods: {
+        }
+    })
+</script>
+
+
+<style>
+
+    .registerClass {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: url(/assets/pc/images/13.jpg);
+        background-size: 100% 100%;
+    }
+    .form_container {
+        width: 500px;
+        height: 400px;
+        position: absolute;
+        top: 20%;
+        left: 25%;
+        padding: 25px;
+        border-radius: 5px;
+        text-align: center;
+    }
+
+    .registerForm {
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 20px 40px 20px 20px;
+        border-radius: 5px;
+    }
+
+    .title {
+        font-family: "Microsoft YaHei";
+        font-weight: bold;
+        font-size: 26px;
+    }
+</style>
+
+</body>
+
+</html>

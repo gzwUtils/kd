@@ -5,7 +5,6 @@ import com.gzw.kd.service.ChartGptService;
 import com.gzw.kd.vo.input.GptInput;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.io.IOException;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +33,7 @@ public class ChatGptController {
     @ApiOperation(value = "提问")
     @OperatorLog(value = "提问",description = "learn")
     @RequestMapping(value = "/askAi",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public R askAi(@RequestBody GptInput gptInput) throws IOException {
+    public R askAi(@RequestBody GptInput gptInput) throws Exception {
 
         String replyStr = chartGptService.send(gptInput.getAskStr());
 

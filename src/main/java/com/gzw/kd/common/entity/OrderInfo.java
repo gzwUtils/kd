@@ -27,6 +27,12 @@ public class OrderInfo {
     /**房屋住宅面积*/
     private String  floorArea;
 
+    /** 0 未支付 1  支付*/
+
+    private int  status ;
+
+
+
     /**服务分类*/
     private int  style;
 
@@ -45,6 +51,10 @@ public class OrderInfo {
     /**总费用*/
     private BigDecimal serviceBalance;
 
-    /**openId*/
-    private String  openid;
+    /**是否拥有优惠劵 0 没有 1 有*/
+    private int coupon;
+
+
+    /**优惠劵额度*/
+    private BigDecimal couponBalance;
 }

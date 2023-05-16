@@ -371,7 +371,6 @@ public class PCController {
 
     @RequestMapping("/info")
     public String info(HttpServletRequest request, HttpSession session) throws Exception {
-        int step = 1;
         Map<String, String> steps = new HashMap<>();
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
         List<Doc> docs = m_docService.getDocByName(user.getAccount());
