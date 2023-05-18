@@ -280,7 +280,7 @@ public class PCController {
         Operator operator = new Operator();
         HttpSession session = MysessionListener.sessionContext.getSessionMap().get(userName);
         if (session != null) {
-            MysessionListener.sessionContext.getSessionMap().remove(session.getId());
+            log.warn("用户重复登陆");
             MysessionListener.sessionContext.getSessionMap().remove(userName);
         }
         if (StringUtils.isBlank(userName) || StringUtils.isBlank(password) || StringUtils.isBlank(code)) {

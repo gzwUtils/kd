@@ -73,10 +73,10 @@ public class SnowIdGenerator{
                     "Clock moved backwards.  Refusing to generate id for %d milliseconds", lastTimestamp - timestamp));
         }
 
-        // 如果是同一时间生成的，则进行毫秒内序列
+        // 如果是同一时间生成的，则进行秒内序列
         if (lastTimestamp == timestamp) {
             sequence = (sequence + 1) & sequenceMask;
-            // 毫秒内序列溢出
+            // 秒内序列溢出
             if (sequence == 0) {
                 // 阻塞到下一个秒,获得新的时间戳
                 timestamp = tilNextIs(lastTimestamp);

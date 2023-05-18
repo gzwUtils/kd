@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @author 高志伟
  */
+@SuppressWarnings("all")
 @Slf4j
 public class SessionContext {
 

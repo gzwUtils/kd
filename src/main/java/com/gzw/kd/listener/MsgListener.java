@@ -63,7 +63,7 @@ public class MsgListener  {
 
     @EventListener(MsgEvent.class)
     public void sendMsg(MsgEvent event) throws Exception {
-        int onlineNum = MysessionListener.sessionContext.getSessionMap().size() / 2;
+        int onlineNum = MysessionListener.sessionContext.getSessionMap().size();
         if (event.getStatus() == OnlineStatusEnum.OFF_LINE.getStatus()) {
             log.info("用户:{} {},时间:{} 在线人数:{}", event.getUserName(), event.getEvent(), event.getOnLineTime() + "-" + event.getOffLineTime(),onlineNum-1);
         } else if (event.getStatus() == OnlineStatusEnum.ON_LINE.getStatus()) {
