@@ -17,10 +17,6 @@ public class MysessionListener implements HttpSessionListener, HttpSessionAttrib
 
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-        HttpSession session = httpSessionEvent.getSession();
-        if (session.isNew() && !isOnline(session.getId())) {
-            sessionContext.addSession(httpSessionEvent.getSession());
-        }
     }
 
     @Override
