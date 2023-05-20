@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>gpt</title>
+    <!--引入 element-ui 的样式，-->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 必须先引入vue，  后使用element-ui -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <!-- 引入element 的组件库-->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+      <el-button type="primary" icon="el-icon-search" size="mini" @click="addNotice()">添加</el-button>
+      <el-input v-model="notice" placeholder="请输入内容"></el-input>
+      <br/>
+      <br/>
+</div>
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                notice: ''
+            }
+        },
+        methods: {
+            addNotice () {
+                axios.post('/pc/addNotice?notice='+this.notice).then(response => {
+                    this.$message.success(response.data.message);
+                });
+            }
+        }
+    })
+</script>
+</html>

@@ -141,10 +141,18 @@ public class PCController {
     @Resource
     FileUploadUtil fileUploadUtil;
 
+    @Resource
+    NoticeService noticeService;
+
 
     @RequestMapping("/login")
     public String login() {
         return "/pc/login";
+    }
+
+    @RequestMapping("/notice")
+    public String addNotice() {
+        return "/pc/notice";
     }
 
     @RequestMapping("/chatGpt")
@@ -203,6 +211,19 @@ public class PCController {
         MysessionListener.sessionContext.getSessionMap().remove(operator.getAccount());
         request.getSession().removeAttribute(Constants.LOGIN_USER_SESSION_KEY);
         return "/pc/login";
+    }
+
+    @RequestMapping(value = "/addNotice",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @ResponseBody
+    @OperatorLog(value = "添加公告",description = "添加公告")
+    public R addNotice(@RequestParam("notice") String notice) {
+        Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
+        Notice notice1 = new Notice().setContext(notice).setOperatorName(operator.getAccount()).setCreateTime(LocalDateTime.now());
+        Integer integer = noticeService.add(notice1);
+        if(integer==null){
+            return R.error().message("添加失败");
+        }
+        return R.ok();
     }
 
     /**
@@ -363,8 +384,10 @@ public class PCController {
     public String index(HttpServletRequest request,HttpSession  session)throws  Exception {
         Operator operator = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
         if(ObjectUtil.isNotEmpty(operator)){
+            String context = noticeService.getContext();
             String isLock = operator.isSysLock()==true? STRING_ONE:STRING_ZERO;
             request.setAttribute("isLock",isLock);
+            request.setAttribute("noticeBoard",context);
         }
         return "/pc/index";
     }

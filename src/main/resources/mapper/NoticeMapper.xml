@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.NoticeMapper" >
+
+
+  <insert id="add"  parameterType="com.gzw.kd.common.entity.Notice">
+
+      INSERT INTO notice (context, operatorName, create_time)
+      VALUES(#{context}, #{operatorName}, #{createTime});
+  </insert>
+
+  <select id="getContext"   resultType="string">
+      select context from notice order by create_time desc limit 1
+  </select>
+
+</mapper>
