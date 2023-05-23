@@ -98,7 +98,7 @@ public class WxIndexController {
 
 
     @ApiOperation(value = "注册")
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String register(HttpServletRequest request) {
         String openId = request.getParameter("openId");
         request.setAttribute("openId", openId);
@@ -107,20 +107,20 @@ public class WxIndexController {
 
 
     @ApiOperation(value = "支付宝二维码")
-    @RequestMapping("/zfbQrCode")
+    @RequestMapping(value = "/zfbQrCode",method = RequestMethod.GET)
     public String zfbQrCode(HttpServletRequest request) {
         return "/zfb/zfbQrCode";
     }
 
     @ApiOperation(value = "首页")
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(HttpServletRequest request) {
         return "/wx/index";
     }
 
 
     @ApiOperation(value = "详情")
-    @RequestMapping("/xq")
+    @RequestMapping(value = "/xq",method = RequestMethod.GET)
     public String xq(HttpServletRequest request) throws Exception {
         String id = request.getParameter("id");
         String openId = request.getParameter("openId");
@@ -132,7 +132,7 @@ public class WxIndexController {
     }
 
     @ApiOperation(value = "账户")
-    @RequestMapping("/account")
+    @RequestMapping(value = "/account",method = RequestMethod.GET)
     public String account(HttpServletRequest request) throws Exception {
         //TODO
         String openId = request.getParameter("openId");
@@ -144,7 +144,7 @@ public class WxIndexController {
     }
 
     @ApiOperation(value = "签署")
-    @RequestMapping("/assign")
+    @RequestMapping(value = "/assign",method = RequestMethod.GET)
     public String assign(HttpServletRequest request) throws Exception {
         Assign assign = new Assign();
         String openId = request.getParameter("openId");
@@ -178,7 +178,7 @@ public class WxIndexController {
     }
 
     @ApiOperation(value = "代办")
-    @RequestMapping("/daiban")
+    @RequestMapping(value = "/daiban",method = RequestMethod.GET)
     public String daiban(HttpServletRequest request) throws Exception {
         String openId = request.getParameter("openId");
         List<Doc> docs = new ArrayList<>();
@@ -195,7 +195,7 @@ public class WxIndexController {
     }
 
     @ApiOperation(value = "更新")
-    @RequestMapping("/updateStatus")
+    @RequestMapping(value = "/updateStatus",method = RequestMethod.GET)
     @ResponseBody
     public R updateStatus(String status, String id, String openId) throws Exception {
         Doc doc = new Doc();
@@ -308,7 +308,7 @@ public class WxIndexController {
     }
 
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
     public void wxAuth(HttpServletResponse response,HttpServletRequest request) throws IOException {
         String STATE = request.getParameter("index");
         String callBack = natAppUrl+"/wx/callBack?index="+STATE;
@@ -324,7 +324,7 @@ public class WxIndexController {
     }
 
 
-    @RequestMapping("/callBack")
+    @RequestMapping(value = "/callBack",method = RequestMethod.GET)
     public void wxCallBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String STATE = request.getParameter("index");
         String accessToken = getAuthTokenAndOpenid(request);

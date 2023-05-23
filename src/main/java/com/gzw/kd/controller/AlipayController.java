@@ -89,7 +89,7 @@ public class AlipayController {
      */
 
 
-    @RequestMapping(value = "/aliNotify")
+    @RequestMapping(value = "/aliNotify",method = RequestMethod.GET)
     public R aliNotify(HttpServletRequest request) {
         try {
             log.info("进入支付宝回调地址");
