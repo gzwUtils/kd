@@ -192,6 +192,7 @@
             <appender-ref ref="CONSOLE" />
         </root>
         <logger name="com.gzw.kd" level="info"/> <!-- 开发环境, info -->
+        <logger name="org.flowable" level="warn"/>
     </springProfile>
 
     <springProfile name="test">
