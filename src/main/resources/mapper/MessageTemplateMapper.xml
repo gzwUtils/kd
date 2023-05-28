@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.MessageTemplateMapper" >
+
+  <select id="selectById"   resultType="com.gzw.kd.common.entity.TemplateInfo">
+      SELECT id,name,msg_status msgStatus ,cron_task_id cronTaskId,cron_crowd_path cronCrowdPath,id_type idType,send_channel sendChannel,template_type templateType, msg_type msgType,shield_type shieldType,msg_content  msgContent,send_account sendAccount, expect_push_time expectPushTime,is_deleted isDeleted  from  message_template  where  id = #{id}
+  </select>
+
+   <insert id="registerTemplate" parameterType="com.gzw.kd.common.entity.TemplateInfo">
+       insert into message_template (id, name, msg_status, cron_task_id, cron_crowd_path, expect_push_time, id_type,
+                                     send_channel, template_type, msg_type, shield_type, msg_content, send_account, creator,
+                                     updator, is_deleted, created, updated)
+       values (null,#{name},#{msgStatus},#{cronTaskId},#{cronCrowdPath},#{expectPushTime},#{idType},#{sendChannel},#{templateType},#{msgType},#{shieldType},#{msgContent},#{sendAccount},#{creator},#{updator},#{isDeleted},#{created},#{updated});
+   </insert>
+
+    <select id="findAllByIsDeleted" resultType="com.gzw.kd.common.entity.TemplateInfo">
+        SELECT id,name,msg_status msgStatus ,cron_task_id cronTaskId,cron_crowd_path cronCrowdPath,id_type idType,send_channel sendChannel,template_type templateType, msg_type msgType,shield_type shieldType,msg_content  msgContent,send_account sendAccount, expect_push_time expectPushTime,is_deleted isDeleted  from  message_template
+       <if test="isDeleted!=null">
+           where  is_deleted = #{isDeleted}
+       </if>
+    </select>
+
+
+    <select id="countByIsDeletedEquals" resultType="Long">
+        select count(1) from message_template where is_deleted = #{isDeleted}
+    </select>
+
+</mapper>
