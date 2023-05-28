@@ -95,6 +95,12 @@ public interface Constants {
      */
     String STRING_EQUAL_SIGN = "=";
 
+
+    /**
+     * 空json
+     */
+    String EMPTY_JSON_OBJECT = "{}";
+
     /***
      * 人民币标志
      */
@@ -628,4 +634,15 @@ public interface Constants {
     public static final String KEY_TOKEN_FILTER = "tokenFilter";
 
     public static final String URL_PATTERN_ALL = "/base/*";
+
+
+    /**
+     * flow controll
+     */
+    public static final String FLOW_CONTROL_KEY = "flowControlRule";
+
+    public static final String FLOW_CONTROL_PREFIX = "flow_control_";
+
+
+    public static final String LINK_NAME = "url";
 }
