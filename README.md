@@ -1,7 +1,8 @@
-# **kd**
+# 背景
+##  java 项目学习。
 
-
-## 基于spring-boot项目 
+# 框架
+## SPRING BOOT
 
 ## redis,es,canal,flyway、sms、mail,
 ## rocketmq,websocket,schedule,freemarker
@@ -19,4 +20,4 @@
 ### 11、邮件、短信发送。
 ### 12、websocket 客户端服务端交互。
 ### 13、基于timer、schedule、定时。
-
+### 14、消息推送
