@@ -1,5 +1,5 @@
 # 背景
- java 项目学习。
+##  java 项目学习。
 
 # 框架
 ## SPRING BOOT
@@ -20,22 +20,9 @@
 ### 11、邮件、短信发送。
 ### 12、websocket 客户端服务端交互。
 ### 13、基于timer、schedule、定时。
-
-1. 启动服务
-
-```bash
-service kd start
-
-2. 查看服务状态
-```bash
-service kd status
-
-7. 停止服务
-
-```bash
-service kd stop
+### 14、消息推送
 
 
 
-### https://juejin.cn/user/2151063691992622
+### /pc/login
 
