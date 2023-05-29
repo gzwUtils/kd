@@ -73,9 +73,10 @@ public class LogExportAsyncTask implements AsyncTaskService, CommonExportService
                 Iterator<List<Map<String, Object>>> itr = iterable.iterator();
 
                 for (int i = 0; i < exportFileNum; ++i) {
-                    final String fileNameAndSuffix = IdUtil.fastSimpleUUID() + XLSX_EXPORT_FILE_SUFFIX;
+                    final String fileNameAndSuffix = fileName + STRING_UNDERLINE + IdUtil.fastSimpleUUID() + XLSX_EXPORT_FILE_SUFFIX;
                     final String filePath = defaultStoragePath(fileNameAndSuffix);
-                    BigExcelWriterNew writer = new BigExcelWriterNew(filePath, "log");
+                    log.info("async file path.....{}",filePath);
+                    BigExcelWriterNew writer = new BigExcelWriterNew(filePath, fileName + STRING_UNDERLINE + i);
 
                     // 单个文件最多查询10个批次, 即最多50_000条数据
                     int batchSize = 10;

@@ -2,30 +2,34 @@ package com.gzw.kd.export;
 
 import cn.hutool.core.thread.ExecutorBuilder;
 import cn.hutool.core.thread.ThreadUtil;
+import com.gzw.kd.common.ExecutorPoolConstant;
 import com.gzw.kd.vo.output.AsyncTaskOutput;
+import java.util.concurrent.TimeUnit;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
 /**
+ *  业务  核心线程可以被回收  不被spring管理
  * @author 高志伟
  */
 @Component
 @Slf4j
+@SuppressWarnings("all")
 public class AsyncTaskExecutorService {
 
     private static final String THREAD_PREFIX = "async-task-executor-thread-";
-
     private static final ThreadPoolExecutor EXECUTOR;
 
     static {
-        EXECUTOR = ExecutorBuilder.create().setMaxPoolSize(3).setCorePoolSize(3).setWorkQueue(new SynchronousQueue<>())
+        EXECUTOR = ExecutorBuilder.create().setMaxPoolSize(ExecutorPoolConstant.COMMON_MAX_POOL_SIZE).
+                setCorePoolSize(ExecutorPoolConstant.COMMON_CORE_POOL_SIZE).setWorkQueue(ExecutorPoolConstant.SYNCHRONOUS_QUEUE)
+                .setAllowCoreThreadTimeOut(true).setKeepAliveTime(ExecutorPoolConstant.SMALL_KEEP_LIVE_TIME, TimeUnit.SECONDS).
+                setHandler(new ThreadPoolExecutor.CallerRunsPolicy())
                 .setThreadFactory(ThreadUtil.newNamedThreadFactory(THREAD_PREFIX, true)).build();
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             if (!EXECUTOR.isTerminated()) {

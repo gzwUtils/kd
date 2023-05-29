@@ -26,7 +26,7 @@ public class RandomIdGenerator implements IdGenerator{
         }
         length = length == null ? 8 : length;
         String randomAlphameric = generateRandomAlphameric(length);
-        String id = String.format("%s-%d-%s", lastfieldOfHostName, currentTimeMillis, randomAlphameric);
+        String id = String.format("%s%d%s", lastfieldOfHostName, currentTimeMillis, randomAlphameric);
         return id;
     }
 

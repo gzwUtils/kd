@@ -69,7 +69,7 @@ public class RocketmqConsumerConfig {
         defaultMQPushConsumer.setUnitName("yc_ai_cm");
         defaultMQPushConsumer.setInstanceName("ai_cm");
         try {
-            String topic = MqConstant.Topic.ROCKET_PUB_MESSAGE+system;
+            String topic = MqConstant.Topic.KD_BUSINESS_TOPIC+system;
             defaultMQPushConsumer.subscribe(topic,"*");
             defaultMQPushConsumer.start();
             log.info("rocketmq consumer server 创建成功--------------------------------------------------");

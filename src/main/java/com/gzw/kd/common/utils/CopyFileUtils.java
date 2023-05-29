@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+@SuppressWarnings("all")
 public class CopyFileUtils {
 
 

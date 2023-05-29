@@ -2,7 +2,7 @@ package com.gzw.kd.common.entity;
 import com.alibaba.fastjson2.annotation.JSONField;
 import com.gzw.kd.common.annotation.PrivacyEncrypt;
 import com.gzw.kd.common.enums.PrivacyTypeEnum;
-import java.time.LocalDateTime;
+import java.util.Date;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 public class Log  {
 
     @JSONField(name = "username")
-    @PrivacyEncrypt(type = PrivacyTypeEnum.CUSTOMER,prefixNoMaskLen = 2,suffixNoMaskLen = 0,symbol = "h")
+    @PrivacyEncrypt(type = PrivacyTypeEnum.CUSTOMER,prefixNoMaskLen = 2,suffixNoMaskLen = 0,symbol = "1")
     private String userName;
 
     private String operation;
@@ -27,7 +27,7 @@ public class Log  {
     private String ip;
 
     @JSONField(name = "create_time")
-    private LocalDateTime createTime;
+    private Date createTime;
 
     private String location;
 

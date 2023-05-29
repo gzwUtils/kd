@@ -3,15 +3,17 @@ package com.gzw.kd.controller;
 import cn.hutool.core.util.ObjectUtil;
 import com.github.pagehelper.PageInfo;
 import com.gzw.kd.common.R;
+import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.utils.QuartzManager;
 import com.gzw.kd.common.entity.JobAndTrigger;
 import com.gzw.kd.scheduletask.HelloJob;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import java.util.Map;
  *  定时任务
  * @author 高志伟
  */
+@Api(tags = "定时任务")
 @SuppressWarnings("all")
 @Slf4j
 @RestController
@@ -41,8 +44,15 @@ public class QuartzController {
      * @param cron   cron表达式
      * @return ResultMap
      */
+    @OperatorLog(value = "新增定时任务",description = "新增定时任务")
+    @ApiImplicitParams({@ApiImplicitParam(name = "jName", value = "任务名称", paramType = "query", dataTypeClass = String.class, required = true ),
+            @ApiImplicitParam(name = "jGroup", value = "任务组", paramType = "query", dataTypeClass = String.class, required = true ),
+            @ApiImplicitParam(name = "tName", value = "触发器名称", paramType = "query", dataTypeClass = String.class, required = true ),
+            @ApiImplicitParam(name = "tGroup", value = "触发器组", paramType = "query", dataTypeClass = String.class, required = true ),
+            @ApiImplicitParam(name = "cron", value = "cron表达式", paramType = "query", dataTypeClass = String.class, required = true )})
+    @ApiOperation(value = "新增定时任务")
     @PostMapping(path = "/addJob")
-    public R addJob(String jName, String jGroup, String tName, String tGroup, String cron) {
+    public R addJob(@RequestParam("jName") String jName, @RequestParam("jGroup") String jGroup, @RequestParam("tName") String tName,@RequestParam("tGroup")  String tGroup,@RequestParam("cron") String cron) {
         try {
             quartzManager.getInstance().addJob(jName, jGroup, tName, tGroup, cron, HelloJob.class);
             return R.ok().message("添加任务成功");
@@ -59,6 +69,8 @@ public class QuartzController {
      * @param jGroup 任务组
      * @return ResultMap
      */
+    @OperatorLog(value = "暂停任务",description = "暂停任务")
+    @ApiOperation(value = "暂停任务")
     @PostMapping(path = "/pauseJob")
     public R pauseJob(String jName, String jGroup) {
         try {
@@ -77,6 +89,8 @@ public class QuartzController {
      * @param jGroup 任务组
      * @return ResultMap
      */
+    @ApiOperation(value = "恢复任务")
+    @OperatorLog(value = "恢复任务",description = "恢复任务")
     @PostMapping(path = "/resumeJob")
     public R resumeJob(String jName, String jGroup) {
         try {
@@ -96,6 +110,8 @@ public class QuartzController {
      * @param cron   cron表达式
      * @return ResultMap
      */
+    @ApiOperation(value = "重启任务")
+    @OperatorLog(value = "重启任务",description = "重启任务")
     @PostMapping(path = "/rescheduleJob")
     public R rescheduleJob(String jName, String jGroup, String cron) {
         try {
@@ -114,6 +130,8 @@ public class QuartzController {
      * @param jGroup 任务组
      * @return ResultMap
      */
+    @ApiOperation(value = "删除任务")
+    @OperatorLog(value = "删除任务",description = "删除任务")
     @PostMapping(path = "/deleteJob")
     public R deleteJob(String jName, String jGroup) {
         try {
@@ -132,13 +150,15 @@ public class QuartzController {
      * @param pageSize 每页显示多少条数据
      * @return Map
      */
+    @ApiOperation(value = "查询任务")
+    @OperatorLog(value = "查询任务",description = "查询任务")
     @GetMapping(path = "/queryJob")
     public R queryJob(Integer pageNum, Integer pageSize) {
         PageInfo<JobAndTrigger> pageInfo = quartzManager.getInstance().getJobAndTriggerDetails(pageNum, pageSize);
         Map<String, Object> map = new HashMap<>();
         if (ObjectUtil.isNotEmpty(pageInfo.getTotal())) {
-            map.put("JobAndTrigger", pageInfo);
-            map.put("number", pageInfo.getTotal());
+            map.put("jobs", pageInfo.getList());
+            map.put("total", pageInfo.getTotal());
             return R.ok().data(map).message("查询任务成功");
         }
         return R.error().message("查询任务成功失败，没有数据");

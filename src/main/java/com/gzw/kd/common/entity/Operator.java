@@ -10,6 +10,7 @@ import java.io.Serializable;
  */
 @Data
 @Slf4j
+@SuppressWarnings("all")
 public class Operator extends User implements Serializable {
 
     public static final long serialVersionUID=1L;
@@ -26,4 +27,15 @@ public class Operator extends User implements Serializable {
     private String loginWay;
     /**提示消息*/
     private String hintMessage;
+
+
+    public Operator(){}
+
+
+    public Operator(String noticeBoard,String hintMessage,String loginWay,int target,long lastActiveTime){
+        this.hintMessage = hintMessage;
+        this.loginWay = loginWay;
+        this.target = target;
+        this.lastActiveTime = lastActiveTime;
+    }
 }

@@ -1,17 +1,20 @@
 package com.gzw.kd.config;
 
+import com.alibaba.druid.filter.Filter;
+import com.alibaba.druid.filter.stat.StatFilter;
 import com.alibaba.druid.pool.DruidDataSource;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 import org.quartz.SchedulerException;
 import org.quartz.utils.ConnectionProvider;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
  * @author 高志伟
  */
-
+@SuppressWarnings("all")
 @Data
 public class DruidPoolingConnectionProvider implements ConnectionProvider {
 
@@ -29,6 +32,10 @@ public class DruidPoolingConnectionProvider implements ConnectionProvider {
 
     public int maxConnections;
 
+    public int minIdle;
+
+    public long maxWait ;
+
     public String validationQuery;
 
     private boolean validateOnCheckout;
@@ -44,7 +51,18 @@ public class DruidPoolingConnectionProvider implements ConnectionProvider {
     public static final int DEFAULT_DB_MAX_CACHED_STATEMENTS_PER_CONNECTION = 120;
 
 
+    public List<Filter> filters;
+
+
     private DruidDataSource datasource;
+
+    public DruidPoolingConnectionProvider() {
+        this.filters = new ArrayList<>();
+        StatFilter filter = new StatFilter();
+        filter.setLogSlowSql(true);
+        filter.setSlowSqlMillis(5000);
+        filters.add(filter);
+    }
 
     @Override
     public Connection getConnection() throws SQLException {
@@ -80,8 +98,9 @@ public class DruidPoolingConnectionProvider implements ConnectionProvider {
         datasource.setUsername(this.user);
         datasource.setPassword(this.password);
         datasource.setMaxActive(this.maxConnections);
-        datasource.setMinIdle(1);
-        datasource.setMaxWait(0);
+        datasource.setMinIdle(this.minIdle);
+        datasource.setMaxWait(this.maxWait);
+        datasource.setProxyFilters(filters);
         datasource.setMaxPoolPreparedStatementPerConnectionSize(DEFAULT_DB_MAX_CONNECTIONS);
         if (this.validationQuery != null) {
             datasource.setValidationQuery(this.validationQuery);

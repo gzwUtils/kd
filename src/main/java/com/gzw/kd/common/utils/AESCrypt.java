@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
  * @Date 2022/10/9
  * @dec
  */
+@SuppressWarnings("all")
 @Slf4j
 @Component
 public class AESCrypt {
@@ -27,7 +28,7 @@ public class AESCrypt {
     @PostConstruct
     public void init() {
          aes = new AES(Mode.CBC, Padding.ZeroPadding, KEY.getBytes(StandardCharsets.UTF_8), IV.getBytes(StandardCharsets.UTF_8));
-         log.info("初始化成功了");
+         log.info("aes初始化成功了.............");
     }
 
     //解密

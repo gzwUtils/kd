@@ -13,7 +13,7 @@ import java.util.Properties;
  * @Date 2022/10/21
  * @dec
  */
-@SuppressWarnings("serial")
+@SuppressWarnings("all")
 @Slf4j
 public class PropertiesUtils extends Properties {
 

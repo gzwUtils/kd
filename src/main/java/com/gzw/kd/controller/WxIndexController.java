@@ -1,9 +1,9 @@
 package com.gzw.kd.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.http.HttpUtil;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import static com.gzw.kd.common.Constants.*;
-
-import cn.hutool.json.JSONUtil;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.entity.*;
 import com.gzw.kd.common.enums.StatusEnum;
@@ -12,11 +12,13 @@ import com.gzw.kd.common.generators.RandomIdGenerator;
 import com.gzw.kd.common.utils.AESCrypt;
 import com.gzw.kd.common.utils.AliPayUtils;
 import com.gzw.kd.common.utils.ApplicationContextUtils;
-import com.gzw.kd.common.utils.ToolUtil;
 import com.gzw.kd.listener.event.MsgEvent;
 import com.gzw.kd.service.CustomerService;
 import com.gzw.kd.service.DocService;
+import com.gzw.kd.service.OrderService;
 import com.gzw.kd.service.WxUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URLEncoder;
@@ -32,6 +34,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.gzw.kd.vo.input.AssignInput;
 import com.gzw.kd.vo.input.WxUserInput;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,6 +54,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @since：2022/11/1 02:16
  */
 
+@Api(tags = "微信")
 @Slf4j
 @SuppressWarnings("all")
 @Controller
@@ -67,6 +71,9 @@ public class WxIndexController {
 
     @Resource
     private WxUserService wxUserService;
+
+    @Resource
+    private OrderService orderService;
 
 
     @Resource
@@ -90,7 +97,8 @@ public class WxIndexController {
     private String natAppUrl;
 
 
-    @RequestMapping("/register")
+    @ApiOperation(value = "注册")
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String register(HttpServletRequest request) {
         String openId = request.getParameter("openId");
         request.setAttribute("openId", openId);
@@ -98,18 +106,21 @@ public class WxIndexController {
     }
 
 
-    @RequestMapping("/zfbQrCode")
+    @ApiOperation(value = "支付宝二维码")
+    @RequestMapping(value = "/zfbQrCode",method = RequestMethod.GET)
     public String zfbQrCode(HttpServletRequest request) {
         return "/zfb/zfbQrCode";
     }
 
-    @RequestMapping("/index")
+    @ApiOperation(value = "首页")
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(HttpServletRequest request) {
         return "/wx/index";
     }
 
 
-    @RequestMapping("/xq")
+    @ApiOperation(value = "详情")
+    @RequestMapping(value = "/xq",method = RequestMethod.GET)
     public String xq(HttpServletRequest request) throws Exception {
         String id = request.getParameter("id");
         String openId = request.getParameter("openId");
@@ -120,7 +131,8 @@ public class WxIndexController {
         return "/wx/xq";
     }
 
-    @RequestMapping("/account")
+    @ApiOperation(value = "账户")
+    @RequestMapping(value = "/account",method = RequestMethod.GET)
     public String account(HttpServletRequest request) throws Exception {
         //TODO
         String openId = request.getParameter("openId");
@@ -131,19 +143,23 @@ public class WxIndexController {
         return "/wx/account";
     }
 
-    @RequestMapping("/assign")
+    @ApiOperation(value = "签署")
+    @RequestMapping(value = "/assign",method = RequestMethod.GET)
     public String assign(HttpServletRequest request) throws Exception {
+        Assign assign = new Assign();
         String openId = request.getParameter("openId");
-        Assign byOpenId = customerService.getUserByOpenId(openId);
-        String redisAssign = redisTemplate.opsForValue().get(ASSIGN_INFO_KEY_);
-        List<?> list = ToolUtil.jsonToList(redisAssign, Assign.class);
-        Assign assign1 = (Assign) list.get(0);
-        byOpenId = ObjectUtil.isEmpty(byOpenId)?assign1:byOpenId;
-        if(ObjectUtil.isNotEmpty(byOpenId)){
-            if(byOpenId.getStatus()==INT_ZERO){
+        String redisAssign = redisTemplate.opsForValue().get(ASSIGN_INFO_KEY_+openId);
+        if(StringUtils.isBlank(redisAssign)){
+            assign = customerService.getUserByOpenId(openId);
+        } else {
+            redisAssign = StringEscapeUtils.unescapeJava(redisAssign);
+             assign = com.alibaba.fastjson.JSONObject.parseObject(redisAssign, Assign.class);
+        }
+        if(ObjectUtil.isNotEmpty(assign)){
+            if(assign.getStatus()==INT_ZERO){
                 ZFBFaceToFaceModel model = new ZFBFaceToFaceModel();
                 String generate = randomIdGenerator.generate(16);
-                model.setOutTradeNo(generate).setTotalAmount(byOpenId.getBalance()).setSubject("佳一品").setBody("佳一品家政服务有限公司");
+                model.setOutTradeNo(generate).setTotalAmount(assign.getServiceBalance()).setSubject("test").setBody("kd");
                 R order = aliPayUtils.newAliOrder(model);
                 if(!order.getSuccess()){
                     return "/error/500";
@@ -152,15 +168,17 @@ public class WxIndexController {
                     return "/zfb/zfbQrCode";
                 }
             } else {
-                //TODO
-                log.info("生成合同PDF");
+                request.setAttribute("contract", assign);
+                log.info("开始生成合同PDF..................................................................");
+                return "/wx/contract";
             }
         }
         request.setAttribute("openId", openId);
         return "/wx/assign";
     }
 
-    @RequestMapping("/daiban")
+    @ApiOperation(value = "代办")
+    @RequestMapping(value = "/daiban",method = RequestMethod.GET)
     public String daiban(HttpServletRequest request) throws Exception {
         String openId = request.getParameter("openId");
         List<Doc> docs = new ArrayList<>();
@@ -176,7 +194,8 @@ public class WxIndexController {
         return "/wx/daiBanDocList";
     }
 
-    @RequestMapping("/updateStatus")
+    @ApiOperation(value = "更新")
+    @RequestMapping(value = "/updateStatus",method = RequestMethod.GET)
     @ResponseBody
     public R updateStatus(String status, String id, String openId) throws Exception {
         Doc doc = new Doc();
@@ -199,10 +218,11 @@ public class WxIndexController {
                         daiban(p);
                     });
                 } else {
-                    //TODO 扣减余额
                     Assign byOpenId = customerService.getUserByOpenId(openId);
-                    BigDecimal balance = byOpenId.getBalance().subtract(BigDecimal.valueOf(2));
-                    customerService.updateBalance(openId,balance,0,null);
+                    String config = redisTemplate.opsForValue().get(SERVICE_COFIG);
+                    Configs configs = JSON.parseObject(config, Configs.class);
+                    byOpenId.setBalance(byOpenId.getBalance().subtract(configs.getAnnualBalance())).setSyNumber(byOpenId.getSyNumber()-1);
+                    customerService.updateAssignByOpenId(byOpenId);
                 }
                 return R.ok();
             }
@@ -213,7 +233,7 @@ public class WxIndexController {
     private void daiban(Doc doc) {
         ApplicationContext context = ApplicationContextUtils.getApplicationContext();
         Map<String, TemplateDataStyle> data = new HashMap<>();
-        data.put("user",new TemplateDataStyle("保洁人员"+doc.getAudit()+"已审批,请您确认:"+doc.getCustomerName()));
+        data.put("user",new TemplateDataStyle("客户"+doc.getAudit()+"已审批,请您确认:"+doc.getCustomerName()));
         data.put("address",new TemplateDataStyle(doc.getAddress()));
         data.put("desc",new TemplateDataStyle(doc.getDesc()));
         data.put("issueDate",new TemplateDataStyle(doc.getIssueDate().format(DATE_TIME_FORMAT_S)));
@@ -233,6 +253,30 @@ public class WxIndexController {
         return R.ok();
     }
 
+    @RequestMapping(value = "/paycallback",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    public R paycallback(String openId) throws Exception {
+        String redisAssign = redisTemplate.opsForValue().get(ASSIGN_INFO_KEY_+openId);
+        String order = redisTemplate.opsForValue().get(ORDER_INFO_KEY_+openId);
+        OrderInfo orderInfo = null;
+        if(StringUtils.isNotBlank(redisAssign)){
+            if(StringUtils.isNotBlank(order)){
+                 orderInfo = JSON.parseObject(order, OrderInfo.class);
+                 orderInfo.setStatus(1);
+                Integer orderL = orderService.registerOrder(orderInfo);
+                if(orderL == null){
+                    return R.error().message("支付成功 订单写入异常.....请核查");
+                }
+            }
+            Assign assign = JSON.parseObject(redisAssign, Assign.class);
+            assign.setUpdateTime(LocalDateTime.now()).setCreateTime(LocalDateTime.now()).setBalance(orderInfo.getServiceBalance());
+            Integer flag = customerService.registerUser(assign);
+            if(flag == null){
+                return R.error().message("支付成功 合同写入异常.....请核查");
+            }
+        }
+        return R.ok();
+    }
+
     @Transactional
     @ResponseBody
     @RequestMapping(value = "/updateAssignAction",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
@@ -247,16 +291,24 @@ public class WxIndexController {
         //补充合同信息
         BeanUtils.copyProperties(assignInput,assign);
         assign.setCreateTime(LocalDateTime.now()).setCustomerName(encryptName).setPhone(encryptPhone);
-        redisTemplate.opsForValue().set(ASSIGN_INFO_KEY_, JSONUtil.toJsonStr(assign),ASSIGN_INFO_EXPIRE_TIME,TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(ASSIGN_INFO_KEY_+assign.getOpenId(), JSON.toJSONString(assign),ASSIGN_INFO_EXPIRE_TIME,TimeUnit.SECONDS);
         //补充订单信息
         OrderInfo orderInfo =new OrderInfo();
         BeanUtils.copyProperties(assignInput,orderInfo);
-        redisTemplate.opsForValue().set(ORDER_INFO_KEY_,JSONUtil.toJsonStr(orderInfo),ORDER_INFO_EXPIRE_TIME,TimeUnit.SECONDS);
+        orderInfo.setStatus(INT_ZERO);
+        String config = redisTemplate.opsForValue().get(SERVICE_COFIG);
+        JSONObject object = JSON.parseObject(config);
+        if(assignInput.getNumber()!=12){
+            orderInfo.setServiceBalance( object.getBigDecimal("annualBalance").multiply(new BigDecimal(assignInput.getNumber())));
+        } else {
+            orderInfo.setServiceBalance( object.getBigDecimal("yearBalance"));
+        }
+        redisTemplate.opsForValue().set(ORDER_INFO_KEY_+assign.getOpenId(),JSON.toJSONString(orderInfo),ORDER_INFO_EXPIRE_TIME,TimeUnit.SECONDS);
         return R.ok();
     }
 
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
     public void wxAuth(HttpServletResponse response,HttpServletRequest request) throws IOException {
         String STATE = request.getParameter("index");
         String callBack = natAppUrl+"/wx/callBack?index="+STATE;
@@ -272,7 +324,7 @@ public class WxIndexController {
     }
 
 
-    @RequestMapping("/callBack")
+    @RequestMapping(value = "/callBack",method = RequestMethod.GET)
     public void wxCallBack(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String STATE = request.getParameter("index");
         String accessToken = getAuthTokenAndOpenid(request);
