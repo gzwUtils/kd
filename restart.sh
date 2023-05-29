@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#加载env配置脚本文件
+source `dirname $0`/env.sh
 #先stop应用
 sh stop.sh
 #再start应用

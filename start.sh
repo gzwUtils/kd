@@ -1,6 +1,7 @@
 #!/bin/bash
 
-
+#加载env配置脚本文件
+source `dirname $0`/env.sh
 
 #验证是否已经启动
 if [[ $pid_count -ne 0 ]]; then
