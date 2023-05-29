@@ -47,8 +47,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         try {
             Operator operator = (Operator) request.getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
             String ssoToken = request.getParameter("token");
-            String state = request.getParameter("state");
-            if(StringUtils.equals(state,"STATE")){
+            String index = request.getParameter("index");
+            if(StringUtils.isNotBlank(index)){
                 return true;
             }
             if (StringUtils.isNotBlank(ssoToken)) {

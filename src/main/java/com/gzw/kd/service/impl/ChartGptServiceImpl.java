@@ -7,14 +7,13 @@ import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.gzw.kd.service.ChartGptService;
 import com.gzw.kd.vo.output.GptOutput;
-import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
  * @author gzw
- * @description：
+ * @description： gpt
  * @since：2023/4/4 16:19
  */
 @Slf4j
@@ -39,7 +38,7 @@ public class ChartGptServiceImpl implements ChartGptService {
 
 
     @Override
-    public String send(String prompt) throws IOException {
+    public String send(String prompt) throws Exception {
         JSONObject bodyJson = new JSONObject();
         bodyJson.put("prompt", prompt);
         bodyJson.put("max_tokens", Integer.parseInt(maxTokens));

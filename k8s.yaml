@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kd-service
+spec:
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: kd-service
+    spec:
+      containers:
+        - name: kd-service
+          image: kd-service:1.0.0
+          ports:
+            - containerPort: 8080
+  selector:
+    matchLabels:
+      app: kd-service
+  strategy:
+    type: RollingUpdate #滚动更新策略
+    rollingUpdate:
+      maxSurge: 1 #升级过程中最多可以比原先设置的副本数多出的数量
+      maxUnavailable: 1 #升级过程中最多有多少个服务无法提供服务的状态

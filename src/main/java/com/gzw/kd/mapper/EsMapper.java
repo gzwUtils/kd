@@ -62,6 +62,7 @@ public class EsMapper {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         searchSourceBuilder.query(request.getQueryBuilder());
         searchSourceBuilder.sort(request.getSort());
+        searchSourceBuilder.size(request.getSize());
         SearchRequest searchRequest = new SearchRequest().indices(request.getIndexName()).source(searchSourceBuilder).scroll(request.getScroll());
         SearchResponse response = null;
         try {

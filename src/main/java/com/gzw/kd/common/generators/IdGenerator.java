@@ -10,9 +10,9 @@ public interface IdGenerator {
 
     /**
      *  id generate
-     * @param length
-     * @return
-     * @throws GlobalException
+     * @param length 8
+     * @return id
+     * @throws GlobalException ex
      */
     String generate(Integer length) throws GlobalException;
 

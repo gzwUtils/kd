@@ -2,8 +2,6 @@ package com.gzw.kd.service;
 
 
 import com.gzw.kd.common.entity.Assign;
-
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -32,13 +30,13 @@ public interface CustomerService {
     Integer registerUser(Assign user)throws  Exception;
 
     /**
-     * 更新用户合同信息
+     * 更新服务信息
      * @param user
      * @return
      * @throws Exception
      */
 
-    Integer updatePhoneByOpenId(Assign user)throws  Exception;
+    Integer updateAssignByOpenId(Assign user)throws  Exception;
 
     /**
      * 更新手机号
@@ -51,18 +49,6 @@ public interface CustomerService {
 
     Integer updatePhone(String openId,String phone,String name)throws  Exception;
 
-
-    /**
-     * 更新余额
-     * @param openId openId
-     * @param  balance 余额
-     * @param  coupon 是否使用优惠劵
-     *  @param  couponBalance 优惠劵额度
-     * @return
-     * @throws Exception
-     */
-
-    Integer updateBalance(String openId, BigDecimal balance,int coupon,BigDecimal couponBalance) throws  Exception;
 
     /**
      * 获取关注公众号成员列表

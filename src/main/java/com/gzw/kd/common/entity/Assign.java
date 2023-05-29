@@ -15,20 +15,7 @@ import java.time.LocalDateTime;
 
 @Accessors(chain = true)
 @Data
-public class Assign {
-
-
-    /**
-     *id
-     */
-
-    private int  id ;
-
-    /**
-     * 0 未支付 1  支付
-     */
-
-    private int  status ;
+public class Assign extends OrderInfo{
 
     /**
      *openId
@@ -62,9 +49,9 @@ public class Assign {
     private LocalDateTime updateTime;
 
     /**
-     * 消费次数
+     * 剩余次数
      */
-    private String number;
+    private int syNumber;
 
     /**
      * 余额
@@ -76,14 +63,19 @@ public class Assign {
      */
     private String serviceId;
 
-    /**
-     * 是否拥有优惠劵 0 没有 1 有
-     */
-    private int coupon;
 
-    /**
-     * 优惠劵额度
-     */
-    private BigDecimal couponBalance;
+    public Assign() {
+    }
 
+    public Assign(String openId, String customerName, String phone, String address, LocalDateTime createTime, LocalDateTime updateTime, int syNumber, BigDecimal balance, String serviceId) {
+        this.openId = openId;
+        this.customerName = customerName;
+        this.phone = phone;
+        this.address = address;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+        this.syNumber = syNumber;
+        this.balance = balance;
+        this.serviceId = serviceId;
+    }
 }

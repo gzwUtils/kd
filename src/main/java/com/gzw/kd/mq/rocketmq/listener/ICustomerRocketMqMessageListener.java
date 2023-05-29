@@ -9,8 +9,8 @@ public interface ICustomerRocketMqMessageListener {
 
     /**
      * 消费消息
-     * @param mqBo
-     * @return
+     * @param mqBo mq
+     * @return flag
      */
     boolean onMessage(CustomerMsgRocketMqBo mqBo);
 }

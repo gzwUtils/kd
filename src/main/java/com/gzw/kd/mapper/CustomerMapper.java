@@ -40,7 +40,7 @@ public interface CustomerMapper {
      * @throws Exception
      */
 
-    Integer updatePhoneByOpenId(Assign user)throws  Exception;
+    Integer updateAssignByOpenId(Assign user)throws  Exception;
 
 
     /**
@@ -53,19 +53,6 @@ public interface CustomerMapper {
      */
 
     Integer updatePhone(String openId,String phone,String name)throws  Exception;
-
-
-    /**
-     * 更新余额
-     * @param openId openId
-     * @param  balance 余额
-     * @param  coupon 是否使用优惠劵
-     *  @param  couponBalance 优惠劵额度
-     * @return
-     * @throws Exception
-     */
-
-    Integer updateBalance(String openId, BigDecimal balance, int coupon, BigDecimal couponBalance) throws  Exception;
 
 
     /**

@@ -1,8 +1,10 @@
 package com.gzw.kd.controller;
 import com.gzw.kd.common.R;
+import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.service.ChartGptService;
 import com.gzw.kd.vo.input.GptInput;
-import java.io.IOException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @description：
  * @since：2023/4/4 16:10
  */
-
+@Api(tags = "gpt")
 @RestController
 @RequestMapping("/chatGpt")
 public class ChatGptController {
@@ -28,8 +30,10 @@ public class ChatGptController {
      * @param gptInput 条件对象
      * @return 出参对象
      */
+    @ApiOperation(value = "提问")
+    @OperatorLog(value = "提问",description = "learn")
     @RequestMapping(value = "/askAi",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public R askAi(@RequestBody GptInput gptInput) throws IOException {
+    public R askAi(@RequestBody GptInput gptInput) throws Exception {
 
         String replyStr = chartGptService.send(gptInput.getAskStr());
 

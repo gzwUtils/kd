@@ -23,12 +23,14 @@ public class TestSyncTaskExportHandler extends HandlerInit {
     protected Map<String, FieldHandler> initialize() {
         return new LinkedHashMap<String, FieldHandler>() {
             {
-                put("id", new FieldHandler("id", "id", t -> t));
-                put("ip", new FieldHandler("ip", "ip", t -> t));
+                put("id", new FieldHandler("编号", "id", t -> t));
                 put("username", new FieldHandler("姓名", "username", t -> t));
-                put("operation", new FieldHandler("操作类型", "operation", t -> t));
-                put("createTime", new FieldHandler("操作时间", "createTime", t -> t));
+                put("ip", new FieldHandler("地址", "ip", t -> t));
+                put("location", new FieldHandler("地点", "location", t -> t));
+                put("operation", new FieldHandler("操作", "operation", t -> t));
+                put("desc", new FieldHandler("描述", "desc", t -> t));
                 put("result", new FieldHandler("结果", "result", t -> t));
+                put("createTime", new FieldHandler("操作时间", "createTime", t -> t));
             }
         };
     }

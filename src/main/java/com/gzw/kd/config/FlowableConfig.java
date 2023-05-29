@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @description：
  * @since：2023/3/1 20:20
  */
-
+@SuppressWarnings("all")
 @Configuration
 public class FlowableConfig implements EngineConfigurationConfigurer<SpringProcessEngineConfiguration> {
 

@@ -5,7 +5,6 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.google.common.collect.Maps;
 import java.util.Map;
 import javax.sql.DataSource;
-
 import com.gzw.kd.config.datasource.DynamicDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,7 +12,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-
 import static com.gzw.kd.common.Constants.INT_THREE;
 
 /**
@@ -50,16 +48,28 @@ public class DataSourceConfig {
         return DruidDataSourceBuilder.create().build();
     }
 
+    @ConfigurationProperties(prefix="spring.datasource.sqlite")
+    @Bean(initMethod = "init",destroyMethod = "close")
+    public DruidDataSource sqliteDataSource() {
+        return DruidDataSourceBuilder.create().build();
+    }
+
 
     @Bean
     @Primary
     public DynamicDataSource dataSource(@Qualifier("oneDatasource") DataSource one,
                                         @Qualifier("twoDatasource") DataSource two,
-                                        @Qualifier("threeDatasource") DataSource three) {
+                                        @Qualifier("threeDatasource") DataSource three,
+                                        @Qualifier("sqliteDataSource") DataSource sqlite) {
         Map<Object, Object> dsMap = Maps.newHashMapWithExpectedSize(INT_THREE);
         dsMap.put("MASTER", one);
         dsMap.put("SLAVE_2", two);
         dsMap.put("SLAVE_3", three);
+        dsMap.put("SLAVE_4", sqlite);
         return new DynamicDataSource(dsMap, one);
     }
+
+
+
+
 }

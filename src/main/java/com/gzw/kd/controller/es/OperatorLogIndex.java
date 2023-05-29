@@ -3,6 +3,7 @@ import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.gzw.kd.common.enums.ResultCodeEnum;
 import com.gzw.kd.common.exception.GlobalException;
+import com.gzw.kd.common.utils.ToolUtil;
 import com.gzw.kd.vo.input.OperatorLogInput;
 import com.gzw.kd.vo.output.EsLogSearchIndex;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import org.elasticsearch.client.Requests;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.RangeQueryBuilder;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -60,27 +62,30 @@ public class OperatorLogIndex {
         List<EsLogSearchIndex> esLogSearchIndexList = new ArrayList<>();
         BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
         if(StringUtils.isNotBlank(whereLog.getUserName())){
-            queryBuilder.must(QueryBuilders.termQuery("username", whereLog.getUserName()));
+            queryBuilder.filter(QueryBuilders.termQuery("username", whereLog.getUserName()));
         }
         if(StringUtils.isNotBlank(whereLog.getLocation())){
-            queryBuilder.must(QueryBuilders.termQuery("location", whereLog.getLocation()));
+            queryBuilder.filter(QueryBuilders.termQuery("location", whereLog.getLocation()));
         }
-        if(StringUtils.isNotBlank(whereLog.getCreateTimeStart()) && StringUtils.isNotBlank(whereLog.getCreateTimeEnd())){
-            queryBuilder.must(QueryBuilders.rangeQuery("create_time")
-                    .from(whereLog.getCreateTimeStart())
-                    .to(whereLog.getCreateTimeEnd())
-                    );
+        if(StringUtils.isNotBlank(whereLog.getCreateTimeStart()) || StringUtils.isNotBlank(whereLog.getCreateTimeEnd())) {
+            RangeQueryBuilder rangeQuery = QueryBuilders.rangeQuery("create_time");
+            if(StringUtils.isNotBlank(whereLog.getCreateTimeStart())){
+                rangeQuery = rangeQuery.gte(ToolUtil.stringToDate(whereLog.getCreateTimeStart()));
+            }
+            if(StringUtils.isNotBlank(whereLog.getCreateTimeEnd())){
+                rangeQuery = rangeQuery.lte(ToolUtil.stringToDate(whereLog.getCreateTimeEnd()));
+            }
+            queryBuilder.filter(rangeQuery);
         }
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         int size = whereLog.getSize() == 0 ? defaultSize:whereLog.getSize();
-        sourceBuilder.query(queryBuilder).size(size).sort("create_time", SortOrder.DESC);
         // 高亮查询
         HighlightBuilder highlightBuilder = new HighlightBuilder();
         highlightBuilder.preTags("<span style='color:red'>");
         highlightBuilder.postTags("</span>");
-        highlightBuilder.requireFieldMatch(false);
-        highlightBuilder.field("*");
+        highlightBuilder.field("username");
         sourceBuilder.highlighter(highlightBuilder);
+        sourceBuilder.query(queryBuilder).size(size).sort("create_time",SortOrder.DESC);
         SearchRequest searchRequest = new SearchRequest(logIndex).source(sourceBuilder);
         SearchResponse response;
         try {

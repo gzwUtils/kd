@@ -3,50 +3,34 @@
 <mapper namespace="com.gzw.kd.mapper.CustomerMapper" >
 
   <select id="getUserByOpenId"   resultType="com.gzw.kd.common.entity.Assign">
-      SELECT id, customer_name customerName, address, phone, create_time createTime, update_time updateTime, status, `number`, balance, `service_id` serviceId, coupon, coupon_balance couponBalance, openid
+      SELECT id, customer_name customerName, address, phone, create_time createTime, update_time updateTime, `syNumber`, balance, `service_id` serviceId, openid
       FROM doc.assign  where   openid=#{openId}
   </select>
 
   <insert id="registerUser"  parameterType="com.gzw.kd.common.entity.Assign">
 
-      INSERT INTO assign (customer_name, address, phone, create_time, update_time, status, `number`, balance, `service_id`, coupon, coupon_balance, openid)
-      VALUES(#{customerName}, #{address}, #{phone}, #{createTime}, #{updateTime}, 0, #{number}, #{balance}, #{serviceId,jdbcType=VARCHAR}, #{coupon}, #{couponBalance}, #{openId});
+      INSERT INTO assign (customer_name, address, phone, create_time, update_time, `syNumber`, balance, `service_id`, openid)
+      VALUES(#{customerName}, #{address}, #{phone}, #{createTime}, #{updateTime}, #{syNumber}, #{balance}, #{serviceId,jdbcType=VARCHAR}, #{openId});
   </insert>
 
-  <update id="updatePhoneByOpenId"  parameterType="com.gzw.kd.common.entity.Assign">
+  <update id="updateAssignByOpenId"  parameterType="com.gzw.kd.common.entity.Assign">
       UPDATE assign
       <set>
-      <if test="status!=null" >
-          status=#{status},
-      </if>
       <if test="updateTime!=null" >
           update_time=#{updateTime},
+      </if>
+      <if test="syNumber!=null" >
+          syNumber=#{syNumber},
       </if>
       <if test="balance!=null" >
           balance=#{balance},
       </if>
       </set>
-     <where> openId = #{openId}</where>
+     <where> openid = #{openId}</where>
   </update>
 
     <update id="updatePhone" parameterType="string">
-        UPDATE assign set phone = #{phone}, customer_name = #{customerName}  where openId=#{openId}
-    </update>
-
-    <update id="updateBalance" parameterType="string">
-        UPDATE assign
-        <set>
-        <if test="balance!=null" >
-            balance=#{balance},
-        </if>
-        <if test="coupon!=0" >
-            coupon=#{coupon},
-        </if>
-        <if test="couponBalance!=null" >
-            coupon_balance=#{couponBalance},
-        </if>
-        </set>
-         where openId=#{openId}
+        UPDATE assign set phone = #{phone}, customer_name = #{customerName}  where openid=#{openId}
     </update>
 
     <select id="getAllNames" resultType="string">

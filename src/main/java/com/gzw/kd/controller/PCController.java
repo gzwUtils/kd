@@ -31,6 +31,7 @@ import com.gzw.kd.vo.input.OperatorLogInput;
 import com.gzw.kd.vo.output.EsLogSearchIndex;
 import com.gzw.kd.vo.output.FileOutput;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import java.io.File;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -67,7 +68,7 @@ import static com.gzw.kd.common.Constants.*;
  * gzw
  */
 @Slf4j
-@Api(value = "登录")
+@Api(tags = "首页")
 @Controller
 @RequestMapping("/pc")
 @SuppressWarnings("all")
@@ -140,69 +141,91 @@ public class PCController {
     @Resource
     FileUploadUtil fileUploadUtil;
 
+    @Resource
+    NoticeService noticeService;
 
-    @RequestMapping("/login")
+
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login() {
         return "/pc/login";
     }
 
-    @RequestMapping("/chatGpt")
+    @RequestMapping(value = "/notice",method = RequestMethod.GET)
+    public String addNotice() {
+        return "/pc/notice";
+    }
+
+    @RequestMapping(value = "/chatGpt",method = RequestMethod.GET)
     public String chatGpt() {
         return "/pc/chat";
     }
 
-    @RequestMapping("/userInfo")
+    @RequestMapping(value = "/userInfo",method = RequestMethod.GET)
     public String userInfo() {
         return "/pc/userInfo";
     }
 
 
-    @RequestMapping("/uploadFile")
+    @RequestMapping(value = "/uploadFile",method = RequestMethod.GET)
     public String uploadFile() {
         return "/pc/uploadFile";
     }
-
-    @RequestMapping("/unknown")
+    @RequestMapping(value = "/unknown",method = RequestMethod.GET)
     public String unknown() {
         return "404";
     }
 
-    @RequestMapping("/other")
+    @RequestMapping(value = "/other",method = RequestMethod.GET)
     public String other () {
 
         return "/pc/other";
     }
 
-
-    @RequestMapping("/word")
+    @RequestMapping(value = "/word",method = RequestMethod.GET)
     public String word () {
 
         return "/pc/word";
     }
 
-    @RequestMapping("/error")
+    @RequestMapping(value = "/error",method = RequestMethod.GET)
     public String error() {
         return "/error/500";
     }
 
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String register() {
         return "/pc/register";
     }
 
-    @RequestMapping("/phoneLogin")
+    @RequestMapping(value = "/phoneLogin",method = RequestMethod.GET)
     public String phoneLogin() {
         return "/pc/phoneLogin";
     }
 
 
-    @RequestMapping("/logout")
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         Operator operator = (Operator) request.getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
         push(request, OnlineStatusEnum.OFF_LINE.getStatus());
         MysessionListener.sessionContext.getSessionMap().remove(operator.getAccount());
         request.getSession().removeAttribute(Constants.LOGIN_USER_SESSION_KEY);
         return "/pc/login";
+    }
+
+    @RequestMapping(value = "/addNotice",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @ResponseBody
+    @OperatorLog(value = "添加公告",description = "添加公告")
+    public R addNotice(@RequestParam("notice") String notice) {
+        Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
+        if(operator.getIsAdmin().equals(UserAdminEnum.VIP.getStatus())){
+            return R.error().message("添加失败 没有操作权限");
+        }
+        Notice notice1 = new Notice().setContext(notice).setOperatorName(operator.getAccount()).setCreateTime(LocalDateTime.now());
+        Integer integer = noticeService.add(notice1);
+        if(integer==null){
+            return R.error().message("添加失败");
+        }
+        return R.ok();
     }
 
     /**
@@ -280,7 +303,7 @@ public class PCController {
         Operator operator = new Operator();
         HttpSession session = MysessionListener.sessionContext.getSessionMap().get(userName);
         if (session != null) {
-            MysessionListener.sessionContext.getSessionMap().remove(session.getId());
+            log.warn("用户重复登陆");
             MysessionListener.sessionContext.getSessionMap().remove(userName);
         }
         if (StringUtils.isBlank(userName) || StringUtils.isBlank(password) || StringUtils.isBlank(code)) {
@@ -359,19 +382,20 @@ public class PCController {
         return R.ok();
     }
 
-    @RequestMapping("/index")
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(HttpServletRequest request,HttpSession  session)throws  Exception {
         Operator operator = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
         if(ObjectUtil.isNotEmpty(operator)){
+            String context = noticeService.getContext();
             String isLock = operator.isSysLock()==true? STRING_ONE:STRING_ZERO;
             request.setAttribute("isLock",isLock);
+            request.setAttribute("noticeBoard",context);
         }
         return "/pc/index";
     }
 
-    @RequestMapping("/info")
+    @RequestMapping(value = "/info",method = RequestMethod.GET)
     public String info(HttpServletRequest request, HttpSession session) throws Exception {
-        int step = 1;
         Map<String, String> steps = new HashMap<>();
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
         List<Doc> docs = m_docService.getDocByName(user.getAccount());
@@ -386,7 +410,7 @@ public class PCController {
         return "/pc/info";
     }
 
-    @RequestMapping("/getAllDocs")
+    @RequestMapping(value = "/getAllDocs",method = RequestMethod.GET)
     public String getAllDocs(HttpServletRequest request, Doc doc) {
         List<Doc> allDocs = m_docService.getAllDocs(doc);
         allDocs.forEach(p->{
@@ -400,7 +424,7 @@ public class PCController {
     }
 
 
-    @RequestMapping("/getAllOperatorLog")
+    @RequestMapping(value = "/getAllOperatorLog",method = RequestMethod.GET)
     public String getAllOperatorLog(HttpSession session, HttpServletRequest request) {
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
         if (startEsQuery) {
@@ -432,21 +456,21 @@ public class PCController {
      */
 
 
-    @RequestMapping("/pass")
+    @RequestMapping(value = "/pass",method = RequestMethod.GET)
     public String pass() {
         return "/pc/pass";
     }
 
 
     @ResponseBody
-    @RequestMapping("/getAddress")
+    @RequestMapping(value = "/getAddress",method = RequestMethod.GET)
     public R getAddress(HttpServletRequest request) throws Exception {
         String name = request.getParameter("customerName");
         Assign user = customerService.getUserByName(AESCrypt.encrypt(name));
         return R.ok().data("address",user.getAddress());
     }
 
-    @RequestMapping("/showAddUi")
+    @RequestMapping(value = "/showAddUi",method = RequestMethod.GET)
     public String showAddUi(HttpServletRequest request) {
         List<String> names = wxUserService.getAllNames();
         names = names.stream().map(p -> p = AESCrypt.decrypt(p)).collect(Collectors.toList());
@@ -459,7 +483,7 @@ public class PCController {
 
     @OperatorLog(value = "派单",description = "派单")
     @ResponseBody
-    @RequestMapping(value = "/addDoc", produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/addDoc",method =RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R addDoc(@RequestBody  Doc doc, HttpSession session) {
         try {
             Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
@@ -485,7 +509,7 @@ public class PCController {
 
     @OperatorLog(value = "费用",description = "费用")
     @ResponseBody
-    @RequestMapping(value = "/addConfig", produces = "application/json;charset=utf-8")
+    @RequestMapping(value = "/addConfig",method =RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R addConfig(@RequestBody Configs configs, HttpSession session) {
         try {
             Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
@@ -504,7 +528,7 @@ public class PCController {
     }
 
 
-    @RequestMapping("/showDocListUi")
+    @RequestMapping(value = "/showDocListUi",method =RequestMethod.GET)
     public String showDocListUi(HttpServletRequest request,String flg,HttpSession  session) throws Exception {
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
         String listUrl="";
@@ -535,7 +559,7 @@ public class PCController {
     /**
      * 生成验证码
      */
-    @RequestMapping("/getCode")
+    @RequestMapping(value = "/getCode",method =RequestMethod.GET)
     public void getCode(HttpServletResponse response,HttpServletRequest request){
         HttpSession session = request.getSession();
         //随机生成4为验证码
@@ -558,7 +582,7 @@ public class PCController {
 
 
     @OperatorLog(value = "节点流转",description = "流程节点流转")
-    @RequestMapping("/setDocStatus")
+    @RequestMapping(value = "/setDocStatus",method = RequestMethod.GET)
     @ResponseBody
     public R setDocStatus(String status, String id, HttpSession session) throws Exception {
         Doc doc = new Doc();
@@ -582,7 +606,7 @@ public class PCController {
     }
 
     @OperatorLog(value = "修改密码",description = "用户密码修改")
-    @RequestMapping("/updatePassword")
+    @RequestMapping(value = "/updatePassword",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     @ResponseBody
     public R updatePassword(String pass, String newPass,String timestamp, HttpSession session) throws Exception {
         if(StringUtils.isBlank(pass) || StringUtils.isBlank(newPass) || StringUtils.isBlank(timestamp)){
@@ -644,9 +668,9 @@ public class PCController {
     }
 
 
+    @OperatorLog(value = "获取ID",description = "获取ID")
     @RequestMapping(value = "/getUniqueId",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
     @ResponseBody
-    @Resubmit
     public R getUniqueId() throws GlobalException {
         StopWatch watch = new StopWatch();
         watch.start();
@@ -657,7 +681,7 @@ public class PCController {
     }
 
 
-    @RequestMapping(value = "/systemErrorInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/systemErrorInfo", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public R getErrorInfo(HttpServletRequest request) {
         String errorInfo = (String) request.getSession().getAttribute(Constants.SYSTEM_ERROR_INFO_SESSION_KEY);
         Map<String, Object> data = new HashMap<>();
@@ -881,6 +905,7 @@ public class PCController {
     }
 
 
+    @ApiOperation(value = "短信发送")
     @OperatorLog(value = "短信发送",description = "短信发送")
     @PostMapping("/sendMessage")
     @ResponseBody
@@ -888,6 +913,7 @@ public class PCController {
         return smsUtils.sendMessage(phone, message);
     }
 
+    @ApiOperation(value = "邮箱发送")
     @OperatorLog(value = "邮箱发送",description = "邮箱发送")
     @PostMapping("/sendEmailMessage")
     @ResponseBody

@@ -30,7 +30,7 @@
             <el-input type="type" placeholder="真实姓名" v-model="ruleForm.customerName" autocomplete="off">
             </el-input>
         </el-form-item>
-        <el-form-item label="保洁地址:"  prop="address">
+        <el-form-item label="地址:"  prop="address">
             <el-input type="type" placeholder="地址" v-model="ruleForm.address" autocomplete="off">
             </el-input>
         </el-form-item>
@@ -73,12 +73,12 @@
                     placeholder="选择日期"
                     style="width: 55%"
                     align="left"
-                    format="MM 月 dd 日"
-                    value-format="MM-dd">
+                    format="dd 日"
+                    value-format="dd">
             </el-date-picker>
             <el-select v-model="ruleForm.serviceEndDay" placeholder="请选择" style="width: 40%">
-                <el-option label="上午" value="11:59:59"></el-option>
-                <el-option label="下午" value="23:59:59"></el-option>
+                <el-option label="上午" value="0"></el-option>
+                <el-option label="下午" value="1"></el-option>
             </el-select>
         </el-form-item>
         <el-form-item label="特许附加项目:" prop="extraDesc">

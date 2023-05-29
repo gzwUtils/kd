@@ -1,5 +1,6 @@
 package com.gzw.kd.common.entity;
 
+import java.math.BigDecimal;
 import lombok.Data;
 
 /**
@@ -17,20 +18,20 @@ public class Configs {
     /**
      * 每月费用
      */
-    private String annualBalance;
+    private BigDecimal annualBalance;
 
     /**
      * 每年费用
      */
-    private String yearBalance;
+    private BigDecimal yearBalance;
 
     /**
      * 附加项费用
      */
-    private String extraBalance;
+    private BigDecimal extraBalance;
 
     /**
      * 其他费用
      */
-    private String otherBalance;
+    private BigDecimal otherBalance;
 }

@@ -95,6 +95,12 @@ public interface Constants {
      */
     String STRING_EQUAL_SIGN = "=";
 
+
+    /**
+     * 空json
+     */
+    String EMPTY_JSON_OBJECT = "{}";
+
     /***
      * 人民币标志
      */
@@ -389,7 +395,9 @@ public interface Constants {
 
     public static final String TRACE_ID = "TRACE_ID";
 
-    public static final String TRACE_ID_FLAG = "kd.";
+    public static final String TRACE_ID_FLAG = "kd_";
+
+    public static final String REQUEST_ID_HEADER = "RequestId";
 
     public static final String TRACE_ID_EXECUTOR_FLAG = "kd.executor.";
 
@@ -502,6 +510,9 @@ public interface Constants {
     public final static long ORDER_INFO_EXPIRE_TIME = 3600 * 6;
 
 
+    public final static String SERVICE_COFIG = "service_config_key_";
+
+
 
     public final static String CONTENT_DISPOSITION_NAME="Content-Disposition";
 
@@ -611,4 +622,27 @@ public interface Constants {
   public static final String SMS_SEND_URL = "http://106.ihuyi.cn/webservice/sms.php?method=Submit";
 
   public static final String FILE_SUFFIX = ".jpg,.jpeg,.xlsx,.txt,.doc,.png,.pdf,.xls,.docx,.sh,pptx,.mp4,.zip,.sql,.mp3";
+
+
+    /**
+     *  other http  request token
+     */
+
+
+    public static final String   HTTP_USER_TOKEN =  "other-token";
+
+    public static final String KEY_TOKEN_FILTER = "tokenFilter";
+
+    public static final String URL_PATTERN_ALL = "/base/*";
+
+
+    /**
+     * flow controll
+     */
+    public static final String FLOW_CONTROL_KEY = "flowControlRule";
+
+    public static final String FLOW_CONTROL_PREFIX = "flow_control_";
+
+
+    public static final String LINK_NAME = "url";
 }

@@ -2,9 +2,7 @@ package com.gzw.kd.vo.input;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 /**
  * @author gzw
@@ -57,22 +55,22 @@ public class AssignInput {
     /**
      * 第一次日期
      */
-    private LocalDateTime firstServiceTime;
+    private String firstServiceTime;
 
     /**
      * 第一次日期 上下午
      */
-    private LocalDateTime endDay;
+    private String endDay;
 
     /**
      * 固定日期
      */
-    private LocalDateTime serviceTime;
+    private String serviceTime;
 
     /**
      * 固定日期 上下午
      */
-    private LocalDateTime serviceEndDay;
+    private String serviceEndDay;
 
     /**
      * 特许附加项目

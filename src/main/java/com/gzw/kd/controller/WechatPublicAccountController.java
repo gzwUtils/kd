@@ -17,6 +17,7 @@ import com.gzw.kd.listener.event.MsgEvent;
 import com.gzw.kd.service.DocService;
 import com.gzw.kd.service.WxUserService;
 import com.gzw.kd.vo.input.RequestVo;
+import io.swagger.annotations.Api;
 import java.io.IOException;
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,7 @@ import static com.gzw.kd.common.Constants.*;
 /**
  * @author 高志伟
  */
+@Api(tags = "微信公众号")
 @Slf4j
 @SuppressWarnings("all")
 @RestController
