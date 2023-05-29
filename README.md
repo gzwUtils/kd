@@ -1,7 +1,8 @@
-# **kd**
+# 背景
+ java 项目学习。
 
-
-## 基于spring-boot项目 
+# 框架
+## SPRING BOOT
 
 ## redis,es,canal,flyway、sms、mail,
 ## rocketmq,websocket,schedule,freemarker
@@ -20,5 +21,21 @@
 ### 12、websocket 客户端服务端交互。
 ### 13、基于timer、schedule、定时。
 
-# https://juejin.cn/user/2151063691992622
+1. 启动服务
+
+```bash
+service kd start
+
+2. 查看服务状态
+```bash
+service kd status
+
+7. 停止服务
+
+```bash
+service kd stop
+
+
+
+### https://juejin.cn/user/2151063691992622
 
