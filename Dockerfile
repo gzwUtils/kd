@@ -1,5 +1,5 @@
 FROM java:8
-
+#项目维护人员
 MAINTAINER gaozw private_gzw1314@163.com
 #构建参数
 ARG  version
@@ -15,6 +15,7 @@ ENV jarName "${servicename}_${version}.jar"
 WORKDIR /app
 
 COPY ${projectname}/target/*.jar /app
+COPY ${projectname}/*.sh /app
 
 
 

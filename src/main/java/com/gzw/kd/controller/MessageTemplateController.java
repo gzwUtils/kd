@@ -47,7 +47,7 @@ public class MessageTemplateController {
     @PostMapping("/find")
     @ApiOperation("/查询模版")
     @OperatorLog(value = "查询所有模版",description = "查询模版信息")
-    public R select(@ApiParam("0 启用 1 停用") @RequestParam("isDeleted") String isDeleted) {
+    public R select(@ApiParam("0 启用 1 停用") @RequestParam(value = "isDeleted",defaultValue = "0",required = false) String isDeleted) {
         List<TemplateInfo> allInfo = messageTemplateService.findAllByIsDeleted(Integer.valueOf(isDeleted));
         return R.ok().data("allInfo",allInfo);
     }
@@ -58,7 +58,7 @@ public class MessageTemplateController {
     @PostMapping("/count")
     @ApiOperation("/统计模版")
     @OperatorLog(value = "统计条数",description = "统计条数")
-    public R count(@ApiParam("0 启用 1 停用") @RequestParam("isDeleted") String isDeleted) {
+    public R count(@ApiParam("0 启用 1 停用") @RequestParam(value = "isDeleted",defaultValue = "0",required = false) String isDeleted) {
         Long count = messageTemplateService.countByIsDeletedEquals(Integer.valueOf(isDeleted));
         return R.ok().data("count",count);
     }
