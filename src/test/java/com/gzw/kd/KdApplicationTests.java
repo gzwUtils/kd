@@ -1,7 +1,7 @@
 package com.gzw.kd;
 import cn.hutool.core.codec.Base64;
 import com.alibaba.fastjson.JSON;
-import com.gzw.kd.common.entity.User;
+import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.exception.GlobalException;
 import com.gzw.kd.common.generators.RandomIdGenerator;
 import com.gzw.kd.common.utils.MyLinkedBlockQueue;
@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -90,8 +89,9 @@ class KdApplicationTests {
     @Test
     void chain() throws Exception {
         DemoGzwFilterStage demoGzwFilterStage = new DemoGzwFilterStage();
-        User admin = new User().setAccount("admin").setIsAdmin(1);
-        demoGzwFilterStage.setUser(admin);
+        Operator operator = new Operator();
+        operator.setAccount("admin").setIsAdmin(1);
+        demoGzwFilterStage.setOperator(operator);
         DemoGzwFilterStage stage = demoGzwFilterChain.doFilter(demoGzwFilterStage);
         List<Map<String, Object>> result = stage.getStageHandlerResult();
         log.info("chain end {}", JSON.toJSONString(result));
