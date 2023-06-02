@@ -5,7 +5,6 @@ import static com.gzw.kd.common.Constants.LOGIN_USER_SESSION_KEY;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.entity.Operator;
-import com.gzw.kd.common.entity.User;
 import com.gzw.kd.common.generators.SnowIdGenerator;
 import com.gzw.kd.common.utils.ContextUtil;
 import com.gzw.kd.common.utils.SnowFlakeIdUtils;
@@ -21,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -86,9 +84,7 @@ public class EsController {
     public R filterChain(){
         Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(LOGIN_USER_SESSION_KEY);
         DemoGzwFilterStage demoGzwFilterStage = new DemoGzwFilterStage();
-        User user = new User();
-        BeanUtils.copyProperties(operator,user);
-        demoGzwFilterStage.setUser(user);
+        demoGzwFilterStage.setOperator(operator);
         DemoGzwFilterStage stage = demoGzwFilterChain.doFilter(demoGzwFilterStage);
         List<Map<String, Object>> result = stage.getStageHandlerResult();
         log.info("chain end {}", JSON.toJSONString(result));
