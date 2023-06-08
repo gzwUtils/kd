@@ -1,5 +1,6 @@
 package com.gzw.kd.service;
 
+import com.gzw.kd.common.R;
 import com.gzw.kd.common.entity.TemplateInfo;
 import java.util.List;
 
@@ -38,7 +39,37 @@ public interface MessageTemplateService {
     /**
      * 新增模版
      * @param templateInfo info
-     * @return int
      */
-    Integer registerTemplate(TemplateInfo templateInfo);
+    void registerTemplate(TemplateInfo templateInfo);
+
+
+    /**
+     * 复制配置
+     *
+     * @param id id
+     */
+    void copy(Long id);
+
+    /**
+     * 软删除(deleted=1)
+     *
+     * @param ids ids
+     */
+    void deleteByIds(List<Long> ids);
+
+    /**
+     * 启动模板的定时任务
+     *
+     * @param id id
+     * @return result
+     */
+    R startCronTask(Long id);
+
+    /**
+     * 暂停模板的定时任务
+     *
+     * @param id id
+     * @return result
+     */
+    R stopCronTask(Long id);
 }

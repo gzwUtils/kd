@@ -1,0 +1,4 @@
+2023-06-05 10:31:30 [com.xxl.job.core.thread.JobThread#run]-[133]-[xxl-job, JobThread-2-1685930130042] <br>----------- xxl-job job execute start -----------<br>----------- Param:逆流而上
+2023-06-05 10:31:30 [com.gzw.kd.common.utils.XxlJobLogUtil#log]-[23]-[xxl-job, JobThread-2-1685930130042] 告警消息开始推送 param[逆流而上]
+2023-06-05 10:31:30 [com.xxl.job.core.thread.JobThread#run]-[179]-[xxl-job, JobThread-2-1685930130042] <br>----------- xxl-job job execute end(finish) -----------<br>----------- Result: handleCode=200, handleMsg = null
+2023-06-05 10:31:30 [com.xxl.job.core.thread.TriggerCallbackThread#callbackLog]-[197]-[xxl-job, executor TriggerCallbackThread] <br>----------- xxl-job job callback finish.

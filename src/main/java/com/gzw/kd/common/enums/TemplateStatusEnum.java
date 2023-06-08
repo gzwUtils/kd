@@ -16,8 +16,8 @@ public enum TemplateStatusEnum {
      * 模板状态
      */
 
-    START(0,"启用"),
-    STOP(1,"停用");
+    START(0,"不删除"),
+    STOP(1,"删除");
 
     private final int  status;
 
