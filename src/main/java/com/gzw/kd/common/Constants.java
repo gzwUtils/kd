@@ -101,6 +101,9 @@ public interface Constants {
      */
     String EMPTY_JSON_OBJECT = "{}";
 
+
+    String EMPTY_VALUE_JSON_ARRAY = "[]";
+
     /***
      * 人民币标志
      */
