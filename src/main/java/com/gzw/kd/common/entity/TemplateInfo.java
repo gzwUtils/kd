@@ -35,7 +35,6 @@ public class TemplateInfo implements Serializable {
      * 定时任务Id(由xxl-job返回)
      */
     private Integer cronTaskId;
-
     /**
      * 定时发送的人群的文件路径
      */

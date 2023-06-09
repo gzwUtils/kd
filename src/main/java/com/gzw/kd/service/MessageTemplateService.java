@@ -61,9 +61,11 @@ public interface MessageTemplateService {
      * 启动模板的定时任务
      *
      * @param id id
+     * @param executorHandlerName handler
+     * @param  desc desc
      * @return result
      */
-    R startCronTask(Long id);
+    R startCronTask(Long id,String executorHandlerName,String desc);
 
     /**
      * 暂停模板的定时任务

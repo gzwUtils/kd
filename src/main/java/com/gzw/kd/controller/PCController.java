@@ -510,9 +510,9 @@ public class PCController {
     @OperatorLog(value = "费用",description = "费用")
     @ResponseBody
     @RequestMapping(value = "/addConfig",method =RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public R addConfig(@RequestBody Configs configs, HttpSession session) {
+    public R addConfig(@RequestBody Configs configs) {
         try {
-            Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
+            Operator user = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(LOGIN_USER_SESSION_KEY);
             if (user.getIsAdmin().equals(INT_ONE)) {
                 if (configs.getId() == null) {
                     configService.addDoc(configs);

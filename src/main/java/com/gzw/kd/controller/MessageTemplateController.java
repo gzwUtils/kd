@@ -85,20 +85,21 @@ public class MessageTemplateController {
      */
     @DeleteMapping("delete/{id}")
     @ApiOperation("/根据Ids删除")
-    public void deleteByIds(@PathVariable("id") String id) {
+    public R deleteByIds(@PathVariable("id") String id) {
         if (StrUtil.isNotBlank(id)) {
             List<Long> idList = Arrays.stream(id.split(StrUtil.COMMA)).map(Long::valueOf).collect(Collectors.toList());
             messageTemplateService.deleteByIds(idList);
         }
+        return R.ok();
     }
 
     /**
      * 启动模板的定时任务
      */
-    @PostMapping("start/{id}")
+    @PostMapping("/start")
     @ApiOperation("/启动模板的定时任务")
-    public R start(@RequestBody @PathVariable("id") Long id) {
-        return messageTemplateService.startCronTask(id);
+    public R start( @RequestParam(value = "id") Long id ,@RequestParam("executorHandlerName") String executorHandlerName,@RequestParam(value = "desc",required = false,defaultValue = "kd") String desc) {
+        return messageTemplateService.startCronTask(id,executorHandlerName,desc);
     }
 
     /**

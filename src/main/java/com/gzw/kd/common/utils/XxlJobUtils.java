@@ -13,10 +13,12 @@ import com.gzw.kd.common.enums.ResultCodeEnum;
 import com.gzw.kd.common.enums.ScheduleTypeEnum;
 import com.gzw.kd.service.CronTaskService;
 import com.xxl.job.core.enums.ExecutorBlockStrategyEnum;
+import com.xxl.job.core.glue.GlueTypeEnum;
 import java.util.Date;
 import java.util.Objects;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -33,6 +35,9 @@ public class XxlJobUtils {
     @Value("${xxl.job.executor.appname}")
     private String appName;
 
+    @Value("${mail.address: }")
+    private String [] mails;
+
     @Resource
     private CronTaskService cronTaskService;
 
@@ -44,7 +49,7 @@ public class XxlJobUtils {
      * @return xxl info
      */
 
-    public XxlJobInfo buildXxlJobInfo(TemplateInfo templateInfo) {
+    public XxlJobInfo buildXxlJobInfo(TemplateInfo templateInfo,String executorHandlerName,String desc) {
 
         String scheduleConf = templateInfo.getExpectPushTime();
         // 如果没有指定cron表达式，说明立即执行(给到xxl-job延迟5秒的cron表达式)
@@ -54,19 +59,22 @@ public class XxlJobUtils {
 
 
         XxlJobInfo xxlJobInfo = XxlJobInfo.builder()
-                .jobGroup(queryJobGroupId()).jobDesc(templateInfo.getName())
+                .jobGroup(queryJobGroupId()).jobDesc(desc)
                 .author(templateInfo.getCreator())
                 .scheduleConf(scheduleConf)
                 .scheduleType(ScheduleTypeEnum.CRON.name())
                 .misfireStrategy(MisfireStrategyEnum.DO_NOTHING.name())
                 .executorRouteStrategy(ExecutorRouteStrategyEnum.CONSISTENT_HASH.name())
-                .executorHandler(XxlJobConstant.JOB_TITLE)
-                .executorParam(String.valueOf(templateInfo.getId()))
-                .executorBlockStrategy(ExecutorBlockStrategyEnum.SERIAL_EXECUTION.name())
+                .executorHandler(executorHandlerName)
+                .executorParam(StrUtil.EMPTY)
+                .executorBlockStrategy(ExecutorBlockStrategyEnum.DISCARD_LATER.name())
                 .executorTimeout(XxlJobConstant.TIME_OUT)
                 .executorFailRetryCount(XxlJobConstant.RETRY_COUNT)
+                .glueType(GlueTypeEnum.BEAN.name())
                 .triggerStatus(INT_ZERO)
-                .alarmEmail(StrUtil.EMPTY)
+                .alarmEmail(StringUtils.join(mails,","))
+                .glueRemark(StrUtil.EMPTY)
+                .glueSource(StrUtil.EMPTY)
                 .childJobId(StrUtil.EMPTY).build();
 
         if (Objects.nonNull(templateInfo.getCronTaskId())) {

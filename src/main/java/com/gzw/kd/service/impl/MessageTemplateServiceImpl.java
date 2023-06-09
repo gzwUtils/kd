@@ -3,6 +3,7 @@ import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.gzw.kd.common.Constants;
 import com.gzw.kd.common.R;
+import com.gzw.kd.common.XxlJobConstant;
 import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.entity.XxlJobInfo;
 import com.gzw.kd.common.enums.MessageStatusEnum;
@@ -97,15 +98,15 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class)
-    public R startCronTask(Long id) {
+    public R startCronTask(Long id,String executorHandlerName,String desc) {
         // 1.获取消息模板的信息
         TemplateInfo templateInfo = messageTemplateMapper.selectById(Math.toIntExact(id));
-        if (Objects.isNull(templateInfo)) {
-            return R.error();
+        if (Objects.isNull(templateInfo) || TemplateStatusEnum.STOP.getStatus().equals(templateInfo.getIsDeleted())) {
+            return R.error().message("模版不存在");
         }
 
         // 2.动态创建或更新定时任务
-        XxlJobInfo xxlJobInfo = xxlJobUtils.buildXxlJobInfo(templateInfo);
+        XxlJobInfo xxlJobInfo = xxlJobUtils.buildXxlJobInfo(templateInfo,executorHandlerName,desc);
 
         // 3.获取taskId(如果本身存在则复用原有任务，如果不存在则得到新建后任务ID)
         Integer taskId = templateInfo.getCronTaskId();
@@ -131,8 +132,8 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
     @Override
     public R stopCronTask(Long id) {
         TemplateInfo info = messageTemplateMapper.selectById(Math.toIntExact(id));
-        if(ObjectUtil.isEmpty(info)){
-            return R.error();
+        if(ObjectUtil.isEmpty(info) || TemplateStatusEnum.STOP.getStatus().equals(info.getIsDeleted())){
+            return R.error().message("模版不存在");
         }
         Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
         TemplateInfo clone = ObjectUtil.clone(info).setMsgStatus(MessageStatusEnum.STOP.getCode()).setUpdated(Math.toIntExact(DateUtil.currentSeconds())).setUpdator(operator.getAccount());
@@ -153,7 +154,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
         templateInfo.setMsgStatus(MessageStatusEnum.INIT.getCode()).setUpdator(operator.getAccount()).setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
 
         if (Objects.nonNull(templateInfo.getCronTaskId()) && TemplateType.CLOCKING.getCode().equals(templateInfo.getTemplateType())) {
-            XxlJobInfo xxlJobInfo = xxlJobUtils.buildXxlJobInfo(templateInfo);
+            XxlJobInfo xxlJobInfo = xxlJobUtils.buildXxlJobInfo(templateInfo, XxlJobConstant.EXECUTE_HANDLER_NAME,XxlJobConstant.DESC);
             cronTaskService.saveCronTask(xxlJobInfo);
             cronTaskService.stopCronTask(templateInfo.getCronTaskId());
         }

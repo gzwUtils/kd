@@ -19,7 +19,7 @@ public enum TemplateStatusEnum {
     START(0,"不删除"),
     STOP(1,"删除");
 
-    private final int  status;
+    private final Integer  status;
 
     private final String desc;
 
