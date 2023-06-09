@@ -84,6 +84,23 @@ public class XxlJobInfo implements Serializable {
     private int executorFailRetryCount;
 
     /**
+     * 运行模式
+     */
+    private String glueType;
+    /**
+     * GLUE源代码
+     */
+    private String glueSource;
+    /**
+     * GLUE备注
+     */
+    private String glueRemark;
+    /**
+     * GLUE更新时间
+     */
+    private Date glueUpdatetime;
+
+    /**
      * 子任务ID，多个逗号分隔
      */
     private String childJobId;

@@ -58,4 +58,15 @@ public interface XxlJobConstant {
      * 执行任务标题——
      */
     public static final String JOB_TITLE = "kd-test";
+
+
+    /**
+     * 重置后默认handler
+     */
+    public static final String EXECUTE_HANDLER_NAME = "";
+
+    /**
+     * 重置后默认描述
+     */
+    public static final String DESC = "重置模版中........";
 }
