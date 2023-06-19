@@ -3,6 +3,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
+import com.gzw.kd.common.utils.EventBusUtils;
 import com.gzw.kd.common.utils.MyLinkedBlockQueue;
 import com.gzw.kd.common.entity.MyQueue;
 import com.gzw.kd.common.utils.RedisLimitFlow;
@@ -17,10 +18,7 @@ import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import static com.gzw.kd.common.Constants.*;
 
@@ -43,6 +41,9 @@ public class BaseController {
 
     @Autowired
     private GzwThreadDemo gzwThreadDemo;
+
+    @Resource
+    private EventBusUtils  eventBusUtils;
 
 
     private static List<String> put_list = new ArrayList<>();
@@ -127,6 +128,15 @@ public class BaseController {
     @RequestMapping(value = "/valid", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R valid(@RequestBody @Validated ValidTest validTest){
         log.info("valid ........{}", JSON.toJSONString(validTest));
+        return R.ok();
+    }
+
+
+    @ApiOperation(value = "消息事件推送")
+    @OperatorLog(value = "观察者模式",description = "学习")
+    @RequestMapping(value = "/push", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R push(@RequestParam("msg") String msg) {
+        eventBusUtils.asyncEventPost(msg);
         return R.ok();
     }
 }

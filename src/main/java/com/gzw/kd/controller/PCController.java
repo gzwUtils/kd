@@ -582,7 +582,7 @@ public class PCController {
 
 
     @OperatorLog(value = "节点流转",description = "流程节点流转")
-    @RequestMapping(value = "/setDocStatus",method = RequestMethod.GET)
+    @RequestMapping(value = "/setDocStatus",method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public R setDocStatus(String status, String id, HttpSession session) throws Exception {
         Doc doc = new Doc();
