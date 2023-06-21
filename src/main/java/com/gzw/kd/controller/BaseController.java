@@ -7,6 +7,8 @@ import com.gzw.kd.common.utils.EventBusUtils;
 import com.gzw.kd.common.utils.MyLinkedBlockQueue;
 import com.gzw.kd.common.entity.MyQueue;
 import com.gzw.kd.common.utils.RedisLimitFlow;
+import com.gzw.kd.learn.model.callback.Client;
+import com.gzw.kd.learn.model.callback.Server;
 import com.gzw.kd.learn.model.model.GzwThreadDemo;
 import com.gzw.kd.vo.input.ValidTest;
 import io.swagger.annotations.Api;
@@ -137,6 +139,15 @@ public class BaseController {
     @RequestMapping(value = "/push", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R push(@RequestParam("msg") String msg) {
         eventBusUtils.asyncEventPost(msg);
+        return R.ok();
+    }
+
+    @ApiOperation(value = "回调")
+    @OperatorLog(value = "回调",description = "学习")
+    @RequestMapping(value = "/call", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R call(@RequestParam("msg") String msg) {
+        Client client = new Client(new Server());
+        client.sendMsg(msg);
         return R.ok();
     }
 }

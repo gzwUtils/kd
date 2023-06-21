@@ -22,6 +22,6 @@ public class EventConfig {
 
     @Bean(name = "asyncEventBus")
     public KdAsyncEventBus asyncEventBus() {
-        return new KdAsyncEventBus(ThreadPoolConfig.getJobExecutor());
+        return new KdAsyncEventBus(ThreadPoolConfig.getConsumePendingThreadPool());
     }
 }
