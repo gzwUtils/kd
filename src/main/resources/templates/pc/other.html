@@ -70,8 +70,6 @@
       <br/>
       <br/>
       <el-button type="success"  size="mini" @click="brpop()">消费</el-button><br/>
-      <el-input v-model="takePop" placeholder="出参" disabled="disabled"></el-input>
-      <el-button type="success"  size="mini" @click="l_clear()">clear</el-button><br/>
 </div>
 </body>
 <script>
@@ -96,7 +94,6 @@
                         label: '5'
                   }],
                 phone:'',
-                takePop: '',
                 uniqueId: '',
                 interParams: '',
                 value: '',
@@ -186,10 +183,7 @@
                         'sign': CryptoJS.MD5(sign).toString(),
                   }
                     axios.post('/base/put',body,{headers}).then(response => {
-                          if(response.data.data.pushs !==''){
-                                this.interParams =  response.data.data.pushs;
-                          }
-
+                                this.interParams =  response.data.message;
                     });
             },
             brpop () {
@@ -206,9 +200,7 @@
                           'sign': CryptoJS.MD5(sign).toString(),
                     }
                     axios.post('/base/take',body,{headers}).then(response => {
-                          if(response.data.data.takes !==''){
-                                this.takePop =  response.data.data.takes;
-                          }
+                          this.$message.success(response.data.message);
                     });
               },
             otherSave (){
@@ -228,11 +220,6 @@
                           return;
                     }
                     axios.post('/pc/sendMessage?phone=' + this.phone + "&message=" + this.textarea).then(response => {
-                          this.$message.success(response.data.message);
-                    });
-              },
-            l_clear() {
-                    axios.post('/base/clear').then(response => {
                           this.$message.success(response.data.message);
                     });
               },
