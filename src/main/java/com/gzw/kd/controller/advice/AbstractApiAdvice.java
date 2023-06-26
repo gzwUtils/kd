@@ -52,6 +52,18 @@ public abstract class AbstractApiAdvice extends RequestBodyAdviceAdapter {
     @SuppressWarnings("NullableProblems")
     @Override
     public boolean supports(MethodParameter methodParameter, Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
+        //鉴权开关判断
+        if (!authConfig.isEnabled()) {
+            return false;
+        }
+        if (ArrayUtil.isNotEmpty(authConfig.getExcludeUrls())) {
+            String accessUrl = ContextUtil.getHttpRequest().getRequestURI();
+            for (String excludeUrl : authConfig.getExcludeUrls()) {
+                if (pathMatcher.match(excludeUrl.trim(), accessUrl)) {
+                    return false;
+                }
+            }
+        }
         return true;
     }
 
@@ -114,18 +126,6 @@ public abstract class AbstractApiAdvice extends RequestBodyAdviceAdapter {
      */
 
     private void signCheckout(InnerApiInput innerApiInput) throws GlobalException{
-        //鉴权开关判断
-        if (!authConfig.isEnabled()) {
-            return;
-        }
-        if (ArrayUtil.isNotEmpty(authConfig.getExcludeUrls())) {
-            String accessUrl = ContextUtil.getHttpRequest().getRequestURI();
-            for (String excludeUrl : authConfig.getExcludeUrls()) {
-                if (pathMatcher.match(excludeUrl.trim(), accessUrl)) {
-                    return;
-                }
-            }
-        }
 
         //签名校验
         String formatStr = String.format(Constants.INNER_MD5_ENC_STR, innerApiInput.getTimestamp(),

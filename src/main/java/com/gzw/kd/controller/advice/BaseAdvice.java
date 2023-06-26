@@ -1,6 +1,9 @@
 package com.gzw.kd.controller.advice;
 
 import com.gzw.kd.controller.BaseController;
+import com.gzw.kd.controller.ChatGptController;
+import com.gzw.kd.controller.EsController;
+import com.gzw.kd.controller.SendController;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -14,7 +17,7 @@ import static com.gzw.kd.common.Constants.TOKEN_PUSH_BASE_CLUE;
  * @author 高志伟
  */
 
-@ControllerAdvice(assignableTypes = {BaseController.class})
+@ControllerAdvice(assignableTypes = {BaseController.class, EsController.class, ChatGptController.class, SendController.class})
 @SuppressWarnings("all")
 public class BaseAdvice extends AbstractApiAdvice{
 
