@@ -7,6 +7,7 @@ import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.entity.SysLog;
+import com.gzw.kd.common.enums.ResultCodeEnum;
 import com.gzw.kd.common.utils.AESCrypt;
 import com.gzw.kd.common.utils.AddressUtil;
 import com.gzw.kd.common.utils.ContextUtil;
@@ -51,6 +52,7 @@ public class OperatorLogAspect {
         try {
             result = point.proceed();
         } catch (Throwable e) {
+            result = ResultCodeEnum.UNKNOWN_ERROR;
             log.error("operator  log exception {} ",e.getMessage(),e);
         }
         long time = System.currentTimeMillis() - beginTime;
