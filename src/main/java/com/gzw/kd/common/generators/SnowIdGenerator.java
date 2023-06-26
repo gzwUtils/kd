@@ -1,6 +1,5 @@
 package com.gzw.kd.common.generators;
 import com.gzw.kd.common.exception.GlobalException;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicLong;
@@ -37,7 +36,7 @@ public class SnowIdGenerator{
     private final long sequenceMask = ~(-1L << sequenceBits);
 
 
-    private static AtomicLong START_ = new AtomicLong(20_000L);
+    private static AtomicLong START_ = new AtomicLong(2000_0);
 
 
     public SnowIdGenerator(String bizTypePrefix, String dateFormat) {
@@ -104,7 +103,6 @@ public class SnowIdGenerator{
         long timestamp = timeGen();
         while (timestamp <= lastTimestamp) {
             timestamp = timeGen();
-            timestamp++;
         }
         return timestamp;
     }
@@ -115,8 +113,7 @@ public class SnowIdGenerator{
      * @return 当前时间(秒)
      */
     protected long timeGen(){
-        SimpleDateFormat sp = new SimpleDateFormat("HHmmss");
-        return sp.parse(sp.format(new Date()), new ParsePosition(0)).getTime()/ 1000L;
+        return System.currentTimeMillis() / 1000L;
     }
 
 }
