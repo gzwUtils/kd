@@ -605,8 +605,8 @@ public interface Constants {
     /** elasticsearch */
     String SCHEMA_TEST = "test.learn";
 
-    /** base 接口token **/
-    String TOKEN_PUSH_BASE_CLUE="3705564dd0b774b746beeabdf5064640";
+    /**  接口token **/
+    String TOKEN_PUSH_KD="3705564dd0b774b746beeabdf5064640";
 
     /**
      * mail

@@ -181,6 +181,7 @@
                         'Content-Type': 'application/json',
                         'timestamp': timestamp,
                         'sign': CryptoJS.MD5(sign).toString(),
+                        'other-token': this.tokens,
                   }
                     axios.post('/base/put',body,{headers}).then(response => {
                                 this.interParams =  response.data.message;
@@ -198,6 +199,7 @@
                           'Content-Type': 'application/json',
                           'timestamp': timestamp,
                           'sign': CryptoJS.MD5(sign).toString(),
+                          'other-token': this.tokens,
                     }
                     axios.post('/base/take',body,{headers}).then(response => {
                           this.$message.success(response.data.message);
