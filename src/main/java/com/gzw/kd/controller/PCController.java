@@ -858,7 +858,7 @@ public class PCController {
         String fileName = "template.xlsx";
         headers.setContentDispositionFormData(ATTACHMENT,
                 new String(URLEncoder.encode(fileName, "UTF-8").getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1));
-        String filePath = "/excel/clue_d_upload_template.xlsx";
+        String filePath = "/excel/kd_upload_template.xlsx";
         byte[] bytes = IoUtil.readBytes(this.getClass().getResourceAsStream(
                 filePath));
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
