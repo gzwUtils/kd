@@ -39,12 +39,12 @@ public class FreemarkerUtils {
             out.flush();
             return out.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("freemaker异常 message:{}", e.getMessage(), e);
         } finally {
             try {
                 out.close();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                log.error("freemaker异常 message:{}", ex.getMessage(), ex);
             }
         }
         return null;
