@@ -2,7 +2,6 @@ package com.gzw.kd.common;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.util.StrUtil;
-
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -234,6 +233,11 @@ public interface Constants {
     int INT_180 = 180;
 
     /**
+     * int 300
+     */
+    int INT_300 = 300;
+
+    /**
      * int 500
      */
     int INT_500 = 500;
@@ -242,6 +246,11 @@ public interface Constants {
      * int 1000
      */
     int INT_1000 = 1000;
+
+    /**
+     * int 3000
+     */
+    int INT_3000 = 3000;
 
     /**
      * int 10000

@@ -15,6 +15,7 @@ import com.gzw.kd.learn.model.model.GzwThreadDemo;
 import com.gzw.kd.vo.input.ValidTest;
 import com.itextpdf.xmp.impl.Base64;
 import io.swagger.annotations.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import static com.gzw.kd.common.Constants.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author gzw
@@ -49,6 +51,9 @@ public class BaseController {
 
     @Resource
     private DemoGzwFilterChain demoGzwFilterChain;
+
+    @Resource
+    FileUploadUtil fileUploadUtil;
 
     @ApiOperation(value = "入队 阻塞")
     @OperatorLog(value = "入队 阻塞 ",description = "入队 阻塞")
@@ -184,5 +189,15 @@ public class BaseController {
         List<Map<String, Object>> result = stage.getStageHandlerResult();
         log.info("chain end {}", JSON.toJSONString(result));
         return R.ok().data("result",result);
+    }
+
+    @ApiOperation(value = "pdf上传加密")
+    @OperatorLog(value = "pdf上传加密",description = "学习")
+    @RequestMapping(value = "/uploadFileEcrypt", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R uploadFileEcrypt(@RequestParam("file") @ApiParam("文件") MultipartFile file,@RequestParam(value = "password",required = false) @ApiParam("密码") String password) throws IOException {
+        Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(LOGIN_USER_SESSION_KEY);
+        password = password == null ? operator.getPassword() : password;
+        fileUploadUtil.encrypt(file, password);
+        return R.ok();
     }
 }
