@@ -215,7 +215,22 @@ public interface Constants {
     /**
      * int 40
      */
+    int INT_40 = 40;
+
+    /**
+     * int 50
+     */
     int INT_50 = 50;
+
+    /**
+     * int 60
+     */
+    int INT_60 = 60;
+
+    /**
+     * int 70
+     */
+    int INT_70 = 70;
 
     /**
      * int 32
@@ -228,9 +243,20 @@ public interface Constants {
     int INT_100 = 100;
 
     /**
+     * int 170
+     */
+    int INT_170 = 170;
+
+    /**
      * int 180
      */
     int INT_180 = 180;
+
+
+    /**
+     * int 200
+     */
+    int INT_200 = 200;
 
     /**
      * int 300

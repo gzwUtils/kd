@@ -31,7 +31,7 @@ public class FileUploadUtil {
     private String basedir;
 
 
-    private static final float OPACITY = 0.3f;
+    private static final float OPACITY = 0.8f;
 
 
     public R upload(@RequestParam("file") MultipartFile file) {
@@ -58,7 +58,7 @@ public class FileUploadUtil {
         try {
             File out = new File(dir, LocalDateTime.now().format(DATE_TIME_FORMAT_HM) + "_" + originalFilename);
             file.transferTo(out);
-            waterMark(null, suffix, out.getPath(), OPACITY);
+            waterMark(null,suffix,out.getPath(),OPACITY);
             return R.ok();
         } catch (Exception e) {
             log.error("upload file  error {}", e.getMessage(), e);
@@ -87,12 +87,10 @@ public class FileUploadUtil {
 
 
     public void waterMarkToPdf(WaterMarkContent content, String path) {
-        BufferedImage image = WaterMarkUtil.createWatermarkImage(content);
         try {
-            Objects.requireNonNull(image);
-            WaterMarkUtil.setWaterMarkToPdf(path, image);
+            WaterMarkUtil.addWaterMark(path, path,content);
         } catch (Exception e) {
-            log.error("水印添加失败 path:{}", path, e);
+            log.error("pdf水印添加失败 path:{}", path, e);
         }
     }
 
@@ -102,7 +100,7 @@ public class FileUploadUtil {
             Objects.requireNonNull(image);
             WaterMarkUtil.setWaterMarkToImg(path, image, opacity);
         } catch (Exception e) {
-            log.error("水印添加失败 path:{}", path, e);
+            log.error("img 水印添加失败 path:{}", path, e);
         }
     }
 
@@ -110,7 +108,7 @@ public class FileUploadUtil {
     public void waterMark(WaterMarkContent content, String suffix, String path, float opacity) {
         switch (suffix) {
             case ".pdf":
-                waterMarkToPdf(content, path);
+                //waterMarkToPdf(content, path);
                 break;
             case ".jpg":
                 waterMarkToImg(content, path, opacity);

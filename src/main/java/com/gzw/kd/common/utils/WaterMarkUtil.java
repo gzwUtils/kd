@@ -4,10 +4,12 @@ import cn.hutool.core.util.StrUtil;
 import static com.gzw.kd.common.Constants.*;
 import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.entity.WaterMarkContent;
+import com.gzw.kd.common.enums.ResultCodeEnum;
+import com.gzw.kd.common.exception.GlobalException;
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfStamper;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.pdf.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
@@ -23,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
  * @since：2023/6/28 11:37
  */
 @Slf4j
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused"})
 public class WaterMarkUtil {
 
     /**
@@ -133,15 +135,8 @@ public class WaterMarkUtil {
      * @return 图片
      */
     public static BufferedImage createWatermarkImage(WaterMarkContent watermark) {
-        Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(LOGIN_USER_SESSION_KEY);
+        watermark = getMarkContent(watermark);
         if (watermark == null) {
-            watermark = new WaterMarkContent();
-            watermark.setEnable(true);
-            watermark.setText(operator.getAccount());
-            watermark.setColor("#C5CBCF");
-            watermark.setDateFormat("yyyy-MM-dd HH:mm:ss");
-        }
-        if (!watermark.isEnable()) {
             return null;
         }
         String[] textArray = watermark.getText().split(",");
@@ -179,6 +174,75 @@ public class WaterMarkUtil {
         return image;
     }
 
+    private static WaterMarkContent getMarkContent(WaterMarkContent watermark) {
+        if (watermark == null) {
+            Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(LOGIN_USER_SESSION_KEY);
+            watermark = new WaterMarkContent();
+            watermark.setEnable(true);
+            watermark.setText(operator.getAccount());
+            watermark.setColor("#C5CBCF");
+            watermark.setDateFormat("yyyy-MM-dd HH:mm:ss");
+        }
+        if (!watermark.isEnable()) {
+            return null;
+        }
+        return watermark;
+    }
+
+
+    /**
+     * 给PDF文件添加文字水印
+     * @param path input
+     * @param outPath out
+     * @param content mark
+     */
+    public static void addWaterMark(String path, String outPath, WaterMarkContent content) {
+        try {
+            content = getMarkContent(content);
+            if (content == null) {
+                return;
+            }
+            PdfReader reader = new PdfReader(path);
+            FileOutputStream out = new FileOutputStream(outPath);
+            // 输出的PDF文件内容
+            PdfStamper pdfStamper = new PdfStamper(reader, out);
+            BaseFont baseFont = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", true);
+            PdfGState pdfGstate = new PdfGState();
+            pdfGstate.setFillOpacity(0.2f);
+            pdfGstate.setStrokeOpacity(0.4f);
+            int totalPage = reader.getNumberOfPages() + 1;
+            for (int i = 1; i < totalPage; i++) {
+                // 内容下层
+                PdfContentByte pdfContentByte = pdfStamper.getUnderContent(i);
+                pdfContentByte.beginText();
+                // 字体添加透明度
+                pdfContentByte.setGState(pdfGstate);
+                // 添加字体大小等
+                pdfContentByte.setFontAndSize(baseFont, 20);
+                //添加字体颜色
+                pdfContentByte.setColorFill(new BaseColor(Integer.parseInt(content.getColor().substring(1), 16)));
+                // 添加范围
+                pdfContentByte.setTextMatrix(70, 200);
+                //  具体位置 内容   多少行  多少列  旋转多少度 共360度 一页几排 一排几个
+                for (int a = INT_ZERO; a < INT_THREE; a++) {
+                    for (int j = INT_ZERO; j < INT_THREE; j++) {
+                        // 横向  宽
+                        int x = INT_70 + INT_170 * j;
+                        // 纵向  高
+                        int y = INT_70 + INT_200 * a;
+                        // 45 是水印旋转的角度
+                        pdfContentByte.showTextAligned(Element.ALIGN_BOTTOM, content.getText(), x, y, 45);
+                    }
+                }
+                pdfContentByte.endText();
+            }
+            pdfStamper.close();
+            reader.close();
+        } catch (Exception e) {
+            log.error("pdf 添加水印异常", e);
+            throw new GlobalException(ResultCodeEnum.UNKNOWN_ERROR);
+        }
+    }
 
     /**
      * pdf加水印图片
@@ -192,7 +256,8 @@ public class WaterMarkUtil {
         PdfReader reader = new PdfReader(filePath);
         //保存路径
         String downloadPath = filePath.substring(0, filePath.lastIndexOf("/") + 1) + StrUtil.subAfter(filePath, "/", true);
-        PdfStamper stamper = new PdfStamper(reader, Files.newOutputStream(Paths.get(filePath)));
+        FileOutputStream outputStream = new FileOutputStream(downloadPath);
+        PdfStamper stamper = new PdfStamper(reader,outputStream);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         ImageIO.write(bfi, "png", out);
         //将图片放入pdf中
@@ -212,16 +277,22 @@ public class WaterMarkUtil {
                 height = pageSize.getHeight();
             }
             //水印图片设置在内容之上，之下用getUnderContent
-            PdfContentByte pdfContentByte = stamper.getOverContent(i);
+            PdfContentByte pdfContentByte = stamper.getUnderContent(i);
+            pdfContentByte.saveState();
             //设置图片的位置，参数Image.UNDERLYING是作为文字的背景显示。
             image.setAlignment(com.itextpdf.text.Image.UNDEFINED);
             //设置图片的绝对位置
             image.setAbsolutePosition((width - image.getWidth()) / 2, (height - image.getHeight()) / 2);
             pdfContentByte.addImage(image);
+            pdfContentByte.endText();
+            pdfContentByte.restoreState();
         }
         stamper.close();
+        outputStream.close();
         reader.close();
     }
+
+
 
 
     /**
