@@ -11,6 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 public class QuerySort implements SortAlg{
     @Override
     public void sort(String path) {
-        log.info("...........");
+        log.info("......query.....");
     }
 }

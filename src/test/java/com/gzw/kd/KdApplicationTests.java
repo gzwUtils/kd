@@ -10,6 +10,7 @@ import com.gzw.kd.learn.model.filter.DemoGzwFilterChain;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterStage;
 import com.gzw.kd.learn.model.model.GzwThreadDemo;
 import com.gzw.kd.scheduletask.ScheduleTask;
+import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,7 @@ class KdApplicationTests {
     void base64() {
         String code = Base64.decodeStr("cGljb0NURns1M3J2M3JfNTNydjNyXzUzcnYzcl81M3J2M3JfNTNydjNyfQ");
         System.out.println(code+"=================================================");
+        System.out.println(new Date().getHours());
     }
 
     @Test

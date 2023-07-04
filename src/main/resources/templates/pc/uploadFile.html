@@ -80,9 +80,13 @@
             },
             //成功回调
             handleAvatarSuccess(res, file) {
-                this.dataForm.attachName = file.name
-                this.dataForm.attachUrl = res.data.url
-                this.dataForm.attachSize = file.size
+                if(res.code === 20000){
+                    this.dataForm.attachName = file.name
+                    this.dataForm.attachUrl = res.data.url
+                    this.dataForm.attachSize = file.size
+                } else {
+                    this.$message.error(res.message);
+                }
                 this.dataFormSubmit()
             },
             // 删除
