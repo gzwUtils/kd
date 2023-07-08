@@ -463,10 +463,9 @@ public class PCController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/getAddress",method = RequestMethod.GET)
-    public R getAddress(HttpServletRequest request) throws Exception {
-        String name = request.getParameter("customerName");
-        Assign user = customerService.getUserByName(AESCrypt.encrypt(name));
+    @RequestMapping(value = "/getAddress",method = RequestMethod.POST)
+    public R getAddress(@RequestParam("customerName") String customerName) throws Exception {
+        Assign user = customerService.getUserByName(AESCrypt.encrypt(customerName));
         return R.ok().data("address",user.getAddress());
     }
 
