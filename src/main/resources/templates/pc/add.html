@@ -176,15 +176,12 @@
        },
         GetCurAddress() {
            let customerName= this.ruleForm.customerName;
-           axios.get('http://localhost:8092/pc/getAddress?customerName='+customerName).then(res => {
+           axios.post('http://localhost:8092/pc/getAddress?customerName='+customerName).then(res => {
            let data = res.data;
            if (data.code === 20000) {
                  this.ruleForm.address = data.data.address;
            }else {
-                 that.$alert({
-                     message: data.message,
-                     code: data.code
-                 })
+               this.$message.error('获取地址失败');
            }
           });
         },
