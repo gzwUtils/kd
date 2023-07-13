@@ -4,8 +4,6 @@ import cn.hutool.core.util.StrUtil;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.entity.TemplateInfo;
-import com.gzw.kd.common.enums.ResultCodeEnum;
-import com.gzw.kd.common.exception.GlobalException;
 import com.gzw.kd.service.MessageTemplateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,7 +12,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.Resource;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -39,9 +36,6 @@ public class MessageTemplateController {
     @ApiOperation("/保存数据")
     @OperatorLog(value = "模版新增", description = "模版新增")
     public R save(@RequestBody TemplateInfo templateInfo) {
-        if (StringUtils.isBlank(templateInfo.getCreator())) {
-            throw new GlobalException(ResultCodeEnum.PARAM_ERROR);
-        }
         messageTemplateService.registerTemplate(templateInfo);
         return R.ok();
     }
