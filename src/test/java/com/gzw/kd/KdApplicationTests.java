@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("all")
 @Slf4j
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class KdApplicationTests {
 
     @Autowired
