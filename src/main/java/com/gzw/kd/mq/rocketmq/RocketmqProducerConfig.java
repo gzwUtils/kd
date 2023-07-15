@@ -17,22 +17,22 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @SuppressWarnings("all")
 @Configuration
-@ConditionalOnProperty(prefix ="rocketMq.producer",value = "isOnOff",havingValue ="on")
+@ConditionalOnProperty(prefix ="rocketmq.producer",value = "isOnOff",havingValue ="on")
 public class RocketmqProducerConfig {
 
-    @Value("${rocketMq.producer.groupName}")
+    @Value("${rocketmq.producer.groupName}")
     private String groupName;
-    @Value("${rocketMq.producer.nameServAddr}")
+    @Value("${rocketmq.producer.nameServAddr}")
     private String nameServAddr;
-    @Value("${rocketMq.producer.maxMessageSize}")
+    @Value("${rocketmq.producer.maxMessageSize}")
     private Integer maxMessageSize;
-    @Value("${rocketMq.producer.sendMsgTimeout}")
+    @Value("${rocketmq.producer.sendMsgTimeout}")
     private Integer sendMsgTimeout;
-    @Value("${rocketMq.producer.retryTimesWhenSendFailed}")
+    @Value("${rocketmq.producer.retryTimesWhenSendFailed}")
     private Integer retryTimesWhenSendFailed;
-    @Value("${rocketMq.acl.accessKey}")
+    @Value("${rocketmq.acl.accessKey}")
     private String accessKey;
-    @Value("${rocketMq.acl.secretKey}")
+    @Value("${rocketmq.acl.secretKey}")
     private String secretKey;
 
     @Bean

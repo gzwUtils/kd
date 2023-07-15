@@ -15,10 +15,12 @@ import org.springframework.stereotype.Component;
  * @description：
  * @since：2023/5/24 14:02
  */
+
+@SuppressWarnings("all")
 @Component
 public class SpringEventBusReceiverListener implements ApplicationListener<KdApplicationEvent> {
 
-    @Autowired
+    @Autowired(required = false)
     private  CustomerService customerService;
 
     @Override
