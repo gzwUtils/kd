@@ -66,10 +66,17 @@ public enum ResultCodeEnum {
      * redis
      */
 
-    REDIS_LOCK_EXIST(false,40001,"you can not do it , because another has get the lock  ===");
+    REDIS_LOCK_EXIST(false,40001,"you can not do it , because another has get the lock  ==="),
 
 
+    /**
+     * 模版
+     */
 
+    TEMPLATE_NOT_FOUND(false,50001, "找不到模板或模板已被删除"),
+    TOO_MANY_RECEIVER(false,50002, "传入的接收者大于100个"),
+
+    EMPTY_RECEIVER(false,50003, "传入的接收者为空");
     private final Boolean success;
 
     private final Integer code;
