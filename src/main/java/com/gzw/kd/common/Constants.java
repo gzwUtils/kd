@@ -613,6 +613,17 @@ public interface Constants {
     String USERNAME_FILTER_PATTERN = "[ 　＇'\\\\%％+＋|｜,，/／＼\"＂“”‘’]";
 
     /**
+     * 手机号正则
+     */
+    String PHONE_REGEX_EXP = "^((13[0-9])|(14[5,7,9])|(15[0-3,5-9])|(166)|(17[0-9])|(18[0-9])|(19[1,8,9]))\\d{8}$";
+
+    /**
+     * 邮箱正则
+     */
+    String EMAIL_REGEX_EXP = "^[A-Za-z0-9-_\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+
+
+    /**
      * 姓名特殊符号判断
      */
     Pattern usernamePattern = Pattern.compile(USERNAME_FILTER_PATTERN);
@@ -683,4 +694,20 @@ public interface Constants {
 
 
     public static final String LINK_NAME = "url";
+
+
+    /**
+     * 接口限制 最多的人数
+     */
+    public static final Integer BATCH_RECEIVER_SIZE = 100;
+
+
+    /**
+     * boolean转换
+     */
+    public final static Integer TRUE = 1;
+
+    public final static Integer FALSE = 0;
+
+
 }
