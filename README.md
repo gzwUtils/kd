@@ -16,7 +16,7 @@
 ### 7、es查询。
 ### 8、freemarker 数据渲染。
 ### 9、rocketmq配置。
-### 10、flyway 数据迁移。
+### 10、flyway 数据库版本管理。
 ### 11、邮件、短信发送。
 ### 12、websocket 客户端服务端交互。
 ### 13、基于timer、schedule、定时。
