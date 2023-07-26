@@ -79,7 +79,7 @@
 
 
     <update id="deleteTemplateInfo" parameterType="com.gzw.kd.common.entity.TemplateInfo">
-        <foreach collection="templateInfo"  item="item">
+        <foreach collection="templateInfo"  item="item" index="index" open="" close="" separator=";">
            update message_template
                 <set>
                      <if test="item.isDeleted!=null">
