@@ -36,7 +36,7 @@ public class EmailHandler extends BaseHandler {
             EmailContentModel emailContentModel = JSON.parseObject(taskInfo.getContentModel(), EmailContentModel.class);
             Set<String> receiver = taskInfo.getReceiver();
             String[] array = receiver.toArray(new String[0]);
-            MailUtil.getMailSend().sendEmail(emailContentModel.getTitle(), emailContentModel.getContent(), array, true);
+            MailUtil.getMailSend().sendEmail(emailContentModel.getTitle(), emailContentModel.getContent(), array, false);
 
         } catch (Exception e) {
             log.error("EmailHandler error {}", e.getMessage(), e);
