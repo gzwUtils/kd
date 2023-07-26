@@ -40,13 +40,37 @@
     <update id="updateTemplateInfo" parameterType="com.gzw.kd.common.entity.TemplateInfo">
         update message_template
     <set>
-        <if test="msgStatus!=null">
+        <if test="name!=null and  name!=''">
+            name = #{name},
+        </if>
+        <if test="cronCrowdPath!=null and cronCrowdPath!=''">
+            cron_crowd_path = #{cronCrowdPath},
+        </if>
+        <if test="idType!=0">
+            id_type = #{idType},
+        </if>
+        <if test="sendChannel!=0">
+            send_channel = #{sendChannel},
+        </if>
+        <if test="msgContent!=null and msgContent!=''">
+            msg_content = #{msgContent},
+        </if>
+        <if test="templateType!=0">
+            template_type = #{templateType},
+        </if>
+        <if test="msgType!=0">
+            msg_type = #{msgType},
+        </if>
+        <if test="expectPushTime!=null and expectPushTime!=''">
+            expect_push_time = #{expectPushTime},
+        </if>
+        <if test="msgStatus!=0">
               msg_status = #{msgStatus},
         </if>
-        <if test="updator!=null">
+        <if test="updator!=null and updator!=''">
               updator = #{updator},
         </if>
-        <if test="updated!=null">
+        <if test="updated!=null and updated!=''">
               updated = #{updated},
         </if>
     </set>
@@ -55,7 +79,7 @@
 
 
     <update id="deleteTemplateInfo" parameterType="com.gzw.kd.common.entity.TemplateInfo">
-        <foreach collection="templateInfo"  item="item"  separator=",">
+        <foreach collection="templateInfo"  item="item">
            update message_template
                 <set>
                      <if test="item.isDeleted!=null">
