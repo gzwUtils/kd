@@ -158,5 +158,6 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
             cronTaskService.saveCronTask(xxlJobInfo);
             cronTaskService.stopCronTask(templateInfo.getCronTaskId());
         }
+        messageTemplateMapper.updateTemplateInfo(templateInfo);
     }
 }
