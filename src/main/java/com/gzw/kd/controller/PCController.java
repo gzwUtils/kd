@@ -212,6 +212,7 @@ public class PCController {
         return "/pc/login";
     }
 
+    @Resubmit(limit = 3)
     @RequestMapping(value = "/addNotice",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     @ResponseBody
     @OperatorLog(value = "添加公告",description = "添加公告")
@@ -281,7 +282,7 @@ public class PCController {
                 request.getSession().setAttribute(Constants.LOGIN_USER_SESSION_KEY, operator);
                 return R.ok().message("解锁系统成功！");
             } else {
-                return R.error().message("此用户已不存在,请重新登录！！");
+                return R.error().message("用户长时间未操作,请重新登录！！");
             }
         }
     }

@@ -3,6 +3,7 @@ import com.gzw.kd.common.utils.RocketMqUtils;
 import com.gzw.kd.mq.eventBus.service.SendMqService;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @SuppressWarnings("all")
 @Component
+@ConditionalOnProperty(prefix ="rocketmq.producer",value = "isOnOff",havingValue ="on")
 public class RocketMqSendService implements SendMqService {
 
     @Resource
