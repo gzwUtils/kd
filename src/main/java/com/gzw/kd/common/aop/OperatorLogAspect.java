@@ -52,7 +52,7 @@ public class OperatorLogAspect {
         try {
             result = point.proceed();
         } catch (Throwable e) {
-            result = ResultCodeEnum.UNKNOWN_ERROR;
+            result = R.setResult(ResultCodeEnum.UNKNOWN_ERROR);
             log.error("operator  log exception {} ",e.getMessage(),e);
         }
         long time = System.currentTimeMillis() - beginTime;

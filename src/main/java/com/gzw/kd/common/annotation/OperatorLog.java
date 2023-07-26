@@ -12,7 +12,7 @@ public @interface OperatorLog {
 
     /**
      * 日志类型
-     * @return
+     * @return type
      */
     String value() default "";
 
