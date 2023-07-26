@@ -30,14 +30,11 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/pc/phoneLogin",
                 "/pc/phoneCheckLogin",
                 "/pc/getCode",
-                "/chatGpt/**",
                 "/wx/**",
                 "/pc/unknown",
                 "/pc/error",
                 "/pc/loginAction",
-                "/quartz/**",
                 "/ali/**",
-                "/qrt/**",
                 "/assets/**");
         registry.addInterceptor(resubmitInterceptor).addPathPatterns("/**");
 
