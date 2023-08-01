@@ -515,8 +515,10 @@ public class PCController {
             Operator user = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(LOGIN_USER_SESSION_KEY);
             if (user.getIsAdmin().equals(INT_ONE)) {
                 if (configs.getId() == null) {
+                    configs.setCreateTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S)).setUpdateTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S));
                     configService.addDoc(configs);
                 } else {
+                    configs.setUpdateTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S));
                     configService.updateConfigsForById(configs);
                 }
             }
