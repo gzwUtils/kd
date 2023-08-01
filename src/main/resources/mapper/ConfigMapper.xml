@@ -3,13 +3,13 @@
 <mapper namespace="com.gzw.kd.mapper.ConfigMapper" >
 
   <select id="getConfigs"   resultType="com.gzw.kd.common.entity.Configs">
-      SELECT id,annual_balance annualBalance, year_balance yearBalance,extra_balance extraBalance,other_balance otherBalance from config
+      SELECT id,annual_balance annualBalance, year_balance yearBalance,extra_balance extraBalance,other_balance otherBalance from config  order by  update_time desc limit 1
   </select>
 
   <insert id="addDoc"  parameterType="com.gzw.kd.common.entity.Configs">
 
-      INSERT INTO config ( annual_balance, year_balance, extra_balance, other_balance)
-      VALUES(#{annualBalance}, #{yearBalance}, #{extraBalance}, #{otherBalance});
+      INSERT INTO config ( annual_balance, year_balance, extra_balance, other_balance,create_time,update_time)
+      VALUES(#{annualBalance}, #{yearBalance}, #{extraBalance}, #{otherBalance},#{createTime},#{updateTime});
   </insert>
 
   <update id="updateConfigsForById"  parameterType="com.gzw.kd.common.entity.Configs">
@@ -20,6 +20,9 @@
       </if>
       <if test="yearBalance!=null" >
           year_balance=#{yearBalance},
+      </if>
+      <if test="updateTime!=null" >
+          update_time=#{updateTime},
       </if>
       </set>
      <where> id = #{id}</where>

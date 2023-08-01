@@ -2,11 +2,12 @@ package com.gzw.kd.common.entity;
 
 import java.math.BigDecimal;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author 高志伟
  */
-
+@Accessors(chain = true)
 @Data
 public class Configs {
 
@@ -34,4 +35,11 @@ public class Configs {
      * 其他费用
      */
     private BigDecimal otherBalance;
+
+
+
+    private String createTime;
+
+
+    private String updateTime;
 }

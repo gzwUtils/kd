@@ -7,6 +7,7 @@ import com.gzw.kd.common.entity.Configs;
 import com.gzw.kd.common.exception.Asserts;
 import com.gzw.kd.service.ConfigService;
 import javax.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
  * @description： 服务配置初始化
  * @since：2023/5/15 16:29
  */
+@Slf4j
 @Component
 public class ServiceConfigInit implements CommandLineRunner {
 
@@ -31,6 +33,7 @@ public class ServiceConfigInit implements CommandLineRunner {
         Configs configs = configService.getConfigs();
         if(ObjectUtil.isNotEmpty(configs)){
             redisTemplate.opsForValue().set(SERVICE_COFIG, JSONObject.toJSONString(configs));
+            log.info("初始化服务配置加载成功.............................................");
         } else {
             Asserts.fail("初始化服务配置失败........................................");
         }

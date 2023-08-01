@@ -663,7 +663,7 @@ public interface Constants {
 
    public static final String SYSTEM_MAIL_USER = "2876533492@qq.com";
 
-   public static final String SYSTEM_MAIL_PASSWORD = "ftaaokyudgztdeah";
+   public static final String SYSTEM_MAIL_PASSWORD = "jcpkpjmpzagwdddj";
 
     /**
      * SMS
