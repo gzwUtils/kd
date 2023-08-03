@@ -140,7 +140,7 @@ public class BaseController {
     @OperatorLog(value = "观察者模式",description = "学习")
     @RequestMapping(value = "/push", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R push(@RequestParam("msg") @ApiParam("消息") String msg) {
-        eventBusUtils.asyncEventPost(msg);
+        eventBusUtils.eventPost(msg);
         return R.ok();
     }
 

@@ -39,6 +39,7 @@ public class EventBusUtils {
      * @param obj 消息
      */
     public void eventPost(Object obj){
+        log.info("同步阻塞....................分发消息开始");
         eventBus.post(obj);
         log.info("同步阻塞....................分发消息完成");
     }
@@ -49,6 +50,7 @@ public class EventBusUtils {
      * @param obj 消息
      */
     public void asyncEventPost(Object obj){
+        log.info("异步非阻塞....................分发消息开始");
         asyncEventBus.post(obj);
         log.info("异步非阻塞....................分发消息完成");
     }
