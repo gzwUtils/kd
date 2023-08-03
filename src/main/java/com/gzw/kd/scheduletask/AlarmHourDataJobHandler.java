@@ -20,7 +20,7 @@ public class AlarmHourDataJobHandler {
     @XxlJob("AlarmHourDataJobHandler")
     public ReturnT<String> execute(){
         String param = XxlJobHelper.getJobParam();
-        XxlJobLogUtil.log(log,false,"告警消息开始推送 param[{}]",param);
+        XxlJobLogUtil.log(log,false,"告警消息开始推送... param[{}]",param);
         return ReturnT.SUCCESS;
     }
 }
