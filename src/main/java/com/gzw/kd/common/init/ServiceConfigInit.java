@@ -2,6 +2,7 @@ package com.gzw.kd.common.init;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSONObject;
+import com.github.benmanes.caffeine.cache.Cache;
 import static com.gzw.kd.common.Constants.SERVICE_COFIG;
 import com.gzw.kd.common.entity.Configs;
 import com.gzw.kd.common.exception.Asserts;
@@ -25,6 +26,9 @@ public class ServiceConfigInit implements CommandLineRunner {
     private ConfigService configService;
 
     @Resource
+    private Cache<String, Object> caffeineCache;
+
+    @Resource
     private RedisTemplate<String,String> redisTemplate;
 
 
@@ -33,6 +37,7 @@ public class ServiceConfigInit implements CommandLineRunner {
         Configs configs = configService.getConfigs();
         if(ObjectUtil.isNotEmpty(configs)){
             redisTemplate.opsForValue().set(SERVICE_COFIG, JSONObject.toJSONString(configs));
+            caffeineCache.put(SERVICE_COFIG, configs);
             log.info("初始化服务配置加载成功.............................................");
         } else {
             Asserts.fail("初始化服务配置失败........................................");

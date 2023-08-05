@@ -1,6 +1,7 @@
 package com.gzw.kd.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.github.benmanes.caffeine.cache.Cache;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.entity.Operator;
@@ -51,6 +52,10 @@ public class BaseController {
 
     @Resource
     private DemoGzwFilterChain demoGzwFilterChain;
+
+    @Resource
+    private Cache<String, Object> caffeineCache;
+
 
     @Resource
     FileUploadUtil fileUploadUtil;
@@ -199,5 +204,13 @@ public class BaseController {
         password = password == null ? operator.getPassword() : password;
         fileUploadUtil.encrypt(file, password);
         return R.ok();
+    }
+
+    @ApiOperation(value = "获取配置")
+    @OperatorLog(value = "获取服务配置",description = "学习")
+    @RequestMapping(value = "/configInfo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R configInfo(){
+        Object present = caffeineCache.asMap().get(SERVICE_COFIG);
+        return R.ok().data("config",present);
     }
 }
