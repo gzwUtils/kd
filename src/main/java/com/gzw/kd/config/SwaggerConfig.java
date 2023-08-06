@@ -47,6 +47,7 @@ public class SwaggerConfig {
                 .version("1.0")
                 .contact(new Contact("kd", "http://localhost:8092/pc/login", "2876533492@qq.com"))
                 .description("用于学习")
+                .termsOfServiceUrl("http://localhost:8092/pc/login")
                 .build();
     }
 }
