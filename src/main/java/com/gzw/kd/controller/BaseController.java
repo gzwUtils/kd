@@ -110,7 +110,7 @@ public class BaseController {
     @OperatorLog(value = "redis limit flow ",description = "redis 限流")
     @RequestMapping(value = "/limitFlow",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     public  R limitFlow (){
-        return RedisLimitFlow.limitFlow(60000l,5);
+        return RedisLimitFlow.limitFlow("limitFlow",60000l,5);
     }
 
 
@@ -210,7 +210,11 @@ public class BaseController {
     @OperatorLog(value = "获取服务配置",description = "学习")
     @RequestMapping(value = "/configInfo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R configInfo(){
-        Object present = caffeineCache.asMap().get(SERVICE_COFIG);
-        return R.ok().data("config",present);
+        R limitFlow = RedisLimitFlow.limitFlow("config",60000l, 3);
+        if(limitFlow.getSuccess()){
+            Object present = caffeineCache.asMap().get(SERVICE_COFIG);
+            return R.ok().data("config",present);
+        }
+        return limitFlow;
     }
 }
