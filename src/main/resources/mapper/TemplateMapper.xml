@@ -7,4 +7,17 @@
 
   </select>
 
+  <select id="getTemplateById" resultType="com.gzw.kd.common.entity.WeChatTemplateMsg">
+        SELECT id, template_id templateId,url, template_name templateName, color, status, `role`,data dataFormat,sys FROM doc.wx_template_msg  where  status =0 and id = #{id}
+  </select>
+    <select id="getTemplateBySys" resultType="com.gzw.kd.common.entity.WeChatTemplateMsg">
+        SELECT id, template_id templateId,url, template_name templateName, color, status, `role`,data dataFormat,sys FROM doc.wx_template_msg  where  status =0 and sys = #{sys}
+    </select>
+    <select id="getAllSys" resultType="java.lang.String">
+        select distinct  sys FROM doc.wx_template_msg  where  status =0
+    </select>
+    <select id="getTemplateByName" resultType="com.gzw.kd.common.entity.WeChatTemplateMsg">
+        SELECT id, template_id templateId,url, template_name templateName, color, status, `role`,data dataFormat,sys FROM doc.wx_template_msg  where  status =0 and template_name = #{name}
+    </select>
+
 </mapper>

@@ -1,6 +1,6 @@
 package com.gzw.kd.listener;
-
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.gzw.kd.common.R;
@@ -80,28 +80,38 @@ public class MsgListener  {
                 }
 
             }
-        } else if (event.getStatus() == TemplateRoleEnum.DAI_BAN.getStatus()) {
+        } else{
             String name = event.getUserName();
             WxUserInfo user = wxUserService.getUserByName(AESCrypt.encrypt(name));
             if(user.getSubscribe() == INT_ZERO){
                 log.info("用户 {} 已经取消了关注 不能发送",name);
                 return;
             }
-            List<WeChatTemplateMsg> templateByOpenId = templateService.getTemplateByRole(TemplateRoleEnum.DAI_BAN.getStatus());
-            for (WeChatTemplateMsg templateMsg : templateByOpenId) {
+            WeChatTemplateMsg templateMsg = templateService.getTemplateByName(event.getEvent().substring(event.getEvent().indexOf(STRING_UNDERLINE)+1));
                 try {
-                    templateMsg.setData(event.getData()).setToUser(user.getOpenid());
+                    String dataFormat = templateMsg.getDataFormat();
+                    JSONArray jsonArray = JSONUtil.parseArray(dataFormat);
+                    Map<String, String> hashMap = new HashMap<>();
+                    for (int i =0 ;i<jsonArray.size();i++) {
+                        JSONObject object = jsonArray.getJSONObject(i);
+                        Map<String, String> map = com.alibaba.fastjson2.JSONObject.parseObject(object.toString(), Map.class);
+                        for (Map.Entry<String, String> data1:map.entrySet()) {
+                            String value = event.getData().get(data1.getValue());
+                            Map<String, String> v = new HashMap<>();
+                            v.put("value",value);
+                            hashMap.put(data1.getKey(),JSONUtil.toJsonStr(v));
+                        }
+                    }
+                    templateMsg.setData(hashMap).setToUser(user.getOpenid());
                     R msg = sendModelMsg(templateMsg, event.getId());
                     if(msg.getSuccess()){
-                        log.info("用户 {} 代办消息发送成功 请查收 时间:{}",name,LocalDateTime.now());
+                        log.info("用户 {} {}消息发送成功 请查收 时间:{}",name,event.getEvent(),LocalDateTime.now());
                     } else {
-                        log.info("用户 {} 代办消息发送失败 请查收 时间:{} message{}",name,LocalDateTime.now(),msg.getMessage());
+                        log.error("用户 {} {} 消息发送失败 请查收 时间:{} message {}",name,event.getEvent(),LocalDateTime.now(),msg.getMessage());
                     }
                 } catch (Exception e) {
-                    log.error("用户{}代办消息发送异常 时间:{}",name, LocalDateTime.now(),e);
+                    log.error("用户{} {}消息发送异常 时间:{}",name,event.getEvent(), LocalDateTime.now(),e);
                 }
-
-            }
         }
     }
 

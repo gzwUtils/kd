@@ -30,9 +30,26 @@ public class WeChatTemplateMsg {
 
 
     /**
-     * 0 关注  1  代办
+     * 0 关注  1  通知 2 提醒  3 其他
      */
     private Integer role;
+
+
+    /**
+     *  模版ID
+     */
+    private Integer id;
+
+
+    /**
+     *  数据映射
+     */
+    private String dataFormat;
+
+    /**
+     *  来源
+     */
+    private String sys;
 
 
 
@@ -41,10 +58,15 @@ public class WeChatTemplateMsg {
      */
     private Integer status;
 
+
+
+
+    /* -----------------------------template  push ------------------*/
+
     /**
      * 模板数据
      */
-    private Map<String,TemplateDataStyle> data;
+    private Map<String,String> data;
 
     /**
      * 跳转链接
@@ -61,4 +83,7 @@ public class WeChatTemplateMsg {
     public WeChatTemplateMsg() {
         this.color = "#173177";
     }
+
+
+
 }
