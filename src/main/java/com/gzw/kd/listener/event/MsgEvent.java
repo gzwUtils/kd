@@ -1,6 +1,4 @@
 package com.gzw.kd.listener.event;
-
-import com.gzw.kd.common.entity.TemplateDataStyle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -54,13 +52,19 @@ public class MsgEvent {
     /**
      * 数据
      */
-    private Map<String, TemplateDataStyle> data;
+    private Map<String, String> data;
 
 
     /**
      * id
      */
     private Integer id;
+
+
+    /**
+     * templateId
+     */
+    private Integer templateId;
 
 
 

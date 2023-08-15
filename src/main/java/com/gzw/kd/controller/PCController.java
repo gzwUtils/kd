@@ -144,6 +144,9 @@ public class PCController {
     @Resource
     NoticeService noticeService;
 
+    @Resource
+    TemplateService templateService;
+
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login() {
@@ -470,12 +473,22 @@ public class PCController {
         return R.ok().data("address",user.getAddress());
     }
 
+
+    @ResponseBody
+    @RequestMapping(value = "/getTemplateName",method = RequestMethod.POST)
+    public R getTemplateName(@RequestParam("sys") String sys) throws Exception {
+        List<WeChatTemplateMsg> templateMsgList = templateService.getTemplateBySys(sys);
+        return R.ok().data("templateMsgList",templateMsgList);
+    }
+
     @RequestMapping(value = "/showAddUi",method = RequestMethod.GET)
     public String showAddUi(HttpServletRequest request) {
         List<String> names = wxUserService.getAllNames();
         names = names.stream().map(p -> p = AESCrypt.decrypt(p)).collect(Collectors.toList());
         request.setAttribute("names",names);
         List<String> allNames = customerService.getAllNames();
+        List<String> allSys = templateService.getAllSys();
+        request.setAttribute("allSys",allSys);
         allNames = allNames.stream().map(p -> p = AESCrypt.decrypt(p)).collect(Collectors.toList());
         request.setAttribute("customerNames",allNames);
         return "/pc/add";
@@ -492,12 +505,13 @@ public class PCController {
             doc.setIssueDate(LocalDateTime.now());
             m_docService.addDoc(doc);
             ApplicationContext context = ApplicationContextUtils.getApplicationContext();
-            Map<String, TemplateDataStyle> data = new HashMap<>();
-            data.put("user",new TemplateDataStyle(doc.getCustomerName()));
-            data.put("address",new TemplateDataStyle(doc.getAddress()));
-            data.put("desc",new TemplateDataStyle(doc.getDesc()));
-            data.put("issueDate",new TemplateDataStyle(doc.getIssueDate().format(DATE_TIME_FORMAT_S)));
-            MsgEvent event = new MsgEvent().setEvent(" 代办查收").setStatus(TemplateRoleEnum.DAI_BAN.getStatus()).setUserName(doc.getAppoint()).setData(data).setId(doc.getId());
+            Map<String, String> data = new HashMap<>();
+            data.put("user",doc.getCustomerName());
+            data.put("address",doc.getAddress());
+            data.put("desc",doc.getDesc());
+            data.put("issueDate",doc.getIssueDate().format(DATE_TIME_FORMAT_S));
+            WeChatTemplateMsg templateMsg = templateService.getTemplateById(doc.getTempId());
+            MsgEvent event = new MsgEvent().setEvent(doc.getTempSys()+STRING_UNDERLINE+templateMsg.getTemplateName()).setStatus(templateMsg.getRole()).setUserName(doc.getAppoint()).setData(data).setId(doc.getId()).setTemplateId(templateMsg.getId());
             context.publishEvent(event);
         } catch (Exception e) {
             log.error("起草失败 插入数据失败 {}", e.getMessage(), e);
