@@ -486,7 +486,7 @@ public interface Constants {
 
     public  static final String WX_USER_URL  = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=";
 
-    public  static final String WX_MODEL_MSG_URL  = "https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=";
+    public  static final String WX_MODEL_MSG_URL  = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=";
 
     public  static final String WX_APP_SECRET="secret";
 

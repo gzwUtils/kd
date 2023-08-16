@@ -66,7 +66,7 @@ public class WeChatTemplateMsg {
     /**
      * 模板数据
      */
-    private Map<String,String> data;
+    private Map<String,TemplateDataStyle> data;
 
     /**
      * 跳转链接

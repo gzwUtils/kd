@@ -4,6 +4,7 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.gzw.kd.common.R;
+import com.gzw.kd.common.entity.TemplateDataStyle;
 import com.gzw.kd.common.enums.OnlineStatusEnum;
 import com.gzw.kd.common.enums.TemplateRoleEnum;
 import com.gzw.kd.common.utils.AESCrypt;
@@ -91,15 +92,14 @@ public class MsgListener  {
                 try {
                     String dataFormat = templateMsg.getDataFormat();
                     JSONArray jsonArray = JSONUtil.parseArray(dataFormat);
-                    Map<String, String> hashMap = new HashMap<>();
+                    Map<String, TemplateDataStyle> hashMap = new HashMap<>();
                     for (int i =0 ;i<jsonArray.size();i++) {
                         JSONObject object = jsonArray.getJSONObject(i);
                         Map<String, String> map = com.alibaba.fastjson2.JSONObject.parseObject(object.toString(), Map.class);
                         for (Map.Entry<String, String> data1:map.entrySet()) {
                             String value = event.getData().get(data1.getValue());
-                            Map<String, String> v = new HashMap<>();
-                            v.put("value",value);
-                            hashMap.put(data1.getKey(),JSONUtil.toJsonStr(v));
+                            TemplateDataStyle style = new TemplateDataStyle(value);
+                            hashMap.put(data1.getKey(),style);
                         }
                     }
                     templateMsg.setData(hashMap).setToUser(user.getOpenid());
