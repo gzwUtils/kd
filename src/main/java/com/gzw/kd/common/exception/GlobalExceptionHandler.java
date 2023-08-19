@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
         if(mailIsEnabled){
             MailUtil.getMailSend().sendEmail(url.toString(),e.getMessage(),mails,mailtoHtml);
         }
-        return R.error();
+        return R.error().message(e.getMessage());
     }
 
     /**-------- 指定异常处理方法 --------**/
