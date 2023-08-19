@@ -515,7 +515,7 @@ public class PCController {
             context.publishEvent(event);
         } catch (Exception e) {
             log.error("起草失败 插入数据失败 {}", e.getMessage(), e);
-            return R.error();
+            return R.error().message(e.getMessage());
         }
         return R.ok();
     }
