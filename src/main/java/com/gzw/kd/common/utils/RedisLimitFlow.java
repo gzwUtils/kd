@@ -32,7 +32,6 @@ public class RedisLimitFlow {
         Boolean limit = redisTemplate.hasKey(key);
         if(Boolean.TRUE.equals(limit)){
             int count = redisTemplate.opsForZSet().rangeByScore(key, time - intervalTime, time).size();
-            log.info("limit count {}",count);
             if(count >= limitCount){
                 int minute = (int) (intervalTime/1000/60);
                 return R.error().message("请求太频繁 请稍后重试..........");
