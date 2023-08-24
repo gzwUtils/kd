@@ -1,9 +1,11 @@
 package com.gzw.kd.controller;
+import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
+import com.gzw.kd.common.entity.Configs;
 import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.generators.SnowIdGenerator;
 import com.gzw.kd.common.utils.*;
@@ -13,6 +15,7 @@ import com.gzw.kd.learn.model.callback.Server;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterChain;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterStage;
 import com.gzw.kd.learn.model.model.GzwThreadDemo;
+import com.gzw.kd.service.ConfigService;
 import com.gzw.kd.vo.input.ValidTest;
 import com.itextpdf.xmp.impl.Base64;
 import io.swagger.annotations.*;
@@ -55,6 +58,9 @@ public class BaseController {
 
     @Resource
     private Cache<String, Object> caffeineCache;
+
+    @Resource
+    private ConfigService configService;
 
 
     @Resource
@@ -209,11 +215,14 @@ public class BaseController {
     @ApiOperation(value = "获取配置")
     @OperatorLog(value = "获取服务配置",description = "学习")
     @RequestMapping(value = "/configInfo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public R configInfo(){
-        R limitFlow = RedisLimitFlow.limitFlow("config",60000l, 3);
-        if(limitFlow.getSuccess()){
-            Object present = caffeineCache.asMap().get(SERVICE_COFIG);
-            return R.ok().data("config",present);
+    public R configInfo() throws Exception {
+        R limitFlow = RedisLimitFlow.limitFlow("config", 60000l, 3);
+        if (limitFlow.getSuccess()) {
+            Configs configs = (Configs) caffeineCache.asMap().get(SERVICE_COFIG);
+            if (ObjectUtil.isEmpty(configs)) {
+                configs = configService.getConfigs();
+            }
+            return R.ok().data("config", configs);
         }
         return limitFlow;
     }
