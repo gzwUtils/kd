@@ -215,7 +215,7 @@ public class BaseController {
     @ApiOperation(value = "获取配置")
     @OperatorLog(value = "获取服务配置",description = "学习")
     @RequestMapping(value = "/configInfo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public R configInfo() throws Exception {
+    public R configInfo() {
         R limitFlow = RedisLimitFlow.limitFlow("config", 60000l, 3);
         if (limitFlow.getSuccess()) {
             Configs configs = (Configs) caffeineCache.asMap().get(SERVICE_COFIG);
