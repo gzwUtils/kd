@@ -12,11 +12,11 @@ import org.springframework.stereotype.Repository;
 public interface ConfigMapper {
 
     //查询config表
-    Configs getConfigs() throws  Exception;
+    Configs getConfigs();
 
     //插入一条记录
-    Integer addDoc(Configs configs) throws  Exception;
+    Integer addDoc(Configs configs);
 
     //更新数据库
-    Integer updateConfigsForById(Configs configs) throws  Exception;
+    Integer updateConfigsForById(Configs configs);
 }
