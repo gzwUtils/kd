@@ -309,6 +309,7 @@ public class PCController {
         if (session != null) {
             log.warn("用户重复登陆");
             MysessionListener.sessionContext.getSessionMap().remove(userName);
+            MysessionListener.sessionContext.getSessionMap().remove(session.getId());
         }
         if (StringUtils.isBlank(userName) || StringUtils.isBlank(password) || StringUtils.isBlank(code)) {
             return R.setResult(ResultCodeEnum.PARAM_ABSENT);
