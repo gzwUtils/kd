@@ -1560,7 +1560,7 @@ public class Demo {
      */
 
     /**
-     *
+     *  postman
      * var timestamp = Math.round(new Date().getTime());
      * var body = pm.request.body.raw;
      * var sign = "timestamp=" + timestamp + "&token=token&body=" + body;
@@ -1569,6 +1569,13 @@ public class Demo {
      * pm.environment.set("timestamp", timestamp);
      */
 
+    /**
+     * 意图识别 文本匹配算法
+     *
+     * 编辑距离
+     * jaccard 相似度
+     * word2vec
+     */
 
 
 
