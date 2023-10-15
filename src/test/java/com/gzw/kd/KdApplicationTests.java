@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.exception.GlobalException;
 import com.gzw.kd.common.generators.RandomIdGenerator;
+import com.gzw.kd.common.utils.AESCrypt;
 import com.gzw.kd.common.utils.MyLinkedBlockQueue;
 import com.gzw.kd.common.utils.SM4Utils;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterChain;
@@ -33,6 +34,9 @@ class KdApplicationTests {
 
     @Autowired
     private GzwThreadDemo gzwThreadDemo;
+
+    @Autowired
+    private AESCrypt aesCrypt;
 
     @Test
     void contextLoads() throws GlobalException {
@@ -82,6 +86,8 @@ class KdApplicationTests {
 
     @Test
     void smc() throws Exception {
+        System.out.println(aesCrypt.encrypt("zwh"));
+        System.out.println(aesCrypt.decrypt("YwaBH/lSbq7lnOeHAt4OJw=="));
         String password = SM4Utils.encryptData_CBC("abdc1234", SM4Utils.DEFAULT_KEY, SM4Utils.DEFAULT_IV, false, SM4Utils.CIPHER_TEXT_BASE64);
         String plainPassword = SM4Utils.decryptData_CBC(password, SM4Utils.DEFAULT_KEY, SM4Utils.DEFAULT_IV, false, SM4Utils.CIPHER_TEXT_BASE64);
         log.info(password + "-----------------------------------encrryPass---------------------------------------------------------------------");
