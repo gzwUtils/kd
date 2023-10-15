@@ -601,7 +601,7 @@ public class PCController {
     @OperatorLog(value = "节点流转",description = "流程节点流转")
     @RequestMapping(value = "/setDocStatus",method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public R setDocStatus(String status, String id, HttpSession session) throws Exception {
+    public R setDocStatus(String status, String id, HttpSession session,String remark) throws Exception {
         Doc doc = new Doc();
         int stat = Integer.parseInt(status) - 1;
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
@@ -614,6 +614,7 @@ public class PCController {
             doc.setStatus(stat);
             doc.setIssueDate(LocalDateTime.now());
             doc.setId(Integer.parseInt(id));
+            doc.setRemark(remark);
             int count = m_docService.updateStatusForDocById(doc);
             if (count != 0) {
                 return R.ok();

@@ -21,8 +21,9 @@
                 <th width="10%">发起人</th>
                 <th width="30%">描述信息</th>
                 <th width="10%">指派时间</th>
-                <th width="15%">审批人</th>
-                <th width="15%">确认人</th>
+                <th width="8%">审批人</th>
+                <th width="15%">审批意见</th>
+                <th width="7%">确认人</th>
                 <th width="20%">操作</th>
             </tr>
             <#if docs?exists>
@@ -33,11 +34,14 @@
                 <td>${doc.desc!""}</td>
                 <td>${doc.appointDates}</td>
                 <td>${doc.audit!""}</td>
+                <td>${doc.remark!""}</td>
                 <td>${doc.verify!""}</td>
                 <td>
                     <div class="button-group">
-                        <a class="button border-green" onclick="return check(${doc.id})"><span
-                                class="icon-adjust"></span>确认</a>
+                        <a class="button border-green" onclick="return check()"><span
+                                class="icon-adjust"></span>批阅</a>
+                        <a class="button border-blue" onclick="hGConfirm(${doc.id})"><span class="icon-adjust"></span>确认</a>
+
                     </div>
                 </td>
             </tr>
@@ -50,18 +54,28 @@
         </#if>
         </table>
     </div>
+   <br/>
+   <br/>
+    <div style="display: none" id="hGKd">
+         <textarea name="hGRemark" id="hGRemark" cols="179.9"></textarea>
+    </div>
 </form>
 <script type="text/javascript">
+
+    function check() {
+        document.getElementById("hGKd").style.display="table-row";
+    }
     //流转
-    function check(param) {
+    function hGConfirm(param) {
          if (confirm("您确定要结束嘛")) {
+             let remark = document.getElementById("hGRemark").value;
          $.ajax({
                type: "POST",
-               url: "/pc/setDocStatus?status=4&id="+param,
+               url: "/pc/setDocStatus?status=4&id="+param+"&remark="+remark,
                dataType: "json",
                success: function (data) {
                       if (data.code === 20000) {
-                           window.parent.refresh();
+                           window.location.reload();
                       } else {
                         alert(data.message);
                       }
