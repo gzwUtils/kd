@@ -3,7 +3,15 @@
 <mapper namespace="com.gzw.kd.mapper.DocMapper" >
 
   <select id="getDocByNameAndStatus"   resultType="com.gzw.kd.common.entity.Doc">
-     select id, status, `dispatch`,result, appoint, `desc`, issue_date as issueDate, audit, verify, appoint_date as appointDate ,consumer_Name customerName,address,tempId from doc  where appoint=#{name} and status=#{status} order by issue_date desc
+     select id, status, `dispatch`,result, appoint, `desc`, issue_date as issueDate, audit, verify, appoint_date as appointDate ,consumer_Name customerName,address,tempId from doc
+     where
+      <if test="status==1" >
+          appoint=#{name} and
+      </if>
+      <if test="status==2" >
+          consumer_Name=#{name} and
+      </if>
+      status=#{status} order by issue_date desc
   </select>
 
     <select id="getDocByName"   resultType="com.gzw.kd.common.entity.Doc">
