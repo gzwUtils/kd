@@ -27,13 +27,14 @@
             <#list docs as doc>
             <#if (doc.id)!=0   &&  (doc.status) == 1>
             <tr>
-                <td style="text-align:left; padding-left:20px;">${doc.dispatch!""}</td>
-                <td>${doc.desc!""}</td>
-                <td>${doc.appointDates!""}</td>
-                <td>${doc.audit!""}</td>
+                <td style="text-align:center; padding-left:20px;">${doc.dispatch!""}</td>
+                <td style="text-align: center">${doc.desc!""}</td>
+                <td style="text-align: center">${doc.appointDates!""}</td>
+                <td style="text-align: center">${doc.audit!""}</td>
                 <td>
                 <div class="button-group">
-                    <a class="button border-green" onclick="return check(${doc.id})"><span class="icon-adjust"></span>批阅</a>
+                    <a class="button border-green" onclick="return check()"><span class="icon-adjust"></span>批阅</a>
+                    <a class="button border-blue" onclick="confirm(${doc.id})"><span class="icon-adjust"></span>确认</a>
                 </div>
                 </td>
             </tr>
@@ -46,24 +47,29 @@
             </#if>
         </table>
     </div>
+    <div style="display: none" id="kd">
+        <textarea name="remark" id="remark" cols="179.9"></textarea>
+    </div>
 </form>
 <script type="text/javascript">
-    function check(param) {
-            if (confirm("您确定要流转到确认环节?")) {
-                $.ajax({
-                    type: "POST",
-                    url: "/pc/setDocStatus?status=3&id="+param,
-                    dataType: "json",
-                    success: function (data) {
-                        if (data.code === 20000) {
-                           window.parent.refresh();
-                      } else {
-                        alert(data.message);
-                      }
-                    }
-                });
-            }
+    function check() {
+            document.getElementById("kd").style.display="table-row";
         }
+    function confirm(param) {
+        let remark = document.getElementById("remark").value;
+            $.ajax({
+                type: "POST",
+                url: "/pc/setDocStatus?status=3&id="+param+"&remark="+remark,
+                dataType: "json",
+                success: function (data) {
+                    if (data.code === 20000) {
+                        window.location.reload();
+                    } else {
+                        alert(data.message);
+                    }
+                }
+            });
+    }
 </script>
 </body>
 </html>

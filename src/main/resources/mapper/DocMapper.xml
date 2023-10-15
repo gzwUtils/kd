@@ -3,7 +3,7 @@
 <mapper namespace="com.gzw.kd.mapper.DocMapper" >
 
   <select id="getDocByNameAndStatus"   resultType="com.gzw.kd.common.entity.Doc">
-     select id, status, `dispatch`,result, appoint, `desc`, issue_date as issueDate, audit, verify, appoint_date as appointDate ,consumer_Name customerName,address,tempId from doc
+     select id, status, `dispatch`,result, appoint, `desc`, issue_date as issueDate, audit, verify, appoint_date as appointDate ,consumer_Name customerName,address,tempId,remark from doc
      where
       <if test="status==1" >
           appoint=#{name} and
@@ -15,15 +15,15 @@
   </select>
 
     <select id="getDocByName"   resultType="com.gzw.kd.common.entity.Doc">
-        SELECT id, status, `dispatch`, appoint, `desc`, issue_date as issueDate, appoint_date as appointDate, audit, verify, `result`, msgId ,consumer_Name customerName,address,tempId FROM doc.doc where appoint=#{name}  order by issue_date  desc
+        SELECT id, status, `dispatch`, appoint, `desc`, issue_date as issueDate, appoint_date as appointDate, audit, verify, `result`, msgId ,consumer_Name customerName,address,tempId,remark FROM doc.doc where appoint=#{name}  order by issue_date  desc
     </select>
 
     <select id="getDocById"   resultType="com.gzw.kd.common.entity.Doc">
-        SELECT id, status, `dispatch`, appoint, `desc`, issue_date as issueDate, appoint_date as appointDate, audit, verify, `result`, msgId,consumer_Name customerName,address,tempId FROM doc.doc where id = #{id}
+        SELECT id, status, `dispatch`, appoint, `desc`, issue_date as issueDate, appoint_date as appointDate, audit, verify, `result`, msgId,consumer_Name customerName,address,tempId,remark FROM doc.doc where id = #{id}
     </select>
 
     <select id="getAllDocs"   resultType="com.gzw.kd.common.entity.Doc">
-        select  id, status, `dispatch`, appoint, `desc`, issue_date as issueDate,  audit, verify ,appoint_date as appointDate,consumer_Name customerName,address,tempId   from doc  where 1=1
+        select  id, status, `dispatch`, appoint, `desc`, issue_date as issueDate,  audit, verify ,appoint_date as appointDate,consumer_Name customerName,address,tempId,remark   from doc  where 1=1
         <if test="status!=null" >
            and   status=#{status}
         </if>
@@ -61,6 +61,9 @@
           </if>
         <if test="verify!=null" >
             , verify=#{verify}
+        </if>
+        <if test="remark!=null" >
+            , remark=#{remark}
         </if>
         where ID=#{id}
   </update>
