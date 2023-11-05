@@ -29,7 +29,7 @@
   </update>
 
     <update id="updateStatusById">
-        update user Set status=#{status},update_time=now() where id=#{id}
+        update user Set status=#{status},update_time=now(),error_retry = 0 where id=#{id}
     </update>
 
     <update id="updateErrorByName">

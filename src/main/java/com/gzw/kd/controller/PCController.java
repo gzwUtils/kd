@@ -342,11 +342,12 @@ public class PCController {
                     push(request, OnlineStatusEnum.ON_LINE.getStatus());
                     return R.ok();
                 } else {
-                    if (user.getErrorRetry() <  errorCount) {
+                   boolean flag = errorCount -1 - user.getErrorRetry() > 0? true :false;
+                    if (flag) {
                         sessionVerificationCodeDel(request);
-                        int count = errorCount - user.getErrorRetry();
+                        int count = errorCount - user.getErrorRetry() - 1;
                         userService.updateErrorByName(user.getAccount(), user.getErrorRetry()+1);
-                        return R.error().message("输入密码错误，您最多可以尝试" + count + "次");
+                        return R.error().message("输入密码错误，您最多还可以尝试" + count + "次");
                     } else {
                         userService.updateStatusByName(user.getAccount(), UserStatusEnum.STOP.getStatus());
                         sessionVerificationCodeDel(request);
