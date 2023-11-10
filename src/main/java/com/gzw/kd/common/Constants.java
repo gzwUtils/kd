@@ -458,7 +458,7 @@ public interface Constants {
 
     public static final String SCHEME = "http";
 
-    public static final int  SESSION_EXPIRE_TIME = 60 * 30;
+    public static final int  SESSION_EXPIRE_TIME = 60 * 120;
 
     public  static final String REGISTER_REDIS_KEY="redis_register_key_";
 

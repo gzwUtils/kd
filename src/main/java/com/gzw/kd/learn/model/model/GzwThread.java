@@ -38,12 +38,13 @@ public abstract class GzwThread implements Runnable{
 
 
     public void start(){
-        log.info("try to start service threadName :{} started :{} lastThread :{}",getServiceName(),started.get(),thread);
+        String serviceName = getServiceName();
+        log.info("try to start service threadName :{} started :{} lastThread :{}",serviceName,started.get(),thread);
         if(!started.compareAndSet(false,true)){
             return;
         }
         this.stopped = false;
-        this.thread = new Thread(this,getServiceName());
+        this.thread = new Thread(this,serviceName);
         this.thread.setDaemon(isDaemon);
         this.thread.start();
     }
