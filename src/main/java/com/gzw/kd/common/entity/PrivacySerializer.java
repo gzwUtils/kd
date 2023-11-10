@@ -62,7 +62,7 @@ public class PrivacySerializer extends JsonSerializer<String> implements Context
                     jsonGenerator.writeString(PrivacyUtil.desValue(origin,prefixNoMaskLen,suffixNoMaskLen,symbol));
                     break;
                 case NAME:
-                    jsonGenerator.writeString(PrivacyUtil.hideName(origin,null));
+                    jsonGenerator.writeString(PrivacyUtil.hideName(origin,symbol));
                     break;
                 case PHONE:
                     jsonGenerator.writeString(PrivacyUtil.hidePhone(origin));
