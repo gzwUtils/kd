@@ -38,11 +38,12 @@ public abstract class GzwThread implements Runnable{
 
 
     public void start(){
-        String serviceName = getServiceName();
-        log.info("try to start service threadName :{} started :{} lastThread :{}",serviceName,started.get(),thread);
         if(!started.compareAndSet(false,true)){
+            log.warn("try to stop service threadName {}",thread.getName());
             return;
         }
+        String serviceName = getServiceName();
+        log.info("try to start service threadName :{} started :{} lastThread :{}",serviceName,started.get(),thread);
         this.stopped = false;
         this.thread = new Thread(this,serviceName);
         this.thread.setDaemon(isDaemon);
@@ -50,10 +51,9 @@ public abstract class GzwThread implements Runnable{
     }
 
     public void shutdown(boolean interrupt) {
-        log.info("Try to shutdown service thread:{} started:{} lastThread:{}", new Object[]{this.getServiceName(), this.started.get(), this.thread});
         if (this.started.compareAndSet(true, false)) {
             this.stopped = true;
-            log.info("shutdown thread " + this.getServiceName() + " interrupt " + interrupt);
+            log.info("shutdown thread " + this.thread.getName() + " interrupt " + interrupt);
             if (this.hasNotified.compareAndSet(false, true)) {
                 this.waitPoint.countDown();
             }
@@ -69,7 +69,7 @@ public abstract class GzwThread implements Runnable{
                 }
 
                 long elapsedTime = System.currentTimeMillis() - beginTime;
-                log.info("join thread " + this.getServiceName() + " elapsed time(ms) " + elapsedTime + " " + this.getJoinTime());
+                log.info("join thread " + this.thread.getName() + " elapsed time(ms) " + elapsedTime + " " + this.getJoinTime());
             } catch (InterruptedException var6) {
                 log.error("Interrupted", var6);
             }
@@ -79,7 +79,7 @@ public abstract class GzwThread implements Runnable{
 
 
     public void shutdown() {
-        this.shutdown(false);
+        this.shutdown(true);
     }
 
     public long getJoinTime() {
@@ -90,7 +90,7 @@ public abstract class GzwThread implements Runnable{
     public void makeStop() {
         if (this.started.get()) {
             this.stopped = true;
-            log.info("makestop thread " + this.getServiceName());
+            log.info("makestop thread " + thread.getName());
         }
     }
 
