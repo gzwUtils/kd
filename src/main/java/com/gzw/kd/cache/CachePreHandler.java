@@ -3,7 +3,6 @@ package com.gzw.kd.cache;
 import com.gzw.kd.common.utils.ApplicationContextUtils;
 import java.util.Map;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-@ConditionalOnProperty(prefix ="cache.init",value = "enable",havingValue ="on")
 public class CachePreHandler implements CommandLineRunner {
 
     @Override
