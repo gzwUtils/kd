@@ -1,6 +1,8 @@
 package com.gzw.kd.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.JSONObject;
+import com.googlecode.aviator.AviatorEvaluator;
+import com.googlecode.aviator.Expression;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.annotation.Resubmit;
@@ -216,6 +218,24 @@ public class BaseController {
     @OperatorLog(value = "获取服务配置",description = "学习")
     @RequestMapping(value = "/configInfo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R configInfo() {
-        return R.ok().data("config",JSONObject.parse(serviceConfigInit.get()));
+        return R.ok().data("config",serviceConfigInit.get());
+    }
+
+    @ApiOperation(value = "清除缓存")
+    @Resubmit(limit = 5)
+    @OperatorLog(value = "清除缓存",description = "学习")
+    @RequestMapping(value = "/clearCache", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R clearCache() {
+        serviceConfigInit.clear();
+        return R.ok();
+    }
+
+    @ApiOperation(value = "aviator")
+    @OperatorLog(value = "aviator",description = "学习")
+    @RequestMapping(value = "/aviator", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R aviator(String exp) {
+        Expression compile = AviatorEvaluator.compile(exp);
+        Object execute = compile.execute();
+        return R.ok().data("avit",execute);
     }
 }
