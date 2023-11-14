@@ -592,6 +592,7 @@ public class PCController {
             //输出到页面
             lineCaptcha.write(response.getOutputStream());
             session.setAttribute(KAPTCHA_SESSION_KEY,lineCaptcha.getCode());
+            session.setMaxInactiveInterval(60);
             response.getOutputStream().close();
         }catch (Exception e){
             e.printStackTrace();
@@ -764,14 +765,14 @@ public class PCController {
     @OperatorLog(value = "登录",description = "验证码登录")
     @ResponseBody
     @PostMapping("/phoneCheckLogin")
-    public R phoneCheckLogin(String phoneNumber,String vCode,HttpSession session,HttpServletRequest request) throws IOException {
+    public R phoneCheckLogin(String phoneNumber, String vCode, HttpSession session, HttpServletRequest request) throws IOException {
         Object code = session.getAttribute("smsCode");
-        User user = userService.getUserByPhone(phoneNumber);
-        if(user.getStatus().equals(UserStatusEnum.STOP.getStatus())){
-            return R.error().message("账号被禁用！！ 请联系管理员");
-        }
-        if(ObjectUtil.isNotEmpty(user)){
-            if(code != null && code.equals(vCode)){
+        if (code != null && code.equals(vCode)) {
+            User user = userService.getUserByPhone(phoneNumber);
+            if (ObjectUtil.isNotEmpty(user)) {
+                if (user.getStatus().equals(UserStatusEnum.STOP.getStatus())) {
+                    return R.error().message("账号被禁用！！ 请联系管理员");
+                }
                 Operator operator = new Operator();
                 BeanUtils.copyProperties(user, operator);
                 ToolUtil.loginSuccess(request, operator, "general");
@@ -779,10 +780,11 @@ public class PCController {
                 sessionVerificationCodeDel(request);
                 return R.ok();
             } else {
-                return R.error().message("该验证码错误");
+                return R.error().message("该手机号用户不存在");
             }
+        } else {
+            return R.error().message("验证码错误");
         }
-        return R.error().message("该手机号用户不存在");
     }
 
 

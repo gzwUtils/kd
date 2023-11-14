@@ -37,7 +37,7 @@ public class ServiceConfigInit extends AbstractCache {
     @Override
     protected void init() {
         Configs configs = configService.getConfigs();
-        if(ObjectUtil.isNotEmpty(configs) && Boolean.FALSE.equals(redisTemplate.hasKey(SERVICE_COFIG))){
+        if(ObjectUtil.isNotEmpty(configs)){
             redisTemplate.opsForValue().set(SERVICE_COFIG, ToolUtil.objectToJson(configs));
             caffeineCache.put(SERVICE_COFIG, configs);
             log.info("初始化服务配置加载成功.............................................");
