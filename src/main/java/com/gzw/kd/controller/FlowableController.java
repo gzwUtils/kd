@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.task.api.Task;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -43,7 +44,7 @@ public class FlowableController {
     @OperatorLog(value = "发起流程", description = "员工请假")
     @ApiOperation(value = "发起流程")
     @RequestMapping(value = "/start", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public R start(@RequestBody StudentLeaveInput input) {
+    public R start(@RequestBody @Validated StudentLeaveInput input) {
         flowableUtils.startAndComplete(input.getProcessKey(), input.getBusinessKey(), input.getMap());
         return R.ok();
     }
