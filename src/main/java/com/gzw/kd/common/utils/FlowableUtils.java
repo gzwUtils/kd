@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.validation.constraints.NotNull;
+import lombok.extern.slf4j.Slf4j;
 import org.flowable.engine.HistoryService;
 import org.flowable.engine.history.HistoricActivityInstance;
 import org.flowable.task.api.Task;
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Component;
  * @author gzw
  * @description：flowable工具
  */
+
+@Slf4j
 @Component
 @SuppressWarnings("all")
 public class FlowableUtils {
@@ -105,7 +108,7 @@ public class FlowableUtils {
 
         List<Task> tasks = taskService.createTaskQuery().taskCandidateGroup(group).orderByTaskCreateTime().desc().list();
         for (Task task : tasks) {
-            System.out.println(task.toString());
+            log.debug("task processInstanceId : {},id {}",task.getProcessInstanceId(),task.getId());
         }
         return tasks;
     }
