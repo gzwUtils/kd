@@ -24,7 +24,7 @@ public class EmailHandler extends BaseHandler {
         channelCode = ChannelTypeEnum.EMAIL.getCode();
 
         // 按照请求限流，默认单机 1 qps
-        double rateInitValue = 1.0;
+        double rateInitValue = 5.0;
         flowControlParam = FlowControlParam.builder().rateInitValue(rateInitValue)
                 .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
                 .rateLimiter(RateLimiter.create(rateInitValue)).build();

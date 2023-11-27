@@ -1,0 +1,240 @@
+ 2023-11-22 21:44:35.107 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-11-22 21:44:35.195 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-11-22 21:44:35.250 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei with PID 20187 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-11-22 21:44:35.252 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2023-11-22 21:45:21.979 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-11-22 21:45:22.023 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-11-22 21:45:22.096 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei with PID 20213 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-11-22 21:45:22.098 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2023-11-22 21:45:25.343 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-11-22 21:45:25.347 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-11-22 21:45:25.413 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 0 Redis repository interfaces.
+ 2023-11-22 21:45:25.951 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=bccf0bc8-e79a-34db-9e27-f26567bdbf1e
+ 2023-11-22 21:45:27.448 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-11-22 21:45:27.466 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-11-22 21:45:27.467 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-11-22 21:45:27.468 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2023-11-22 21:45:27.968 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-11-22 21:45:27.971 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5387 ms
+ 2023-11-22 21:45:34.090 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-11-22 21:45:39.422 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2023-11-22 21:45:44.353 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2023-11-22 21:45:44.407 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2023-11-22 21:45:44.414 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2023-11-22 21:45:44.418 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2023-11-22 21:45:44.419 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2023-11-22 21:45:44.419 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2023-11-22 21:45:44.439 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2023-11-22 21:52:26.067 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-11-22 21:52:26.106 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-11-22 21:52:26.162 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei with PID 20400 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-11-22 21:52:26.163 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2023-11-22 21:52:28.546 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-11-22 21:52:28.549 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-11-22 21:52:28.608 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 0 Redis repository interfaces.
+ 2023-11-22 21:52:28.925 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=bccf0bc8-e79a-34db-9e27-f26567bdbf1e
+ 2023-11-22 21:52:30.063 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-11-22 21:52:30.078 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-11-22 21:52:30.078 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-11-22 21:52:30.079 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2023-11-22 21:52:30.364 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-11-22 21:52:30.365 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3824 ms
+ 2023-11-22 21:52:36.152 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-11-22 21:52:41.306 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2023-11-22 21:52:46.254 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2023-11-22 21:52:46.308 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2023-11-22 21:52:46.316 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2023-11-22 21:52:46.322 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2023-11-22 21:52:46.323 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2023-11-22 21:52:46.323 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2023-11-22 21:52:46.347 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2023-11-22 21:56:19.195 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-11-22 21:56:19.240 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-11-22 21:56:19.315 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei with PID 20508 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-11-22 21:56:19.316 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2023-11-22 21:56:22.552 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-11-22 21:56:22.557 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-11-22 21:56:22.662 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 72 ms. Found 0 Redis repository interfaces.
+ 2023-11-22 21:56:23.296 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=bccf0bc8-e79a-34db-9e27-f26567bdbf1e
+ 2023-11-22 21:56:24.972 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-11-22 21:56:24.993 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-11-22 21:56:24.994 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-11-22 21:56:24.995 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2023-11-22 21:56:25.359 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-11-22 21:56:25.359 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5490 ms
+ 2023-11-22 21:56:31.223 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-11-22 21:56:36.473 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2023-11-22 21:56:41.418 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2023-11-22 21:56:41.488 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2023-11-22 21:56:41.502 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2023-11-22 21:56:41.508 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2023-11-22 21:56:41.509 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2023-11-22 21:56:41.510 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2023-11-22 21:56:41.539 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2023-11-22 21:57:20.317 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-11-22 21:57:20.348 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-11-22 21:57:20.415 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei with PID 20533 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-11-22 21:57:20.416 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2023-11-22 21:57:22.663 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-11-22 21:57:22.666 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-11-22 21:57:22.725 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 0 Redis repository interfaces.
+ 2023-11-22 21:57:23.059 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=bccf0bc8-e79a-34db-9e27-f26567bdbf1e
+ 2023-11-22 21:57:24.205 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-11-22 21:57:24.219 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-11-22 21:57:24.220 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-11-22 21:57:24.220 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2023-11-22 21:57:24.464 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-11-22 21:57:24.464 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3674 ms
+ 2023-11-22 21:57:30.374 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-11-22 21:57:35.574 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2023-11-22 21:57:40.769 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2023-11-22 21:57:40.805 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+ 2023-11-22 21:57:40.976 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.6655441015472476800/]
+ 2023-11-22 21:57:41.036 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2023-11-22 21:57:41.075 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2023-11-22 21:57:42.691 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+ 2023-11-22 21:57:42.860 [main] INFO  o.flywaydb.core.internal.database.DatabaseFactory - Database: jdbc:mysql://123.249.77.250:3306/doc (MySQL 5.7)
+ 2023-11-22 21:57:43.350 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closing ...
+ 2023-11-22 21:57:43.351 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closed
+ 2023-11-22 21:57:43.352 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closing ...
+ 2023-11-22 21:57:43.355 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closed
+ 2023-11-22 21:57:43.355 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2023-11-22 21:57:43.356 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2023-11-22 21:57:43.356 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2023-11-22 21:57:43.357 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2023-11-22 21:57:43.362 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2023-11-22 21:57:43.384 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2023-11-22 21:57:44.343 [Druid-ConnectionPool-Create-1537311996] INFO  com.alibaba.druid.pool.DruidDataSource - put physical connection to pool failed.
+ 2023-11-22 22:00:49.503 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2023-11-22 22:00:49.543 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2023-11-22 22:00:49.613 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on gaozhiwei with PID 20609 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2023-11-22 22:00:49.615 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2023-11-22 22:00:52.545 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2023-11-22 22:00:52.549 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2023-11-22 22:00:52.615 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 0 Redis repository interfaces.
+ 2023-11-22 22:00:52.981 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=bccf0bc8-e79a-34db-9e27-f26567bdbf1e
+ 2023-11-22 22:00:54.337 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2023-11-22 22:00:54.354 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2023-11-22 22:00:54.355 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2023-11-22 22:00:54.356 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2023-11-22 22:00:54.708 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2023-11-22 22:00:54.708 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4662 ms
+ 2023-11-22 22:01:00.647 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2023-11-22 22:01:05.846 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2023-11-22 22:01:10.918 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2023-11-22 22:01:10.951 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+ 2023-11-22 22:01:11.114 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.1535141775833801929/]
+ 2023-11-22 22:01:11.185 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2023-11-22 22:01:11.224 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2023-11-22 22:01:12.880 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+ 2023-11-22 22:01:13.030 [main] INFO  o.flywaydb.core.internal.database.DatabaseFactory - Database: jdbc:mysql://123.249.77.250:3306/doc (MySQL 5.7)
+ 2023-11-22 22:01:13.513 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closing ...
+ 2023-11-22 22:01:13.514 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closed
+ 2023-11-22 22:01:13.515 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closing ...
+ 2023-11-22 22:01:13.517 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closed
+ 2023-11-22 22:01:13.517 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2023-11-22 22:01:13.518 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2023-11-22 22:01:13.518 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2023-11-22 22:01:13.535 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2023-11-22 22:01:13.538 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2023-11-22 22:01:13.563 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.

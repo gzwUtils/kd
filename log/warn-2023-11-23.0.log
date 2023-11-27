@@ -1,0 +1,158 @@
+ 2023-11-23 09:30:04.631 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...188 :
+ 2023-11-23 09:30:11.876 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [logback-6] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ sun.misc.Unsafe.park(Native Method)
+ java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+ java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+ java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1088)
+ java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:809)
+ java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+ java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+ java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+ java.lang.Thread.run(Thread.java:748)
+ 2023-11-23 09:30:11.877 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Create-1394241900] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.net.PlainSocketImpl.socketConnect(Native Method)
+ java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+ java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+ java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+ java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+ java.net.Socket.connect(Socket.java:589)
+ com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153)
+ com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:63)
+ com.mysql.cj.NativeSession.connect(NativeSession.java:121)
+ com.mysql.cj.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:839)
+ com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:820)
+ com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:446)
+ com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+ com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1700)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1792)
+ com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2877)
+ 2023-11-23 09:30:11.878 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Destroy-1394241900] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Thread.sleep(Native Method)
+ com.alibaba.druid.pool.DruidDataSource$DestroyConnectionThread.run(DruidDataSource.java:2951)
+ 2023-11-23 09:30:11.879 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+ 2023-11-23 09:30:39.277 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...177 :
+ 2023-11-23 09:30:46.349 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...6239 :
+ 2023-11-23 09:30:52.270 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:twoDatasource time...5894 :
+ 2023-11-23 09:30:58.094 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:threeDatasource time...5804 :
+ 2023-11-23 09:31:00.833 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'operatorLogAspect': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'systemOperationLogServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'systemOperationLogMapper' defined in file [/Users/gaozhiwei/kd/target/classes/com/gzw/kd/mapper/SystemOperationLogMapper.class]: Unsatisfied dependency expressed through bean property 'sqlSessionTemplate'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is java.lang.reflect.InvocationTargetException
+ 2023-11-23 09:31:00.881 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Create-1507181879] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.net.PlainSocketImpl.socketConnect(Native Method)
+ java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+ java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+ java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+ java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+ java.net.Socket.connect(Socket.java:589)
+ com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153)
+ com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:63)
+ com.mysql.cj.NativeSession.connect(NativeSession.java:121)
+ com.mysql.cj.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:839)
+ com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:820)
+ com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:446)
+ com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+ com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1700)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1792)
+ com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2877)
+ 2023-11-23 12:54:57.448 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...183 :
+ 2023-11-23 12:55:04.679 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...6210 :
+ 2023-11-23 12:55:10.573 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:twoDatasource time...5867 :
+ 2023-11-23 12:55:17.501 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:threeDatasource time...6909 :
+ 2023-11-23 12:55:20.321 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'operatorLogAspect': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'systemOperationLogServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'systemOperationLogMapper' defined in file [/Users/gaozhiwei/kd/target/classes/com/gzw/kd/mapper/SystemOperationLogMapper.class]: Unsatisfied dependency expressed through bean property 'sqlSessionTemplate'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is java.lang.reflect.InvocationTargetException
+ 2023-11-23 12:55:20.387 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Create-1537311996] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.net.PlainSocketImpl.socketConnect(Native Method)
+ java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+ java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+ java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+ java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+ java.net.Socket.connect(Socket.java:589)
+ com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153)
+ com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:63)
+ com.mysql.cj.NativeSession.connect(NativeSession.java:121)
+ com.mysql.cj.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:839)
+ com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:820)
+ com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:446)
+ com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+ com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1700)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1792)
+ com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2877)
+ 2023-11-23 12:57:46.900 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...194 :
+ 2023-11-23 12:57:54.911 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...6888 :
+ 2023-11-23 12:58:06.088 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:twoDatasource time...11144 :
+ 2023-11-23 12:58:15.877 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:threeDatasource time...9769 :
+ 2023-11-23 12:58:20.147 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'operatorLogAspect': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'systemOperationLogServiceImpl': Injection of resource dependencies failed; nested exception is org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'systemOperationLogMapper' defined in file [/Users/gaozhiwei/kd/target/classes/com/gzw/kd/mapper/SystemOperationLogMapper.class]: Unsatisfied dependency expressed through bean property 'sqlSessionTemplate'; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is java.lang.reflect.InvocationTargetException
+ 2023-11-23 12:58:20.190 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Create-1537311996] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.net.PlainSocketImpl.socketConnect(Native Method)
+ java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+ java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+ java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+ java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+ java.net.Socket.connect(Socket.java:589)
+ com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153)
+ com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:63)
+ com.mysql.cj.NativeSession.connect(NativeSession.java:121)
+ com.mysql.cj.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:839)
+ com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:820)
+ com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:446)
+ com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+ com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1700)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1792)
+ com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2877)
+ 2023-11-23 13:03:25.112 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...234 :
+ 2023-11-23 13:03:33.907 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Create-33299582] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.net.PlainSocketImpl.socketConnect(Native Method)
+ java.net.AbstractPlainSocketImpl.doConnect(AbstractPlainSocketImpl.java:350)
+ java.net.AbstractPlainSocketImpl.connectToAddress(AbstractPlainSocketImpl.java:206)
+ java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:188)
+ java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+ java.net.Socket.connect(Socket.java:589)
+ com.mysql.cj.protocol.StandardSocketFactory.connect(StandardSocketFactory.java:153)
+ com.mysql.cj.protocol.a.NativeSocketConnection.connect(NativeSocketConnection.java:63)
+ com.mysql.cj.NativeSession.connect(NativeSession.java:121)
+ com.mysql.cj.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:839)
+ com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:820)
+ com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:446)
+ com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+ com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1700)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1792)
+ com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2877)
+ 2023-11-23 13:03:33.908 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Destroy-33299582] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Thread.sleep(Native Method)
+ com.alibaba.druid.pool.DruidDataSource$DestroyConnectionThread.run(DruidDataSource.java:2951)
+ 2023-11-23 13:03:33.909 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+ 2023-11-23 13:27:14.894 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...197 :
+ 2023-11-23 13:27:16.614 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...568 :
+ 2023-11-23 13:27:16.748 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:twoDatasource time...108 :
+ 2023-11-23 13:27:20.951 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Create-1893063019] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ sun.misc.Unsafe.park(Native Method)
+ java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+ java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+ com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2852)
+ 2023-11-23 13:27:20.952 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Destroy-1893063019] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Thread.sleep(Native Method)
+ com.alibaba.druid.pool.DruidDataSource$DestroyConnectionThread.run(DruidDataSource.java:2951)
+ 2023-11-23 13:27:20.953 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Create-549357837] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ sun.misc.Unsafe.park(Native Method)
+ java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+ java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+ com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2852)
+ 2023-11-23 13:27:20.953 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Destroy-549357837] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Thread.sleep(Native Method)
+ com.alibaba.druid.pool.DruidDataSource$DestroyConnectionThread.run(DruidDataSource.java:2951)
+ 2023-11-23 13:27:20.954 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Create-1940974851] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Thread.sleep(Native Method)
+ com.mysql.cj.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:886)
+ com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:820)
+ com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:446)
+ com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+ com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1700)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1792)
+ com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2877)
+ 2023-11-23 13:27:20.954 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Destroy-1940974851] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Thread.sleep(Native Method)
+ com.alibaba.druid.pool.DruidDataSource$DestroyConnectionThread.run(DruidDataSource.java:2951)
+ 2023-11-23 13:27:20.955 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
