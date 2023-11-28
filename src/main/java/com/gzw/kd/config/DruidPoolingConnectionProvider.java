@@ -60,7 +60,7 @@ public class DruidPoolingConnectionProvider implements ConnectionProvider {
         this.filters = new ArrayList<>();
         StatFilter filter = new StatFilter();
         filter.setLogSlowSql(true);
-        filter.setSlowSqlMillis(5000);
+        filter.setSlowSqlMillis(2000);
         filters.add(filter);
     }
 

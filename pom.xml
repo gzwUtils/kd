@@ -843,7 +843,7 @@
 				<artifactId>flyway-maven-plugin</artifactId>
 				<version>6.4.4</version>
 				<configuration>
-					<url>jdbc:mysql://127.0.0.1:3306/doc?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8&amp;zeroDateTimeBehavior=CONVERT_TO_NULL&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true</url>
+					<url>jdbc:mysql://127.0.0.1:3306/doc?characterEncoding=utf8&amp;connectTimeout=10000&amp;socketTimeout=30000&amp;autoReconnect=true&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;allowPublicKeyRetrieval=true</url>
 					<user>root</user>
 					<password>gzw941120</password>
 					<driver>com.mysql.cj.jdbc.Driver</driver>
