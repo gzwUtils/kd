@@ -37,6 +37,7 @@ CREATE TABLE `async_task`
     `exportName`        varchar(100) DEFAULT NULL COMMENT '导出名称',
     `numberOfSuccesses` int(11) DEFAULT NULL COMMENT '处理成功的条数',
     `numberOfFailed`    int(11) DEFAULT NULL COMMENT '处理失败的条数',
+    `file_path`         varchar(200) null comment '文件路径',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='async_task';
 
@@ -51,8 +52,10 @@ CREATE TABLE `config`
     `year_balance`   decimal(10, 2) DEFAULT NULL COMMENT '全年服务费',
     `extra_balance`  decimal(10, 2) DEFAULT NULL COMMENT '加项服务费',
     `other_balance`  decimal(10, 2) DEFAULT NULL COMMENT '其他服务费',
+    `create_time`    datetime       null comment '创建时间',
+    `update_time`    datetime       null comment '更新时间'
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='服务';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='服务配置';
 
 
 DROP TABLE IF EXISTS `doc`;
@@ -163,6 +166,7 @@ CREATE TABLE `user`
     `update_time` datetime     DEFAULT NULL COMMENT '更新时间',
     `is_admin`    int(1) DEFAULT '0' COMMENT '是否管理员',
     `error_retry` int(1) DEFAULT '0' COMMENT '错误次数',
+    `email`       varchar(60)   null comment 'email',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='user';
 
