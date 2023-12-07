@@ -76,6 +76,7 @@ CREATE TABLE `doc`
     `remark`        varchar(500) DEFAULT NULL COMMENT '备注',
     `address`       varchar(500) DEFAULT NULL COMMENT '客户地址',
     `consumer_Name` varchar(500) DEFAULT NULL COMMENT '客户姓名',
+    `tempId`        int          null comment '模版ID',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='doc';
 
@@ -184,6 +185,7 @@ CREATE TABLE `wx_template_msg`
     `role`          int(2) DEFAULT '0' COMMENT '0 关注 1 代办 ',
     `url`           varchar(100) DEFAULT NULL COMMENT '跳转url',
     `data`          varchar(100) DEFAULT NULL COMMENT '模板数据',
+    sys           varchar(10) default '公众号' null comment '系统来源',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='wx_template_msg';
 
