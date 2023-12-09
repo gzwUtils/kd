@@ -476,7 +476,7 @@ public interface Constants {
 
     public  static final String WX_DELETE_MENU_URL="https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=";
 
-    public  static final String WX_ACCESS_TOKEN_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=";
+    public  static final String WX_ACCESS_TOKEN_URL="https://api.weixin.qq.com/cgi-bin/stable_token";
 
     public  static final String WX_AUTH_ACCESS_TOKEN_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=authorization_code&appid=";
 
@@ -489,6 +489,8 @@ public interface Constants {
     public  static final String WX_MODEL_MSG_URL  = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=";
 
     public  static final String WX_APP_SECRET="secret";
+
+    public  static final String WX_APP_ID="appid";
 
     public  static final String WX_APP_ACCESS_TOKEN="access_token";
 
