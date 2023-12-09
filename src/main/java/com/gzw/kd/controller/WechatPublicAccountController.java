@@ -130,8 +130,11 @@ public class WechatPublicAccountController {
 
     @GetMapping("/getAccessToken")
     public String getAccessToken(){
-        String url = WX_ACCESS_TOKEN_URL + appid + "&"+WX_APP_SECRET+"=" + secret;
-        String result = HttpUtil.get(url);
+        Map<String, Object> data = new HashMap<>();
+        data.put(WX_APP_ID,appid);
+        data.put(WX_APP_SECRET,secret);
+        data.put("grant_type","client_credential");
+        String result = HttpUtil.post(WX_ACCESS_TOKEN_URL,data);
         JSONObject jsonObject = JSONUtil.parseObj(result);
         String accessToken = jsonObject.getStr(WX_APP_ACCESS_TOKEN);
         if (StringUtils.isNotBlank(accessToken)){

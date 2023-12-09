@@ -108,7 +108,7 @@ public class FileUploadUtil {
     public void waterMark(WaterMarkContent content, String suffix, String path, float opacity) {
         switch (suffix) {
             case ".pdf":
-                //waterMarkToPdf(content, path);
+                waterMarkToPdf(content, path);
                 break;
             case ".jpg":
                 waterMarkToImg(content, path, opacity);
