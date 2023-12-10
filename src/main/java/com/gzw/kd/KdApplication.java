@@ -34,6 +34,7 @@ public class KdApplication {
 		stopWatch.start();
 		SpringApplication app = new SpringApplication(KdApplication.class);
 		app.setBannerMode(Banner.Mode.LOG);
+		app.setHeadless(false);
 		ConfigurableApplicationContext context = app.run(args);
 		stopWatch.stop();
 		ServerProperties serverProperties = context.getBean(ServerProperties.class);

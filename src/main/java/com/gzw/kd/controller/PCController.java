@@ -595,7 +595,7 @@ public class PCController {
             session.setMaxInactiveInterval(60);
             response.getOutputStream().close();
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("验证码生成失败 error {}",e);
         }
     }
 

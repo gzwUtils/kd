@@ -134,10 +134,13 @@ public class WechatPublicAccountController {
         data.put(WX_APP_ID,appid);
         data.put(WX_APP_SECRET,secret);
         data.put("grant_type","client_credential");
+        data.put("force_refresh",true);
         String result = HttpUtil.post(WX_ACCESS_TOKEN_URL,data);
         JSONObject jsonObject = JSONUtil.parseObj(result);
         String accessToken = jsonObject.getStr(WX_APP_ACCESS_TOKEN);
+        log.warn("access_token... .url.....{} data {},result {}",WX_ACCESS_TOKEN_URL,data,result);
         if (StringUtils.isNotBlank(accessToken)){
+            redisTemplate.setValueSerializer(new StringRedisSerializer());
             redisTemplate.opsForValue().set(WX_APP_ACCESS_TOKEN, accessToken);
             redisTemplate.expire(WX_APP_ACCESS_TOKEN,WX_APP_EXPIRE_IN, TimeUnit.SECONDS);
         }
