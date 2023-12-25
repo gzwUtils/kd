@@ -27,7 +27,7 @@ public class MethodSwitchDataSourceAspectJ implements Ordered {
 
     @Before(value = "pointcut() && @annotation(specDataSource)",argNames = "specDataSource")
     public void before(SpecDataSource specDataSource){
-        DynamicDataSource.setDataSourceKey(specDataSource.value());
+        DynamicDataSource.setDataSourceKey(specDataSource.value().name());
     }
     @After(value = "pointcut()")
     public void after(){
