@@ -1,7 +1,9 @@
 package com.gzw.kd.common.utils;
 
+import com.gzw.kd.common.enums.DataSourceEnum;
 import com.gzw.kd.common.enums.ResultCodeEnum;
 import com.gzw.kd.common.exception.GlobalException;
+import com.gzw.kd.config.datasource.annotation.SpecDataSource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Component;
  * @author gzw
  * @description：flowable工具
  */
-
+@SpecDataSource(DataSourceEnum.FLOWABLE)
 @Slf4j
 @Component
 @SuppressWarnings("all")

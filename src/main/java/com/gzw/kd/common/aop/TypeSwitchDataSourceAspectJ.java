@@ -28,7 +28,7 @@ public class TypeSwitchDataSourceAspectJ implements Ordered {
 
     @Before(value = "pointcut() && @within(specDataSource)",argNames = "specDataSource")
     public void before(SpecDataSource specDataSource){
-        DynamicDataSource.setDataSourceKey(specDataSource.value());
+        DynamicDataSource.setDataSourceKey(specDataSource.value().name());
     }
     @After(value = "pointcut()")
     public void after(){

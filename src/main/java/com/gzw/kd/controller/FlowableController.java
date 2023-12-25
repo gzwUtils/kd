@@ -73,4 +73,11 @@ public class FlowableController {
     }
 
 
+    @OperatorLog(value = "获取任务列表", description = "获取指定用户组的任务列表")
+    @ApiOperation(value = "获取任务列表")
+    @RequestMapping(value = "/getListByGroup", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R getListByGroup(@RequestParam(value = "group") String group) {
+        List<Task> list = flowableUtils.getListByGroup(group);
+        return R.ok().data("taskList",list);
+    }
 }
