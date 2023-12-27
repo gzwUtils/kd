@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gzw.kd.common.entity.JobAndTrigger;
 import com.gzw.kd.mapper.JobDetailMapper;
+import com.gzw.kd.scheduletask.BaseJob;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
 import org.springframework.stereotype.Component;
@@ -56,9 +57,9 @@ public class QuartzManager{
      * @param cron   cron表达式
      */
 
-    public void addJob(String jName, String jGroup, String tName, String tGroup, String cron, Class jobClass) {
+    public void addJob(String jName, String jGroup, String tName, String tGroup, String cron, String jobClass) {
         try {
-            JobDetail jobDetail = JobBuilder.newJob(jobClass)
+            JobDetail jobDetail = JobBuilder.newJob(getClass(jobClass).getClass())
                     .withIdentity(jName, jGroup).storeDurably()
                     .build();
             CronTrigger trigger = TriggerBuilder.newTrigger()
@@ -98,5 +99,11 @@ public class QuartzManager{
         scheduler.pauseTrigger(TriggerKey.triggerKey(jName, jGroup));
         scheduler.unscheduleJob(TriggerKey.triggerKey(jName, jGroup));
         scheduler.deleteJob(JobKey.jobKey(jName, jGroup));
+    }
+
+
+    public static BaseJob getClass(String className) throws Exception {
+        Class<?> aClass = Class.forName(className);
+        return (BaseJob)aClass.newInstance();
     }
 }
