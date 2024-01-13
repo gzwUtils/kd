@@ -939,7 +939,7 @@ public class PCController {
     @PostMapping("/sendEmailMessage")
     @ResponseBody
     public R sendEmailMessage(@RequestParam("subject") String subject,@RequestParam("email") String email,@RequestParam("message") String  message) throws Exception {
-        MailUtil.getMailSend().sendEmail(subject,message,new String[]{email},true,"pc/email.html");
+        MailUtil.getMailSend().sendEmail(subject,message,new String[]{email},false,"pc/email.html");
         return R.ok();
     }
 
