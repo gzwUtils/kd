@@ -12,7 +12,9 @@ import com.gzw.kd.common.utils.AESCrypt;
 import com.gzw.kd.common.utils.AddressUtil;
 import com.gzw.kd.common.utils.ContextUtil;
 import com.gzw.kd.service.SystemOperationLogService;
+import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.StopWatch;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -48,15 +50,20 @@ public class OperatorLogAspect {
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint point) throws UnsupportedEncodingException {
         Object result = R.setResult(ResultCodeEnum.UNKNOWN_ERROR);
-        long beginTime = System.currentTimeMillis();
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
         try {
             result = point.proceed();
         } catch (Throwable e) {
             result = R.setResult(ResultCodeEnum.UNKNOWN_ERROR);
             log.error("operator  log exception {} ",e.getMessage(),e);
         }
-        long time = System.currentTimeMillis() - beginTime;
-        saveLog(point, time,result);
+        stopWatch.stop();
+        long time = stopWatch.getTime(TimeUnit.MILLISECONDS);
+        if(time > 500l){
+            log.warn("请求耗时...............{}ms",time);
+        }
+        saveLog(point,time ,result);
         return result;
     }
 

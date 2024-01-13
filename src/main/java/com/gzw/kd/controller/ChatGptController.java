@@ -5,7 +5,11 @@ import com.gzw.kd.service.ChartGptService;
 import com.gzw.kd.vo.input.GptInput;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.concurrent.TimeoutException;
 import javax.annotation.Resource;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Recover;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -30,6 +34,7 @@ public class ChatGptController {
      * @param gptInput 条件对象
      * @return 出参对象
      */
+    @Retryable(value = TimeoutException.class,maxAttempts = 4,backoff = @Backoff(delay = 1000,multiplier = 2))
     @ApiOperation(value = "提问")
     @OperatorLog(value = "提问",description = "learn")
     @RequestMapping(value = "/askAi",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
@@ -38,5 +43,12 @@ public class ChatGptController {
         String replyStr = chartGptService.send(gptInput.getAskStr());
 
         return R.ok().data("gpt", replyStr);
+    }
+
+
+    @SuppressWarnings("unused")
+    @Recover
+    public R fallback() {
+        return R.error();
     }
 }
