@@ -1578,5 +1578,11 @@ public class Demo {
      */
 
 
+    /**
+     * 查询服务进程CPU情况：top –Hp pid
+     * 查询JVM GC相关参数：jstat -gc pid 2000 (对 pid [进程号] 每隔 2s 输出一次日志)
+     * 打印当前堆栈信息：jstack -l pid >> stack.log
+     */
+
 
 }
