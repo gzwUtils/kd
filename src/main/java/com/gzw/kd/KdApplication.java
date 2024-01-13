@@ -13,12 +13,14 @@ import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.util.StopWatch;
 
 /**
  * @author 高志伟
  */
+@EnableRetry
 @EnableDiscoveryClient
 @ServletComponentScan
 @EnableScheduling

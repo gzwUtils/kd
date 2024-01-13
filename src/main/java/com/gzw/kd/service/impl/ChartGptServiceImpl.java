@@ -41,6 +41,7 @@ public class ChartGptServiceImpl implements ChartGptService {
 
     @Override
     public String send(String prompt) throws Exception {
+        log.warn("prompt.............................................{}",prompt);
         JSONObject bodyJson = new JSONObject();
         Map<String, String> header = new HashMap<>(2);
         header.put(Header.AUTHORIZATION+"","Bearer " + apiKey);
