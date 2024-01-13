@@ -259,7 +259,7 @@
     }
 
     websocket.onclose = function (){
-        alert("通道已关闭 请检查！！！！ ")
+        this.$message.error("通道已关闭 请检查！！！！ ");
         document.getElementById("online").value = '0';
         console.log('websocket close');
     }
