@@ -21,7 +21,7 @@ public interface UserService {
 
     Integer updatePasswordDocById(User user)throws  Exception;
 
-    Integer updateStatusByName(String name,int status)throws  Exception;
+    Integer updateStatusByName(String name,int status,int errorRetry)throws  Exception;
 
     Integer updateStatusById(String id,int status)throws  Exception;
 
@@ -31,5 +31,8 @@ public interface UserService {
 
 
     List<User> getAllUsers();
+
+
+    List<User> getAllStopUsers();
 
 }

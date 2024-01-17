@@ -349,7 +349,7 @@ public class PCController {
                         userService.updateErrorByName(user.getAccount(), user.getErrorRetry()+1);
                         return R.error().message("输入密码错误，您最多还可以尝试" + count + "次");
                     } else {
-                        userService.updateStatusByName(user.getAccount(), UserStatusEnum.STOP.getStatus());
+                        userService.updateStatusByName(user.getAccount(), UserStatusEnum.STOP.getStatus(),user.getErrorRetry()+1);
                         sessionVerificationCodeDel(request);
                         return R.setResult(ResultCodeEnum.USER_STOP);
                     }
