@@ -17,6 +17,8 @@ import com.gzw.kd.learn.model.filter.DemoGzwFilterChain;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterStage;
 import com.gzw.kd.learn.model.model.GzwThreadDemo;
 import com.gzw.kd.learn.pipeline.PiPeLineHandler;
+import com.gzw.kd.learn.spi.StandardRemoteServiceInterface;
+import com.gzw.kd.learn.spi.load.SpiServiceLoaderHelper;
 import com.gzw.kd.service.ConfigService;
 import com.gzw.kd.vo.input.ValidTest;
 import com.itextpdf.xmp.impl.Base64;
@@ -249,6 +251,16 @@ public class BaseController {
     @RequestMapping(value = "/pipe", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R pipe() {
         piPeLineHandler.exec();
+        return R.ok();
+    }
+
+
+    @ApiOperation(value = "spi")
+    @OperatorLog(value = "spi",description = "学习")
+    @RequestMapping(value = "/spi", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R spi() {
+        StandardRemoteServiceInterface anInterface = SpiServiceLoaderHelper.serviceInterface();
+        anInterface.exec();
         return R.ok();
     }
 }
