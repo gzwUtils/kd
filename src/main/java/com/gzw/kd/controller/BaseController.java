@@ -16,6 +16,7 @@ import com.gzw.kd.learn.model.callback.Server;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterChain;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterStage;
 import com.gzw.kd.learn.model.model.GzwThreadDemo;
+import com.gzw.kd.learn.pipeline.PiPeLineHandler;
 import com.gzw.kd.service.ConfigService;
 import com.gzw.kd.vo.input.ValidTest;
 import com.itextpdf.xmp.impl.Base64;
@@ -62,6 +63,9 @@ public class BaseController {
 
     @Resource
     private ConfigService configService;
+
+    @Resource
+    private PiPeLineHandler piPeLineHandler;
 
 
     @Resource
@@ -237,5 +241,14 @@ public class BaseController {
         Expression compile = AviatorEvaluator.compile(exp);
         Object execute = compile.execute();
         return R.ok().data("avit",execute);
+    }
+
+
+    @ApiOperation(value = "pipe")
+    @OperatorLog(value = "pipe",description = "学习")
+    @RequestMapping(value = "/pipe", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    public R pipe() {
+        piPeLineHandler.exec();
+        return R.ok();
     }
 }
