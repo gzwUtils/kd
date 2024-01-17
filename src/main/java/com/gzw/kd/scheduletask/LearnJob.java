@@ -1,9 +1,9 @@
 package com.gzw.kd.scheduletask;
 import com.gzw.kd.common.entity.User;
 import com.gzw.kd.common.enums.UserStatusEnum;
+import com.gzw.kd.common.utils.ApplicationContextUtils;
 import com.gzw.kd.service.UserService;
 import java.util.List;
-import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -17,9 +17,6 @@ import org.springframework.stereotype.Component;
 public class LearnJob implements BaseJob {
 
 
-    @Resource
-    UserService userService;
-
 
 
 
@@ -27,6 +24,7 @@ public class LearnJob implements BaseJob {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         log.info("quartz LearnJob execute start --------------------------");
+        UserService userService = ApplicationContextUtils.getBean(UserService.class);
         List<User> users = userService.getAllStopUsers();
         users.forEach(p->{
             try {
