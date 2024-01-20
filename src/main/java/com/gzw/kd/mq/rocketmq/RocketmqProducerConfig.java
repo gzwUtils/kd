@@ -41,11 +41,20 @@ public class RocketmqProducerConfig {
         DefaultMQProducer defaultMQProducer=new DefaultMQProducer(groupName,new AclClientRPCHook(new SessionCredentials(accessKey,secretKey)));
         defaultMQProducer.setNamesrvAddr(nameServAddr);
         defaultMQProducer.setVipChannelEnabled(false);
+        //消息最大长度，默认1024 * 1024 * 4(默认4M)
         defaultMQProducer.setMaxMessageSize(maxMessageSize);
+        //发送消息超时时间，默认3000
         defaultMQProducer.setSendMsgTimeout(sendMsgTimeout);
+        //发送消息失败重试次数
         defaultMQProducer.setRetryTimesWhenSendFailed(retryTimesWhenSendFailed);
-        defaultMQProducer.setUnitName("yc_ai_cm");
-        defaultMQProducer.setInstanceName("ai_cm");
+        //异步消息重试次数
+        defaultMQProducer.setRetryTimesWhenSendAsyncFailed(retryTimesWhenSendFailed);
+        //压缩消息阈值，默认4k(1024 * 4)
+        defaultMQProducer.setCompressMsgBodyOverHowmuch(4096);
+        // 是否在内部发送失败时重试另一个broker，默认false
+        defaultMQProducer.setRetryAnotherBrokerWhenNotStoreOK(false);
+        defaultMQProducer.setUnitName("kd_rocketmq");
+        defaultMQProducer.setInstanceName("kd_rocketmq");
         defaultMQProducer.start();
         log.info("rocketMq  produce server 创建成功 -------------------------------------------------");
         return defaultMQProducer;
