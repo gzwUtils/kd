@@ -49,7 +49,7 @@ public class OperatorLogAspect {
 
     @Around("pointcut()")
     public Object around(ProceedingJoinPoint point) throws UnsupportedEncodingException {
-        Object result = R.setResult(ResultCodeEnum.UNKNOWN_ERROR);
+        Object result = null;
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         try {

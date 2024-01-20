@@ -47,7 +47,7 @@ public class ResubmitInterceptor implements HandlerInterceptor {
 
 
     @Override
-    public boolean preHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) throws Exception {
+    public boolean preHandle(@NotNull HttpServletRequest request, @NotNull HttpServletResponse response, @NotNull Object handler) {
         if(!defaultEnabled){
             return true;
         }
