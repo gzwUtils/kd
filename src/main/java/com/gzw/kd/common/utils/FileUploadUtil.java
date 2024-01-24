@@ -111,6 +111,7 @@ public class FileUploadUtil {
                 waterMarkToPdf(content, path);
                 break;
             case ".jpg":
+            case ".jpeg":
                 waterMarkToImg(content, path, opacity);
                 break;
             default:
