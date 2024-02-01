@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @author gzw
- * @description：
+ * @description： init
  * @since：2023/11/8 11:23
  */
 @Slf4j
