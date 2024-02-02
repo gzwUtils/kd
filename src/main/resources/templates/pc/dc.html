@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>随机点餐</title>
+</head>
+<style>
+  body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: url(/assets/pc/images/dc.jpg);
+    background-size: 100% 500%;
+  }
+  #box{background-color:#CCC;width:400px;font:600 24px/3 "";text-align:center;margin:20px auto		;border-radius:12px;}
+  #btn{background-color:#CFF;width:100px;font:14px/2 "";text-align:center;margin:10px 46%		;border-radius:25px;}
+</style>
+<body>
+<div id="box">今天中午想点啥</div>
+<input type="button" id="btn" value="开始">
+</body>
+<script>
+
+  var arr = ["麻辣烫","冒菜","螺蛳粉","手指饼", "鸡蛋灌饼","煎饼","烤冷面","臭豆腐","铁板烧","烧烤","炸鸡"];
+
+  var box = document.getElementById("box")
+  var btn = document.getElementById("btn")
+
+  var i=0;
+  var t;
+
+  btn.onclick = function(){
+    if(i===0){
+      t = setInterval(function(){
+        box.innerHTML = arr[random(0,arr.length-1)];
+      }, 30);
+
+      i = 1;
+      btn.value = "停止"
+    }else{
+      clearInterval(t);
+      i = 0;
+      btn.value = "继续";
+    }
+  }
+
+
+  function random(a,b){
+    return Math.round(Math.random()*(a-b)+b);
+  }
+
+</script>
+</html>

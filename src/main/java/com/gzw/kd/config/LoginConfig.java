@@ -30,6 +30,7 @@ public class LoginConfig implements WebMvcConfigurer {
                 "/pc/phoneLogin",
                 "/pc/phoneCheckLogin",
                 "/pc/getCode",
+                "/pc/dc",
                 "/base/**",
                 "/wx/**",
                 "/pc/unknown",
