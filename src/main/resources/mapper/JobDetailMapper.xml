@@ -31,7 +31,7 @@
         detail.JOB_CLASS_NAME,
         tragger.TRIGGER_NAME,
         tragger.TRIGGER_GROUP,
-        tragger.TRIGGER_STATE
+        tragger.TRIGGER_STATE,
         cron.CRON_EXPRESSION,
         cron.TIME_ZONE_ID
         FROM

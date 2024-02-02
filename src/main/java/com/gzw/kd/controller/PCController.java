@@ -184,6 +184,12 @@ public class PCController {
         return "/pc/other";
     }
 
+    @RequestMapping(value = "/dc",method = RequestMethod.GET)
+    public String dc () {
+
+        return "/pc/dc";
+    }
+
     @RequestMapping(value = "/word",method = RequestMethod.GET)
     public String word () {
 
