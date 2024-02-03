@@ -114,7 +114,7 @@ public class WechatPublicAccountController {
                                 .setNickname(DEFAULT_NICK_NAME[RandomUtil.randomInt(DEFAULT_NICK_NAME.length)]+STRING_UNDERLINE+ SnowFlakeIdUtils.generatorId());
                     }
                     wxUserService.registerUser(wxUserInfo);
-                    MsgEvent msgEvent = new MsgEvent().setEvent(" 公众号关注").setUserName(wxUserInfo.getNickname()).setStatus(TemplateRoleEnum.GUAN_ZHU.getStatus()).setOpenId(wxUserInfo.getOpenid());
+                    MsgEvent msgEvent = new MsgEvent().setEvent("kd_公众号关注").setUserName(wxUserInfo.getNickname()).setStatus(TemplateRoleEnum.GUAN_ZHU.getStatus()).setOpenId(wxUserInfo.getOpenid());
                     ApplicationContext context = ApplicationContextUtils.getApplicationContext();
                     context.publishEvent(msgEvent);
                 } else {
