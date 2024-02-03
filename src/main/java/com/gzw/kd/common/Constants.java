@@ -712,4 +712,9 @@ public interface Constants {
     public final static Integer FALSE = 0;
 
 
+    /**
+     * nickName
+     */
+  public final static String [] DEFAULT_NICK_NAME= {"静谧之夜","心城风起潮落"};
+
 }
