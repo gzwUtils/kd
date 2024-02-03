@@ -92,8 +92,8 @@ public class WechatPublicAccountController {
                 outMessage.setContent("爱情万岁！！！！！！！");
             } else {
                 inContent = "掘金:https://juejin.cn/user/2151063691992622\n";
-                inContent +="github:https://github.com/gzwUtils/kd.git</br>\n";
-                inContent +="如有问题请联系:2876533492@qq.com</br>\n";
+                inContent +="github:https://github.com/gzwUtils/kd.git\n";
+                inContent +="如有问题请联系:2876533492@qq.com\n";
                 inContent +="后台地址:http://123.249.77.250";
                 outMessage.setContent(inContent);
             }
