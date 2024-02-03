@@ -163,6 +163,11 @@ public class PCController {
         return "/pc/chat";
     }
 
+    @RequestMapping(value = "/chat",method = RequestMethod.GET)
+    public String chat() {
+        return "/pc/kd";
+    }
+
     @RequestMapping(value = "/userInfo",method = RequestMethod.GET)
     public String userInfo() {
         return "/pc/userInfo";
