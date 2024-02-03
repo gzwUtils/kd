@@ -16,9 +16,6 @@
 </head>
 <body>
 <div id="app">
-      <el-link type="success">页面观看人数:</el-link>
-      <input type="text" id="online" disabled="disabled" size="10px"/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <input type="hidden" id ="userName" name="userName" value="${Session['user_key'].account}"/>
       <a  href="http://www.dmanywhere.cn/" target="_blank">pdm在线地址</a>&nbsp;&nbsp;
       <a  href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html" target="_blank">B+树</a>
@@ -237,36 +234,5 @@
               }
         }
     })
-
-    function getUUID(){
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function (c){
-            const r = Math.random() * 16 | 0;
-            const v = c === 'x'?r:(r & 0x3 | 0x8);
-            return v.toString(16);
-        })
-    }
-
-    const websocket = new WebSocket("ws://123.249.77.250:8092/websocket/" + getUUID());
-
-    websocket.onopen = function (){
-        websocket.send("connect success ......");
-    }
-
-    websocket.onmessage = function (msg){
-        const server = msg.data;
-        document.getElementById("online").value = server;
-        console.log(server);
-    }
-
-    websocket.onclose = function (){
-        this.$message.error("通道已关闭 请检查！！！！ ");
-        document.getElementById("online").value = '0';
-        console.log('websocket close');
-    }
-
-    websocket.onerror = function (){
-        alert("通道发生错误 请检查！！！！ ")
-        console.log('websocket error');
-    }
 </script>
 </html>
