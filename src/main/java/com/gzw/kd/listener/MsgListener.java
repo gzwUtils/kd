@@ -142,7 +142,7 @@ public class MsgListener {
         data.put(WX_APP_ID,appid);
         data.put(WX_APP_SECRET,secret);
         data.put("grant_type","client_credential");
-        String result = HttpUtil.post(WX_ACCESS_TOKEN_URL,data);
+        String result = HttpUtil.post(WX_ACCESS_TOKEN_URL,JSONUtil.toJsonStr(data));
         JSONObject jsonObject = JSONUtil.parseObj(result);
         String accessToken = jsonObject.getStr(WX_APP_ACCESS_TOKEN);
         if (StringUtils.isNotBlank(accessToken)) {

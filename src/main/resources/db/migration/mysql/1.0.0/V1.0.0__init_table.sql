@@ -15,6 +15,7 @@ CREATE TABLE `assign`
     `coupon`         int(1) DEFAULT '0' COMMENT '是否拥有优惠劵 0 没有 1 有',
     `coupon_balance` decimal(10, 2) DEFAULT '0.00' COMMENT '优惠劵额度',
     `openid`         varchar(100)   DEFAULT NULL COMMENT 'openId',
+    `syNumber`       int                         null comment '剩余次数',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='合同';
 
