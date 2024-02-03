@@ -109,7 +109,8 @@ public class WechatPublicAccountController {
                         wxUserInfo.setOpenid(inMessage.getFromUserName());
                         wxUserInfo.setSubscribe(1);
                         wxUserInfo.setSubscribe_time(currentTimeMillis);
-                        wxUserInfo.setLanguage("zh_CN").setName("kd"+SnowFlakeIdUtils.generatorId())
+                        wxUserInfo.setLanguage("zh_CN").setSubscribe_scene("ADD_SCENE_SEARCH").setHeadimgurl("https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI2GyzfhE5mKZ868euuvrqqylKAGZ5dSOWNW8Z2FZ4qOicJ6qOjf3chhXeicwMrQeRMSgSugEMnrTHQ/132")
+                                .setSex("2").setGroupid(0)
                                 .setNickname(DEFAULT_NICK_NAME[RandomUtil.randomInt(DEFAULT_NICK_NAME.length)]+STRING_UNDERLINE+ SnowFlakeIdUtils.generatorId());
                     }
                     wxUserService.registerUser(wxUserInfo);
