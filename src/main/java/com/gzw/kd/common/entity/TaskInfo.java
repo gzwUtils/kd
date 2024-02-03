@@ -60,7 +60,7 @@ public class TaskInfo {
     /**
      * 发送文案模型
      * template info 表存储的content是JSON(所有内容都会塞进去)
-     * 不同的渠道要发送的内容不一样(比如发push会有img，而短信没有)
+     * 不同的渠道要发送的内容不一样
      * 所以会有ContentModel
      */
     private String contentModel;
