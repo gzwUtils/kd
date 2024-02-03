@@ -1,7 +1,6 @@
 package com.gzw.kd.controller;
-
-
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
@@ -13,12 +12,12 @@ import com.gzw.kd.common.enums.EventTypeEnum;
 import com.gzw.kd.common.enums.MenuTypeEnum;
 import com.gzw.kd.common.enums.TemplateRoleEnum;
 import com.gzw.kd.common.utils.ApplicationContextUtils;
+import com.gzw.kd.common.utils.SnowFlakeIdUtils;
 import com.gzw.kd.listener.event.MsgEvent;
 import com.gzw.kd.service.DocService;
 import com.gzw.kd.service.WxUserService;
 import com.gzw.kd.vo.input.RequestVo;
 import io.swagger.annotations.Api;
-import java.io.IOException;
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -105,6 +104,13 @@ public class WechatPublicAccountController {
                     WxUserInfo wxUserInfo = wxUserinfoByOpenId(inMessage.getFromUserName());
                     if (ObjectUtil.isNotEmpty(wxUserInfo.getTagid_list())) {
                         wxUserInfo.setTagIdlist(wxUserInfo.getTagid_list().toString());
+                    } else {
+                        long currentTimeMillis = System.currentTimeMillis();
+                        wxUserInfo.setOpenid(inMessage.getFromUserName());
+                        wxUserInfo.setSubscribe(1);
+                        wxUserInfo.setSubscribe_time(currentTimeMillis);
+                        wxUserInfo.setLanguage("zh_CN").setName("kd"+SnowFlakeIdUtils.generatorId())
+                                .setNickname(DEFAULT_NICK_NAME[RandomUtil.randomInt(DEFAULT_NICK_NAME.length)]+STRING_UNDERLINE+ SnowFlakeIdUtils.generatorId());
                     }
                     wxUserService.registerUser(wxUserInfo);
                     MsgEvent msgEvent = new MsgEvent().setEvent(" 公众号关注").setUserName(wxUserInfo.getNickname()).setStatus(TemplateRoleEnum.GUAN_ZHU.getStatus()).setOpenId(wxUserInfo.getOpenid());
@@ -135,7 +141,7 @@ public class WechatPublicAccountController {
         data.put(WX_APP_SECRET,secret);
         data.put("grant_type","client_credential");
         data.put("force_refresh",true);
-        String result = HttpUtil.post(WX_ACCESS_TOKEN_URL,data);
+        String result = HttpUtil.post(WX_ACCESS_TOKEN_URL,JSONUtil.toJsonStr(data));
         JSONObject jsonObject = JSONUtil.parseObj(result);
         String accessToken = jsonObject.getStr(WX_APP_ACCESS_TOKEN);
         log.warn("access_token... .url.....{} data {},result {}",WX_ACCESS_TOKEN_URL,data,result);
@@ -336,13 +342,13 @@ public class WechatPublicAccountController {
         }
         return R.ok();
     }
-    public WxUserInfo wxUserinfoByOpenId(String openId) throws IOException {
+    public WxUserInfo wxUserinfoByOpenId(String openId){
         System.out.println("===========WxUserinfoByOpenId");
         String url = checkToken(WX_USER_URL);
         String infoUrl = url+"&openid=" + openId +"&lang=zh_CN";
         String result = HttpUtil.get(infoUrl);
         log.info("wx user info {}",result);
-        WxUserInfo codes = com.alibaba.fastjson.JSONObject.parseObject(result, WxUserInfo.class);
-        return codes;
+        WxUserInfo info = com.alibaba.fastjson.JSONObject.parseObject(result, WxUserInfo.class);
+        return info;
     }
 }
