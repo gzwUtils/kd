@@ -37,8 +37,7 @@
     }
 
     websocket.onclose = function (){
-        this.$message.error("通道已关闭 请检查！！！！ ");
-        console.log('websocket close');
+        showMessage("通道已关闭........","error",5000);
     }
 
     websocket.onmessage = function (msg){
@@ -47,8 +46,24 @@
     }
 
     websocket.onerror = function (){
-        this.$message.error("通道发生错误 请检查！！！！ ");
-        console.log('websocket error');
+        showMessage("通道发生错误 请检查！！！！ ","error",5000);
+    }
+
+    function showMessage(message, type, time) {
+        let str = ''
+        switch (type) {
+            case 'success':
+                str = '<div class="success-message" style="width: 300px;height: 40px;text-align: center;background-color:#daf5eb;;color: rgba(103,194,58,0.7);position: fixed;left: 50%;top: 5%;margin-left:-150px;margin-top:-20px;line-height: 40px;border-radius: 5px;z-index: 9999">\n' +
+                    '    <span class="mes-text">' + message + '</span></div>'
+                break;
+            case 'error':
+                str = '<div class="error-message" style="width: 300px;height: 40px;text-align: center;background-color: #f5f0e5;color: rgba(238,99,99,0.8);position: fixed;left: 50%;top: 10%;line-height: 40px;margin-left:-150px;margin-top:-20px;border-radius: 5px;;z-index: 9999">\n' +
+                    '    <span class="mes-text">' + message + '</span></div>'
+        }
+        $('body').append(str);
+        setTimeout(function () {
+            $('.' + type + '-message').remove();
+        }, time);
     }
 </script>
 </html>
