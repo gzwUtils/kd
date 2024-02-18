@@ -26,14 +26,14 @@ public class PiPeLineHandler {
         // 管道初始化
         PipeLine pipeline = new StandardPipeline();
 
-        //添加节点
+        //添加节点阀门
         pipeline.addValue(testValue);
         pipeline.addValue(switchValue);
 
         // 上下文
         PipelineContext pipelineContext = new StandardPipelineContext();
 
-        // 调用管道
+        // 调用上下文信息流转
         pipeline.invoke(pipelineContext);
 
     }
