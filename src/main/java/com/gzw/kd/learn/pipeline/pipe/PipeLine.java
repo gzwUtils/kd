@@ -1,8 +1,5 @@
 package com.gzw.kd.learn.pipeline.pipe;
 
-import com.gzw.kd.learn.pipeline.pipe.PipelineContext;
-import com.gzw.kd.learn.pipeline.pipe.PipelineValue;
-
 /**
  * @author gzw
  * @description：
@@ -15,21 +12,22 @@ public interface PipeLine {
 
     /**
      * 执行
+     * @param pipelineContext 管道上下文
      * @return res
      */
     boolean invoke(PipelineContext pipelineContext);
 
     /**
      * 添加值
-     * @param pipelineValue
-     * @return
+     * @param pipelineValue 管道节点
+     * @return res
      */
     boolean addValue(PipelineValue pipelineValue);
     /**
      * 移除值
      *
-     * @param pipelineValue
-     * @return
+     * @param pipelineValue 管道节点
+     * @return res
      */
     boolean removeValue(PipelineValue pipelineValue);
 }
