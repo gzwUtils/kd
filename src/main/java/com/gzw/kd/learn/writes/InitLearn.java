@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class InitLearn implements SmartInitializingSingleton, SmartLifecycle {
 
-    private boolean isRunning = false;
+    private volatile boolean isRunning = false;
 
 
     @Override
