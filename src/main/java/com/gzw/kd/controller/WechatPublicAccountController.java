@@ -10,11 +10,9 @@ import com.gzw.kd.common.annotation.Resubmit;
 import com.gzw.kd.common.entity.*;
 import com.gzw.kd.common.enums.EventTypeEnum;
 import com.gzw.kd.common.enums.MenuTypeEnum;
-import com.gzw.kd.common.enums.TemplateRoleEnum;
-import com.gzw.kd.common.utils.ApplicationContextUtils;
 import com.gzw.kd.common.utils.SnowFlakeIdUtils;
-import com.gzw.kd.listener.event.MsgEvent;
 import com.gzw.kd.service.DocService;
+import com.gzw.kd.service.WechatService;
 import com.gzw.kd.service.WxUserService;
 import com.gzw.kd.vo.input.RequestVo;
 import io.swagger.annotations.Api;
@@ -22,7 +20,6 @@ import java.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.validation.annotation.Validated;
@@ -60,6 +57,9 @@ public class WechatPublicAccountController {
 
     @Resource
     private RedisTemplate<String,String> redisTemplate;
+
+    @Resource
+    private WechatService wechatService;
 
     @GetMapping("/validate")
     @ResponseBody
@@ -118,9 +118,7 @@ public class WechatPublicAccountController {
                                 .setNickname(DEFAULT_NICK_NAME[RandomUtil.randomInt(DEFAULT_NICK_NAME.length)]+STRING_UNDERLINE+ SnowFlakeIdUtils.generatorId());
                     }
                     wxUserService.registerUser(wxUserInfo);
-                    MsgEvent msgEvent = new MsgEvent().setEvent("kd_公众号关注").setUserName(wxUserInfo.getNickname()).setStatus(TemplateRoleEnum.GUAN_ZHU.getStatus()).setOpenId(wxUserInfo.getOpenid());
-                    ApplicationContext context = ApplicationContextUtils.getApplicationContext();
-                    context.publishEvent(msgEvent);
+                    outMessage.setContent("感谢关注:"+wxUserInfo.getNickname());
                 } else {
                     outMessage.setContent("欢迎您回来");
                     WxUserInfo info = new WxUserInfo().setOpenid(inMessage.getFromUserName()).setSubscribe(1);
@@ -355,5 +353,35 @@ public class WechatPublicAccountController {
         log.info("wx user info {}",result);
         WxUserInfo info = com.alibaba.fastjson.JSONObject.parseObject(result, WxUserInfo.class);
         return info;
+    }
+
+
+    /**
+     * 群发图文信息
+     * @return
+     */
+
+    @RequestMapping(value = "/sendAll", method = RequestMethod.POST)
+    public R sendMessageToAll() {
+        boolean all = wechatService.sendMessageToAll();
+        if (!all) {
+            return R.error();
+        }
+        return R.ok();
+    }
+
+
+    /**
+     * 模版消息推送
+     * @return
+     */
+
+    @RequestMapping(value = "/sendTemplate", method = RequestMethod.POST)
+    public R sendTemplate() {
+        boolean all = wechatService.sendTemplate();
+        if (!all) {
+            return R.error();
+        }
+        return R.ok();
     }
 }
