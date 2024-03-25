@@ -18,8 +18,9 @@ import com.gzw.kd.vo.output.AsyncTaskOutput;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -35,7 +36,7 @@ import static com.gzw.kd.common.Constants.STRING_EMPTY;
 @DependsOn({"applicationContextUtils"})
 @Component
 @Slf4j
-public class AsyncTaskJobHandler{
+public class AsyncTaskJobHandler implements BaseJob {
 
     private final Collection<AsyncTaskService> asyncTaskHandlers;
 
@@ -53,7 +54,6 @@ public class AsyncTaskJobHandler{
         log.info("Async task impl list: {}", asyncTaskHandlers);
     }
 
-    @Scheduled(cron = "0 0/2 * * * ?")
     public void execute() {
         List<AsyncTasksEntity> asyncTaskLogs = asyncTaskLogService.fetchUnCompletedTasks(3);
 
@@ -124,4 +124,10 @@ public class AsyncTaskJobHandler{
         }
     }
 
+    @Override
+    public void execute(JobExecutionContext executionContext) throws JobExecutionException {
+        log.info("异步任务开始..........");
+        execute();
+        log.info("异步任务结束....................................");
+    }
 }
