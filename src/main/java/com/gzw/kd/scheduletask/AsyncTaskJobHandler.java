@@ -68,6 +68,10 @@ public class AsyncTaskJobHandler implements BaseJob {
 
                             try {
                                 log.info("async task execute  menu {} type {}",logs.getFromMenu(),logs.getType());
+
+                                // 记录任务处理状态为处理中
+                                asyncTaskLogService.updateOne(logs.getId(), AsyncTaskStatusEnum.PROCESSING
+                                        , null, null,null);
                                 // 提交任务至线程池中
                                 asyncTaskExecutorService.submitTask(
                                         // 执行asyncTask实现类processAsyncTask方法
@@ -80,9 +84,6 @@ public class AsyncTaskJobHandler implements BaseJob {
                                                 , taskExecuteStatus(ret)
                                                 , ret.getAsyncTaskOutput()
                                                 , exceptionMessage(ret),ret.getAsyncTaskOutput().getFilePath()));
-                                // 记录任务处理状态为处理中
-                                asyncTaskLogService.updateOne(logs.getId(), AsyncTaskStatusEnum.PROCESSING
-                                        , null, null,null);
                             } catch (RejectedExecutionException ex) {
                                 asyncTaskLogService.updateOne(logs.getId(), AsyncTaskStatusEnum.FAILURE
                                         , null, ex.getMessage(),null);

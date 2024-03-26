@@ -87,7 +87,7 @@ class KdApplicationTests {
     @Test
     void smc() throws Exception {
         System.out.println(aesCrypt.encrypt("zwh"));
-        System.out.println(aesCrypt.decrypt("YwaBH/lSbq7lnOeHAt4OJw=="));
+        System.out.println(aesCrypt.decrypt("mOSFJVbruZPLzajDbPUrPAvYDuEcNHoYUaISTmn3+2r4rWIUi5Mg1VVfgzqjn+ttUpk0y8DwJh0FgXhJ0gWhpA=="));
         String password = SM4Utils.encryptData_CBC("abdc1234", SM4Utils.DEFAULT_KEY, SM4Utils.DEFAULT_IV, false, SM4Utils.CIPHER_TEXT_BASE64);
         String plainPassword = SM4Utils.decryptData_CBC(password, SM4Utils.DEFAULT_KEY, SM4Utils.DEFAULT_IV, false, SM4Utils.CIPHER_TEXT_BASE64);
         log.info(password + "-----------------------------------encrryPass---------------------------------------------------------------------");
