@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @SuppressWarnings("unused")
 public class Singleton {
 
-    public static final Singleton INSTANCE=new Singleton();
+    private static final Singleton INSTANCE=new Singleton();
 
     private Singleton(){
 

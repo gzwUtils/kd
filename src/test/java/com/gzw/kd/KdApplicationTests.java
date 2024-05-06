@@ -63,8 +63,8 @@ class KdApplicationTests {
     @Test
     void base64() {
         String code = Base64.decodeStr("cGljb0NURns1M3J2M3JfNTNydjNyXzUzcnYzcl81M3J2M3JfNTNydjNyfQ");
-        System.out.println(code+"=================================================");
-        System.out.println(new Date().getHours());
+        log.info(code+"=================================================");
+        log.info(String.valueOf(new Date().getHours()));
     }
 
     @Test
@@ -86,8 +86,8 @@ class KdApplicationTests {
 
     @Test
     void smc() throws Exception {
-        System.out.println(aesCrypt.encrypt("zwh"));
-        System.out.println(aesCrypt.decrypt("mOSFJVbruZPLzajDbPUrPAvYDuEcNHoYUaISTmn3+2r4rWIUi5Mg1VVfgzqjn+ttUpk0y8DwJh0FgXhJ0gWhpA=="));
+        log.info(aesCrypt.encrypt("gzw"));
+        log.info(aesCrypt.decrypt("mOSFJVbruZPLzajDbPUrPAvYDuEcNHoYUaISTmn3+2r4rWIUi5Mg1VVfgzqjn+ttUpk0y8DwJh0FgXhJ0gWhpA=="));
         String password = SM4Utils.encryptData_CBC("abdc1234", SM4Utils.DEFAULT_KEY, SM4Utils.DEFAULT_IV, false, SM4Utils.CIPHER_TEXT_BASE64);
         String plainPassword = SM4Utils.decryptData_CBC(password, SM4Utils.DEFAULT_KEY, SM4Utils.DEFAULT_IV, false, SM4Utils.CIPHER_TEXT_BASE64);
         log.info(password + "-----------------------------------encrryPass---------------------------------------------------------------------");

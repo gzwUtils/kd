@@ -5,7 +5,6 @@ import com.github.benmanes.caffeine.cache.Cache;
 import com.gzw.kd.cache.AbstractCache;
 import static com.gzw.kd.common.Constants.SERVICE_COFIG;
 import com.gzw.kd.common.entity.Configs;
-import com.gzw.kd.common.exception.Asserts;
 import com.gzw.kd.common.utils.ToolUtil;
 import com.gzw.kd.service.ConfigService;
 import javax.annotation.Resource;
@@ -41,8 +40,6 @@ public class ServiceConfigInit extends AbstractCache {
             redisTemplate.opsForValue().set(SERVICE_COFIG, ToolUtil.objectToJson(configs));
             caffeineCache.put(SERVICE_COFIG, configs);
             log.info("初始化服务配置加载成功.............................................");
-        } else {
-            Asserts.fail("初始化服务配置失败........................................");
         }
     }
 

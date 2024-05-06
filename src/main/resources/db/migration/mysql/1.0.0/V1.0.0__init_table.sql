@@ -54,7 +54,7 @@ CREATE TABLE `config`
     `extra_balance`  decimal(10, 2) DEFAULT NULL COMMENT '加项服务费',
     `other_balance`  decimal(10, 2) DEFAULT NULL COMMENT '其他服务费',
     `create_time`    datetime       null comment '创建时间',
-    `update_time`    datetime       null comment '更新时间'
+    `update_time`    datetime       null comment '更新时间',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='服务配置';
 
