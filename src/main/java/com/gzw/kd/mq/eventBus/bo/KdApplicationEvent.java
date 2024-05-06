@@ -11,6 +11,9 @@ import org.springframework.context.ApplicationEvent;
 @Getter
 public class KdApplicationEvent extends ApplicationEvent {
 
+    private static final long serialVersionUID = 1L;
+
+
     private final SpringEventBusSource springEventBusSource;
 
     public KdApplicationEvent(Object source, SpringEventBusSource springEventBusSource) {

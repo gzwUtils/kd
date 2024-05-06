@@ -1,0 +1,34 @@
+ 2024-04-09 23:56:17.058 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2024-04-09 23:56:17.117 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2024-04-09 23:56:17.162 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on bogon with PID 78892 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2024-04-09 23:56:17.169 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2024-04-09 23:56:19.668 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2024-04-09 23:56:19.672 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2024-04-09 23:56:19.743 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 52 ms. Found 0 Redis repository interfaces.
+ 2024-04-09 23:56:20.170 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=99c19bf2-c4cb-3fad-a34f-98912ba18b40
+ 2024-04-09 23:56:21.584 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2024-04-09 23:56:21.597 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2024-04-09 23:56:21.598 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2024-04-09 23:56:21.599 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2024-04-09 23:56:21.892 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2024-04-09 23:56:21.892 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4296 ms
+ 2024-04-09 23:56:26.725 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2024-04-09 23:56:26.773 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2024-04-09 23:56:26.804 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.

@@ -1585,4 +1585,16 @@ public class Demo {
      */
 
 
+    /**
+     * spring 事务的几个接口
+     *
+     * PlatformTransactionManager：（平台）事务管理器，Spring 事务策略的核心。
+     * TransactionDefinition：事务定义信息(事务隔离级别、传播行为、超时、只读、回滚规则)。
+     * TransactionStatus：事务运行状态。
+     *
+     *
+     * AutoConfigurationImportSelector  加载自动装配 实现 importSelector 重写了selectImports方法 getAutoConfigurationEntry
+     * @Configuration --- ConditionalOnClass
+     */
+
 }

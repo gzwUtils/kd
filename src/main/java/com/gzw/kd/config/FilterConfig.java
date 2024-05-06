@@ -85,7 +85,7 @@ public class FilterConfig {
         }
 
         private void writeFailureRestResponse(HttpServletResponse response) throws IOException {
-            R res = R.error().code(ERR_NO_LOGIN).message(MessageUtils.getMessage(ERR_NO_ACCESS_PRIVILEGE));
+            R res = R.error().code(ERR_NO_ACCESS_PRIVILEGE).message(MessageUtils.getMessage(ERR_NO_ACCESS_PRIVILEGE));
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             StreamUtils.copy(JSONObject.toJSONString(res), CharsetUtil.CHARSET_UTF_8, response.getOutputStream());
         }
