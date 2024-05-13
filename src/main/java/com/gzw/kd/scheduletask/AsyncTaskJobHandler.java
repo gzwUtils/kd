@@ -10,15 +10,16 @@ import com.gzw.kd.common.enums.ResultCodeEnum;
 import com.gzw.kd.common.utils.AddressUtil;
 import com.gzw.kd.common.utils.ApplicationContextUtils;
 import com.gzw.kd.common.utils.IpUtil;
+import com.gzw.kd.common.utils.XxlJobLogUtil;
 import com.gzw.kd.export.AsyncTaskExecutorService;
 import com.gzw.kd.export.AsyncTaskLogService;
 import com.gzw.kd.export.AsyncTaskService;
 import com.gzw.kd.service.SystemOperationLogService;
 import com.gzw.kd.vo.output.AsyncTaskOutput;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
@@ -36,7 +37,7 @@ import static com.gzw.kd.common.Constants.STRING_EMPTY;
 @DependsOn({"applicationContextUtils"})
 @Component
 @Slf4j
-public class AsyncTaskJobHandler implements BaseJob {
+public class AsyncTaskJobHandler {
 
     private final Collection<AsyncTaskService> asyncTaskHandlers;
 
@@ -54,7 +55,7 @@ public class AsyncTaskJobHandler implements BaseJob {
         log.info("Async task impl list: {}", asyncTaskHandlers);
     }
 
-    public void execute() {
+    public void handle() {
         List<AsyncTasksEntity> asyncTaskLogs = asyncTaskLogService.fetchUnCompletedTasks(3);
 
         if (CollectionUtil.isNotEmpty(asyncTaskLogs)) {
@@ -125,10 +126,10 @@ public class AsyncTaskJobHandler implements BaseJob {
         }
     }
 
-    @Override
-    public void execute(JobExecutionContext executionContext) throws JobExecutionException {
-        log.info("异步任务开始..........");
-        execute();
-        log.info("异步任务结束....................................");
+    @XxlJob("AsyncTaskJobHandler")
+    public void execute() throws JobExecutionException {
+        XxlJobLogUtil.log(log,false,"异步任务开始执行");
+        handle();
+        XxlJobLogUtil.log(log,false,"异步任务执行结束");
     }
 }
