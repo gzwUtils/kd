@@ -21,7 +21,6 @@ import com.gzw.kd.common.utils.*;
 import com.gzw.kd.controller.es.OperatorLogIndex;
 import com.gzw.kd.export.AsyncTaskLogService;
 import com.gzw.kd.export.ExportFileMeta;
-import com.gzw.kd.listener.MysessionListener;
 import com.gzw.kd.listener.event.MsgEvent;
 import com.gzw.kd.mail.MailUtil;
 import com.gzw.kd.scheduletask.ScheduleTask;
@@ -220,8 +219,8 @@ public class PCController {
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         Operator operator = (Operator) request.getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
+        SessionContext.getInstance().getSessionMap().remove(operator.getAccount());
         push(request, OnlineStatusEnum.OFF_LINE.getStatus());
-        MysessionListener.sessionContext.getSessionMap().remove(operator.getAccount());
         request.getSession().removeAttribute(Constants.LOGIN_USER_SESSION_KEY);
         return "/pc/login";
     }
@@ -302,9 +301,9 @@ public class PCController {
     }
 
     private void push(HttpServletRequest request, Integer flag) {
-        User attribute = (User) request.getSession().getAttribute(LOGIN_USER_SESSION_KEY);
+        Operator attribute = (Operator) request.getSession().getAttribute(LOGIN_USER_SESSION_KEY);
         if (ObjectUtil.isNotEmpty(attribute)) {
-            Object onLineTime = request.getSession().getAttribute(LOGIN_USER_SESSION_ON_LINE_TIME + attribute.getAccount());
+            Object onLineTime = request.getSession().getAttribute(LOGIN_USER_SESSION_ON_LINE_TIME + STRING_UNDERLINE + attribute.getAccount());
             MsgEvent msgEvent = new MsgEvent().setEvent(OnlineStatusEnum.getDesc(flag)).setUserName(attribute.getAccount()).setOnLineTime(onLineTime.toString()).setOffLineTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S)).setStatus(flag);
             ApplicationContext context = ApplicationContextUtils.getApplicationContext();
             context.publishEvent(msgEvent);
@@ -316,12 +315,6 @@ public class PCController {
     @RequestMapping(value = "/loginAction", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R loginAction(HttpServletRequest request, String userName, String password, String code, String timestamp) throws Exception {
         Operator operator = new Operator();
-        HttpSession session = MysessionListener.sessionContext.getSessionMap().get(userName);
-        if (session != null) {
-            log.warn("用户重复登陆");
-            MysessionListener.sessionContext.getSessionMap().remove(userName);
-            MysessionListener.sessionContext.getSessionMap().remove(session.getId());
-        }
         if (StringUtils.isBlank(userName) || StringUtils.isBlank(password) || StringUtils.isBlank(code)) {
             return R.setResult(ResultCodeEnum.PARAM_ABSENT);
         }

@@ -4,7 +4,6 @@ import cn.hutool.core.util.CharsetUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.gzw.kd.common.Constants;
 import static com.gzw.kd.common.ErrorCode.ERR_NO_ACCESS_PRIVILEGE;
-import static com.gzw.kd.common.ErrorCode.ERR_NO_LOGIN;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.utils.MessageUtils;
 import com.gzw.kd.common.xss.XssFilter;
