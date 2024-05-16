@@ -3,6 +3,7 @@ package com.gzw.kd.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.google.common.collect.Maps;
+import static com.gzw.kd.common.Constants.INT_FOUR;
 import com.gzw.kd.common.enums.DataSourceEnum;
 import java.util.Map;
 import javax.sql.DataSource;
@@ -62,7 +63,7 @@ public class DataSourceConfig {
                                         @Qualifier("twoDatasource") DataSource two,
                                         @Qualifier("threeDatasource") DataSource three,
                                         @Qualifier("sqliteDataSource") DataSource sqlite) {
-        Map<Object, Object> dsMap = Maps.newHashMapWithExpectedSize(INT_THREE);
+        Map<Object, Object> dsMap = Maps.newHashMapWithExpectedSize(INT_FOUR);
         dsMap.put(DataSourceEnum.MASTER, one);
         dsMap.put(DataSourceEnum.TEST, two);
         dsMap.put(DataSourceEnum.FLOWABLE, three);

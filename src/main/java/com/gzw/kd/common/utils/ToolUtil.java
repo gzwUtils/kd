@@ -8,10 +8,8 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gzw.kd.common.entity.Operator;
-import com.gzw.kd.listener.MysessionListener;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBContext;
@@ -715,8 +713,7 @@ public class ToolUtil {
         account.setTarget(INT_ZERO);
         session.setAttribute(LOGIN_USER_SESSION_KEY, account);
         session.setMaxInactiveInterval(SESSION_EXPIRE_TIME);
-        session.setAttribute(LOGIN_USER_SESSION_ON_LINE_TIME+account.getAccount(),LocalDateTime.now().format(DATE_TIME_FORMAT_S));
-        MysessionListener.sessionContext.getSessionMap().put(account.getAccount(), session);
+        session.setAttribute(LOGIN_USER_SESSION_ON_LINE_TIME+STRING_UNDERLINE+account.getAccount(),LocalDateTime.now().format(DATE_TIME_FORMAT_S));
         return account;
     }
 

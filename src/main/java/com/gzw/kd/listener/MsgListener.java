@@ -12,6 +12,7 @@ import com.gzw.kd.common.utils.AESCrypt;
 import com.gzw.kd.common.entity.WeChatTemplateMsg;
 import com.gzw.kd.common.entity.WxErrorCode;
 import com.gzw.kd.common.entity.WxUserInfo;
+import com.gzw.kd.common.utils.SessionContext;
 import com.gzw.kd.listener.event.MsgEvent;
 import com.gzw.kd.service.TemplateService;
 import com.gzw.kd.service.WxUserService;
@@ -64,9 +65,9 @@ public class MsgListener {
 
     @EventListener(MsgEvent.class)
     public void sendMsg(MsgEvent event) throws Exception {
-        int onlineNum = MysessionListener.sessionContext.getSessionMap().size();
+        int onlineNum = SessionContext.getInstance().getSessionMap().size();
         if (event.getStatus() == OnlineStatusEnum.OFF_LINE.getStatus()) {
-            log.info("用户:{} {},时间:{} 在线人数:{}", event.getUserName(), event.getEvent(), event.getOnLineTime() + "-" + event.getOffLineTime(), onlineNum - 1);
+            log.info("用户:{} {},时间:{} 在线人数:{}", event.getUserName(), event.getEvent(), event.getOnLineTime() + "-" + event.getOffLineTime(), onlineNum);
         } else if (event.getStatus() == OnlineStatusEnum.ON_LINE.getStatus()) {
             log.info("用户:{} {},时间:{} 在线人数:{}", event.getUserName(), event.getEvent(), event.getOnLineTime(), onlineNum);
         } else {

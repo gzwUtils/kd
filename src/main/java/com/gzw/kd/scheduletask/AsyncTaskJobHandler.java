@@ -16,11 +16,11 @@ import com.gzw.kd.export.AsyncTaskLogService;
 import com.gzw.kd.export.AsyncTaskService;
 import com.gzw.kd.service.SystemOperationLogService;
 import com.gzw.kd.vo.output.AsyncTaskOutput;
+import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.JobExecutionException;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
@@ -127,9 +127,10 @@ public class AsyncTaskJobHandler {
     }
 
     @XxlJob("AsyncTaskJobHandler")
-    public void execute() throws JobExecutionException {
+    public ReturnT<String> execute(){
         XxlJobLogUtil.log(log,false,"异步任务开始执行");
         handle();
         XxlJobLogUtil.log(log,false,"异步任务执行结束");
+        return ReturnT.SUCCESS;
     }
 }
