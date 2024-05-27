@@ -68,8 +68,9 @@ public class MessageTemplateController {
      */
     @PostMapping("copy/{id}")
     @ApiOperation("/根据Id复制")
-    public void copyById(@PathVariable("id") Long id) {
+    public R copyById(@PathVariable("id") Long id) {
         messageTemplateService.copy(id);
+        return R.ok();
     }
 
 

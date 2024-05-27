@@ -36,7 +36,7 @@ public class MysessionListener implements HttpSessionListener, HttpSessionAttrib
             boolean online = isOnline(attr.getAccount());
             if(online){
                 HttpSession session1 = SessionContext.getInstance().getSessionMap().get(attr.getAccount());
-                log.warn("账户:{} 重复登陆",attr.getAccount());
+                log.warn("账户:{} 重复登陆.....................................",attr.getAccount());
                 session1.invalidate();
             }
             SessionContext.getInstance().getSessionMap().put(attr.getAccount(), session);
