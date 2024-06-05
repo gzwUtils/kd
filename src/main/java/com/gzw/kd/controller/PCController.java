@@ -381,9 +381,10 @@ public class PCController {
                 }
                 return R.setResult(ResultCodeEnum.DuplicateKey);
             }
+            String account = dataUser.getAccount().equals(user.getAccount())?user.getAccount()+RandomUtil.randomInt(100):user.getAccount();
             String upperCase = MD5Util.md5(user.getPassword()).toUpperCase();
             User admin = new User().setCreateTime(LocalDateTime.now()).setStatus(UserStatusEnum.START.getStatus()).setPassword(upperCase)
-                    .setAccount(user.getAccount()).setIsAdmin(user.getIsAdmin()).setPhone(user.getPhone()).setEmail(user.getEmail());
+                    .setAccount(account).setIsAdmin(user.getIsAdmin()).setPhone(user.getPhone()).setEmail(user.getEmail());
             userService.registerUser(admin);
             redisLock.releaseLock(REGISTER_REDIS_KEY, REGISTER_REDIS_EXPIRES);
         } else {
