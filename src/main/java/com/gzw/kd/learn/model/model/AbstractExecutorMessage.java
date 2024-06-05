@@ -15,15 +15,15 @@ public abstract class AbstractExecutorMessage implements Callable<User> {
 
     /**
      * 唯一标识
-     * @return id
+     * @return
      */
     public abstract Long uniqueId();
 
 
     /**
      * 真正执行的逻辑
-     * @param id flag
-     * @return 用户信息
+     * @param id
+     * @return
      */
 
     public abstract User handler(Integer id);
