@@ -52,7 +52,7 @@ public class RocketmqProducerConfig {
         //压缩消息阈值，默认4k(1024 * 4)
         defaultMQProducer.setCompressMsgBodyOverHowmuch(4096);
         // 是否在内部发送失败时重试另一个broker，默认false
-        defaultMQProducer.setRetryAnotherBrokerWhenNotStoreOK(false);
+        defaultMQProducer.setRetryAnotherBrokerWhenNotStoreOK(true);
         defaultMQProducer.setUnitName("kd_rocketmq");
         defaultMQProducer.setInstanceName("kd_rocketmq");
         defaultMQProducer.start();

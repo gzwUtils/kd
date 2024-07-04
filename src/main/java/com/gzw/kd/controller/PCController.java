@@ -44,6 +44,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -604,6 +605,7 @@ public class PCController {
     }
 
 
+    @Transactional(rollbackFor = Exception.class)
     @OperatorLog(value = "节点流转",description = "流程节点流转")
     @RequestMapping(value = "/setDocStatus",method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
@@ -611,6 +613,7 @@ public class PCController {
         Doc doc = new Doc();
         int stat = Integer.parseInt(status) - 1;
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
+        Doc docById = m_docService.getDocById(Integer.parseInt(id));
         if(ObjectUtil.isNotEmpty(user)){
             if (stat == StatusEnum.APPROVE.getStatus()) {
                 doc.setAudit(user.getAccount());
@@ -620,7 +623,7 @@ public class PCController {
             doc.setStatus(stat);
             doc.setIssueDate(LocalDateTime.now());
             doc.setId(Integer.parseInt(id));
-            doc.setRemark(remark);
+            doc.setRemark(docById.getRemark()+"\r\n"+remark);
             int count = m_docService.updateStatusForDocById(doc);
             if (count != 0) {
                 return R.ok();
