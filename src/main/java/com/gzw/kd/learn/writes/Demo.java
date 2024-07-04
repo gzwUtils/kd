@@ -1593,7 +1593,7 @@ public class Demo {
      * TransactionStatus：事务运行状态。
      *
      *
-     * AutoConfigurationImportSelector  加载自动装配 实现 importSelector 重写了selectImports方法 getAutoConfigurationEntry
+     * AutoConfigurationImportSelector  加载自动装配 实现 importSelector 重写了selectImports方法 ---SpringFactoriesLoader.loadFactoryNames  getAutoConfigurationEntry
      * @Configuration --- ConditionalOnClass
      */
 

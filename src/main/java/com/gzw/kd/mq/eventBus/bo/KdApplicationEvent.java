@@ -1,5 +1,6 @@
 package com.gzw.kd.mq.eventBus.bo;
 
+import java.io.Serializable;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
@@ -9,7 +10,7 @@ import org.springframework.context.ApplicationEvent;
  * @since：2023/5/24 11:24
  */
 @Getter
-public class KdApplicationEvent extends ApplicationEvent {
+public class KdApplicationEvent extends ApplicationEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
