@@ -7,16 +7,12 @@ import static com.gzw.kd.common.Constants.*;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.entity.*;
 import com.gzw.kd.common.enums.StatusEnum;
-import com.gzw.kd.common.enums.TemplateRoleEnum;
 import com.gzw.kd.common.generators.RandomIdGenerator;
 import com.gzw.kd.common.utils.AESCrypt;
 import com.gzw.kd.common.utils.AliPayUtils;
 import com.gzw.kd.common.utils.ApplicationContextUtils;
 import com.gzw.kd.listener.event.MsgEvent;
-import com.gzw.kd.service.CustomerService;
-import com.gzw.kd.service.DocService;
-import com.gzw.kd.service.OrderService;
-import com.gzw.kd.service.WxUserService;
+import com.gzw.kd.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.io.IOException;
@@ -82,6 +78,10 @@ public class WxIndexController {
 
     @Resource
     RandomIdGenerator randomIdGenerator;
+
+
+    @Resource
+    TemplateService templateService;
 
 
     @Resource
@@ -212,7 +212,7 @@ public class WxIndexController {
             doc.setId(Integer.parseInt(id));
             int count = m_docService.updateStatusForDocById(doc);
             if (count != 0) {
-                if (stat == StatusEnum.APPROVE.getStatus()) {
+                if (stat == StatusEnum.APPROVE.getStatus() || stat == StatusEnum.REVIEW_DRIFT.getStatus()) {
                     List<Doc> docs = m_docService.getDocByNameAndStatus(AESCrypt.decrypt(user.getName()), stat);
                     docs.forEach(p->{
                         daiban(p);
@@ -232,12 +232,13 @@ public class WxIndexController {
 
     private void daiban(Doc doc) {
         ApplicationContext context = ApplicationContextUtils.getApplicationContext();
-        Map<String, TemplateDataStyle> data = new HashMap<>();
-        data.put("user",new TemplateDataStyle("客户"+doc.getAudit()+"已审批,请您确认:"+doc.getCustomerName()));
-        data.put("address",new TemplateDataStyle(doc.getAddress()));
-        data.put("desc",new TemplateDataStyle(doc.getDesc()));
-        data.put("issueDate",new TemplateDataStyle(doc.getIssueDate().format(DATE_TIME_FORMAT_S)));
-        MsgEvent event = new MsgEvent().setEvent(" 代办查收").setStatus(TemplateRoleEnum.DAI_BAN.getStatus()).setUserName(doc.getAppoint()).setData(data).setId(doc.getId());
+        Map<String, String> data = new HashMap<>();
+        data.put("user","客户"+doc.getCustomerName());
+        data.put("address",doc.getAddress());
+        data.put("desc",doc.getDesc());
+        data.put("issueDate",doc.getIssueDate().format(DATE_TIME_FORMAT_S));
+        WeChatTemplateMsg template = templateService.getTemplateById(doc.getTempId());
+        MsgEvent event = new MsgEvent().setEvent(doc.getTempSys()+STRING_UNDERLINE+template.getTemplateName()).setStatus(template.getRole()).setUserName(doc.getAppoint()).setData(data).setId(doc.getId()).setTemplateId(doc.getTempId());
         context.publishEvent(event);
     }
 

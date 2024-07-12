@@ -1,5 +1,6 @@
 package com.gzw.kd.config.datasource.annotation;
 
+import com.gzw.kd.common.enums.DataSourceEnum;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,5 +18,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD,ElementType.TYPE})
 public @interface SpecDataSource {
 
-    String value();
+    DataSourceEnum value() default DataSourceEnum.MASTER;
 }

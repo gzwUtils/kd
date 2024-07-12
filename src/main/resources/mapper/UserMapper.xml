@@ -25,11 +25,11 @@
   </insert>
 
   <update id="updateStatusByName">
-         update user Set status=#{status},update_time=now() where account=#{account}
+         update user Set status=#{status},update_time=now(),error_retry=#{errorRetry} where account=#{account}
   </update>
 
     <update id="updateStatusById">
-        update user Set status=#{status},update_time=now() where id=#{id}
+        update user Set status=#{status},update_time=now(),error_retry = 0 where id=#{id}
     </update>
 
     <update id="updateErrorByName">
@@ -43,5 +43,11 @@
 
     <select id="getAllUsers"   resultType="com.gzw.kd.common.entity.User">
         SELECT id, password, account,email, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user
+    </select>
+
+
+    <select id="getAllStopUsers"   resultType="com.gzw.kd.common.entity.User">
+        SELECT id, password, account,email, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user
+        where error_retry = 5 and status = 1 and update_time &lt;=date_add(now(),INTERVAL -30 MINUTE)
     </select>
 </mapper>

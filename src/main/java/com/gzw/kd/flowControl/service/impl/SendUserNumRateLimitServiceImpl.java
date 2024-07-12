@@ -9,10 +9,7 @@ import com.gzw.kd.common.entity.TaskInfo;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by TOM
- * On 2022/7/21 17:14
- *
- * @author TOM
+ * @author gzw
  */
 @SuppressWarnings("all")
 @Service

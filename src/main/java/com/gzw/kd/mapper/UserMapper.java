@@ -27,13 +27,15 @@ public interface UserMapper {
 
     List<String> getAllNames();
 
-    Integer updateStatusByName(String account,int status)throws  Exception;
+    Integer updateStatusByName(String account,int status,int errorRetry)throws  Exception;
 
     Integer updateStatusById(String id,int status)throws  Exception;
 
     Integer updateErrorByName(String account,int errorRetry)throws  Exception;
 
     List<User> getAllUsers();
+
+    List<User> getAllStopUsers();
 
 
 

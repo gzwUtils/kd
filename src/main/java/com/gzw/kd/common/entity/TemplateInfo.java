@@ -1,5 +1,7 @@
 package com.gzw.kd.common.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -9,6 +11,8 @@ import lombok.experimental.Accessors;
  * @description：
  * @since：2023/5/24 14:42
  */
+
+@ApiModel(value = "消息模版")
 @Accessors(chain = true)
 @Data
 public class TemplateInfo implements Serializable {
@@ -23,19 +27,20 @@ public class TemplateInfo implements Serializable {
     /**
      * 模板标题
      */
+    @ApiModelProperty(value = "模板标题")
     private String name;
 
 
     /**
      * 消息状态
      */
+    @ApiModelProperty(value = "消息状态")
     private Integer msgStatus;
 
     /**
      * 定时任务Id(由xxl-job返回)
      */
     private Integer cronTaskId;
-
     /**
      * 定时发送的人群的文件路径
      */
@@ -44,31 +49,37 @@ public class TemplateInfo implements Serializable {
     /**
      * 发送的Id类型
      */
+    @ApiModelProperty(value = "发送的Id类型")
     private Integer idType;
 
     /**
      * 发送渠道
      */
+    @ApiModelProperty(value = "发送渠道")
     private Integer sendChannel;
 
     /**
      * 消息内容  {$var} 为占位符
      */
+    @ApiModelProperty(value = "消息内容 {$var} 为占位符")
     private String msgContent;
 
     /**
      * 模板类型
      */
+    @ApiModelProperty(value = "模板类型")
     private Integer templateType;
 
     /**
      * 屏蔽类型
      */
+    @ApiModelProperty(value = "屏蔽类型")
     private Integer shieldType;
 
     /**
      * 消息类型
      */
+    @ApiModelProperty(value = "消息类型")
     private Integer msgType;
 
     /**
@@ -76,12 +87,13 @@ public class TemplateInfo implements Serializable {
      * 0：立即发送
      * else：crontab 表达式
      */
+    @ApiModelProperty(value = "推送消息的时间 0 立即发送,crontab")
     private String expectPushTime;
 
     /**
      * 发送账号
      */
-
+    @ApiModelProperty(value = "发送账号")
     private String sendAccount;
 
     /**

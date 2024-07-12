@@ -1,7 +1,4 @@
 package com.gzw.kd.mail;
-
-import com.gzw.kd.common.enums.ResultCodeEnum;
-import com.gzw.kd.common.exception.GlobalException;
 import com.gzw.kd.common.utils.FreemarkerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -42,7 +39,6 @@ public class MailSend {
 			javaMailSender.send(message);
 		} catch (Exception e) {
 			log.error("邮件发送失败 {} ",e.getMessage(),e);
-			throw new GlobalException(ResultCodeEnum.UNKNOWN_ERROR.getCode(),e.getMessage(),e);
 		}
 	}
 
@@ -66,7 +62,6 @@ public class MailSend {
 			javaMailSender.send(message);
 		} catch (Exception e) {
 			log.error("邮件发送失败 {} ",e.getMessage(),e);
-			throw new GlobalException(ResultCodeEnum.UNKNOWN_ERROR.getCode(),e.getMessage(),e);
 		}
 	}
 

@@ -21,7 +21,6 @@ import com.gzw.kd.common.utils.*;
 import com.gzw.kd.controller.es.OperatorLogIndex;
 import com.gzw.kd.export.AsyncTaskLogService;
 import com.gzw.kd.export.ExportFileMeta;
-import com.gzw.kd.listener.MysessionListener;
 import com.gzw.kd.listener.event.MsgEvent;
 import com.gzw.kd.mail.MailUtil;
 import com.gzw.kd.scheduletask.ScheduleTask;
@@ -45,6 +44,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -144,6 +144,9 @@ public class PCController {
     @Resource
     NoticeService noticeService;
 
+    @Resource
+    TemplateService templateService;
+
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public String login() {
@@ -158,6 +161,11 @@ public class PCController {
     @RequestMapping(value = "/chatGpt",method = RequestMethod.GET)
     public String chatGpt() {
         return "/pc/chat";
+    }
+
+    @RequestMapping(value = "/chat",method = RequestMethod.GET)
+    public String chat() {
+        return "/pc/kd";
     }
 
     @RequestMapping(value = "/userInfo",method = RequestMethod.GET)
@@ -179,6 +187,12 @@ public class PCController {
     public String other () {
 
         return "/pc/other";
+    }
+
+    @RequestMapping(value = "/dc",method = RequestMethod.GET)
+    public String dc () {
+
+        return "/pc/dc";
     }
 
     @RequestMapping(value = "/word",method = RequestMethod.GET)
@@ -206,12 +220,13 @@ public class PCController {
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
         Operator operator = (Operator) request.getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
+        SessionContext.getInstance().getSessionMap().remove(operator.getAccount());
         push(request, OnlineStatusEnum.OFF_LINE.getStatus());
-        MysessionListener.sessionContext.getSessionMap().remove(operator.getAccount());
         request.getSession().removeAttribute(Constants.LOGIN_USER_SESSION_KEY);
         return "/pc/login";
     }
 
+    @Resubmit(limit = 3)
     @RequestMapping(value = "/addNotice",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
     @ResponseBody
     @OperatorLog(value = "添加公告",description = "添加公告")
@@ -281,15 +296,15 @@ public class PCController {
                 request.getSession().setAttribute(Constants.LOGIN_USER_SESSION_KEY, operator);
                 return R.ok().message("解锁系统成功！");
             } else {
-                return R.error().message("此用户已不存在,请重新登录！！");
+                return R.error().message("用户长时间未操作,请重新登录！！");
             }
         }
     }
 
     private void push(HttpServletRequest request, Integer flag) {
-        User attribute = (User) request.getSession().getAttribute(LOGIN_USER_SESSION_KEY);
+        Operator attribute = (Operator) request.getSession().getAttribute(LOGIN_USER_SESSION_KEY);
         if (ObjectUtil.isNotEmpty(attribute)) {
-            Object onLineTime = request.getSession().getAttribute(LOGIN_USER_SESSION_ON_LINE_TIME + attribute.getAccount());
+            Object onLineTime = request.getSession().getAttribute(LOGIN_USER_SESSION_ON_LINE_TIME + STRING_UNDERLINE + attribute.getAccount());
             MsgEvent msgEvent = new MsgEvent().setEvent(OnlineStatusEnum.getDesc(flag)).setUserName(attribute.getAccount()).setOnLineTime(onLineTime.toString()).setOffLineTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S)).setStatus(flag);
             ApplicationContext context = ApplicationContextUtils.getApplicationContext();
             context.publishEvent(msgEvent);
@@ -301,18 +316,13 @@ public class PCController {
     @RequestMapping(value = "/loginAction", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     public R loginAction(HttpServletRequest request, String userName, String password, String code, String timestamp) throws Exception {
         Operator operator = new Operator();
-        HttpSession session = MysessionListener.sessionContext.getSessionMap().get(userName);
-        if (session != null) {
-            log.warn("用户重复登陆");
-            MysessionListener.sessionContext.getSessionMap().remove(userName);
-        }
         if (StringUtils.isBlank(userName) || StringUtils.isBlank(password) || StringUtils.isBlank(code)) {
             return R.setResult(ResultCodeEnum.PARAM_ABSENT);
         }
         Object captchacode = request.getSession().getAttribute(KAPTCHA_SESSION_KEY);
         if (ObjectUtil.isEmpty(captchacode)) {
             sessionVerificationCodeDel(request);
-            return R.error().message("验证码错误");
+            return R.error().message("验证码为空");
         } else if (!captchacode.equals(code)) {
             sessionVerificationCodeDel(request);
             return R.error().message("验证码错误");
@@ -337,13 +347,14 @@ public class PCController {
                     push(request, OnlineStatusEnum.ON_LINE.getStatus());
                     return R.ok();
                 } else {
-                    if (user.getErrorRetry() <  errorCount) {
+                   boolean flag = errorCount -1 - user.getErrorRetry() > 0? true :false;
+                    if (flag) {
                         sessionVerificationCodeDel(request);
-                        int count = errorCount - user.getErrorRetry();
+                        int count = errorCount - user.getErrorRetry() - 1;
                         userService.updateErrorByName(user.getAccount(), user.getErrorRetry()+1);
-                        return R.error().message("输入密码错误，您最多可以尝试" + count + "次");
+                        return R.error().message("输入密码错误，您最多还可以尝试" + count + "次");
                     } else {
-                        userService.updateStatusByName(user.getAccount(), UserStatusEnum.STOP.getStatus());
+                        userService.updateStatusByName(user.getAccount(), UserStatusEnum.STOP.getStatus(),user.getErrorRetry()+1);
                         sessionVerificationCodeDel(request);
                         return R.setResult(ResultCodeEnum.USER_STOP);
                     }
@@ -463,11 +474,18 @@ public class PCController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/getAddress",method = RequestMethod.GET)
-    public R getAddress(HttpServletRequest request) throws Exception {
-        String name = request.getParameter("customerName");
-        Assign user = customerService.getUserByName(AESCrypt.encrypt(name));
+    @RequestMapping(value = "/getAddress",method = RequestMethod.POST)
+    public R getAddress(@RequestParam("customerName") String customerName) throws Exception {
+        Assign user = customerService.getUserByName(AESCrypt.encrypt(customerName));
         return R.ok().data("address",user.getAddress());
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/getTemplateName",method = RequestMethod.POST)
+    public R getTemplateName(@RequestParam("sys") String sys) throws Exception {
+        List<WeChatTemplateMsg> templateMsgList = templateService.getTemplateBySys(sys);
+        return R.ok().data("templateMsgList",templateMsgList);
     }
 
     @RequestMapping(value = "/showAddUi",method = RequestMethod.GET)
@@ -476,6 +494,8 @@ public class PCController {
         names = names.stream().map(p -> p = AESCrypt.decrypt(p)).collect(Collectors.toList());
         request.setAttribute("names",names);
         List<String> allNames = customerService.getAllNames();
+        List<String> allSys = templateService.getAllSys();
+        request.setAttribute("allSys",allSys);
         allNames = allNames.stream().map(p -> p = AESCrypt.decrypt(p)).collect(Collectors.toList());
         request.setAttribute("customerNames",allNames);
         return "/pc/add";
@@ -492,16 +512,17 @@ public class PCController {
             doc.setIssueDate(LocalDateTime.now());
             m_docService.addDoc(doc);
             ApplicationContext context = ApplicationContextUtils.getApplicationContext();
-            Map<String, TemplateDataStyle> data = new HashMap<>();
-            data.put("user",new TemplateDataStyle(doc.getCustomerName()));
-            data.put("address",new TemplateDataStyle(doc.getAddress()));
-            data.put("desc",new TemplateDataStyle(doc.getDesc()));
-            data.put("issueDate",new TemplateDataStyle(doc.getIssueDate().format(DATE_TIME_FORMAT_S)));
-            MsgEvent event = new MsgEvent().setEvent(" 代办查收").setStatus(TemplateRoleEnum.DAI_BAN.getStatus()).setUserName(doc.getAppoint()).setData(data).setId(doc.getId());
+            Map<String, String> data = new HashMap<>();
+            data.put("user",doc.getCustomerName());
+            data.put("address",doc.getAddress());
+            data.put("desc",doc.getDesc());
+            data.put("issueDate",doc.getIssueDate().format(DATE_TIME_FORMAT_S));
+            WeChatTemplateMsg templateMsg = templateService.getTemplateById(doc.getTempId());
+            MsgEvent event = new MsgEvent().setEvent(doc.getTempSys()+STRING_UNDERLINE+templateMsg.getTemplateName()).setStatus(templateMsg.getRole()).setUserName(doc.getAppoint()).setData(data).setId(doc.getId()).setTemplateId(templateMsg.getId());
             context.publishEvent(event);
         } catch (Exception e) {
             log.error("起草失败 插入数据失败 {}", e.getMessage(), e);
-            return R.error();
+            return R.error().message(e.getMessage());
         }
         return R.ok();
     }
@@ -510,13 +531,15 @@ public class PCController {
     @OperatorLog(value = "费用",description = "费用")
     @ResponseBody
     @RequestMapping(value = "/addConfig",method =RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public R addConfig(@RequestBody Configs configs, HttpSession session) {
+    public R addConfig(@RequestBody Configs configs) {
         try {
-            Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
+            Operator user = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(LOGIN_USER_SESSION_KEY);
             if (user.getIsAdmin().equals(INT_ONE)) {
                 if (configs.getId() == null) {
+                    configs.setCreateTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S)).setUpdateTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S));
                     configService.addDoc(configs);
                 } else {
+                    configs.setUpdateTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S));
                     configService.updateConfigsForById(configs);
                 }
             }
@@ -574,20 +597,23 @@ public class PCController {
             //输出到页面
             lineCaptcha.write(response.getOutputStream());
             session.setAttribute(KAPTCHA_SESSION_KEY,lineCaptcha.getCode());
+            session.setMaxInactiveInterval(60);
             response.getOutputStream().close();
         }catch (Exception e){
-            e.printStackTrace();
+            log.error("验证码生成失败 error {}",e);
         }
     }
 
 
+    @Transactional(rollbackFor = Exception.class)
     @OperatorLog(value = "节点流转",description = "流程节点流转")
-    @RequestMapping(value = "/setDocStatus",method = RequestMethod.GET)
+    @RequestMapping(value = "/setDocStatus",method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public R setDocStatus(String status, String id, HttpSession session) throws Exception {
+    public R setDocStatus(String status, String id, HttpSession session,String remark) throws Exception {
         Doc doc = new Doc();
         int stat = Integer.parseInt(status) - 1;
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
+        Doc docById = m_docService.getDocById(Integer.parseInt(id));
         if(ObjectUtil.isNotEmpty(user)){
             if (stat == StatusEnum.APPROVE.getStatus()) {
                 doc.setAudit(user.getAccount());
@@ -597,6 +623,7 @@ public class PCController {
             doc.setStatus(stat);
             doc.setIssueDate(LocalDateTime.now());
             doc.setId(Integer.parseInt(id));
+            doc.setRemark(docById.getRemark()+"\r\n"+remark);
             int count = m_docService.updateStatusForDocById(doc);
             if (count != 0) {
                 return R.ok();
@@ -745,14 +772,14 @@ public class PCController {
     @OperatorLog(value = "登录",description = "验证码登录")
     @ResponseBody
     @PostMapping("/phoneCheckLogin")
-    public R phoneCheckLogin(String phoneNumber,String vCode,HttpSession session,HttpServletRequest request) throws IOException {
+    public R phoneCheckLogin(String phoneNumber, String vCode, HttpSession session, HttpServletRequest request) throws IOException {
         Object code = session.getAttribute("smsCode");
-        User user = userService.getUserByPhone(phoneNumber);
-        if(user.getStatus().equals(UserStatusEnum.STOP.getStatus())){
-            return R.error().message("账号被禁用！！ 请联系管理员");
-        }
-        if(ObjectUtil.isNotEmpty(user)){
-            if(code != null && code.equals(vCode)){
+        if (code != null && code.equals(vCode)) {
+            User user = userService.getUserByPhone(phoneNumber);
+            if (ObjectUtil.isNotEmpty(user)) {
+                if (user.getStatus().equals(UserStatusEnum.STOP.getStatus())) {
+                    return R.error().message("账号被禁用！！ 请联系管理员");
+                }
                 Operator operator = new Operator();
                 BeanUtils.copyProperties(user, operator);
                 ToolUtil.loginSuccess(request, operator, "general");
@@ -760,10 +787,11 @@ public class PCController {
                 sessionVerificationCodeDel(request);
                 return R.ok();
             } else {
-                return R.error().message("该验证码错误");
+                return R.error().message("该手机号用户不存在");
             }
+        } else {
+            return R.error().message("验证码错误");
         }
-        return R.error().message("该手机号用户不存在");
     }
 
 
@@ -858,7 +886,7 @@ public class PCController {
         String fileName = "template.xlsx";
         headers.setContentDispositionFormData(ATTACHMENT,
                 new String(URLEncoder.encode(fileName, "UTF-8").getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1));
-        String filePath = "/excel/clue_d_upload_template.xlsx";
+        String filePath = "/excel/kd_upload_template.xlsx";
         byte[] bytes = IoUtil.readBytes(this.getClass().getResourceAsStream(
                 filePath));
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
@@ -918,7 +946,7 @@ public class PCController {
     @PostMapping("/sendEmailMessage")
     @ResponseBody
     public R sendEmailMessage(@RequestParam("subject") String subject,@RequestParam("email") String email,@RequestParam("message") String  message) throws Exception {
-        MailUtil.getMailSend().sendEmail(subject,message,new String[]{email},true,"pc/email.html");
+        MailUtil.getMailSend().sendEmail(subject,message,new String[]{email},false,"pc/email.html");
         return R.ok();
     }
 

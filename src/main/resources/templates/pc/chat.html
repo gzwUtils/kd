@@ -35,7 +35,12 @@
               chat(){
                 let body = {'askStr':this.ask};
                 axios.post('/chatGpt/askAi',body).then(response => {
-                    this.ask = response.data.data.gpt;
+                    if (response.data.code === 20000) {
+                        this.$message.success(response.data.message);
+                        this.ask = response.data.data.gpt;
+                    } else {
+                        this.$message.error(response.data.message);
+                    }
                 });
             }
         }

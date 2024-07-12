@@ -5,6 +5,7 @@ import com.gzw.kd.mq.rocketmq.bo.CustomerMsgRocketMqBo;
 /**
  * @author gaozhiwei
  */
+@SuppressWarnings("unused")
 public interface ICustomerRocketMqMessageListener {
 
     /**

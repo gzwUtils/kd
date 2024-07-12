@@ -66,8 +66,8 @@ public class RocketmqConsumerConfig {
         defaultMQPushConsumer.setConsumeMessageBatchMaxSize(consumeMessageBatchMaxSize);
         defaultMQPushConsumer.setMaxReconsumeTimes(retryTimesWhenConsumerFailed);
         defaultMQPushConsumer.setVipChannelEnabled(false);
-        defaultMQPushConsumer.setUnitName("yc_ai_cm");
-        defaultMQPushConsumer.setInstanceName("ai_cm");
+        defaultMQPushConsumer.setUnitName("kd_rocketmq");
+        defaultMQPushConsumer.setInstanceName("kd_rocketmq");
         try {
             String topic = MqConstant.Topic.KD_BUSINESS_TOPIC+system;
             defaultMQPushConsumer.subscribe(topic,"*");
@@ -75,7 +75,6 @@ public class RocketmqConsumerConfig {
             log.info("rocketmq consumer server 创建成功--------------------------------------------------");
         }catch (MQClientException e){
             log.error("rocketmq consumer server exception ",e);
-            e.getErrorMessage();
         }
 
         return defaultMQPushConsumer;

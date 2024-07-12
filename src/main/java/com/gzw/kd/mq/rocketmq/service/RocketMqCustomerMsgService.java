@@ -55,10 +55,10 @@ public class RocketMqCustomerMsgService implements MessageListenerConcurrently {
         } catch (Exception e) {
             log.error("customer 获取rocketmq 消息内容异常", e);
             if (messageExt.getReconsumeTimes() == retryTimesWhenConsumerFailed) {
-                log.debug("消费次数[{}],消息[{}]", retryTimesWhenConsumerFailed, JSON.toJSONString(messageExt));
+                log.warn("消费次数[{}],消息[{}]", retryTimesWhenConsumerFailed, JSON.toJSONString(messageExt));
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             } else {
-                log.debug("消费失败,请重试!!!");
+                log.error("消费失败,请重试!!!");
                 return ConsumeConcurrentlyStatus.RECONSUME_LATER;
             }
         }

@@ -1,6 +1,7 @@
 package com.gzw.kd.common.entity;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.io.Serializable;
  */
 @Data
 @Slf4j
+@Accessors(chain = true)
 @SuppressWarnings("all")
 public class Operator extends User implements Serializable {
 

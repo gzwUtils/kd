@@ -1,7 +1,10 @@
 package com.gzw.kd.handler.impl;
 import com.alibaba.fastjson2.JSON;
+import com.google.common.util.concurrent.RateLimiter;
+import com.gzw.kd.common.entity.FlowControlParam;
 import com.gzw.kd.common.entity.SmsContentModel;
 import com.gzw.kd.common.enums.ChannelTypeEnum;
+import com.gzw.kd.common.enums.RateLimitStrategy;
 import com.gzw.kd.common.utils.SMSUtils;
 import com.gzw.kd.handler.BaseHandler;
 import com.gzw.kd.common.entity.TaskInfo;
@@ -16,6 +19,7 @@ import org.springframework.stereotype.Component;
  * @description： 短信推送
  * @since：2023/5/24 15:33
  */
+@SuppressWarnings("all")
 @Slf4j
 @Component
 public class SmsHandler extends BaseHandler {
@@ -28,6 +32,12 @@ public class SmsHandler extends BaseHandler {
     public SmsHandler() {
 
         channelCode = ChannelTypeEnum.SMS.getCode();
+
+        // 按照请求限流，默认单机 3 qps
+        double rateInitValue = 3.0;
+        flowControlParam = FlowControlParam.builder().rateInitValue(rateInitValue)
+                .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
+                .rateLimiter(RateLimiter.create(rateInitValue)).build();
     }
 
     @Override

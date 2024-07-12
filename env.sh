@@ -3,7 +3,7 @@ cd `dirname $0`/
 
 ############ 应用按需修改的部分 ############
 #应用名称，不指定则默认取最后一个jar文件名, 即springboot one jar打包后xxx.jar中xxx的部分
-APP_NAME=kd-1.0.0
+APP_NAME=kd
 #指定应用端口号，不填则使用应用配置文件指定的端口
 SERVER_PORT=
 #获取本机ip地址，用于jmx连接使用
@@ -23,7 +23,7 @@ LOCK_FILE="/var/lock/subsys/${APP_NAME}"
 ########################################
 
 #应用目录
-APP_HOME=$PWD/target/
+APP_HOME=$PWD
 
 #如果未设置应用名，默认取最后一个jar文件名
 if [[ -z "$APP_NAME" ]]; then

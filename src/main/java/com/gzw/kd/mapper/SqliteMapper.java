@@ -1,4 +1,5 @@
 package com.gzw.kd.mapper;
+import com.gzw.kd.common.enums.DataSourceEnum;
 import com.gzw.kd.config.datasource.annotation.SpecDataSource;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,7 @@ import org.springframework.stereotype.Repository;
 /**
  * @author 高志伟
  */
-@SpecDataSource("SLAVE_4")
+@SpecDataSource(DataSourceEnum.SQLITE)
 @SuppressWarnings("all")
 @Repository
 @Mapper

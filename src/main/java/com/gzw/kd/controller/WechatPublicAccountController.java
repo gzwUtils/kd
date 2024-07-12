@@ -1,7 +1,6 @@
 package com.gzw.kd.controller;
-
-
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
@@ -11,19 +10,16 @@ import com.gzw.kd.common.annotation.Resubmit;
 import com.gzw.kd.common.entity.*;
 import com.gzw.kd.common.enums.EventTypeEnum;
 import com.gzw.kd.common.enums.MenuTypeEnum;
-import com.gzw.kd.common.enums.TemplateRoleEnum;
-import com.gzw.kd.common.utils.ApplicationContextUtils;
-import com.gzw.kd.listener.event.MsgEvent;
+import com.gzw.kd.common.utils.SnowFlakeIdUtils;
 import com.gzw.kd.service.DocService;
+import com.gzw.kd.service.WechatService;
 import com.gzw.kd.service.WxUserService;
 import com.gzw.kd.vo.input.RequestVo;
 import io.swagger.annotations.Api;
-import java.io.IOException;
 import java.util.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.validation.annotation.Validated;
@@ -62,6 +58,9 @@ public class WechatPublicAccountController {
     @Resource
     private RedisTemplate<String,String> redisTemplate;
 
+    @Resource
+    private WechatService wechatService;
+
     @GetMapping("/validate")
     @ResponseBody
     public String validate(String signature,String timestamp,String nonce,String echostr){
@@ -92,6 +91,10 @@ public class WechatPublicAccountController {
             if (inContent.contains("万岁")) {
                 outMessage.setContent("爱情万岁！！！！！！！");
             } else {
+                inContent = "掘金:https://juejin.cn/user/2151063691992622\n";
+                inContent +="github:https://github.com/gzwUtils/kd.git\n";
+                inContent +="如有问题请联系:2876533492@qq.com\n";
+                inContent +="后台地址:http://123.249.77.250";
                 outMessage.setContent(inContent);
             }
         } else if ("image".equals(msgType)) {
@@ -105,11 +108,17 @@ public class WechatPublicAccountController {
                     WxUserInfo wxUserInfo = wxUserinfoByOpenId(inMessage.getFromUserName());
                     if (ObjectUtil.isNotEmpty(wxUserInfo.getTagid_list())) {
                         wxUserInfo.setTagIdlist(wxUserInfo.getTagid_list().toString());
+                    } else {
+                        long currentTimeMillis = System.currentTimeMillis();
+                        wxUserInfo.setOpenid(inMessage.getFromUserName());
+                        wxUserInfo.setSubscribe(1);
+                        wxUserInfo.setSubscribe_time(currentTimeMillis);
+                        wxUserInfo.setLanguage("zh_CN").setSubscribe_scene("ADD_SCENE_SEARCH").setHeadimgurl("https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTI2GyzfhE5mKZ868euuvrqqylKAGZ5dSOWNW8Z2FZ4qOicJ6qOjf3chhXeicwMrQeRMSgSugEMnrTHQ/132")
+                                .setSex("2").setGroupid(0)
+                                .setNickname(DEFAULT_NICK_NAME[RandomUtil.randomInt(DEFAULT_NICK_NAME.length)]+STRING_UNDERLINE+ SnowFlakeIdUtils.generatorId());
                     }
                     wxUserService.registerUser(wxUserInfo);
-                    MsgEvent msgEvent = new MsgEvent().setEvent(" 公众号关注").setUserName(wxUserInfo.getNickname()).setStatus(TemplateRoleEnum.GUAN_ZHU.getStatus()).setOpenId(wxUserInfo.getOpenid());
-                    ApplicationContext context = ApplicationContextUtils.getApplicationContext();
-                    context.publishEvent(msgEvent);
+                    outMessage.setContent("感谢关注:"+wxUserInfo.getNickname());
                 } else {
                     outMessage.setContent("欢迎您回来");
                     WxUserInfo info = new WxUserInfo().setOpenid(inMessage.getFromUserName()).setSubscribe(1);
@@ -130,11 +139,17 @@ public class WechatPublicAccountController {
 
     @GetMapping("/getAccessToken")
     public String getAccessToken(){
-        String url = WX_ACCESS_TOKEN_URL + appid + "&"+WX_APP_SECRET+"=" + secret;
-        String result = HttpUtil.get(url);
+        Map<String, Object> data = new HashMap<>();
+        data.put(WX_APP_ID,appid);
+        data.put(WX_APP_SECRET,secret);
+        data.put("grant_type","client_credential");
+        data.put("force_refresh",true);
+        String result = HttpUtil.post(WX_ACCESS_TOKEN_URL,JSONUtil.toJsonStr(data));
         JSONObject jsonObject = JSONUtil.parseObj(result);
         String accessToken = jsonObject.getStr(WX_APP_ACCESS_TOKEN);
+        log.warn("access_token... .url.....{} data {},result {}",WX_ACCESS_TOKEN_URL,data,result);
         if (StringUtils.isNotBlank(accessToken)){
+            redisTemplate.setValueSerializer(new StringRedisSerializer());
             redisTemplate.opsForValue().set(WX_APP_ACCESS_TOKEN, accessToken);
             redisTemplate.expire(WX_APP_ACCESS_TOKEN,WX_APP_EXPIRE_IN, TimeUnit.SECONDS);
         }
@@ -330,13 +345,43 @@ public class WechatPublicAccountController {
         }
         return R.ok();
     }
-    public WxUserInfo wxUserinfoByOpenId(String openId) throws IOException {
+    public WxUserInfo wxUserinfoByOpenId(String openId){
         System.out.println("===========WxUserinfoByOpenId");
         String url = checkToken(WX_USER_URL);
         String infoUrl = url+"&openid=" + openId +"&lang=zh_CN";
         String result = HttpUtil.get(infoUrl);
         log.info("wx user info {}",result);
-        WxUserInfo codes = com.alibaba.fastjson.JSONObject.parseObject(result, WxUserInfo.class);
-        return codes;
+        WxUserInfo info = com.alibaba.fastjson.JSONObject.parseObject(result, WxUserInfo.class);
+        return info;
+    }
+
+
+    /**
+     * 群发图文信息
+     * @return
+     */
+
+    @RequestMapping(value = "/sendAll", method = RequestMethod.POST)
+    public R sendMessageToAll() {
+        boolean all = wechatService.sendMessageToAll();
+        if (!all) {
+            return R.error();
+        }
+        return R.ok();
+    }
+
+
+    /**
+     * 模版消息推送
+     * @return
+     */
+
+    @RequestMapping(value = "/sendTemplate", method = RequestMethod.POST)
+    public R sendTemplate() {
+        boolean all = wechatService.sendTemplate();
+        if (!all) {
+            return R.error();
+        }
+        return R.ok();
     }
 }

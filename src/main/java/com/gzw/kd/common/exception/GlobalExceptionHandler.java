@@ -45,7 +45,7 @@ public class GlobalExceptionHandler {
         if(mailIsEnabled){
             MailUtil.getMailSend().sendEmail(url.toString(),e.getMessage(),mails,mailtoHtml);
         }
-        return R.error();
+        return R.error().message(e.getMessage());
     }
 
     /**-------- 指定异常处理方法 --------**/
@@ -60,7 +60,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(HttpClientErrorException.class)
-    public R error(HttpServletRequest request,IndexOutOfBoundsException e) {
+    public R error(HttpServletRequest request,HttpClientErrorException e) {
         StringBuffer url = request.getRequestURL();
         log.error("error url {} message {}",url.toString(),e.getMessage(),e);
         if(mailIsEnabled){

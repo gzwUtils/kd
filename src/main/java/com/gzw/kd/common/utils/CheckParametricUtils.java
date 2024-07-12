@@ -36,4 +36,11 @@ public class CheckParametricUtils {
             }
         }
     }
+
+    public static String check(String name, String condition, String defaultValue){
+        if (condition.contains(name)) {
+            return defaultValue;
+        }
+        return name;
+    }
 }

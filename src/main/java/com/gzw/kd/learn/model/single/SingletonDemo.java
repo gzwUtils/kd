@@ -1,21 +1,24 @@
 package com.gzw.kd.learn.model.single;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 项目名称：spring-demo
  * 类 名 称：SingletonDemo
- * 类 描 述：单例模式
+ * 类 描 述：单例模式- 懒汉式
  * 创建时间：2021/5/31 11:13 下午
  *
  * @author gzw
  */
+
+@Slf4j
+@SuppressWarnings("unused")
 public class SingletonDemo {
     /**
-     * 分配内存 构造对象 建立关联 （指令重排）
-     * volatile 可见性  有序性（禁止指令重排，内存屏障（特殊的一条指令  jvm ll ss ls  sl ））
-     * happens-before 原则
-     * volatile  hotspot （lock addl ）汇编。
-     * 将当前处理器对应缓存的内存刷新到内存。
-     * synchronized  reentrantlock  可重入锁
+     * 构造函数需要是 private 访问权限的，这样才能避免外部通过 new 创建实例;
+     * 考虑对象创建时的线程安全问题;
+     * 考虑是否支持延迟加载;
+     * 考虑 getInstance() 性能是否高(是否加锁)
      */
 
     private static volatile SingletonDemo singletonDemo = null;
@@ -33,6 +36,11 @@ public class SingletonDemo {
             }
         }
         return singletonDemo;
+    }
+
+
+    public void log(){
+        log.info("singletonDemo.........");
     }
 
 }

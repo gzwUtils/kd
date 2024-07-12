@@ -22,6 +22,14 @@ public interface MessageTemplateMapper {
 
 
     /**
+     *   查询模版
+     * @param ids  ids
+     * @return list
+     */
+    List<TemplateInfo> findAllByIds(List<Long> ids);
+
+
+    /**
      * 统计未删除的条数
      *
      * @param deleted 0：启用 1：停用
@@ -42,4 +50,20 @@ public interface MessageTemplateMapper {
      * @return int
      */
     Integer registerTemplate(TemplateInfo templateInfo);
+
+
+    /**
+     * 更新模版
+     * @param templateInfo info
+     * @return int
+     */
+    Integer updateTemplateInfo (TemplateInfo templateInfo);
+
+
+    /**
+     * 停用模版
+     * @param templateInfo list
+     * @return int
+     */
+    Integer deleteTemplateInfo (List<TemplateInfo> templateInfo);
 }

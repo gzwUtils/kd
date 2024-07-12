@@ -1560,7 +1560,7 @@ public class Demo {
      */
 
     /**
-     *
+     *  postman
      * var timestamp = Math.round(new Date().getTime());
      * var body = pm.request.body.raw;
      * var sign = "timestamp=" + timestamp + "&token=token&body=" + body;
@@ -1569,7 +1569,32 @@ public class Demo {
      * pm.environment.set("timestamp", timestamp);
      */
 
+    /**
+     * 意图识别 文本匹配算法
+     *
+     * 编辑距离
+     * jaccard 相似度
+     * word2vec
+     */
 
 
+    /**
+     * 查询服务进程CPU情况：top –Hp pid
+     * 查询JVM GC相关参数：jstat -gc pid 2000 (对 pid [进程号] 每隔 2s 输出一次日志)
+     * 打印当前堆栈信息：jstack -l pid >> stack.log
+     */
+
+
+    /**
+     * spring 事务的几个接口
+     *
+     * PlatformTransactionManager：（平台）事务管理器，Spring 事务策略的核心。
+     * TransactionDefinition：事务定义信息(事务隔离级别、传播行为、超时、只读、回滚规则)。
+     * TransactionStatus：事务运行状态。
+     *
+     *
+     * AutoConfigurationImportSelector  加载自动装配 实现 importSelector 重写了selectImports方法 ---SpringFactoriesLoader.loadFactoryNames  getAutoConfigurationEntry
+     * @Configuration --- ConditionalOnClass
+     */
 
 }

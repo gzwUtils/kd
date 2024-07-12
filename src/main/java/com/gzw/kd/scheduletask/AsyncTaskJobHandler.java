@@ -10,16 +10,18 @@ import com.gzw.kd.common.enums.ResultCodeEnum;
 import com.gzw.kd.common.utils.AddressUtil;
 import com.gzw.kd.common.utils.ApplicationContextUtils;
 import com.gzw.kd.common.utils.IpUtil;
+import com.gzw.kd.common.utils.XxlJobLogUtil;
 import com.gzw.kd.export.AsyncTaskExecutorService;
 import com.gzw.kd.export.AsyncTaskLogService;
 import com.gzw.kd.export.AsyncTaskService;
 import com.gzw.kd.service.SystemOperationLogService;
 import com.gzw.kd.vo.output.AsyncTaskOutput;
+import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.job.core.handler.annotation.XxlJob;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.DependsOn;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -35,7 +37,7 @@ import static com.gzw.kd.common.Constants.STRING_EMPTY;
 @DependsOn({"applicationContextUtils"})
 @Component
 @Slf4j
-public class AsyncTaskJobHandler{
+public class AsyncTaskJobHandler {
 
     private final Collection<AsyncTaskService> asyncTaskHandlers;
 
@@ -53,8 +55,7 @@ public class AsyncTaskJobHandler{
         log.info("Async task impl list: {}", asyncTaskHandlers);
     }
 
-    @Scheduled(cron = "0 0/2 * * * ?")
-    public void execute() {
+    public void handle() {
         List<AsyncTasksEntity> asyncTaskLogs = asyncTaskLogService.fetchUnCompletedTasks(3);
 
         if (CollectionUtil.isNotEmpty(asyncTaskLogs)) {
@@ -68,6 +69,10 @@ public class AsyncTaskJobHandler{
 
                             try {
                                 log.info("async task execute  menu {} type {}",logs.getFromMenu(),logs.getType());
+
+                                // 记录任务处理状态为处理中
+                                asyncTaskLogService.updateOne(logs.getId(), AsyncTaskStatusEnum.PROCESSING
+                                        , null, null,null);
                                 // 提交任务至线程池中
                                 asyncTaskExecutorService.submitTask(
                                         // 执行asyncTask实现类processAsyncTask方法
@@ -80,9 +85,6 @@ public class AsyncTaskJobHandler{
                                                 , taskExecuteStatus(ret)
                                                 , ret.getAsyncTaskOutput()
                                                 , exceptionMessage(ret),ret.getAsyncTaskOutput().getFilePath()));
-                                // 记录任务处理状态为处理中
-                                asyncTaskLogService.updateOne(logs.getId(), AsyncTaskStatusEnum.PROCESSING
-                                        , null, null,null);
                             } catch (RejectedExecutionException ex) {
                                 asyncTaskLogService.updateOne(logs.getId(), AsyncTaskStatusEnum.FAILURE
                                         , null, ex.getMessage(),null);
@@ -124,4 +126,11 @@ public class AsyncTaskJobHandler{
         }
     }
 
+    @XxlJob("AsyncTaskJobHandler")
+    public ReturnT<String> execute(){
+        XxlJobLogUtil.log(log,false,"异步任务开始执行");
+        handle();
+        XxlJobLogUtil.log(log,false,"异步任务执行结束");
+        return ReturnT.SUCCESS;
+    }
 }

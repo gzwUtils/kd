@@ -23,8 +23,8 @@ public class EmailHandler extends BaseHandler {
     public EmailHandler() {
         channelCode = ChannelTypeEnum.EMAIL.getCode();
 
-        // 按照请求限流，默认单机 3 qps （具体数值配置在apollo动态调整)
-        double rateInitValue = 3.0;
+        // 按照请求限流，默认单机 1 qps
+        double rateInitValue = 5.0;
         flowControlParam = FlowControlParam.builder().rateInitValue(rateInitValue)
                 .rateLimitStrategy(RateLimitStrategy.REQUEST_RATE_LIMIT)
                 .rateLimiter(RateLimiter.create(rateInitValue)).build();
@@ -36,7 +36,7 @@ public class EmailHandler extends BaseHandler {
             EmailContentModel emailContentModel = JSON.parseObject(taskInfo.getContentModel(), EmailContentModel.class);
             Set<String> receiver = taskInfo.getReceiver();
             String[] array = receiver.toArray(new String[0]);
-            MailUtil.getMailSend().sendEmail(emailContentModel.getTitle(), emailContentModel.getContent(), array, true);
+            MailUtil.getMailSend().sendEmail(emailContentModel.getTitle(), emailContentModel.getContent(), array, false);
 
         } catch (Exception e) {
             log.error("EmailHandler error {}", e.getMessage(), e);

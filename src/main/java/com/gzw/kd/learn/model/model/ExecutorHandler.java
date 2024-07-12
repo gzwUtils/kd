@@ -20,7 +20,7 @@ public class ExecutorHandler extends AbstractExecutorMessage {
     @Override
     public User handler(Integer id) {
         User user = new User();
-        user.setAccount("gzw").setId(0);
+        user.setAccount("gzw").setId(id);
         return user;
     }
 }
