@@ -84,5 +84,10 @@ public class Doc {
 
     private String appointDates;
 
+    private String tempSys;
+
+
+    private Integer tempId;
+
 
 }

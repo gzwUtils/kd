@@ -24,7 +24,7 @@ public class DemoOneFilter implements GzwFilter<DemoGzwFilterStage> {
          * 1、实际该步骤需要处理的逻辑。并返回
          */
         Map<String, Object> map = new HashMap<>(8);
-        map.put("account-1",lastFilterStage.user.getAccount());
+        map.put("account-1",lastFilterStage.operator.getAccount());
         result.add(map);
         return lastFilterStage.setStageHandlerResult(result);
     }

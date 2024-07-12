@@ -18,17 +18,17 @@ public class ConfigServiceImpl implements ConfigService {
     ConfigMapper configMapper;
 
     @Override
-    public Configs getConfigs() throws Exception {
+    public Configs getConfigs(){
         return configMapper.getConfigs();
     }
 
     @Override
-    public Integer addDoc(Configs configs) throws Exception {
+    public Integer addDoc(Configs configs){
         return configMapper.addDoc(configs);
     }
 
     @Override
-    public Integer updateConfigsForById(Configs configs) throws Exception {
+    public Integer updateConfigsForById(Configs configs) {
         return configMapper.updateConfigsForById(configs);
     }
 }

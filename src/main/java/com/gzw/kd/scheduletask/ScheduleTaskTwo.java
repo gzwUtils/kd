@@ -15,6 +15,6 @@ public class ScheduleTaskTwo extends TimerTask {
 
     @Override
     public void run() {
-        log.info("------------------------------- gzw -------- timeTask-----------------------------------");
+        log.info("------------------------------- kd -------- timeTask-----------------------------------");
     }
 }

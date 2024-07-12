@@ -22,6 +22,8 @@ public class JobAndTrigger {
 
     private String TRIGGER_GROUP;
 
+    private String TRIGGER_STATE;
+
     private BigInteger REPEAT_INTERVAL;
 
     private BigInteger TIMES_TRIGGERED;

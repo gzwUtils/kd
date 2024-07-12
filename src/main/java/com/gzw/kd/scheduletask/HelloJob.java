@@ -5,7 +5,6 @@ import com.gzw.kd.common.utils.ApplicationContextUtils;
 import com.gzw.kd.common.utils.ThreadUtils;
 import java.util.concurrent.ThreadPoolExecutor;
 import lombok.extern.slf4j.Slf4j;
-import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class HelloJob implements Job {
+public class HelloJob implements BaseJob {
 
 
    private static final ThreadPoolExecutor POOL_EXECUTOR= ThreadPoolConfig.getJobExecutor();

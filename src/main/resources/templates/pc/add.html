@@ -25,6 +25,18 @@
 <br/>
 <div id="add">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm"  label-width="80px">
+                    <el-form-item label="模版来源" prop="tempSys">
+                          <el-select v-model="ruleForm.tempSys" placeholder="请选择" style="width: auto" @change="getTempName()">
+                          <#list allSys as sys>
+                          <el-option label="${sys}" value="${sys}"></el-option>
+                          </#list>
+                          </el-select>
+                    </el-form-item>
+                    <el-form-item label="模版名称" prop="tempId">
+                       <el-select v-model="ruleForm.tempId" placeholder="请选择" style="width: auto">
+                          <el-option v-for="item in templateMsgList" :label="item.templateName" :value="item.id"></el-option>
+                       </el-select>
+                    </el-form-item>
                     <el-form-item label="信息" prop="desc">
                     <el-input v-model="ruleForm.desc"></el-input>
                     </el-form-item>
@@ -37,7 +49,7 @@
                        </el-select>
                     </el-form-item>
                     <el-form-item label="客户姓名" prop="customerName">
-                       <el-select v-model="ruleForm.customerName" placeholder="请选择" style="width: auto" @change="GetCurAddress()">
+                       <el-select v-model="ruleForm.customerName" placeholder="请选择" style="width: auto" @change="getCurAddress()">
                            <#list customerNames as customerName>
                            <el-option label="${customerName}" value="${customerName}"></el-option>
                            </#list>
@@ -79,43 +91,46 @@
         data() {
             return {
                 btnShow: false,
+                templateMsgList: [],
                 ruleForm: {
                     appointDate: '',
                     appoint: '',
                     address: '',
+                    tempId: '',
+                    tempSys: '',
                     customerName: '',
                     desc: '',
                     issueDate: moment().format("YYYY-MM-DD HH:mm:ss")
                 },
                 pickerOptions: {
                     disabledDate(time) {
-                      return time.getTime() < Date.now();
+                      return time.getTime() < new Date().getTime();
                     },
                     shortcuts: [{
                         text: '今天',
                         onClick(picker) {
-                            picker.$emit('appointDate', new Date());
+                            picker.$emit('pick', new Date());
                         }
                     }, {
                         text: '明天',
                         onClick(picker) {
                             var date = new Date();
                             date.setTime(date.getTime() + 3600 * 1000 * 24);
-                            picker.$emit('appointDate', date);
+                            picker.$emit('pick', date);
                         }
                     }, {
                         text: '三天后',
                         onClick(picker) {
                             var date = new Date();
                             date.setTime(date.getTime() + 3600 * 1000 * 24 * 3);
-                            picker.$emit('appointDate', date);
+                            picker.$emit('pick', date);
                         }
                     }, {
                         text: '一周后',
                         onClick(picker) {
                             var date = new Date();
                             date.setTime(date.getTime() + 3600 * 1000 * 24 * 7);
-                            picker.$emit('appointDate', date);
+                            picker.$emit('pick', date);
                         }
                     }]
                 },
@@ -135,6 +150,12 @@
                     ],
                     address: [
                         { required: true, message: '请选择客户地址', trigger: 'blur' }
+                    ],
+                    tempSys: [
+                        { required: true, message: '请选择模版来源', trigger: 'blur' }
+                    ],
+                    tempId: [
+                        { required: true, message: '请选择模版', trigger: 'blur' }
                     ]
                 }
             };
@@ -147,7 +168,7 @@
                 if (valid) {
                     this.btnShow = true;
                     this.intervalShowButton();
-                    axios.post('http://localhost:8092/pc/addDoc', that.ruleForm).then(res => {
+                    axios.post('/pc/addDoc', that.ruleForm).then(res => {
                         let data = res.data;
                         if (data.code === 20000) {
                             that.$message({
@@ -174,19 +195,28 @@
         _this.btnShow = false;
         }, 5000);
        },
-        GetCurAddress() {
+        getCurAddress() {
            let customerName= this.ruleForm.customerName;
-           axios.get('http://localhost:8092/pc/getAddress?customerName='+customerName).then(res => {
+           axios.post('/pc/getAddress?customerName='+customerName).then(res => {
            let data = res.data;
            if (data.code === 20000) {
                  this.ruleForm.address = data.data.address;
            }else {
-                 that.$alert({
-                     message: data.message,
-                     code: data.code
-                 })
+               this.$message.error('获取地址失败');
            }
           });
+        },
+        getTempName() {
+            let tempSys= this.ruleForm.tempSys;
+            axios.post('/pc/getTemplateName?sys='+tempSys).then(res => {
+                let data = res.data;
+                debugger;
+                if (data.code === 20000) {
+                    this.templateMsgList = data.data.templateMsgList;
+                }else {
+                    this.$message.error('获取模版失败');
+                }
+            });
         },
     }
     })

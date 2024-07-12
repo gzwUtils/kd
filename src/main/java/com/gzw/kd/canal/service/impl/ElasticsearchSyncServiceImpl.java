@@ -50,8 +50,8 @@ public class ElasticsearchSyncServiceImpl implements ElasticsearchSyncService {
     private List<EsSyncUnit> deleteList = CollUtil.newArrayList();
     private List<EsSyncUnit> upsertList = CollUtil.newArrayList();
 
-    private String esIndexClueData = null;
-    private String esTypeClueData = null;
+    private String esIndexKdData = null;
+    private String esTypeKdData = null;
 
     @PostConstruct
     public void init() {
@@ -64,8 +64,8 @@ public class ElasticsearchSyncServiceImpl implements ElasticsearchSyncService {
                 String index = split[INT_ONE];
                 String type = split[INT_TWO];
                 if (Constants.TARGET_ELASTICSEARCH.equalsIgnoreCase(target)) {
-                    esIndexClueData = index;
-                    esTypeClueData = type;
+                    esIndexKdData = index;
+                    esTypeKdData = type;
                     break;
                 }
             }

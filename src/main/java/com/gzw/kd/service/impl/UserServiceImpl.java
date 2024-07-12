@@ -46,8 +46,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer updateStatusByName(String name, int status) throws Exception {
-        return userMapper.updateStatusByName(name,status);
+    public Integer updateStatusByName(String name, int status,int errorRetry) throws Exception {
+        return userMapper.updateStatusByName(name,status,errorRetry);
     }
 
     @Override
@@ -68,5 +68,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllUsers() {
         return userMapper.getAllUsers();
+    }
+
+    @Override
+    public List<User> getAllStopUsers() {
+        return userMapper.getAllStopUsers();
     }
 }

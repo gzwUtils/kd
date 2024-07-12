@@ -81,13 +81,13 @@
 		}
 
 		Emitter.prototype.getShape = function () {
-		    var d = new Date(),
-		        hour = d.getHours() % 12,
-		        min = (d.getMinutes() < 10 ? "0" : "") + d.getMinutes(),
-		        sec = (d.getSeconds() < 10 ? "0" : "") + d.getSeconds();
+			const d = new Date(),
+				hour = d.getHours(),
+				min = (d.getMinutes() < 10 ? "0" : "") + d.getMinutes(),
+				sec = (d.getSeconds() < 10 ? "0" : "") + d.getSeconds();
 
-
-		    sCtx.clearRect(0, 0, shapeCan.width, shapeCan.height);
+			console.log(hour);
+			sCtx.clearRect(0, 0, shapeCan.width, shapeCan.height);
 		    sCtx.fillText(hour + ":" + min + ":" + sec, 20, 50);
 
 		    var imageData = sCtx.getImageData(0, 0, shapeCan.width, shapeCan.height).data;

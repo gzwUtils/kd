@@ -204,7 +204,7 @@
             <appender-ref ref="ERROR_FILE" />
             <appender-ref ref="ALL_FILE" />
         </root>
-        <logger name="com.gzw.kd" level="info"/> <!-- 测试环境, 指定某包日志为info级 -->
+        <logger name="com.gzw.kd" level="debug"/> <!-- 测试环境, 指定某包日志为info级 -->
     </springProfile>
 
     <springProfile name="prd">
@@ -217,7 +217,7 @@
             <appender-ref ref="ERROR_FILE" />
             <appender-ref ref="ALL_FILE" />
         </root>
-        <logger name="com.gzw.kd" level="warn" addtivity="true"/> <!-- 生产环境, 指定某包日志为warn级 -->
+        <logger name="com.gzw.kd" level="debug" addtivity="true"/> <!-- 生产环境, 指定某包日志为warn级 -->
         <logger name="com.gzw.kd.KdApplication" level="info" addtivity="true"/> <!-- 特定某个类打印info日志, 比如application启动成功后的提示语 -->
     </springProfile>
 

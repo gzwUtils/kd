@@ -13,10 +13,6 @@ public class TemplateDataStyle {
     private String value;
     private String color;
 
-    public TemplateDataStyle() {
-        this.color = "#173177";
-    }
-
     public TemplateDataStyle( String value) {
         this.color = "#173177";
         this.value = value;

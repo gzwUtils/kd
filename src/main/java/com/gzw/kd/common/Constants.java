@@ -2,7 +2,6 @@ package com.gzw.kd.common;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.util.StrUtil;
-
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -100,6 +99,9 @@ public interface Constants {
      * 空json
      */
     String EMPTY_JSON_OBJECT = "{}";
+
+
+    String EMPTY_VALUE_JSON_ARRAY = "[]";
 
     /***
      * 人民币标志
@@ -213,7 +215,22 @@ public interface Constants {
     /**
      * int 40
      */
+    int INT_40 = 40;
+
+    /**
+     * int 50
+     */
     int INT_50 = 50;
+
+    /**
+     * int 60
+     */
+    int INT_60 = 60;
+
+    /**
+     * int 70
+     */
+    int INT_70 = 70;
 
     /**
      * int 32
@@ -226,9 +243,25 @@ public interface Constants {
     int INT_100 = 100;
 
     /**
+     * int 170
+     */
+    int INT_170 = 170;
+
+    /**
      * int 180
      */
     int INT_180 = 180;
+
+
+    /**
+     * int 200
+     */
+    int INT_200 = 200;
+
+    /**
+     * int 300
+     */
+    int INT_300 = 300;
 
     /**
      * int 500
@@ -239,6 +272,11 @@ public interface Constants {
      * int 1000
      */
     int INT_1000 = 1000;
+
+    /**
+     * int 3000
+     */
+    int INT_3000 = 3000;
 
     /**
      * int 10000
@@ -395,7 +433,7 @@ public interface Constants {
 
     public static final String TRACE_ID = "TRACE_ID";
 
-    public static final String TRACE_ID_FLAG = "kd_";
+    public static final String TRACE_ID_FLAG = "kd";
 
     public static final String REQUEST_ID_HEADER = "RequestId";
 
@@ -420,7 +458,7 @@ public interface Constants {
 
     public static final String SCHEME = "http";
 
-    public static final int  SESSION_EXPIRE_TIME = 60 * 30;
+    public static final int  SESSION_EXPIRE_TIME = 60 * 120;
 
     public  static final String REGISTER_REDIS_KEY="redis_register_key_";
 
@@ -438,7 +476,7 @@ public interface Constants {
 
     public  static final String WX_DELETE_MENU_URL="https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=";
 
-    public  static final String WX_ACCESS_TOKEN_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=";
+    public  static final String WX_ACCESS_TOKEN_URL="https://api.weixin.qq.com/cgi-bin/stable_token";
 
     public  static final String WX_AUTH_ACCESS_TOKEN_URL="https://api.weixin.qq.com/cgi-bin/token?grant_type=authorization_code&appid=";
 
@@ -451,6 +489,8 @@ public interface Constants {
     public  static final String WX_MODEL_MSG_URL  = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=";
 
     public  static final String WX_APP_SECRET="secret";
+
+    public  static final String WX_APP_ID="appid";
 
     public  static final String WX_APP_ACCESS_TOKEN="access_token";
 
@@ -575,6 +615,17 @@ public interface Constants {
     String USERNAME_FILTER_PATTERN = "[ 　＇'\\\\%％+＋|｜,，/／＼\"＂“”‘’]";
 
     /**
+     * 手机号正则
+     */
+    String PHONE_REGEX_EXP = "^((13[0-9])|(14[5,7,9])|(15[0-3,5-9])|(166)|(17[0-9])|(18[0-9])|(19[1,8,9]))\\d{8}$";
+
+    /**
+     * 邮箱正则
+     */
+    String EMAIL_REGEX_EXP = "^[A-Za-z0-9-_\\u4e00-\\u9fa5]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+
+
+    /**
      * 姓名特殊符号判断
      */
     Pattern usernamePattern = Pattern.compile(USERNAME_FILTER_PATTERN);
@@ -602,8 +653,8 @@ public interface Constants {
     /** elasticsearch */
     String SCHEMA_TEST = "test.learn";
 
-    /** base 接口token **/
-    String TOKEN_PUSH_BASE_CLUE="3705564dd0b774b746beeabdf5064640";
+    /**  接口token **/
+    String TOKEN_PUSH_KD="3705564dd0b774b746beeabdf5064640";
 
     /**
      * mail
@@ -614,7 +665,7 @@ public interface Constants {
 
    public static final String SYSTEM_MAIL_USER = "2876533492@qq.com";
 
-   public static final String SYSTEM_MAIL_PASSWORD = "ftaaokyudgztdeah";
+   public static final String SYSTEM_MAIL_PASSWORD = "jcpkpjmpzagwdddj";
 
     /**
      * SMS
@@ -645,4 +696,25 @@ public interface Constants {
 
 
     public static final String LINK_NAME = "url";
+
+
+    /**
+     * 接口限制 最多的人数
+     */
+    public static final Integer BATCH_RECEIVER_SIZE = 100;
+
+
+    /**
+     * boolean转换
+     */
+    public final static Integer TRUE = 1;
+
+    public final static Integer FALSE = 0;
+
+
+    /**
+     * nickName
+     */
+  public final static String [] DEFAULT_NICK_NAME= {"静谧之夜","心城风起潮落"};
+
 }

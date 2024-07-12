@@ -6,7 +6,6 @@ import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.utils.QuartzManager;
 import com.gzw.kd.common.entity.JobAndTrigger;
-import com.gzw.kd.scheduletask.HelloJob;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -39,22 +38,20 @@ public class QuartzController {
      *
      * @param jName  任务名称
      * @param jGroup 任务组
-     * @param tName  触发器名称
-     * @param tGroup 触发器组
      * @param cron   cron表达式
+     * @param cron   job全类名称
      * @return ResultMap
      */
     @OperatorLog(value = "新增定时任务",description = "新增定时任务")
     @ApiImplicitParams({@ApiImplicitParam(name = "jName", value = "任务名称", paramType = "query", dataTypeClass = String.class, required = true ),
             @ApiImplicitParam(name = "jGroup", value = "任务组", paramType = "query", dataTypeClass = String.class, required = true ),
-            @ApiImplicitParam(name = "tName", value = "触发器名称", paramType = "query", dataTypeClass = String.class, required = true ),
-            @ApiImplicitParam(name = "tGroup", value = "触发器组", paramType = "query", dataTypeClass = String.class, required = true ),
-            @ApiImplicitParam(name = "cron", value = "cron表达式", paramType = "query", dataTypeClass = String.class, required = true )})
+            @ApiImplicitParam(name = "cron", value = "cron表达式", paramType = "query", dataTypeClass = String.class, required = true ),
+            @ApiImplicitParam(name = "jobClassName", value = "job全类名称", paramType = "query", dataTypeClass = String.class, required = true )})
     @ApiOperation(value = "新增定时任务")
     @PostMapping(path = "/addJob")
-    public R addJob(@RequestParam("jName") String jName, @RequestParam("jGroup") String jGroup, @RequestParam("tName") String tName,@RequestParam("tGroup")  String tGroup,@RequestParam("cron") String cron) {
+    public R addJob(@RequestParam("jName") String jName, @RequestParam("jGroup") String jGroup,@RequestParam("cron") String cron,@RequestParam("jobClassName") String jobClassName) {
         try {
-            quartzManager.getInstance().addJob(jName, jGroup, tName, tGroup, cron, HelloJob.class);
+            quartzManager.getInstance().addJob(jName, jGroup, jName, jGroup, cron, jobClassName);
             return R.ok().message("添加任务成功");
         } catch (Exception e) {
             log.error("add job error jName {}", jName, e);

@@ -15,6 +15,7 @@ CREATE TABLE `assign`
     `coupon`         int(1) DEFAULT '0' COMMENT '是否拥有优惠劵 0 没有 1 有',
     `coupon_balance` decimal(10, 2) DEFAULT '0.00' COMMENT '优惠劵额度',
     `openid`         varchar(100)   DEFAULT NULL COMMENT 'openId',
+    `syNumber`       int                         null comment '剩余次数',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='合同';
 
@@ -37,6 +38,7 @@ CREATE TABLE `async_task`
     `exportName`        varchar(100) DEFAULT NULL COMMENT '导出名称',
     `numberOfSuccesses` int(11) DEFAULT NULL COMMENT '处理成功的条数',
     `numberOfFailed`    int(11) DEFAULT NULL COMMENT '处理失败的条数',
+    `file_path`         varchar(200) null comment '文件路径',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='async_task';
 
@@ -51,8 +53,10 @@ CREATE TABLE `config`
     `year_balance`   decimal(10, 2) DEFAULT NULL COMMENT '全年服务费',
     `extra_balance`  decimal(10, 2) DEFAULT NULL COMMENT '加项服务费',
     `other_balance`  decimal(10, 2) DEFAULT NULL COMMENT '其他服务费',
+    `create_time`    datetime       null comment '创建时间',
+    `update_time`    datetime       null comment '更新时间',
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='服务';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='服务配置';
 
 
 DROP TABLE IF EXISTS `doc`;
@@ -73,6 +77,7 @@ CREATE TABLE `doc`
     `remark`        varchar(500) DEFAULT NULL COMMENT '备注',
     `address`       varchar(500) DEFAULT NULL COMMENT '客户地址',
     `consumer_Name` varchar(500) DEFAULT NULL COMMENT '客户姓名',
+    `tempId`        int          null comment '模版ID',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='doc';
 
@@ -163,6 +168,7 @@ CREATE TABLE `user`
     `update_time` datetime     DEFAULT NULL COMMENT '更新时间',
     `is_admin`    int(1) DEFAULT '0' COMMENT '是否管理员',
     `error_retry` int(1) DEFAULT '0' COMMENT '错误次数',
+    `email`       varchar(60)   null comment 'email',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='user';
 
@@ -180,6 +186,7 @@ CREATE TABLE `wx_template_msg`
     `role`          int(2) DEFAULT '0' COMMENT '0 关注 1 代办 ',
     `url`           varchar(100) DEFAULT NULL COMMENT '跳转url',
     `data`          varchar(100) DEFAULT NULL COMMENT '模板数据',
+    sys           varchar(10) default '公众号' null comment '系统来源',
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COMMENT='wx_template_msg';
 

@@ -70,12 +70,12 @@ public class LoginInterceptor implements HandlerInterceptor {
 
             String referer = request.getHeader("referer");
             if(StringUtils.isBlank(referer)){
-                request.getRequestDispatcher("/pc/error").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/pc/error");
                 return false;
             }
         } catch (Exception e) {
             log.error("get session  user error {}", e.getMessage(), e);
-            request.getRequestDispatcher("/pc/unknown").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/pc/unknown");
             return false;
         }
         return true;

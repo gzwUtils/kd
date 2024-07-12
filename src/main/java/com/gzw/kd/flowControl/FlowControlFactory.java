@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 /**
@@ -27,6 +28,7 @@ import org.springframework.stereotype.Component;
 @SuppressWarnings("all")
 @Slf4j
 @Component
+@DependsOn({"applicationContextUtils"})
 public class FlowControlFactory {
 
 
@@ -71,6 +73,7 @@ public class FlowControlFactory {
 
     @PostConstruct
     private void init() {
+        log.info("flow control init start.........");
         Map<String, Object> serviceMap = ApplicationContextUtils.getApplicationContext().getBeansWithAnnotation(LocalRateLimit.class);
         serviceMap.forEach((name, service) -> {
             if (service instanceof FlowControlService) {
@@ -80,5 +83,6 @@ public class FlowControlFactory {
                 flowControlServiceMap.put(rateLimitStrategy, (FlowControlService) service);
             }
         });
+        log.info("flow control init end.........");
     }
 }

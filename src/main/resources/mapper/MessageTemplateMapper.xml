@@ -3,7 +3,7 @@
 <mapper namespace="com.gzw.kd.mapper.MessageTemplateMapper" >
 
   <select id="selectById"   resultType="com.gzw.kd.common.entity.TemplateInfo">
-      SELECT id,name,msg_status msgStatus ,cron_task_id cronTaskId,cron_crowd_path cronCrowdPath,id_type idType,send_channel sendChannel,template_type templateType, msg_type msgType,shield_type shieldType,msg_content  msgContent,send_account sendAccount, expect_push_time expectPushTime,is_deleted isDeleted  from  message_template  where  id = #{id}
+      SELECT id,name,msg_status msgStatus ,cron_task_id cronTaskId,cron_crowd_path cronCrowdPath,id_type idType,send_channel sendChannel,template_type templateType, msg_type msgType,shield_type shieldType,msg_content  msgContent,send_account sendAccount, expect_push_time expectPushTime,is_deleted isDeleted,creator,updator,created,updated  from  message_template  where  id = #{id}
   </select>
 
    <insert id="registerTemplate" parameterType="com.gzw.kd.common.entity.TemplateInfo">
@@ -14,15 +14,86 @@
    </insert>
 
     <select id="findAllByIsDeleted" resultType="com.gzw.kd.common.entity.TemplateInfo">
-        SELECT id,name,msg_status msgStatus ,cron_task_id cronTaskId,cron_crowd_path cronCrowdPath,id_type idType,send_channel sendChannel,template_type templateType, msg_type msgType,shield_type shieldType,msg_content  msgContent,send_account sendAccount, expect_push_time expectPushTime,is_deleted isDeleted  from  message_template
+        SELECT id,name,msg_status msgStatus ,cron_task_id cronTaskId,cron_crowd_path cronCrowdPath,id_type idType,send_channel sendChannel,template_type templateType, msg_type msgType,shield_type shieldType,msg_content  msgContent,send_account sendAccount, expect_push_time expectPushTime,is_deleted isDeleted ,creator,updator,created,updated  from  message_template
        <if test="isDeleted!=null">
            where  is_deleted = #{isDeleted}
        </if>
     </select>
 
 
+    <select id="findAllByIds" resultType="com.gzw.kd.common.entity.TemplateInfo">
+        SELECT id,name,msg_status msgStatus ,cron_task_id cronTaskId,cron_crowd_path cronCrowdPath,id_type idType,send_channel sendChannel,template_type templateType, msg_type msgType,shield_type shieldType,msg_content  msgContent,send_account sendAccount, expect_push_time expectPushTime,is_deleted isDeleted ,creator,updator,created,updated  from  message_template
+        where id in
+        <foreach collection="ids" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+
+
+
+
+
     <select id="countByIsDeletedEquals" resultType="Long">
         select count(1) from message_template where is_deleted = #{isDeleted}
     </select>
+
+    <update id="updateTemplateInfo" parameterType="com.gzw.kd.common.entity.TemplateInfo">
+        update message_template
+    <set>
+        <if test="name!=null and  name!=''">
+            name = #{name},
+        </if>
+        <if test="cronCrowdPath!=null and cronCrowdPath!=''">
+            cron_crowd_path = #{cronCrowdPath},
+        </if>
+        <if test="idType!=0">
+            id_type = #{idType},
+        </if>
+        <if test="sendChannel!=0">
+            send_channel = #{sendChannel},
+        </if>
+        <if test="msgContent!=null and msgContent!=''">
+            msg_content = #{msgContent},
+        </if>
+        <if test="templateType!=0">
+            template_type = #{templateType},
+        </if>
+        <if test="msgType!=0">
+            msg_type = #{msgType},
+        </if>
+        <if test="expectPushTime!=null and expectPushTime!=''">
+            expect_push_time = #{expectPushTime},
+        </if>
+        <if test="msgStatus!=0">
+              msg_status = #{msgStatus},
+        </if>
+        <if test="updator!=null and updator!=''">
+              updator = #{updator},
+        </if>
+        <if test="updated!=null and updated!=''">
+              updated = #{updated},
+        </if>
+    </set>
+       where id = #{id}
+    </update>
+
+
+    <update id="deleteTemplateInfo" parameterType="com.gzw.kd.common.entity.TemplateInfo">
+        <foreach collection="templateInfo"  item="item" index="index" open="" close="" separator=";">
+           update message_template
+                <set>
+                     <if test="item.isDeleted!=null">
+                             is_deleted = #{item.isDeleted},
+                     </if>
+                     <if test="item.updator!=null">
+                             updator = #{item.updator},
+                     </if>
+                     <if test="item.updated!=null">
+                             updated = #{item.updated},
+                     </if>
+                </set>
+                     where id = #{item.id}
+        </foreach>
+    </update>
 
 </mapper>

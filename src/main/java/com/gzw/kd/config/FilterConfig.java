@@ -4,7 +4,6 @@ import cn.hutool.core.util.CharsetUtil;
 import com.alibaba.fastjson2.JSONObject;
 import com.gzw.kd.common.Constants;
 import static com.gzw.kd.common.ErrorCode.ERR_NO_ACCESS_PRIVILEGE;
-import static com.gzw.kd.common.ErrorCode.ERR_NO_LOGIN;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.utils.MessageUtils;
 import com.gzw.kd.common.xss.XssFilter;
@@ -85,7 +84,7 @@ public class FilterConfig {
         }
 
         private void writeFailureRestResponse(HttpServletResponse response) throws IOException {
-            R res = new R().code(ERR_NO_LOGIN).message(MessageUtils.getMessage(ERR_NO_ACCESS_PRIVILEGE));
+            R res = R.error().code(ERR_NO_ACCESS_PRIVILEGE).message(MessageUtils.getMessage(ERR_NO_ACCESS_PRIVILEGE));
             response.setContentType(MediaType.APPLICATION_JSON_UTF8_VALUE);
             StreamUtils.copy(JSONObject.toJSONString(res), CharsetUtil.CHARSET_UTF_8, response.getOutputStream());
         }

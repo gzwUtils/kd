@@ -1,5 +1,4 @@
 package com.gzw.kd.common.enums;
-
 import lombok.Getter;
 
 /**
@@ -17,7 +16,9 @@ public enum TemplateRoleEnum {
      */
 
     GUAN_ZHU(0,"关注"),
-    DAI_BAN(1,"代办");
+    NOTICE(1,"通知"),
+    REMIND(2,"提醒"),
+    OTHER(3,"其他");
 
     private final int  status;
 
@@ -34,6 +35,17 @@ public enum TemplateRoleEnum {
         for (TemplateRoleEnum v : values) {
             if (v.getStatus() == status) {
                 return v.getDesc();
+            }
+        }
+        return null;
+    }
+
+
+    public static Integer getStatus(String desc) {
+        TemplateRoleEnum[] values = TemplateRoleEnum.values();
+        for (TemplateRoleEnum v : values) {
+            if (desc.contains(v.getDesc())) {
+                return v.getStatus();
             }
         }
         return null;

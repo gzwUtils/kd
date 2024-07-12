@@ -1,10 +1,9 @@
 package com.gzw.kd.learn.model.filter;
 
+import com.gzw.kd.common.entity.Operator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import com.gzw.kd.common.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
@@ -18,14 +17,11 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 public class DemoGzwFilterStage {
 
-    User user;
+    /** ----------------------------入参---------------------------------*/
+    Operator operator;
 
-    Integer userId;
+    /** ----------------------------处理结果---------------------------------*/
 
     List<Map<String, Object>> stageHandlerResult = new ArrayList<>();
 
-    public DemoGzwFilterStage(User user, Integer userId) {
-        this.user = user;
-        this.userId = userId;
-    }
 }

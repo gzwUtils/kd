@@ -1,20 +1,21 @@
 package com.gzw.kd;
 import cn.hutool.core.codec.Base64;
 import com.alibaba.fastjson.JSON;
-import com.gzw.kd.common.entity.User;
+import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.exception.GlobalException;
 import com.gzw.kd.common.generators.RandomIdGenerator;
+import com.gzw.kd.common.utils.AESCrypt;
 import com.gzw.kd.common.utils.MyLinkedBlockQueue;
 import com.gzw.kd.common.utils.SM4Utils;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterChain;
 import com.gzw.kd.learn.model.filter.DemoGzwFilterStage;
 import com.gzw.kd.learn.model.model.GzwThreadDemo;
 import com.gzw.kd.scheduletask.ScheduleTask;
+import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -22,7 +23,7 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings("all")
 @Slf4j
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class KdApplicationTests {
 
     @Autowired
@@ -33,6 +34,9 @@ class KdApplicationTests {
 
     @Autowired
     private GzwThreadDemo gzwThreadDemo;
+
+    @Autowired
+    private AESCrypt aesCrypt;
 
     @Test
     void contextLoads() throws GlobalException {
@@ -59,7 +63,8 @@ class KdApplicationTests {
     @Test
     void base64() {
         String code = Base64.decodeStr("cGljb0NURns1M3J2M3JfNTNydjNyXzUzcnYzcl81M3J2M3JfNTNydjNyfQ");
-        System.out.println(code+"=================================================");
+        log.info(code+"=================================================");
+        log.info(String.valueOf(new Date().getHours()));
     }
 
     @Test
@@ -81,6 +86,8 @@ class KdApplicationTests {
 
     @Test
     void smc() throws Exception {
+        log.info(aesCrypt.encrypt("gzw"));
+        log.info(aesCrypt.decrypt("mOSFJVbruZPLzajDbPUrPAvYDuEcNHoYUaISTmn3+2r4rWIUi5Mg1VVfgzqjn+ttUpk0y8DwJh0FgXhJ0gWhpA=="));
         String password = SM4Utils.encryptData_CBC("abdc1234", SM4Utils.DEFAULT_KEY, SM4Utils.DEFAULT_IV, false, SM4Utils.CIPHER_TEXT_BASE64);
         String plainPassword = SM4Utils.decryptData_CBC(password, SM4Utils.DEFAULT_KEY, SM4Utils.DEFAULT_IV, false, SM4Utils.CIPHER_TEXT_BASE64);
         log.info(password + "-----------------------------------encrryPass---------------------------------------------------------------------");
@@ -90,8 +97,9 @@ class KdApplicationTests {
     @Test
     void chain() throws Exception {
         DemoGzwFilterStage demoGzwFilterStage = new DemoGzwFilterStage();
-        User admin = new User().setAccount("admin").setIsAdmin(1);
-        demoGzwFilterStage.setUser(admin);
+        Operator operator = new Operator();
+        operator.setAccount("admin").setIsAdmin(1);
+        demoGzwFilterStage.setOperator(operator);
         DemoGzwFilterStage stage = demoGzwFilterChain.doFilter(demoGzwFilterStage);
         List<Map<String, Object>> result = stage.getStageHandlerResult();
         log.info("chain end {}", JSON.toJSONString(result));

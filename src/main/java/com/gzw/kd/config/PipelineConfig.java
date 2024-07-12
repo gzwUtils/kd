@@ -3,7 +3,9 @@ package com.gzw.kd.config;
 import com.gzw.kd.common.enums.BusinessCode;
 import com.gzw.kd.send.ProcessControl;
 import com.gzw.kd.send.ProcessTemplate;
+import com.gzw.kd.send.action.AfterParamCheckAction;
 import com.gzw.kd.send.action.AssembleAction;
+import com.gzw.kd.send.action.PreParamCheckAction;
 import com.gzw.kd.send.action.SendMqAction;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,16 +29,24 @@ public class PipelineConfig {
     @Resource
     private AssembleAction assembleAction;
 
+    @Resource
+    private PreParamCheckAction preParamCheckAction;
+
+    @Resource
+    private AfterParamCheckAction afterParamCheckAction;
+
     /**
      * 普通发送执行流程
+     * 1. 前置参数校验
      * 2. 组装参数
+     * 3. 后置参数校验
      * 4. 发送消息至MQ
      *
      */
     @Bean("commonSendTemplate")
     public ProcessTemplate commonSendTemplate() {
         ProcessTemplate processTemplate = new ProcessTemplate();
-        processTemplate.setProcessList(Arrays.asList(assembleAction, sendMqAction));
+        processTemplate.setProcessList(Arrays.asList(preParamCheckAction,assembleAction,afterParamCheckAction, sendMqAction));
         return processTemplate;
     }
 

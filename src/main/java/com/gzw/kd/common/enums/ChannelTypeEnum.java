@@ -17,7 +17,7 @@ import lombok.Getter;
 @SuppressWarnings("all")
 @AllArgsConstructor
 @Getter
-public enum ChannelTypeEnum {
+public enum ChannelTypeEnum implements BaseEnum {
 
 
 

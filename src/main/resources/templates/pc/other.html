@@ -16,9 +16,6 @@
 </head>
 <body>
 <div id="app">
-      <el-link type="success">页面观看人数:</el-link>
-      <input type="text" id="online" disabled="disabled" size="10px"/>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <input type="hidden" id ="userName" name="userName" value="${Session['user_key'].account}"/>
       <a  href="http://www.dmanywhere.cn/" target="_blank">pdm在线地址</a>&nbsp;&nbsp;
       <a  href="https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html" target="_blank">B+树</a>
@@ -70,8 +67,6 @@
       <br/>
       <br/>
       <el-button type="success"  size="mini" @click="brpop()">消费</el-button><br/>
-      <el-input v-model="takePop" placeholder="出参" disabled="disabled"></el-input>
-      <el-button type="success"  size="mini" @click="l_clear()">clear</el-button><br/>
 </div>
 </body>
 <script>
@@ -96,7 +91,6 @@
                         label: '5'
                   }],
                 phone:'',
-                takePop: '',
                 uniqueId: '',
                 interParams: '',
                 value: '',
@@ -184,12 +178,10 @@
                         'Content-Type': 'application/json',
                         'timestamp': timestamp,
                         'sign': CryptoJS.MD5(sign).toString(),
+                        'other-token': this.tokens,
                   }
                     axios.post('/base/put',body,{headers}).then(response => {
-                          if(response.data.data.pushs !==''){
-                                this.interParams =  response.data.data.pushs;
-                          }
-
+                                this.interParams =  response.data.message;
                     });
             },
             brpop () {
@@ -204,11 +196,10 @@
                           'Content-Type': 'application/json',
                           'timestamp': timestamp,
                           'sign': CryptoJS.MD5(sign).toString(),
+                          'other-token': this.tokens,
                     }
                     axios.post('/base/take',body,{headers}).then(response => {
-                          if(response.data.data.takes !==''){
-                                this.takePop =  response.data.data.takes;
-                          }
+                          this.$message.success(response.data.message);
                     });
               },
             otherSave (){
@@ -231,11 +222,6 @@
                           this.$message.success(response.data.message);
                     });
               },
-            l_clear() {
-                    axios.post('/base/clear').then(response => {
-                          this.$message.success(response.data.message);
-                    });
-              },
             emailSend() {
                     this.showEmail = true;
                     if (this.email === '' || this.subject === '') {
@@ -248,36 +234,5 @@
               }
         }
     })
-
-    function getUUID(){
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function (c){
-            const r = Math.random() * 16 | 0;
-            const v = c === 'x'?r:(r & 0x3 | 0x8);
-            return v.toString(16);
-        })
-    }
-
-    const websocket = new WebSocket("ws://localhost:8092/websocket/" + getUUID());
-
-    websocket.onopen = function (){
-        websocket.send("connect success ......");
-    }
-
-    websocket.onmessage = function (msg){
-        const server = msg.data;
-        document.getElementById("online").value = server;
-        console.log(server);
-    }
-
-    websocket.onclose = function (){
-        alert("通道已关闭 请检查！！！！ ")
-        document.getElementById("online").value = '0';
-        console.log('websocket close');
-    }
-
-    websocket.onerror = function (){
-        alert("通道发生错误 请检查！！！！ ")
-        console.log('websocket error');
-    }
 </script>
 </html>
