@@ -322,7 +322,7 @@ public class PCController {
         Object captchacode = request.getSession().getAttribute(KAPTCHA_SESSION_KEY);
         if (ObjectUtil.isEmpty(captchacode)) {
             sessionVerificationCodeDel(request);
-            return R.error().message("验证码错误");
+            return R.error().message("验证码为空");
         } else if (!captchacode.equals(code)) {
             sessionVerificationCodeDel(request);
             return R.error().message("验证码错误");

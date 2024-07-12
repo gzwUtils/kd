@@ -26,6 +26,9 @@ public class BaseAdvice extends AbstractApiAdvice{
 
     private static final Map<Class<?>, String> INNER_API_TOKEN = new HashMap<Class<?>, String>(3) {{
         put(BaseController.class, TOKEN_PUSH_KD);
+        put(EsController.class, TOKEN_PUSH_KD);
+        put(ChatGptController.class, TOKEN_PUSH_KD);
+        put(SendController.class, TOKEN_PUSH_KD);
     }};
 
     @Override
