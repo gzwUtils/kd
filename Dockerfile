@@ -44,6 +44,6 @@ EXPOSE 8080
 #ENTRYPOINT ["sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -Dlogging.file=/app/logs/application.log -jar /app/${project.build.finalName}.jar $APP_ENV"]
 
 
-RUN echo "java -DEnv=${profile}  -jar /app/$jarName" > /app/startup.sh
+RUN echo "java -DEnv=${profile}  -jar /app/$jarName" > /app/start.sh
 
-ENTRYPOINT ["sh","/app/startup.sh"]
+ENTRYPOINT ["sh","/app/start.sh"]
