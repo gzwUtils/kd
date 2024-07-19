@@ -35,5 +35,6 @@ public class AviatorFunctionInit extends AbstractCache {
 
     @Override
     public void clear() {
+        AviatorEvaluator.removeFunction(aviatorUtils);
     }
 }
