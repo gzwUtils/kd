@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum BusinessCode implements BaseEnum {
+public enum BusinessCode {
 
     /**
      * 普通发送流程
