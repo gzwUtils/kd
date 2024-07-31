@@ -25,6 +25,6 @@ public class SendUserNumRateLimitServiceImpl implements FlowControlService {
     @Override
     public Double flowControl(TaskInfo taskInfo, FlowControlParam flowControlParam) {
         RateLimiter rateLimiter = flowControlParam.getRateLimiter();
-        return rateLimiter.acquire(taskInfo.getReceiver().size());
+        return rateLimiter.acquire(flowControlParam.getRateInitValue().intValue());
     }
 }
