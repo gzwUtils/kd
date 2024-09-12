@@ -45,9 +45,9 @@ public class ServiceConfigInit extends AbstractCache {
 
     @Override
     public <T> T get() {
-        log.warn(this.getClass()+"get config cache.........");
+        log.warn("{} get config cache.........", this.getClass());
         if (Boolean.FALSE.equals(redisTemplate.hasKey(SERVICE_COFIG))) {
-            log.warn(this.getClass()+"config cache reload.........");
+            log.warn("{} config cache reload.........", this.getClass());
             reload();
         }
         return (T) redisTemplate.opsForValue().get(SERVICE_COFIG);
@@ -56,7 +56,7 @@ public class ServiceConfigInit extends AbstractCache {
 
     @Override
     public void clear() {
-        log.warn(this.getClass()+"clear config cache.........");
+        log.warn("{} clear config cache.........", this.getClass());
         redisTemplate.delete(SERVICE_COFIG);
         caffeineCache.cleanUp();
     }

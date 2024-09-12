@@ -28,7 +28,6 @@ public class ProxyFactory implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         log.warn("----------"+method);
-        method.invoke(proxy,args);
-        return null;
+        return method.invoke(proxy, args);
     }
 }

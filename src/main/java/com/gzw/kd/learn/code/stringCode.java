@@ -49,6 +49,19 @@ public class stringCode {
     }
 
 
+    public static int test(int[] nums){
+        HashSet<Integer> hashSet = new HashSet<>();
+        int count = 1;
+        for (int i = 0; i < nums.length; i++) {
+            if (hashSet.contains(nums[i])) {
+                ++count;
+            }
+            hashSet.add(nums[i]);
+        }
+        return nums.length - count;
+    }
+
+
     public static boolean isAnagram(String s, String t) {
     if(s.length()!=t.length()){
         return false;
@@ -120,6 +133,9 @@ public class stringCode {
         int [] ll1 ={1,2,4,5};
         boolean b = get(ll1, ll1.length, 7);
         System.out.println(b+"=========================================================");
+        int[] intss = new int[]{1, 0, 0,2,3,2,5,6,2};
+        int tested = test(intss);
+        System.out.println(tested);
         /**
          * HashMap springBoot Kafka es redis
          */

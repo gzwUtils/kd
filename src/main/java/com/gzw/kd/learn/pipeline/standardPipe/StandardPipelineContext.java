@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class StandardPipelineContext implements PipelineContext {
 
-    private Map<String, Object> contentMap = Maps.newConcurrentMap();
+    private final Map<String, Object> contentMap = Maps.newConcurrentMap();
 
     @Override
     public void set(String contextKey, Object contextValue) {

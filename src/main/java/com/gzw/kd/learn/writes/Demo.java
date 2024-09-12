@@ -1595,6 +1595,25 @@ public class Demo {
      *
      * AutoConfigurationImportSelector  加载自动装配 实现 importSelector 重写了selectImports方法 ---SpringFactoriesLoader.loadFactoryNames  getAutoConfigurationEntry
      * @Configuration --- ConditionalOnClass
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     * jstat 查看对堆内存使用情况
+     * jstat -gc pid
+     * jstat -calss pid
+     *
+     *
+     * jmap -heap pid 更详细堆内存
+     * jmap -histo:live  pid ｜ more 查看活跃和非活跃
+     * jmap -dump:format=b,file=dump.dat pid  打印dump文件
+     * jhat对dump文件进行分析 jhat -port 8888 dump.dat
+     *
+     *
+     * jstack 查看线程状态
      */
 
 }

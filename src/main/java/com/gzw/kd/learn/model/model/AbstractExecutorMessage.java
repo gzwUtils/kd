@@ -15,7 +15,6 @@ public abstract class AbstractExecutorMessage implements Callable<User> {
 
     /**
      * 唯一标识
-     * @return
      */
     public abstract Long uniqueId();
 

@@ -2,6 +2,7 @@ package com.gzw.kd.config;
 import com.gzw.kd.common.exception.GlobalException;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import nl.altindag.ssl.SSLFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
@@ -88,6 +89,10 @@ public class ElasticsearchConfiguration {
                 String[] split1 = split[i].split(STRING_COLON);
                 httpHosts[i] = new HttpHost(split1[0], Integer.parseInt(split1[1]), SCHEME);
             }
+            SSLFactory sslFactory = SSLFactory.builder()
+                    .withUnsafeTrustMaterial()
+                    .withUnsafeHostnameVerifier()
+                    .build();
             RestClientBuilder builder = RestClient.builder(httpHosts);
             final CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
             credentialsProvider.setCredentials(AuthScope.ANY,
@@ -103,6 +108,8 @@ public class ElasticsearchConfiguration {
                 httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
                 httpClientBuilder.setMaxConnTotal(maxConnTotal);
                 httpClientBuilder.setMaxConnPerRoute(maxConnPerRoute);
+                httpClientBuilder.setSSLContext(sslFactory.getSslContext());
+                httpClientBuilder.setSSLHostnameVerifier(sslFactory.getHostnameVerifier());
                 return httpClientBuilder;
             });
             log.info("restHighLevelClient build 创建成功 ------------------------------------------------------");
