@@ -26,7 +26,6 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.RejectedExecutionException;
 import static com.gzw.kd.common.Constants.STRING_EMPTY;
 
 /**
@@ -85,7 +84,7 @@ public class AsyncTaskJobHandler {
                                                 , taskExecuteStatus(ret)
                                                 , ret.getAsyncTaskOutput()
                                                 , exceptionMessage(ret),ret.getAsyncTaskOutput().getFilePath()));
-                            } catch (RejectedExecutionException ex) {
+                            } catch (Exception ex) {
                                 asyncTaskLogService.updateOne(logs.getId(), AsyncTaskStatusEnum.FAILURE
                                         , null, ex.getMessage(),null);
                                 log.error("async task error {} ", ex.getMessage(), ex);

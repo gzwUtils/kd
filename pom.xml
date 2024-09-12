@@ -258,6 +258,14 @@
 			<optional>true</optional>
 		</dependency>
 
+		<dependency>
+			<groupId>io.github.hakky54</groupId>
+			<artifactId>sslcontext-kickstart</artifactId>
+			<version>7.1.0</version>
+		</dependency>
+
+
+
 		<!-- xss过滤 -->
 		<dependency>
 			<groupId>org.jsoup</groupId>

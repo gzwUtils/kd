@@ -456,7 +456,7 @@ public interface Constants {
 
     public static final String REQUEST_SCHEMA = "https";
 
-    public static final String SCHEME = "http";
+    public static final String SCHEME = "https";
 
     public static final int  SESSION_EXPIRE_TIME = 60 * 120;
 

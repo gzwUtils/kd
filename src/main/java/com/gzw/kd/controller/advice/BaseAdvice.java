@@ -24,7 +24,7 @@ public class BaseAdvice extends AbstractApiAdvice{
      */
     private static final long MAX_EXPIRED_DURATION_MILLIS = 10 * 60 * 1000L;
 
-    private static final Map<Class<?>, String> INNER_API_TOKEN = new HashMap<Class<?>, String>(3) {{
+    private static final Map<Class<?>, String> INNER_API_TOKEN = new HashMap<Class<?>, String>(4) {{
         put(BaseController.class, TOKEN_PUSH_KD);
         put(EsController.class, TOKEN_PUSH_KD);
         put(ChatGptController.class, TOKEN_PUSH_KD);
