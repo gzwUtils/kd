@@ -1,5 +1,0 @@
-2024-08-31 09:45:01 [com.xxl.job.core.thread.JobThread#run]-[133]-[xxl-job, JobThread-2-1725068701026] <br>----------- xxl-job job execute start -----------<br>----------- Param:
-2024-08-31 09:45:01 [com.gzw.kd.common.utils.XxlJobLogUtil#log]-[23]-[xxl-job, JobThread-2-1725068701026] 异步任务开始执行
-2024-08-31 09:45:01 [com.gzw.kd.common.utils.XxlJobLogUtil#log]-[23]-[xxl-job, JobThread-2-1725068701026] 异步任务执行结束
-2024-08-31 09:45:01 [com.xxl.job.core.thread.JobThread#run]-[179]-[xxl-job, JobThread-2-1725068701026] <br>----------- xxl-job job execute end(finish) -----------<br>----------- Result: handleCode=200, handleMsg = null
-2024-08-31 09:45:33 [com.xxl.job.core.thread.TriggerCallbackThread#callbackLog]-[197]-[xxl-job, executor TriggerCallbackThread] <br>----------- xxl-job job callback finish.
