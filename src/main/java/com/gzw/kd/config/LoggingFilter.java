@@ -1,5 +1,4 @@
 package com.gzw.kd.config;
-import cn.hutool.core.util.RandomUtil;
 import static com.gzw.kd.common.Constants.*;
 import com.gzw.kd.common.utils.SnowFlakeIdUtils;
 import java.io.IOException;
@@ -19,30 +18,34 @@ public class LoggingFilter implements Filter {
 
     private static final long serialVersionUID = 1l;
 
+    private static final String LOG_TEMPLATE = "request : {} {}";
+
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        try {
-            HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
-            HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            MDC.put(TRACE_ID,TRACE_ID_FLAG+Thread.currentThread().getId() + SnowFlakeIdUtils.generatorId() + RandomUtil.randomInt(99999));
-            // 把请求id写到响应头里面
-            httpResponse.setHeader(REQUEST_ID_HEADER, MDC.get(TRACE_ID));
 
-            filterChain.doFilter(servletRequest,servletResponse);
-            // URI
-            String requestURI = httpServletRequest.getRequestURL().toString();
-            // 请求方法
-            String method = httpServletRequest.getMethod();
 
-            log.info("request : {} {}",requestURI,method);
+        HttpServletRequest  req  = (HttpServletRequest)  servletRequest;
+        HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-        }finally {
+        String uri = req.getRequestURI();
+        /* 提前放行静态资源 */
+        int dot = uri.lastIndexOf('.');
+        if (dot != -1 && STATIC_EXT.contains(uri.substring(dot + 1))) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
 
-            MDC.remove(TRACE_ID);
+        String traceId = String.valueOf(SnowFlakeIdUtils.generatorId());
+
+        try (MDC.MDCCloseable ignored = MDC.putCloseable(TRACE_ID, traceId)) {
+            resp.setHeader(REQUEST_ID_HEADER, traceId);
+            filterChain.doFilter(servletRequest, servletResponse);
+            log.info(LOG_TEMPLATE, req.getMethod(), req.getRequestURI());
         }
 
     }

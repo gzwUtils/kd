@@ -1,0 +1,695 @@
+ 2025-08-15 22:21:33.024 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2025-08-15 22:21:33.057 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2025-08-15 22:21:33.119 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on 192.168.1.9 with PID 5459 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2025-08-15 22:21:33.120 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2025-08-15 22:21:35.721 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2025-08-15 22:21:35.724 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2025-08-15 22:21:35.796 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 0 Redis repository interfaces.
+ 2025-08-15 22:21:36.202 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=c659f3e7-0274-32dd-bfb4-50e63d5aa18d
+ 2025-08-15 22:21:37.608 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2025-08-15 22:21:37.623 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2025-08-15 22:21:37.624 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2025-08-15 22:21:37.624 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2025-08-15 22:21:37.855 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2025-08-15 22:21:37.856 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4352 ms
+ 2025-08-15 22:21:42.623 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2025-08-15 22:21:42.664 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2025-08-15 22:25:09.748 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2025-08-15 22:25:09.780 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2025-08-15 22:25:09.843 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on 192.168.1.9 with PID 5535 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2025-08-15 22:25:09.845 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2025-08-15 22:25:12.219 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2025-08-15 22:25:12.223 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2025-08-15 22:25:12.286 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 42 ms. Found 0 Redis repository interfaces.
+ 2025-08-15 22:25:12.628 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=c659f3e7-0274-32dd-bfb4-50e63d5aa18d
+ 2025-08-15 22:25:13.858 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2025-08-15 22:25:13.872 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2025-08-15 22:25:13.872 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2025-08-15 22:25:13.873 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2025-08-15 22:25:14.061 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2025-08-15 22:25:14.061 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3826 ms
+ 2025-08-15 22:25:14.745 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2025-08-15 22:25:14.821 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2025-08-15 22:25:14.864 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2025-08-15 22:25:14.891 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+ 2025-08-15 22:25:15.049 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.5176714300716027720/]
+ 2025-08-15 22:25:15.104 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2025-08-15 22:25:15.466 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2025-08-15 22:25:17.256 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+ 2025-08-15 22:25:17.353 [main] INFO  o.flywaydb.core.internal.database.DatabaseFactory - Database: jdbc:mysql://127.0.0.1:3306/doc (MySQL 5.7)
+ 2025-08-15 22:25:17.442 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 8 migrations (execution time 00:00.042s)
+ 2025-08-15 22:25:17.478 [main] INFO  o.f.c.i.schemahistory.JdbcTableSchemaHistory - Creating Schema History table `doc`.`flyway_schema_history` ...
+ 2025-08-15 22:25:17.622 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `doc`: << Empty Schema >>
+ 2025-08-15 22:25:17.673 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Migrating schema `doc` to version 1.0.0 - init table
+ 2025-08-15 22:25:18.432 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Migrating schema `doc` to version 1.0.1 - init data
+ 2025-08-15 22:25:18.456 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Migrating schema `doc` to version 1.0.2 - create table
+ 2025-08-15 22:25:18.476 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Migrating schema `doc` to version 1.0.3 - insert data
+ 2025-08-15 22:25:18.496 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Migrating schema `doc` to version 1.0.4 - insert data
+ 2025-08-15 22:25:18.515 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Migrating schema `doc` to version 1.0.5 - create
+ 2025-08-15 22:25:18.542 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Migrating schema `doc` to version 1.0.6 - create
+ 2025-08-15 22:25:18.658 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Migrating schema `doc` to version 1.0.7 - insert data
+ 2025-08-15 22:25:18.672 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Successfully applied 8 migrations to schema `doc` (execution time 00:01.059s)
+ 2025-08-15 22:25:18.975 [main] INFO  com.gzw.kd.common.utils.AESCrypt - aes初始化成功了.............
+ 2025-08-15 22:25:19.783 [main] INFO  o.f.s.b.d.DmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$be90a253 - No deployment resources were found for autodeployment
+ 2025-08-15 22:25:19.901 [main] INFO  o.f.s.b.f.FormEngineAutoConfiguration$$EnhancerBySpringCGLIB$$2b61cc1 - No deployment resources were found for autodeployment
+ 2025-08-15 22:25:19.970 [main] INFO  o.f.s.b.a.AppEngineAutoConfiguration$$EnhancerBySpringCGLIB$$1678581b - No deployment resources were found for autodeployment
+ 2025-08-15 22:25:20.063 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:25:20.065 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 6 Engine Configurators in total:
+ 2025-08-15 22:25:20.065 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:25:20.065 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:25:20.065 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:25:20.066 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:25:20.066 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:25:20.066 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:25:20.066 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:25:20.066 [main] INFO  com.gzw.kd.config.FlowableEngineConfigurator - 切换数据源 datasource .................
+ 2025-08-15 22:25:20.066 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:25:20.074 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:25:20.078 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:25:20.083 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:25:20.087 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:25:21.013 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:25:21.014 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:25:21.020 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:25:21.020 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 Engine Configurators in total:
+ 2025-08-15 22:25:21.020 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:25:21.020 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:25:21.483 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:25:21.517 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on common with resource org/flowable/common/db/create/flowable.mysql.create.common.sql
+ 2025-08-15 22:25:21.518 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:21.587 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on identitylink with resource org/flowable/identitylink/service/db/create/flowable.mysql.create.identitylink.sql
+ 2025-08-15 22:25:21.588 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:21.722 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on identitylink.history with resource org/flowable/identitylink/service/db/create/flowable.mysql.create.identitylink.history.sql
+ 2025-08-15 22:25:21.722 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:21.854 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on task with resource org/flowable/task/service/db/create/flowable.mysql.create.task.sql
+ 2025-08-15 22:25:21.854 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:21.995 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on task.history with resource org/flowable/task/service/db/create/flowable.mysql.create.task.history.sql
+ 2025-08-15 22:25:21.995 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:22.098 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on variable with resource org/flowable/variable/service/db/create/flowable.mysql.create.variable.sql
+ 2025-08-15 22:25:22.099 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:22.199 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on variable.history with resource org/flowable/variable/service/db/create/flowable.mysql.create.variable.history.sql
+ 2025-08-15 22:25:22.199 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:22.325 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on job with resource org/flowable/job/service/db/create/flowable.mysql.create.job.sql
+ 2025-08-15 22:25:22.326 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:23.244 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on engine with resource org/flowable/db/create/flowable.mysql.create.engine.sql
+ 2025-08-15 22:25:23.244 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:24.646 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on history with resource org/flowable/db/create/flowable.mysql.create.history.sql
+ 2025-08-15 22:25:24.646 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:25.216 [main] INFO  org.flowable.engine.impl.ProcessEngineImpl - ProcessEngine default created
+ 2025-08-15 22:25:25.292 [main] INFO  org.flowable.engine.impl.cmd.ValidateV5EntitiesCmd - Total of v5 deployments found: 0
+ 2025-08-15 22:25:25.301 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:25:25.334 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - performing create on identity with resource org/flowable/idm/db/create/flowable.mysql.create.identity.sql
+ 2025-08-15 22:25:25.334 [main] INFO  o.f.c.e.i.db.AbstractSqlScriptBasedDbSchemaManager - Found MySQL: majorVersion=5 minorVersion=7
+ 2025-08-15 22:25:25.706 [main] INFO  org.flowable.idm.engine.impl.IdmEngineImpl - IdmEngine default created
+ 2025-08-15 22:25:25.709 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:25:26.371 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:25:26.864 [main] INFO  liquibase.changelog - Creating database history table with name: flowable.ACT_DMN_DATABASECHANGELOG
+ 2025-08-15 22:25:26.890 [main] INFO  liquibase.changelog - Reading from flowable.ACT_DMN_DATABASECHANGELOG
+ 2025-08-15 22:25:26.996 [main] INFO  liquibase.servicelocator - Cannot load service: liquibase.hub.HubService: Provider liquibase.hub.core.StandardHubService could not be instantiated
+ 2025-08-15 22:25:27.028 [main] INFO  liquibase.changelog - Table ACT_DMN_DEPLOYMENT created
+ 2025-08-15 22:25:27.051 [main] INFO  liquibase.changelog - Table ACT_DMN_DEPLOYMENT_RESOURCE created
+ 2025-08-15 22:25:27.076 [main] INFO  liquibase.changelog - Table ACT_DMN_DECISION_TABLE created
+ 2025-08-15 22:25:27.076 [main] INFO  liquibase.changelog - ChangeSet org/flowable/dmn/db/liquibase/flowable-dmn-db-changelog.xml::1::activiti ran successfully in 74ms
+ 2025-08-15 22:25:27.105 [main] INFO  liquibase.changelog - Table ACT_DMN_HI_DECISION_EXECUTION created
+ 2025-08-15 22:25:27.106 [main] INFO  liquibase.changelog - ChangeSet org/flowable/dmn/db/liquibase/flowable-dmn-db-changelog.xml::2::flowable ran successfully in 25ms
+ 2025-08-15 22:25:27.140 [main] INFO  liquibase.changelog - Columns SCOPE_TYPE_(varchar(255)) added to ACT_DMN_HI_DECISION_EXECUTION
+ 2025-08-15 22:25:27.140 [main] INFO  liquibase.changelog - ChangeSet org/flowable/dmn/db/liquibase/flowable-dmn-db-changelog.xml::3::flowable ran successfully in 31ms
+ 2025-08-15 22:25:27.170 [main] INFO  liquibase.changelog - Column ACT_DMN_DECISION_TABLE.PARENT_DEPLOYMENT_ID_ dropped
+ 2025-08-15 22:25:27.170 [main] INFO  liquibase.changelog - ChangeSet org/flowable/dmn/db/liquibase/flowable-dmn-db-changelog.xml::4::flowable ran successfully in 27ms
+ 2025-08-15 22:25:27.202 [main] INFO  liquibase.changelog - ACT_DMN_DEPLOYMENT.DEPLOY_TIME_ datatype was changed to datetime(3)
+ 2025-08-15 22:25:27.228 [main] INFO  liquibase.changelog - ACT_DMN_HI_DECISION_EXECUTION.START_TIME_ datatype was changed to datetime(3)
+ 2025-08-15 22:25:27.255 [main] INFO  liquibase.changelog - ACT_DMN_HI_DECISION_EXECUTION.END_TIME_ datatype was changed to datetime(3)
+ 2025-08-15 22:25:27.255 [main] INFO  liquibase.changelog - ChangeSet org/flowable/dmn/db/liquibase/flowable-dmn-db-changelog.xml::5::flowable ran successfully in 81ms
+ 2025-08-15 22:25:27.258 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:25:27.260 [main] INFO  org.flowable.dmn.engine.impl.DmnEngineImpl - DmnEngine default created
+ 2025-08-15 22:25:27.261 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:25:27.263 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:25:27.263 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 Engine Configurators in total:
+ 2025-08-15 22:25:27.263 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:25:27.263 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:25:27.265 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:25:27.314 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:25:27.572 [main] INFO  liquibase.changelog - Creating database history table with name: flowable.ACT_FO_DATABASECHANGELOG
+ 2025-08-15 22:25:27.598 [main] INFO  liquibase.changelog - Reading from flowable.ACT_FO_DATABASECHANGELOG
+ 2025-08-15 22:25:27.640 [main] INFO  liquibase.changelog - Table ACT_FO_FORM_DEPLOYMENT created
+ 2025-08-15 22:25:27.663 [main] INFO  liquibase.changelog - Table ACT_FO_FORM_RESOURCE created
+ 2025-08-15 22:25:27.688 [main] INFO  liquibase.changelog - Table ACT_FO_FORM_DEFINITION created
+ 2025-08-15 22:25:27.714 [main] INFO  liquibase.changelog - Table ACT_FO_FORM_INSTANCE created
+ 2025-08-15 22:25:27.714 [main] INFO  liquibase.changelog - ChangeSet org/flowable/form/db/liquibase/flowable-form-db-changelog.xml::1::activiti ran successfully in 99ms
+ 2025-08-15 22:25:27.744 [main] INFO  liquibase.changelog - Columns SCOPE_ID_(varchar(255)),SCOPE_TYPE_(varchar(255)),SCOPE_DEFINITION_ID_(varchar(255)) added to ACT_FO_FORM_INSTANCE
+ 2025-08-15 22:25:27.744 [main] INFO  liquibase.changelog - ChangeSet org/flowable/form/db/liquibase/flowable-form-db-changelog.xml::2::flowable ran successfully in 28ms
+ 2025-08-15 22:25:27.778 [main] INFO  liquibase.changelog - Column ACT_FO_FORM_DEFINITION.PARENT_DEPLOYMENT_ID_ dropped
+ 2025-08-15 22:25:27.779 [main] INFO  liquibase.changelog - ChangeSet org/flowable/form/db/liquibase/flowable-form-db-changelog.xml::3::flowable ran successfully in 33ms
+ 2025-08-15 22:25:27.811 [main] INFO  liquibase.changelog - ACT_FO_FORM_DEPLOYMENT.DEPLOY_TIME_ datatype was changed to datetime(3)
+ 2025-08-15 22:25:27.846 [main] INFO  liquibase.changelog - ACT_FO_FORM_INSTANCE.SUBMITTED_DATE_ datatype was changed to datetime(3)
+ 2025-08-15 22:25:27.847 [main] INFO  liquibase.changelog - ChangeSet org/flowable/form/db/liquibase/flowable-form-db-changelog.xml::4::flowable ran successfully in 65ms
+ 2025-08-15 22:25:27.856 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:25:27.858 [main] INFO  org.flowable.form.engine.impl.FormEngineImpl - FormEngine default created
+ 2025-08-15 22:25:27.860 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:25:27.869 [main] INFO  o.f.content.engine.ContentEngineConfiguration - Content file system root : /Users/gaozhiwei/content
+ 2025-08-15 22:25:27.897 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:25:27.990 [main] INFO  liquibase.changelog - Creating database history table with name: flowable.ACT_CO_DATABASECHANGELOG
+ 2025-08-15 22:25:28.014 [main] INFO  liquibase.changelog - Reading from flowable.ACT_CO_DATABASECHANGELOG
+ 2025-08-15 22:25:28.061 [main] INFO  liquibase.changelog - Table ACT_CO_CONTENT_ITEM created
+ 2025-08-15 22:25:28.086 [main] INFO  liquibase.changelog - Index idx_contitem_taskid created
+ 2025-08-15 22:25:28.111 [main] INFO  liquibase.changelog - Index idx_contitem_procid created
+ 2025-08-15 22:25:28.111 [main] INFO  liquibase.changelog - ChangeSet org/flowable/content/db/liquibase/flowable-content-db-changelog.xml::1::activiti ran successfully in 75ms
+ 2025-08-15 22:25:28.139 [main] INFO  liquibase.changelog - Columns SCOPE_ID_(varchar(255)),SCOPE_TYPE_(varchar(255)) added to ACT_CO_CONTENT_ITEM
+ 2025-08-15 22:25:28.163 [main] INFO  liquibase.changelog - Index idx_contitem_scope created
+ 2025-08-15 22:25:28.163 [main] INFO  liquibase.changelog - ChangeSet org/flowable/content/db/liquibase/flowable-content-db-changelog.xml::2::flowable ran successfully in 50ms
+ 2025-08-15 22:25:28.166 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:25:28.166 [main] INFO  org.flowable.content.engine.impl.ContentEngineImpl - ContentEngine default created
+ 2025-08-15 22:25:28.222 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:25:28.328 [main] INFO  liquibase.changelog - Creating database history table with name: flowable.ACT_APP_DATABASECHANGELOG
+ 2025-08-15 22:25:28.352 [main] INFO  liquibase.changelog - Reading from flowable.ACT_APP_DATABASECHANGELOG
+ 2025-08-15 22:25:28.399 [main] INFO  liquibase.changelog - Table ACT_APP_DEPLOYMENT created
+ 2025-08-15 22:25:28.423 [main] INFO  liquibase.changelog - Table ACT_APP_DEPLOYMENT_RESOURCE created
+ 2025-08-15 22:25:28.451 [main] INFO  liquibase.changelog - Foreign key constraint added to ACT_APP_DEPLOYMENT_RESOURCE (DEPLOYMENT_ID_)
+ 2025-08-15 22:25:28.476 [main] INFO  liquibase.changelog - Index ACT_IDX_APP_RSRC_DPL created
+ 2025-08-15 22:25:28.499 [main] INFO  liquibase.changelog - Table ACT_APP_APPDEF created
+ 2025-08-15 22:25:28.535 [main] INFO  liquibase.changelog - Foreign key constraint added to ACT_APP_APPDEF (DEPLOYMENT_ID_)
+ 2025-08-15 22:25:28.564 [main] INFO  liquibase.changelog - Index ACT_IDX_APP_DEF_DPLY created
+ 2025-08-15 22:25:28.565 [main] INFO  liquibase.changelog - ChangeSet org/flowable/app/db/liquibase/flowable-app-db-changelog.xml::1::flowable ran successfully in 189ms
+ 2025-08-15 22:25:28.606 [main] INFO  liquibase.changelog - ACT_APP_DEPLOYMENT.DEPLOY_TIME_ datatype was changed to datetime(3)
+ 2025-08-15 22:25:28.607 [main] INFO  liquibase.changelog - ChangeSet org/flowable/app/db/liquibase/flowable-app-db-changelog.xml::2::flowable ran successfully in 37ms
+ 2025-08-15 22:25:28.611 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:25:28.613 [main] INFO  org.flowable.app.engine.impl.AppEngineImpl - AppEngine default created
+ 2025-08-15 22:25:28.853 [main] INFO  com.gzw.kd.common.utils.HttpClientUtil - http client init success ....................
+ 2025-08-15 22:25:28.866 [main] INFO  com.gzw.kd.common.utils.MessageUtils - init locale message .........
+ 2025-08-15 22:25:28.965 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+ 2025-08-15 22:25:28.968 [main] INFO  org.quartz.simpl.SimpleThreadPool - Job execution threads will use class loader of thread: main
+ 2025-08-15 22:25:28.982 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+ 2025-08-15 22:25:28.982 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+ 2025-08-15 22:25:28.983 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Using thread monitor-based data access locking (synchronization).
+ 2025-08-15 22:25:28.983 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - JobStoreTX initialized.
+ 2025-08-15 22:25:28.984 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'kd_DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is not clustered.
+
+ 2025-08-15 22:25:28.984 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'kd_DefaultQuartzScheduler' initialized from an externally provided properties instance.
+ 2025-08-15 22:25:28.984 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+ 2025-08-15 22:25:28.986 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@2f4c83f1
+ 2025-08-15 22:25:29.039 [main] INFO  com.gzw.kd.mq.rocketmq.RocketmqProducerConfig - rocketMq  produce server   正在创建 --------------------------------------------
+ 2025-08-15 22:25:29.707 [main] INFO  com.gzw.kd.mq.rocketmq.RocketmqProducerConfig - rocketMq  produce server 创建成功 -------------------------------------------------
+ 2025-08-15 22:25:30.101 [main] INFO  com.gzw.kd.flowControl.FlowControlFactory - flow control init start.........
+ 2025-08-15 22:25:30.108 [main] INFO  com.gzw.kd.flowControl.FlowControlFactory - flow control init end.........
+ 2025-08-15 22:25:30.159 [main] INFO  com.gzw.kd.scheduletask.AsyncTaskJobHandler - Async task impl list: [com.gzw.kd.export.service.LogExportAsyncTask@6ca9f1d0]
+ 2025-08-15 22:25:31.171 [main] INFO  com.gzw.kd.config.ExecutorConfiguration - start asyncTaskExecutor
+ 2025-08-15 22:25:31.196 [main] INFO  com.gzw.kd.config.XxlJobConfig - >>>>>>>>>>> xxl-job config init......
+ 2025-08-15 22:25:31.208 [main] INFO  com.gzw.kd.mq.rocketmq.RocketmqConsumerConfig - rocketmq consumer server 正在创建-------------------------------------
+ 2025-08-15 22:25:32.857 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+ 2025-08-15 22:25:32.857 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+ 2025-08-15 22:25:32.858 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+ 2025-08-15 22:25:32.858 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+ 2025-08-15 22:25:32.858 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+ 2025-08-15 22:25:32.880 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closing ...
+ 2025-08-15 22:25:32.881 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closed
+ 2025-08-15 22:25:32.881 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closing ...
+ 2025-08-15 22:25:32.889 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closed
+ 2025-08-15 22:25:32.889 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2025-08-15 22:25:32.890 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2025-08-15 22:25:32.890 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2025-08-15 22:25:32.891 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2025-08-15 22:25:32.894 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2025-08-15 22:26:41.658 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closing...
+ 2025-08-15 22:26:41.660 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closed
+ 2025-08-15 22:26:45.207 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2025-08-15 22:26:45.231 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2025-08-15 22:26:45.281 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on 192.168.1.9 with PID 5600 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2025-08-15 22:26:45.282 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2025-08-15 22:26:47.353 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2025-08-15 22:26:47.355 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2025-08-15 22:26:47.407 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 0 Redis repository interfaces.
+ 2025-08-15 22:26:47.743 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=c659f3e7-0274-32dd-bfb4-50e63d5aa18d
+ 2025-08-15 22:26:48.772 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2025-08-15 22:26:48.788 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2025-08-15 22:26:48.789 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2025-08-15 22:26:48.790 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2025-08-15 22:26:49.022 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2025-08-15 22:26:49.023 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3403 ms
+ 2025-08-15 22:26:49.647 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2025-08-15 22:26:49.732 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2025-08-15 22:26:49.786 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2025-08-15 22:26:49.814 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+ 2025-08-15 22:26:49.961 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.8889773561896247659/]
+ 2025-08-15 22:26:50.008 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2025-08-15 22:26:50.381 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2025-08-15 22:26:51.763 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+ 2025-08-15 22:26:51.813 [main] INFO  o.flywaydb.core.internal.database.DatabaseFactory - Database: jdbc:mysql://127.0.0.1:3306/doc (MySQL 5.7)
+ 2025-08-15 22:26:51.878 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 8 migrations (execution time 00:00.037s)
+ 2025-08-15 22:26:51.887 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `doc`: 1.0.7
+ 2025-08-15 22:26:51.888 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `doc` is up to date. No migration necessary.
+ 2025-08-15 22:26:52.125 [main] INFO  com.gzw.kd.common.utils.AESCrypt - aes初始化成功了.............
+ 2025-08-15 22:26:52.800 [main] INFO  o.f.s.b.d.DmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$be90a253 - No deployment resources were found for autodeployment
+ 2025-08-15 22:26:52.908 [main] INFO  o.f.s.b.f.FormEngineAutoConfiguration$$EnhancerBySpringCGLIB$$2b61cc1 - No deployment resources were found for autodeployment
+ 2025-08-15 22:26:52.962 [main] INFO  o.f.s.b.a.AppEngineAutoConfiguration$$EnhancerBySpringCGLIB$$1678581b - No deployment resources were found for autodeployment
+ 2025-08-15 22:26:53.025 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:26:53.026 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 6 Engine Configurators in total:
+ 2025-08-15 22:26:53.027 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:26:53.027 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:26:53.027 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:26:53.027 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:26:53.027 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:26:53.027 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:26:53.027 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:26:53.027 [main] INFO  com.gzw.kd.config.FlowableEngineConfigurator - 切换数据源 datasource .................
+ 2025-08-15 22:26:53.028 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:26:53.036 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:26:53.039 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:26:53.042 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:26:53.046 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:26:53.923 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:26:53.924 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:26:53.928 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:26:53.928 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 Engine Configurators in total:
+ 2025-08-15 22:26:53.928 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:26:53.928 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:26:54.326 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:26:54.443 [main] INFO  org.flowable.engine.impl.ProcessEngineImpl - ProcessEngine default created
+ 2025-08-15 22:26:54.487 [main] INFO  org.flowable.engine.impl.cmd.ValidateV5EntitiesCmd - Total of v5 deployments found: 0
+ 2025-08-15 22:26:54.495 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:26:54.521 [main] INFO  org.flowable.idm.engine.impl.IdmEngineImpl - IdmEngine default created
+ 2025-08-15 22:26:54.523 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:26:55.043 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:26:55.674 [main] INFO  liquibase.changelog - Reading from flowable.ACT_DMN_DATABASECHANGELOG
+ 2025-08-15 22:26:55.736 [main] INFO  liquibase.servicelocator - Cannot load service: liquibase.hub.HubService: Provider liquibase.hub.core.StandardHubService could not be instantiated
+ 2025-08-15 22:26:55.743 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:26:55.744 [main] INFO  org.flowable.dmn.engine.impl.DmnEngineImpl - DmnEngine default created
+ 2025-08-15 22:26:55.745 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:26:55.747 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:26:55.747 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 Engine Configurators in total:
+ 2025-08-15 22:26:55.747 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:26:55.748 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:26:55.749 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:26:55.775 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:26:55.936 [main] INFO  liquibase.changelog - Reading from flowable.ACT_FO_DATABASECHANGELOG
+ 2025-08-15 22:26:55.967 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:26:55.968 [main] INFO  org.flowable.form.engine.impl.FormEngineImpl - FormEngine default created
+ 2025-08-15 22:26:55.970 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:26:55.977 [main] INFO  o.f.content.engine.ContentEngineConfiguration - Content file system root : /Users/gaozhiwei/content
+ 2025-08-15 22:26:56.004 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:26:56.130 [main] INFO  liquibase.changelog - Reading from flowable.ACT_CO_DATABASECHANGELOG
+ 2025-08-15 22:26:56.150 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:26:56.151 [main] INFO  org.flowable.content.engine.impl.ContentEngineImpl - ContentEngine default created
+ 2025-08-15 22:26:56.208 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:26:56.338 [main] INFO  liquibase.changelog - Reading from flowable.ACT_APP_DATABASECHANGELOG
+ 2025-08-15 22:26:56.353 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:26:56.354 [main] INFO  org.flowable.app.engine.impl.AppEngineImpl - AppEngine default created
+ 2025-08-15 22:26:56.559 [main] INFO  com.gzw.kd.common.utils.HttpClientUtil - http client init success ....................
+ 2025-08-15 22:26:56.575 [main] INFO  com.gzw.kd.common.utils.MessageUtils - init locale message .........
+ 2025-08-15 22:26:56.670 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+ 2025-08-15 22:26:56.675 [main] INFO  org.quartz.simpl.SimpleThreadPool - Job execution threads will use class loader of thread: main
+ 2025-08-15 22:26:56.691 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+ 2025-08-15 22:26:56.691 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+ 2025-08-15 22:26:56.692 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Using thread monitor-based data access locking (synchronization).
+ 2025-08-15 22:26:56.693 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - JobStoreTX initialized.
+ 2025-08-15 22:26:56.694 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'kd_DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is not clustered.
+
+ 2025-08-15 22:26:56.694 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'kd_DefaultQuartzScheduler' initialized from an externally provided properties instance.
+ 2025-08-15 22:26:56.694 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+ 2025-08-15 22:26:56.695 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@ab5954d
+ 2025-08-15 22:26:56.755 [main] INFO  com.gzw.kd.mq.rocketmq.RocketmqProducerConfig - rocketMq  produce server   正在创建 --------------------------------------------
+ 2025-08-15 22:26:57.622 [main] INFO  com.gzw.kd.mq.rocketmq.RocketmqProducerConfig - rocketMq  produce server 创建成功 -------------------------------------------------
+ 2025-08-15 22:26:58.029 [main] INFO  com.gzw.kd.flowControl.FlowControlFactory - flow control init start.........
+ 2025-08-15 22:26:58.036 [main] INFO  com.gzw.kd.flowControl.FlowControlFactory - flow control init end.........
+ 2025-08-15 22:26:58.102 [main] INFO  com.gzw.kd.scheduletask.AsyncTaskJobHandler - Async task impl list: [com.gzw.kd.export.service.LogExportAsyncTask@6ba8859b]
+ 2025-08-15 22:26:59.079 [main] INFO  com.gzw.kd.config.ExecutorConfiguration - start asyncTaskExecutor
+ 2025-08-15 22:26:59.102 [main] INFO  com.gzw.kd.config.XxlJobConfig - >>>>>>>>>>> xxl-job config init......
+ 2025-08-15 22:26:59.112 [main] INFO  com.gzw.kd.mq.rocketmq.RocketmqConsumerConfig - rocketmq consumer server 正在创建-------------------------------------
+ 2025-08-15 22:27:00.781 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+ 2025-08-15 22:27:00.781 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+ 2025-08-15 22:27:00.782 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+ 2025-08-15 22:27:00.782 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+ 2025-08-15 22:27:00.782 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+ 2025-08-15 22:27:00.801 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closing ...
+ 2025-08-15 22:27:00.802 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closed
+ 2025-08-15 22:27:00.802 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closing ...
+ 2025-08-15 22:27:00.810 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closed
+ 2025-08-15 22:27:00.810 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2025-08-15 22:27:00.811 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2025-08-15 22:27:00.811 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2025-08-15 22:27:00.812 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2025-08-15 22:27:00.815 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2025-08-15 22:27:21.535 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closing...
+ 2025-08-15 22:27:25.038 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2025-08-15 22:27:25.061 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2025-08-15 22:27:25.112 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on 192.168.1.9 with PID 5636 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2025-08-15 22:27:25.113 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2025-08-15 22:27:26.954 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2025-08-15 22:27:26.956 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2025-08-15 22:27:27.008 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 37 ms. Found 0 Redis repository interfaces.
+ 2025-08-15 22:27:27.308 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=c659f3e7-0274-32dd-bfb4-50e63d5aa18d
+ 2025-08-15 22:27:28.168 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2025-08-15 22:27:28.179 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2025-08-15 22:27:28.180 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2025-08-15 22:27:28.180 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2025-08-15 22:27:28.349 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2025-08-15 22:27:28.349 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2913 ms
+ 2025-08-15 22:27:28.947 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2025-08-15 22:27:29.029 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2025-08-15 22:27:29.081 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2025-08-15 22:27:29.107 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+ 2025-08-15 22:27:29.241 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.7479970335571191999/]
+ 2025-08-15 22:27:29.286 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2025-08-15 22:27:29.638 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2025-08-15 22:27:30.811 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+ 2025-08-15 22:27:30.859 [main] INFO  o.flywaydb.core.internal.database.DatabaseFactory - Database: jdbc:mysql://127.0.0.1:3306/doc (MySQL 5.7)
+ 2025-08-15 22:27:30.928 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 8 migrations (execution time 00:00.040s)
+ 2025-08-15 22:27:30.938 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `doc`: 1.0.7
+ 2025-08-15 22:27:30.940 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `doc` is up to date. No migration necessary.
+ 2025-08-15 22:27:31.152 [main] INFO  com.gzw.kd.common.utils.AESCrypt - aes初始化成功了.............
+ 2025-08-15 22:27:31.656 [main] INFO  o.f.s.b.d.DmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$5ae0c844 - No deployment resources were found for autodeployment
+ 2025-08-15 22:27:31.723 [main] INFO  o.f.s.b.f.FormEngineAutoConfiguration$$EnhancerBySpringCGLIB$$9f0642b2 - No deployment resources were found for autodeployment
+ 2025-08-15 22:27:31.792 [main] INFO  o.f.s.b.a.AppEngineAutoConfiguration$$EnhancerBySpringCGLIB$$b2c87e0c - No deployment resources were found for autodeployment
+ 2025-08-15 22:27:31.842 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:27:31.843 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 6 Engine Configurators in total:
+ 2025-08-15 22:27:31.843 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:27:31.843 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:27:31.844 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:27:31.844 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:27:31.844 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:27:31.844 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:27:31.844 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:27:31.844 [main] INFO  com.gzw.kd.config.FlowableEngineConfigurator - 切换数据源 datasource .................
+ 2025-08-15 22:27:31.844 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:27:31.849 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:27:31.851 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:27:31.854 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:27:31.856 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:27:32.610 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:27:32.610 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:27:32.614 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:27:32.614 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 Engine Configurators in total:
+ 2025-08-15 22:27:32.615 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:27:32.615 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:27:32.981 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:27:33.074 [main] INFO  org.flowable.engine.impl.ProcessEngineImpl - ProcessEngine default created
+ 2025-08-15 22:27:33.117 [main] INFO  org.flowable.engine.impl.cmd.ValidateV5EntitiesCmd - Total of v5 deployments found: 0
+ 2025-08-15 22:27:33.122 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:27:33.167 [main] INFO  org.flowable.idm.engine.impl.IdmEngineImpl - IdmEngine default created
+ 2025-08-15 22:27:33.168 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:27:33.624 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:27:34.144 [main] INFO  liquibase.changelog - Reading from flowable.ACT_DMN_DATABASECHANGELOG
+ 2025-08-15 22:27:34.202 [main] INFO  liquibase.servicelocator - Cannot load service: liquibase.hub.HubService: Provider liquibase.hub.core.StandardHubService could not be instantiated
+ 2025-08-15 22:27:34.208 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:27:34.209 [main] INFO  org.flowable.dmn.engine.impl.DmnEngineImpl - DmnEngine default created
+ 2025-08-15 22:27:34.211 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:27:34.213 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:27:34.213 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 Engine Configurators in total:
+ 2025-08-15 22:27:34.213 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:27:34.213 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:27:34.215 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:27:34.239 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:27:34.395 [main] INFO  liquibase.changelog - Reading from flowable.ACT_FO_DATABASECHANGELOG
+ 2025-08-15 22:27:34.427 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:27:34.429 [main] INFO  org.flowable.form.engine.impl.FormEngineImpl - FormEngine default created
+ 2025-08-15 22:27:34.431 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:27:34.440 [main] INFO  o.f.content.engine.ContentEngineConfiguration - Content file system root : /Users/gaozhiwei/content
+ 2025-08-15 22:27:34.470 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:27:35.181 [main] INFO  liquibase.changelog - Reading from flowable.ACT_CO_DATABASECHANGELOG
+ 2025-08-15 22:27:35.200 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:27:35.201 [main] INFO  org.flowable.content.engine.impl.ContentEngineImpl - ContentEngine default created
+ 2025-08-15 22:27:35.248 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:27:35.373 [main] INFO  liquibase.changelog - Reading from flowable.ACT_APP_DATABASECHANGELOG
+ 2025-08-15 22:27:35.393 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:27:35.394 [main] INFO  org.flowable.app.engine.impl.AppEngineImpl - AppEngine default created
+ 2025-08-15 22:27:35.598 [main] INFO  com.gzw.kd.common.utils.HttpClientUtil - http client init success ....................
+ 2025-08-15 22:27:35.617 [main] INFO  com.gzw.kd.common.utils.MessageUtils - init locale message .........
+ 2025-08-15 22:27:35.697 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+ 2025-08-15 22:27:35.701 [main] INFO  org.quartz.simpl.SimpleThreadPool - Job execution threads will use class loader of thread: main
+ 2025-08-15 22:27:35.715 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+ 2025-08-15 22:27:35.716 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+ 2025-08-15 22:27:35.717 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Using thread monitor-based data access locking (synchronization).
+ 2025-08-15 22:27:35.718 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - JobStoreTX initialized.
+ 2025-08-15 22:27:35.719 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'kd_DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is not clustered.
+
+ 2025-08-15 22:27:35.719 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'kd_DefaultQuartzScheduler' initialized from an externally provided properties instance.
+ 2025-08-15 22:27:35.719 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+ 2025-08-15 22:27:35.720 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@f1e5f85
+ 2025-08-15 22:27:35.793 [main] INFO  com.gzw.kd.mq.rocketmq.RocketmqProducerConfig - rocketMq  produce server   正在创建 --------------------------------------------
+ 2025-08-15 22:27:35.961 [main] INFO  com.gzw.kd.mq.rocketmq.RocketmqProducerConfig - rocketMq  produce server 创建成功 -------------------------------------------------
+ 2025-08-15 22:27:36.330 [main] INFO  com.gzw.kd.flowControl.FlowControlFactory - flow control init start.........
+ 2025-08-15 22:27:36.337 [main] INFO  com.gzw.kd.flowControl.FlowControlFactory - flow control init end.........
+ 2025-08-15 22:27:36.385 [main] INFO  com.gzw.kd.scheduletask.AsyncTaskJobHandler - Async task impl list: [com.gzw.kd.export.service.LogExportAsyncTask@4be171d1]
+ 2025-08-15 22:27:37.332 [main] INFO  com.gzw.kd.config.ExecutorConfiguration - start asyncTaskExecutor
+ 2025-08-15 22:27:37.352 [main] INFO  com.gzw.kd.config.XxlJobConfig - >>>>>>>>>>> xxl-job config init......
+ 2025-08-15 22:27:37.359 [main] INFO  com.gzw.kd.mq.rocketmq.RocketmqConsumerConfig - rocketmq consumer server 正在创建-------------------------------------
+ 2025-08-15 22:27:39.102 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+ 2025-08-15 22:27:39.102 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+ 2025-08-15 22:27:39.103 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+ 2025-08-15 22:27:39.103 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+ 2025-08-15 22:27:39.103 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+ 2025-08-15 22:27:39.123 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closing ...
+ 2025-08-15 22:27:39.124 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closed
+ 2025-08-15 22:27:39.124 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closing ...
+ 2025-08-15 22:27:39.131 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closed
+ 2025-08-15 22:27:39.132 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2025-08-15 22:27:39.132 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2025-08-15 22:27:39.133 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2025-08-15 22:27:39.134 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2025-08-15 22:27:39.137 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2025-08-15 22:27:39.156 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2025-08-15 22:31:56.650 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closing...
+ 2025-08-15 22:31:56.652 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closed
+ 2025-08-15 22:32:00.534 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2025-08-15 22:32:00.554 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2025-08-15 22:32:00.610 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on 192.168.1.9 with PID 5753 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2025-08-15 22:32:00.611 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
+ 2025-08-15 22:32:02.499 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
+ 2025-08-15 22:32:02.501 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+ 2025-08-15 22:32:02.556 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 0 Redis repository interfaces.
+ 2025-08-15 22:32:02.843 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=d35c3586-6018-3c0f-abe5-55eb3833bfb1
+ 2025-08-15 22:32:03.707 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
+ 2025-08-15 22:32:03.716 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
+ 2025-08-15 22:32:03.717 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+ 2025-08-15 22:32:03.717 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
+ 2025-08-15 22:32:03.886 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+ 2025-08-15 22:32:03.886 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 2950 ms
+ 2025-08-15 22:32:04.443 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+ 2025-08-15 22:32:04.517 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} inited
+ 2025-08-15 22:32:04.559 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} inited
+ 2025-08-15 22:32:04.584 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} inited
+ 2025-08-15 22:32:04.699 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Set web app root system property: 'webapp.root' = [/private/var/folders/8q/l6vbl9k173lftyjksgtf0_6m0000gn/T/tomcat-docbase.8092.2554858253769009604/]
+ 2025-08-15 22:32:04.745 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 正在创建 ------------------------------------------------------
+ 2025-08-15 22:32:05.032 [main] INFO  com.gzw.kd.config.ElasticsearchConfiguration - restHighLevelClient build 创建成功 ------------------------------------------------------
+ 2025-08-15 22:32:06.132 [main] INFO  org.flywaydb.core.internal.license.VersionPrinter - Flyway Community Edition 6.4.4 by Redgate
+ 2025-08-15 22:32:06.176 [main] INFO  o.flywaydb.core.internal.database.DatabaseFactory - Database: jdbc:mysql://127.0.0.1:3306/doc (MySQL 5.7)
+ 2025-08-15 22:32:06.238 [main] INFO  org.flywaydb.core.internal.command.DbValidate - Successfully validated 8 migrations (execution time 00:00.034s)
+ 2025-08-15 22:32:06.246 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Current version of schema `doc`: 1.0.7
+ 2025-08-15 22:32:06.247 [main] INFO  org.flywaydb.core.internal.command.DbMigrate - Schema `doc` is up to date. No migration necessary.
+ 2025-08-15 22:32:06.447 [main] INFO  com.gzw.kd.common.utils.AESCrypt - aes初始化成功了.............
+ 2025-08-15 22:32:06.929 [main] INFO  o.f.s.b.d.DmnEngineAutoConfiguration$$EnhancerBySpringCGLIB$$a359f70 - No deployment resources were found for autodeployment
+ 2025-08-15 22:32:07.014 [main] INFO  o.f.s.b.f.FormEngineAutoConfiguration$$EnhancerBySpringCGLIB$$4e5b19de - No deployment resources were found for autodeployment
+ 2025-08-15 22:32:07.065 [main] INFO  o.f.s.b.a.AppEngineAutoConfiguration$$EnhancerBySpringCGLIB$$621d5538 - No deployment resources were found for autodeployment
+ 2025-08-15 22:32:07.109 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:32:07.110 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 6 Engine Configurators in total:
+ 2025-08-15 22:32:07.110 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:32:07.110 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:32:07.110 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:32:07.111 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:32:07.111 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:32:07.111 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:32:07.111 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:32:07.111 [main] INFO  com.gzw.kd.config.FlowableEngineConfigurator - 切换数据源 datasource .................
+ 2025-08-15 22:32:07.111 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:32:07.116 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:32:07.119 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:32:07.122 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:32:07.124 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:32:07.963 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:32:07.964 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.engine.spring.configurator.SpringProcessEngineConfigurator (priority:50000)
+ 2025-08-15 22:32:07.969 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:32:07.969 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 Engine Configurators in total:
+ 2025-08-15 22:32:07.969 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:32:07.969 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:32:08.404 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:32:08.504 [main] INFO  org.flowable.engine.impl.ProcessEngineImpl - ProcessEngine default created
+ 2025-08-15 22:32:08.546 [main] INFO  org.flowable.engine.impl.cmd.ValidateV5EntitiesCmd - Total of v5 deployments found: 0
+ 2025-08-15 22:32:08.551 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.idm.spring.configurator.SpringIdmEngineConfigurator (priority:100000)
+ 2025-08-15 22:32:08.578 [main] INFO  org.flowable.idm.engine.impl.IdmEngineImpl - IdmEngine default created
+ 2025-08-15 22:32:08.580 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.dmn.spring.configurator.SpringDmnEngineConfigurator (priority:200000)
+ 2025-08-15 22:32:09.110 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:32:09.674 [main] INFO  liquibase.changelog - Reading from flowable.ACT_DMN_DATABASECHANGELOG
+ 2025-08-15 22:32:09.742 [main] INFO  liquibase.servicelocator - Cannot load service: liquibase.hub.HubService: Provider liquibase.hub.core.StandardHubService could not be instantiated
+ 2025-08-15 22:32:09.749 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:32:09.750 [main] INFO  org.flowable.dmn.engine.impl.DmnEngineImpl - DmnEngine default created
+ 2025-08-15 22:32:09.751 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.form.spring.configurator.SpringFormEngineConfigurator (priority:300000)
+ 2025-08-15 22:32:09.754 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 auto-discoverable Process Engine Configurators
+ 2025-08-15 22:32:09.754 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Found 1 Engine Configurators in total:
+ 2025-08-15 22:32:09.754 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:32:09.754 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing beforeInit() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:32:09.756 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class com.gzw.kd.config.FlowableEngineConfigurator (priority:0)
+ 2025-08-15 22:32:09.783 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:32:10.435 [main] INFO  liquibase.changelog - Reading from flowable.ACT_FO_DATABASECHANGELOG
+ 2025-08-15 22:32:10.456 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:32:10.456 [main] INFO  org.flowable.form.engine.impl.FormEngineImpl - FormEngine default created
+ 2025-08-15 22:32:10.458 [main] INFO  o.f.common.engine.impl.AbstractEngineConfiguration - Executing configure() of class org.flowable.content.spring.configurator.SpringContentEngineConfigurator (priority:400000)
+ 2025-08-15 22:32:10.464 [main] INFO  o.f.content.engine.ContentEngineConfiguration - Content file system root : /Users/gaozhiwei/content
+ 2025-08-15 22:32:10.481 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:32:10.594 [main] INFO  liquibase.changelog - Reading from flowable.ACT_CO_DATABASECHANGELOG
+ 2025-08-15 22:32:10.613 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:32:10.613 [main] INFO  org.flowable.content.engine.impl.ContentEngineImpl - ContentEngine default created
+ 2025-08-15 22:32:10.656 [main] INFO  liquibase.lockservice - Successfully acquired change log lock
+ 2025-08-15 22:32:10.792 [main] INFO  liquibase.changelog - Reading from flowable.ACT_APP_DATABASECHANGELOG
+ 2025-08-15 22:32:10.805 [main] INFO  liquibase.lockservice - Successfully released change log lock
+ 2025-08-15 22:32:10.806 [main] INFO  org.flowable.app.engine.impl.AppEngineImpl - AppEngine default created
+ 2025-08-15 22:32:11.006 [main] INFO  com.gzw.kd.common.utils.HttpClientUtil - http client init success ....................
+ 2025-08-15 22:32:11.025 [main] INFO  com.gzw.kd.common.utils.MessageUtils - init locale message .........
+ 2025-08-15 22:32:11.111 [main] INFO  org.quartz.impl.StdSchedulerFactory - Using default implementation for ThreadExecutor
+ 2025-08-15 22:32:11.114 [main] INFO  org.quartz.simpl.SimpleThreadPool - Job execution threads will use class loader of thread: main
+ 2025-08-15 22:32:11.130 [main] INFO  org.quartz.core.SchedulerSignalerImpl - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+ 2025-08-15 22:32:11.130 [main] INFO  org.quartz.core.QuartzScheduler - Quartz Scheduler v.2.3.2 created.
+ 2025-08-15 22:32:11.131 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - Using thread monitor-based data access locking (synchronization).
+ 2025-08-15 22:32:11.132 [main] INFO  org.quartz.impl.jdbcjobstore.JobStoreTX - JobStoreTX initialized.
+ 2025-08-15 22:32:11.133 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler meta-data: Quartz Scheduler (v2.3.2) 'kd_DefaultQuartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 5 threads.
+  Using job-store 'org.quartz.impl.jdbcjobstore.JobStoreTX' - which supports persistence. and is not clustered.
+
+ 2025-08-15 22:32:11.134 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler 'kd_DefaultQuartzScheduler' initialized from an externally provided properties instance.
+ 2025-08-15 22:32:11.134 [main] INFO  org.quartz.impl.StdSchedulerFactory - Quartz scheduler version: 2.3.2
+ 2025-08-15 22:32:11.135 [main] INFO  org.quartz.core.QuartzScheduler - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@9d4d221
+ 2025-08-15 22:32:11.551 [main] INFO  com.gzw.kd.flowControl.FlowControlFactory - flow control init start.........
+ 2025-08-15 22:32:11.558 [main] INFO  com.gzw.kd.flowControl.FlowControlFactory - flow control init end.........
+ 2025-08-15 22:32:11.596 [main] INFO  com.gzw.kd.scheduletask.AsyncTaskJobHandler - Async task impl list: [com.gzw.kd.export.service.LogExportAsyncTask@2b9bacb8]
+ 2025-08-15 22:32:12.439 [main] INFO  com.gzw.kd.config.ExecutorConfiguration - start asyncTaskExecutor
+ 2025-08-15 22:32:12.457 [main] INFO  com.gzw.kd.config.XxlJobConfig - >>>>>>>>>>> xxl-job config init......
+ 2025-08-15 22:32:13.610 [main] INFO  com.gzw.kd.cache.CachePreHandler - cache com.gzw.kd.common.init.AviatorFunctionInit@6c4786af init start
+ 2025-08-15 22:32:13.610 [main] INFO  com.gzw.kd.common.init.AviatorFunctionInit - aviatorUtils init success.......
+ 2025-08-15 22:32:13.611 [main] INFO  com.gzw.kd.cache.CachePreHandler - cache com.gzw.kd.common.init.ServiceConfigInit@dcdb883 init start
+ 2025-08-15 22:32:13.645 [main] INFO  com.gzw.kd.learn.writes.InitLearn - init smartInitializingSingleton
+ 2025-08-15 22:32:13.668 [main] INFO  com.xxl.job.core.executor.XxlJobExecutor - >>>>>>>>>>> xxl-job register jobhandler success, name:AlarmHourDataJobHandler, jobHandler:com.xxl.job.core.handler.impl.MethodJobHandler@228ed68c[class com.gzw.kd.scheduletask.AlarmHourDataJobHandler#execute]
+ 2025-08-15 22:32:13.668 [main] INFO  com.xxl.job.core.executor.XxlJobExecutor - >>>>>>>>>>> xxl-job register jobhandler success, name:AsyncTaskJobHandler, jobHandler:com.xxl.job.core.handler.impl.MethodJobHandler@30e3544d[class com.gzw.kd.scheduletask.AsyncTaskJobHandler#execute]
+ 2025-08-15 22:32:13.802 [main] INFO  com.gzw.kd.learn.writes.InitLearn - init  start  smartLifecycle
+ 2025-08-15 22:32:13.891 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+ 2025-08-15 22:32:13.891 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+ 2025-08-15 22:32:13.947 [Thread-11] INFO  com.xxl.job.core.server.EmbedServer - >>>>>>>>>>> xxl-job remoting server start success, nettype = class com.xxl.job.core.server.EmbedServer, port = 9999
+ 2025-08-15 22:32:28.588 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8092"]
+ 2025-08-15 22:32:28.659 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8092 (http) with context path ''
+ 2025-08-15 22:32:28.994 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.impl.NacosClientAuthServiceImpl success.
+ 2025-08-15 22:32:28.995 [main] INFO  c.a.n.p.auth.spi.client.ClientAuthPluginManager - [ClientAuthPluginManager] Load ClientAuthService com.alibaba.nacos.client.auth.ram.RamClientAuthServiceImpl success.
+ 2025-08-15 22:32:38.474 [Thread-11] INFO  com.xxl.job.core.server.EmbedServer - >>>>>>>>>>> xxl-job remoting server stop.
+ 2025-08-15 22:32:38.522 [xxl-job, executor ExecutorRegistryThread] INFO  com.xxl.job.core.thread.ExecutorRegistryThread - >>>>>>>>>>> xxl-job registry-remove success, registryParam:RegistryParam{registryGroup='EXECUTOR', registryKey='kd-xxl-job-executor', registryValue='http://8.140.62.116:9999/'}, registryResult:ReturnT [code=200, msg=null, content=null]
+ 2025-08-15 22:32:38.523 [xxl-job, executor ExecutorRegistryThread] INFO  com.xxl.job.core.thread.ExecutorRegistryThread - >>>>>>>>>>> xxl-job, executor registry thread destroy.
+ 2025-08-15 22:32:38.523 [main] INFO  com.xxl.job.core.server.EmbedServer - >>>>>>>>>>> xxl-job remoting server destroy success.
+ 2025-08-15 22:32:38.524 [xxl-job, executor JobLogFileCleanThread] INFO  com.xxl.job.core.thread.JobLogFileCleanThread - >>>>>>>>>>> xxl-job, executor JobLogFileCleanThread thread destroy.
+ 2025-08-15 22:32:38.525 [xxl-job, executor TriggerCallbackThread] INFO  com.xxl.job.core.thread.TriggerCallbackThread - >>>>>>>>>>> xxl-job, executor callback thread destroy.
+ 2025-08-15 22:32:38.526 [Thread-10] INFO  com.xxl.job.core.thread.TriggerCallbackThread - >>>>>>>>>>> xxl-job, executor retry callback thread destroy.
+ 2025-08-15 22:32:38.541 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutting down.
+ 2025-08-15 22:32:38.541 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED paused.
+ 2025-08-15 22:32:38.542 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-0} closing ...
+ 2025-08-15 22:32:38.543 [main] INFO  org.quartz.core.QuartzScheduler - Scheduler kd_DefaultQuartzScheduler_$_NON_CLUSTERED shutdown complete.
+ 2025-08-15 22:32:38.543 [main] INFO  o.s.scheduling.quartz.SchedulerFactoryBean - Shutting down Quartz Scheduler
+ 2025-08-15 22:32:38.565 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closing ...
+ 2025-08-15 22:32:38.567 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-4} closed
+ 2025-08-15 22:32:38.567 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closing ...
+ 2025-08-15 22:32:38.672 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-3} closed
+ 2025-08-15 22:32:38.673 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closing ...
+ 2025-08-15 22:32:38.673 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-2} closed
+ 2025-08-15 22:32:38.674 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closing ...
+ 2025-08-15 22:32:38.675 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} closed
+ 2025-08-15 22:32:38.681 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Pausing ProtocolHandler ["http-nio-8092"]
+ 2025-08-15 22:32:38.681 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
+ 2025-08-15 22:32:38.684 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8092"]
+ 2025-08-15 22:32:38.694 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Destroying ProtocolHandler ["http-nio-8092"]
+ 2025-08-15 22:32:38.715 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2025-08-15 22:32:40.567 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closing...
+ 2025-08-15 22:32:40.568 [Export-executor-shutdown-hook-thread] INFO  com.gzw.kd.export.AsyncTaskExecutorService - Export executor closed

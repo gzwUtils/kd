@@ -1,7 +1,7 @@
 package com.gzw.kd.common.utils;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import static com.gzw.kd.common.Constants.*;
 import com.gzw.kd.common.XxlJobConstant;
 import com.gzw.kd.common.entity.TemplateInfo;
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class XxlJobUtils {
 
-    @Value("${xxl.job.executor.appname}")
+    @Value("${xxl.job.executor.appName}")
     private String appName;
 
     @Value("${mail.address: }")
@@ -66,16 +66,16 @@ public class XxlJobUtils {
                 .misfireStrategy(MisfireStrategyEnum.DO_NOTHING.name())
                 .executorRouteStrategy(ExecutorRouteStrategyEnum.CONSISTENT_HASH.name())
                 .executorHandler(executorHandlerName)
-                .executorParam(StrUtil.EMPTY)
+                .executorParam(CharSequenceUtil.EMPTY)
                 .executorBlockStrategy(ExecutorBlockStrategyEnum.DISCARD_LATER.name())
                 .executorTimeout(XxlJobConstant.TIME_OUT)
                 .executorFailRetryCount(XxlJobConstant.RETRY_COUNT)
                 .glueType(GlueTypeEnum.BEAN.name())
                 .triggerStatus(INT_ZERO)
                 .alarmEmail(StringUtils.join(mails,","))
-                .glueRemark(StrUtil.EMPTY)
-                .glueSource(StrUtil.EMPTY)
-                .childJobId(StrUtil.EMPTY).build();
+                .glueRemark(CharSequenceUtil.EMPTY)
+                .glueSource(CharSequenceUtil.EMPTY)
+                .childJobId(CharSequenceUtil.EMPTY).build();
 
         if (Objects.nonNull(templateInfo.getCronTaskId())) {
             xxlJobInfo.setId(templateInfo.getCronTaskId());

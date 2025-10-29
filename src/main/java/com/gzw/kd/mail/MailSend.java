@@ -69,8 +69,11 @@ public class MailSend {
 
 		javaMailSender.setHost(SYSTEM_MAIL_HOST);
 		Properties mailP = new Properties();
-		mailP.put("mail.smtp.auth", true);
-		mailP.put("mail.smtp.timeout", 25000);
+		mailP.put("mail.smtp.auth", "true");
+		mailP.put("mail.smtp.ssl.enable", "true");            // ② 打开 SSL
+		mailP.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		mailP.put("mail.smtp.socketFactory.fallback", "false");
+		mailP.put("mail.smtp.timeout", "25000");
 		javaMailSender.setJavaMailProperties(mailP);
 		// 用户名
 		javaMailSender.setUsername(SYSTEM_MAIL_USER);

@@ -3,6 +3,10 @@ package com.gzw.kd.common;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.util.StrUtil;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -424,12 +428,12 @@ public interface Constants {
 
 
     /** 接口请求限制频次redis key */
-    public  static final String VISIT_LIMIT_REDIS_KEY = "VISIT_LIMIT:SERVICE.";
+    static final String VISIT_LIMIT_REDIS_KEY = "VISIT_LIMIT:SERVICE.";
     /** 黑名单redis key */
     public static final String VISIT_LIMIT_BLACKLIST_REDIS_KEY = "VISIT_LIMIT:SERVICE:BLACKLIST";
 
     /** 内部接口Api的签名验证字符串 */
-    public static final String INNER_MD5_ENC_STR = "timestamp=%s&token=%s&body=%s";
+    static final String INNER_MD5_ENC_STR = "timestamp=%s&token=%s&body=%s";
 
     public static final String TRACE_ID = "TRACE_ID";
 
@@ -465,6 +469,12 @@ public interface Constants {
     public  static final String ADMIN_MANAGER_OPEN_ID="oFGSd57gwTPOBO_5NzN4BVLn372k";
 
 
+    /**
+     *  1. 静态资源后缀白名单，O(1) 查找
+     *  */
+    public static final Set<String> STATIC_EXT = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+            "js", "css", "html", "htm", "png", "jpg", "jpeg", "gif", "ico",
+            "svg", "woff", "woff2", "ttf", "eot", "map")));
 
     /**
      * wx-----------------------------
@@ -540,7 +550,7 @@ public interface Constants {
 
 
 
-    public final static String ASSIGN_INFO_KEY_ = "assign_info_key_";
+    public  static final String ASSIGN_INFO_KEY_ = "assign_info_key_";
 
     public final static long ASSIGN_INFO_EXPIRE_TIME = 3600 * 6;
 
@@ -585,7 +595,7 @@ public interface Constants {
 
     /**
      * 获取canal同步learn表到redis中的key
-     * @param learn id
+     * @param learnId
      * @return redis key
      */
     static String getRedisLearnKey(String learnId) {

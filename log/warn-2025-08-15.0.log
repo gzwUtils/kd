@@ -1,0 +1,85 @@
+ 2025-08-15 22:21:37.415 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...213 :
+ 2025-08-15 22:21:42.666 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [logback-6] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ sun.misc.Unsafe.park(Native Method)
+ java.util.concurrent.locks.LockSupport.park(LockSupport.java:175)
+ java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2039)
+ java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:1088)
+ java.util.concurrent.ScheduledThreadPoolExecutor$DelayedWorkQueue.take(ScheduledThreadPoolExecutor.java:809)
+ java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1074)
+ java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1134)
+ java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+ java.lang.Thread.run(Thread.java:748)
+ 2025-08-15 22:21:42.667 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Create-1967467242] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Thread.sleep(Native Method)
+ com.mysql.cj.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:886)
+ com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:820)
+ com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:446)
+ com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:239)
+ com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:188)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1700)
+ com.alibaba.druid.pool.DruidAbstractDataSource.createPhysicalConnection(DruidAbstractDataSource.java:1792)
+ com.alibaba.druid.pool.DruidDataSource$CreateConnectionThread.run(DruidDataSource.java:2877)
+ 2025-08-15 22:21:42.667 [main] WARN  org.apache.catalina.loader.WebappClassLoaderBase - The web application [ROOT] appears to have started a thread named [Druid-ConnectionPool-Destroy-1967467242] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Thread.sleep(Native Method)
+ com.alibaba.druid.pool.DruidDataSource$DestroyConnectionThread.run(DruidDataSource.java:2951)
+ 2025-08-15 22:21:42.669 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+ 2025-08-15 22:25:13.683 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...191 :
+ 2025-08-15 22:25:14.780 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...362 :
+ 2025-08-15 22:25:15.117 [main] WARN  nl.altindag.ssl.SSLFactory - UnsafeTrustManager is being used. Client/Server certificates will be accepted without validation.
+ 2025-08-15 22:25:17.695 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.assign' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:17.724 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.async_task' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:17.752 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.config' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:17.779 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.doc' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:17.807 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.fly_learn' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:17.861 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.log' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:17.886 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.service' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.013 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.user' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.043 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.wx_template_msg' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.068 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.wx_user' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.095 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_job_details' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.121 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_triggers' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.162 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_blob_triggers' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.190 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_calendars' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.216 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_cron_triggers' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.242 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_fired_triggers' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.271 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_locks' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.296 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_paused_trigger_grps' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.323 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_scheduler_state' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.348 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_simple_triggers' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.374 [main] WARN  o.f.c.internal.sqlscript.DefaultSqlScriptExecutor - DB: Unknown table 'doc.qrtz_simprop_triggers' (SQL State: 42S02 - Error Code: 1051)
+ 2025-08-15 22:25:18.677 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...1425 :
+ 2025-08-15 22:25:26.969 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
+ 2025-08-15 22:25:26.970 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
+ 2025-08-15 22:25:26.970 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
+ 2025-08-15 22:25:27.615 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
+ 2025-08-15 22:25:27.615 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
+ 2025-08-15 22:25:28.375 [main] WARN  liquibase.changelog - modifyDataType will lose primary key/autoincrement/not null settings for mysql.  Use <sql> and re-specify all configuration if this is the case
+ 2025-08-15 22:25:28.618 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...8608 :
+ 2025-08-15 22:25:32.838 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'defaultMQPushConsumer' defined in class path resource [com/gzw/kd/mq/rocketmq/RocketmqConsumerConfig.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.rocketmq.client.consumer.DefaultMQPushConsumer]: Factory method 'defaultMQPushConsumer' threw exception; nested exception is java.lang.IllegalStateException: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to null failed
+ 2025-08-15 22:26:48.640 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...195 :
+ 2025-08-15 22:26:49.687 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...350 :
+ 2025-08-15 22:26:50.019 [main] WARN  nl.altindag.ssl.SSLFactory - UnsafeTrustManager is being used. Client/Server certificates will be accepted without validation.
+ 2025-08-15 22:26:51.893 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...133 :
+ 2025-08-15 22:26:56.357 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...3369 :
+ 2025-08-15 22:27:00.765 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'defaultMQPushConsumer' defined in class path resource [com/gzw/kd/mq/rocketmq/RocketmqConsumerConfig.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.rocketmq.client.consumer.DefaultMQPushConsumer]: Factory method 'defaultMQPushConsumer' threw exception; nested exception is java.lang.IllegalStateException: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to null failed
+ 2025-08-15 22:27:28.059 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...143 :
+ 2025-08-15 22:27:28.985 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...322 :
+ 2025-08-15 22:27:29.298 [main] WARN  nl.altindag.ssl.SSLFactory - UnsafeTrustManager is being used. Client/Server certificates will be accepted without validation.
+ 2025-08-15 22:27:30.945 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...137 :
+ 2025-08-15 22:27:35.399 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...3581 :
+ 2025-08-15 22:27:36.956 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration$EnableWebMvcConfiguration time...153 :
+ 2025-08-15 22:27:39.087 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'defaultMQPushConsumer' defined in class path resource [com/gzw/kd/mq/rocketmq/RocketmqConsumerConfig.class]: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.apache.rocketmq.client.consumer.DefaultMQPushConsumer]: Factory method 'defaultMQPushConsumer' threw exception; nested exception is java.lang.IllegalStateException: org.apache.rocketmq.remoting.exception.RemotingConnectException: connect to null failed
+ 2025-08-15 22:32:03.595 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:tomcatServletWebServerFactory time...139 :
+ 2025-08-15 22:32:04.476 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:oneDatasource time...299 :
+ 2025-08-15 22:32:04.756 [main] WARN  nl.altindag.ssl.SSLFactory - UnsafeTrustManager is being used. Client/Server certificates will be accepted without validation.
+ 2025-08-15 22:32:06.251 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flywayInitializer time...121 :
+ 2025-08-15 22:32:10.810 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:flowableAppEngine time...3727 :
+ 2025-08-15 22:32:12.042 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:parameterRequiredReader time...136 :
+ 2025-08-15 22:32:13.678 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:schedulerFactoryBean time...2623 :
+ 2025-08-15 22:32:13.714 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:cronTriggerMapper time...133 :
+ 2025-08-15 22:32:13.756 [main] WARN  com.gzw.kd.common.utils.TimeCostBeanPostProcessor - bean....:triggerMapper time...174 :
+ 2025-08-15 22:32:28.975 [main] WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is java.lang.reflect.UndeclaredThrowableException
+ 2025-08-15 22:32:40.566 [Thread-16] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Start destroying Publisher
+ 2025-08-15 22:32:40.567 [Thread-16] WARN  com.alibaba.nacos.common.notify.NotifyCenter - [NotifyCenter] Destruction of the end
+ 2025-08-15 22:32:40.568 [Thread-19] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Start destroying common HttpClient
+ 2025-08-15 22:32:40.569 [Thread-19] WARN  com.alibaba.nacos.common.http.HttpClientBeanHolder - [HttpClientBeanHolder] Destruction of the end
