@@ -5,7 +5,7 @@
 
   <insert id="add"  parameterType="com.gzw.kd.common.entity.Notice">
 
-      INSERT INTO notice (context, operatorName, create_time)
+      INSERT INTO notice (context, operator_name, create_time)
       VALUES(#{context}, #{operatorName}, #{createTime});
   </insert>
 
