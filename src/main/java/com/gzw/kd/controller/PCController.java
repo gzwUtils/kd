@@ -17,6 +17,7 @@ import com.gzw.kd.common.exception.GlobalException;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.generators.RandomIdGenerator;
 import com.gzw.kd.common.annotation.Resubmit;
+import com.gzw.kd.common.init.FileInfoInit;
 import com.gzw.kd.common.utils.*;
 import com.gzw.kd.controller.es.OperatorLogIndex;
 import com.gzw.kd.export.AsyncTaskLogService;
@@ -28,7 +29,6 @@ import com.gzw.kd.service.*;
 import com.gzw.kd.vo.input.LogSearchInput;
 import com.gzw.kd.vo.input.OperatorLogInput;
 import com.gzw.kd.vo.output.EsLogSearchIndex;
-import com.gzw.kd.vo.output.FileOutput;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.io.File;
@@ -146,6 +146,9 @@ public class PCController {
 
     @Resource
     TemplateService templateService;
+
+    @Resource
+    private FileInfoInit fileInfoInit;
 
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -849,31 +852,10 @@ public class PCController {
     @PostMapping("/getAllUploadInfo")
     @ResponseBody
     public R getAllUploadInfo(@RequestParam(required = false,value = "path") String path) {
-        String projectPath = System.getProperty("user.dir");
-        if(StringUtils.isBlank(path)){
-             path = projectPath + basedir + "/";
-        }
-        List<FileOutput> allFileList = new ArrayList<>();
-        extracted(path, allFileList);
-        return R.ok().data("dataList", allFileList);
+        return R.ok().data("dataList", fileInfoInit.get());
     }
 
-    private void extracted(String path, List<FileOutput> allFileList) {
-        File[] fileList = new File(path).listFiles();
-        if(ObjectUtil.isNotEmpty(fileList)){
-            for (File file : fileList) {
-               if(!file.isHidden()){
-                   FileOutput output = new FileOutput();
-                   if(file.isDirectory()){
-                       extracted(file.getPath(),allFileList);
-                   } else {
-                       output.setAttachName(file.getName().substring(6,file.getName().length())).setAttachSize(file.length() + "").setUploadTime(file.getParentFile().getName()+" "+file.getName().substring(0, 5)).setAttachUrl("download?path="+file.getParentFile().getName()+"@"+file.getName());
-                       allFileList.add(output);
-                   }
-               }
-            }
-        }
-    }
+
 
     /**
      * 下载模板

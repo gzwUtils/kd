@@ -33,7 +33,7 @@ public class MessageTemplateController {
      * 模版新增
      */
     @PostMapping("/save")
-    @ApiOperation("/保存数据")
+    @ApiOperation("/模版新增")
     @OperatorLog(value = "模版新增", description = "模版新增")
     public R save(@RequestBody TemplateInfo templateInfo) {
         messageTemplateService.registerTemplate(templateInfo);

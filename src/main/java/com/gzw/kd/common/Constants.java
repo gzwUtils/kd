@@ -562,6 +562,8 @@ public interface Constants {
 
     public final static String SERVICE_COFIG = "service_config_key_";
 
+    public final static String UPLOAD_FILE = "upload_file_key_";
+
 
 
     public final static String CONTENT_DISPOSITION_NAME="Content-Disposition";

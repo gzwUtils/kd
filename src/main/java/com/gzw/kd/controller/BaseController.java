@@ -3,6 +3,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.Expression;
+import com.gzw.kd.cache.CacheRefreshApi;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.annotation.Resubmit;
@@ -72,6 +73,10 @@ public class BaseController {
 
     @Resource
     FileUploadUtil fileUploadUtil;
+
+    @Resource
+    private CacheRefreshApi cacheRefreshApi;
+
 
     @ApiOperation(value = "入队 阻塞")
     @OperatorLog(value = "入队 阻塞 ",description = "入队 阻塞")
@@ -261,6 +266,21 @@ public class BaseController {
     public R spi() {
         StandardRemoteServiceInterface anInterface = SpiServiceLoaderHelper.serviceInterface();
         anInterface.exec();
+        return R.ok();
+    }
+
+
+    @OperatorLog(description = "刷新单个缓存")
+    @PostMapping("/refresh/one")
+    public R refreshOne(@RequestParam String beanName) {
+         cacheRefreshApi.refreshOne(beanName);
+         return R.ok();
+    }
+
+    @OperatorLog(description = "刷新全部缓存")
+    @PostMapping("/refresh/all")
+    public R refreshAll() {
+         cacheRefreshApi.refreshAll();
         return R.ok();
     }
 }
