@@ -1,6 +1,6 @@
 package com.gzw.kd.scheduletask;
 
-import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import com.gzw.kd.common.entity.AsyncTasksEntity;
 import com.gzw.kd.common.entity.SysLog;
@@ -17,11 +17,11 @@ import com.gzw.kd.export.AsyncTaskService;
 import com.gzw.kd.service.SystemOperationLogService;
 import com.gzw.kd.vo.output.AsyncTaskOutput;
 import com.xxl.job.core.biz.model.ReturnT;
-import com.xxl.job.core.handler.annotation.XxlJob;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.DependsOn;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.Collection;
@@ -57,7 +57,7 @@ public class AsyncTaskJobHandler {
     public void handle() {
         List<AsyncTasksEntity> asyncTaskLogs = asyncTaskLogService.fetchUnCompletedTasks(3);
 
-        if (CollectionUtil.isNotEmpty(asyncTaskLogs)) {
+        if (CollUtil.isNotEmpty(asyncTaskLogs)) {
             asyncTaskLogs.forEach(logs -> {
                 // 提交任务至线程池
                 final AsyncTaskTypeEnum type = AsyncTaskTypeEnum.getEnumByCode(logs.getType());
@@ -125,7 +125,7 @@ public class AsyncTaskJobHandler {
         }
     }
 
-    @XxlJob("AsyncTaskJobHandler")
+    @Scheduled(cron = "0 */2 * * * ?")
     public ReturnT<String> execute(){
         XxlJobLogUtil.log(log,false,"异步任务开始执行");
         handle();

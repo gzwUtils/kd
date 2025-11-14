@@ -1,69 +1,147 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <title>chat</title>
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8"/>
+    <title>聊天室</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <style>
+        /* 样式与之前完全一致 */
+        *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;}
+        body{display:flex;height:100vh;background:#f3f5f7}
+        .sidebar{width:260px;background:#2c3e50;color:#fff;display:flex;flex-direction:column}
+        .sidebar h3{padding:15px;border-bottom:1px solid #34495e}
+        .user-list{flex:1;overflow-y:auto}
+        .user-item{padding:12px 15px;cursor:pointer;border-bottom:1px solid #34495e;display:flex;align-items:center}
+        .user-item:hover{background:#34495e}
+        .user-item.active{background:#1abc9c}
+        .avatar{width:36px;height:36px;border-radius:50%;background:#1abc9c;display:flex;align-items:center;justify-content:center;margin-right:10px;font-weight:bold}
+        .chat-panel{flex:1;display:flex;flex-direction:column;background:#fff}
+        .chat-header{border-bottom:1px solid #e0e0e0;padding:15px;font-size:18px;font-weight:500}
+        .chat-body{flex:1;padding:15px;overflow-y:auto;background:#fafafa}
+        .msg{margin-bottom:12px;display:flex;align-items:flex-start}
+        .msg.self{flex-direction:row-reverse}
+        .msg .bubble{max-width:60%;padding:10px 14px;border-radius:10px;font-size:14px;line-height:1.4;word-break:break-all}
+        .msg.other .bubble{background:#fff;border:1px solid #e0e0e0}
+        .msg.self .bubble{background:#1abc9c;color:#fff}
+        .msg .time{font-size:12px;color:#999;margin:0 8px}
+        .chat-footer{border-top:1px solid #e0e0e0;display:flex;padding:10px}
+        .chat-footer input{flex:1;padding:10px;border:1px solid #ccc;border-radius:4px;font-size:14px}
+        .chat-footer button{padding:10px 18px;margin-left:8px;border:none;border-radius:4px;background:#1abc9c;color:#fff;cursor:pointer;font-size:14px}
+        .chat-footer button:hover{background:#16a085}
+    </style>
 </head>
 <body>
-<div>
-    <br/>
-    <textarea id="message" cols="100" rows="9"></textarea> <button onclick="send()">发送消息</button>
-    <br/>
-    <br/>
-    <textarea id="text_content" readonly="readonly" cols="100" rows="9" placeholder="返回内容"></textarea>
-    <br/>
-    <br/>
-</div>
-</body>
+<aside class="sidebar">
+    <h3>在线用户</h3>
+    <ul class="user-list" id="userList"></ul>
+</aside>
+
+<section class="chat-panel">
+    <header class="chat-header" id="chatTitle">群聊</header>
+    <main class="chat-body" id="chatBody"></main>
+    <footer class="chat-footer">
+        <input id="msgInput" placeholder="输入消息，回车发送"/>
+        <button onclick="sendMsg()">发送</button>
+    </footer>
+</section>
+
 <script>
-    const websocket = new WebSocket("ws://123.249.77.250:8092/websocket/" + getUUID());
+    /* ========== 工具 ========== */
+    function $(sel) { return document.querySelector(sel); }
 
-    websocket.onopen = function (){
-        websocket.send("connect success ......");
-    }
-
-    function getUUID(){
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function (c){
-            const r = Math.random() * 16 | 0;
-            const v = c === 'x'?r:(r & 0x3 | 0x8);
+    function uuid() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
             return v.toString(16);
-        })
+        });
     }
 
-    function send(){
-        const message = $('#message').val();
-        websocket.send(message);
+    /* ========== WebSocket ========== */
+    var uid  = '${Session["user_key"].account}' +':'+localStorage.getItem('chat-uid') || uuid();
+    localStorage.setItem('chat-uid', uid);
+    var protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+    var ws   = new WebSocket(protocol + '//' + location.host + '/websocket/' + uid);
+    var userList = $('#userList'), chatBody = $('#chatBody'), msgInput = $('#msgInput'), chatTitle = $('#chatTitle');
+
+    var users  = [{uid:'group', name:'群聊', avatar:'G'}];
+    var target = 'group';
+    var meName = '';
+    var reconnectCount = 0;
+
+    function connect() {
+        ws = new WebSocket(protocol + '//' + location.host + '/websocket/' + uid);
+        ws.onopen    = function() { reconnectCount = 0; appendSysMsg('已连接'); };
+        ws.onclose   = function() { appendSysMsg('连接断开，3s后重连…'); if (reconnectCount++ < 5) setTimeout(connect, 3000); };
+        ws.onerror   = function() { appendSysMsg('连接出错'); };
+        ws.onmessage = function(e) {
+            var obj = JSON.parse(e.data);
+            switch (obj.type) {
+                case 'sys': appendSysMsg(obj.content); break;
+                case 'selfInfo': meName = obj.content; break;
+                case 'userList':
+                    users = [{uid:'group', name:'群聊', avatar:'G'}];
+                    for (var i = 0; i < obj.list.length; i++) {
+                        var u = obj.list[i];
+                        users.push({uid: u.uid, name: u.name, avatar: u.name.slice(-1)});
+                    }
+                    renderUsers(); break;
+                case 'group': appendMsg('other', obj.from, obj.content, obj.time); break;
+                case 'private':
+                    appendMsg(obj.from === meName ? 'self' : 'other', obj.from, obj.content, obj.time); break;
+            }
+        };
     }
 
-    websocket.onclose = function (){
-        showMessage("通道已关闭........","error",500000000);
-    }
-
-    websocket.onmessage = function (msg){
-        const server = msg.data;
-        $('#text_content').append(server + '\n');
-    }
-
-    websocket.onerror = function (){
-        showMessage("通道发生错误 请检查！！！！ ","error",5000);
-    }
-
-    function showMessage(message, type, time) {
-        let str = ''
-        switch (type) {
-            case 'success':
-                str = '<div class="success-message" style="width: 300px;height: 40px;text-align: center;background-color:#daf5eb;;color: rgba(103,194,58,0.7);position: fixed;left: 50%;top: 5%;margin-left:-150px;margin-top:-20px;line-height: 40px;border-radius: 5px;z-index: 9999">\n' +
-                    '    <span class="mes-text">' + message + '</span></div>'
-                break;
-            case 'error':
-                str = '<div class="error-message" style="width: 300px;height: 40px;text-align: center;background-color: #f5f0e5;color: rgba(238,99,99,0.8);position: fixed;left: 50%;top: 10%;line-height: 40px;margin-left:-150px;margin-top:-20px;border-radius: 5px;;z-index: 9999">\n' +
-                    '    <span class="mes-text">' + message + '</span></div>'
+    /* ========== 渲染用户 ========== */
+    function renderUsers() {
+        var html = '';
+        for (var i = 0; i < users.length; i++) {
+            var u = users[i];
+            html += '<li class="user-item ' + (u.uid === target ? 'active' : '') + '" onclick="switchUser(\'' +
+                    u.uid + '\', \'' + u.name + '\', event)">' +
+                    '<div class="avatar">' + u.avatar + '</div>' +
+                    '<span>' + u.name + '</span></li>';
         }
-        $('body').append(str);
-        setTimeout(function () {
-            $('.' + type + '-message').remove();
-        }, time);
+        userList.innerHTML = html;
     }
+
+    function switchUser(uid, name, e) {
+        target = uid;
+        chatTitle.textContent = name;
+        var items = document.querySelectorAll('.user-item');
+        for (var i = 0; i < items.length; i++) items[i].classList.remove('active');
+        e.currentTarget.classList.add('active');
+    }
+
+    /* ========== 发送消息 ========== */
+    function sendMsg() {
+        var txt = msgInput.value.trim();
+        if (!txt) return;
+        var type = target === 'group' ? 'group' : 'private';
+        ws.send(JSON.stringify({type: type, to: target, content: txt}));
+        var displayFrom = type === 'group' ? '我' : '→ ' + (users.find(function(u){return u.uid === target;}) || {}).name;
+        appendMsg('self', displayFrom, txt, Date.now());
+        msgInput.value = '';
+    }
+    msgInput.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); sendMsg(); } });
+
+    /* ========== 消息展示 ========== */
+    function appendMsg(side, from, content, time) {
+        var sideClass = side === 'self' ? 'self' : 'other';
+        var t = new Date(time).toLocaleTimeString();
+        chatBody.insertAdjacentHTML('beforeend', '<div class="msg ' + sideClass + '">' +
+            '<div class="time">' + t + '</div>' +
+            '<div class="bubble">' + content + '</div></div>');
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+    function appendSysMsg(txt) {
+        chatBody.insertAdjacentHTML('beforeend', '<div style="text-align:center;color:#999;font-size:12px;margin:8px 0">' + txt + '</div>');
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    /* ========== 初始化 ========== */
+    connect();
+    renderUsers();
 </script>
+</body>
 </html>

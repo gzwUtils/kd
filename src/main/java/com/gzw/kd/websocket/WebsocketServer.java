@@ -1,126 +1,148 @@
 package com.gzw.kd.websocket;
+import com.alibaba.fastjson.JSON;
+import com.gzw.kd.common.entity.MsgVo;
+import com.gzw.kd.common.entity.OnlineUser;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
-
-import java.io.IOException;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.concurrent.atomic.AtomicInteger;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
-/**
- * @author gzw
- * @description：
- * @since：2023/2/17 00:37
- */
-@SuppressWarnings("all")
-@Slf4j
 @ServerEndpoint("/websocket/{uid}")
 @Component
+@Slf4j
 public class WebsocketServer {
 
-    private static final AtomicInteger ONLINE_NUM  = new AtomicInteger(0);
+    private static final Map<String, OnlineUser> ONLINE_MAP = new ConcurrentHashMap<>();
 
-    private static final CopyOnWriteArraySet<Session> SESSIONS = new CopyOnWriteArraySet<>();
-
-    /**
-     * 默认最多允许同时在线人数100
-     */
-    public static int socketMaxOnlineCount = 100;
-
-    /**
-     * 连接建立成功调用的方法
-     */
-    @OnOpen
-    public void onOpen(Session session, @PathParam(value = "uid") String uid) throws IOException {
-        if(!CollectionUtils.isEmpty(SESSIONS) && SESSIONS.contains(session)){
-            log.info("[{}]的连接已存在，不能重复连接，当前连接数=[{}]", uid, ONLINE_NUM);
-            sendMessage(session,"该连接已存在，不能重复连接");
-            session.close();
-            return;
-        }
-        if(ONLINE_NUM.get() == socketMaxOnlineCount){
-            log.error("\n 当前在线人数超过限制数- {}",ONLINE_NUM.get());
-            sendMessage(session,"当前在线人数超过限制数："+socketMaxOnlineCount);
-            session.close();
-            return;
-        }
-        SESSIONS.add(session);
-        ONLINE_NUM.incrementAndGet();
-        log.info("\n 建立连接 - {}", session);
-        log.info(" uid : {} 链接加入 online num {},",uid,ONLINE_NUM);
-        sendMessage(session,"连接成功");
-    }
-    /**
-     * 连接关闭调用的方法
-     */
-    @OnClose
-    public void onClose(Session session, @PathParam(value = "uid") String uid){
-        SESSIONS.remove(session);
-        int cnt = ONLINE_NUM.decrementAndGet();
-        log.info(" uid : {} 链接退出 online num {},",uid,cnt);
-    }
-
-    /**
-     * 发送消息
-     */
-
-    public void sendMessage(Session session, String message) throws IOException {
-        if(session!=null){
-            synchronized (session){
-                session.getBasicRemote().sendText(message);
+    /* ===== 工具 ===== */
+    private void removeAndClose(String uid) {
+        OnlineUser u = ONLINE_MAP.remove(uid);
+        if (u != null && u.getSession() != null) {
+            try {
+                u.getSession().close(new CloseReason(CloseReason.CloseCodes.NORMAL_CLOSURE, "duplicate"));
+            } catch (IOException e) {
+                log.error("uid {} removeAndClose error  {}",uid,e.getMessage());
             }
         }
     }
 
-
-    /**
-     * 群发消息
-     */
-
-    public void broadCastInfo(String message) throws IOException {
-       for(Session session : SESSIONS){
-           if(session.isOpen()){
-               sendMessage(session,message);
-           }
-       }
+    private void sendObj(Session s, String json) {
+        if (s != null && s.isOpen()) {
+            try { s.getBasicRemote().sendText(json); } catch (IOException e) { log.error("send error", e); }
+        }
     }
 
+    private void broadCast(String json) {
+        ONLINE_MAP.values().forEach(u -> sendObj(u.getSession(), json));
+    }
 
-    /**
-     * 收到客户端消息后调用的方法
-     * @param message
-     * @param session
-     */
+    private void sendTo(String uid, String json) {
+        OnlineUser u = ONLINE_MAP.get(uid);
+        if (u != null) sendObj(u.getSession(), json);
+    }
+
+    private String buildMsg(String type, String from, String to, String content) {
+        return JSON.toJSONString(new MsgVo(type, from, to, content, System.currentTimeMillis()));
+    }
+
+    private void refreshUsers() {
+        List<UserListVo> list = ONLINE_MAP.values().stream()
+                .map(u -> new UserListVo(u.getUid(), u.getName())).collect(Collectors.toList());
+        broadCast(JSON.toJSONString(new UserListDTO(list)));
+    }
+
+    /* ===== 生命周期 ===== */
+    @OnOpen
+    public void onOpen(Session session, @PathParam("uid") String uid) {
+        removeAndClose(uid);                                     // 踢旧
+        String name = uid.substring(0,uid.indexOf(":"));
+        ONLINE_MAP.put(uid, new OnlineUser(uid, name, session));
+        log.info("{} 上线，当前在线 {}", name, ONLINE_MAP.size());
+
+        // 告诉前端自己是谁
+        sendObj(session, buildMsg("selfInfo", null, uid, name));
+        broadCast(buildMsg("sys", null, null, name + " 加入了群聊"));
+        refreshUsers();
+
+        // 定时心跳
+        startPing(session);
+    }
+
+    @OnClose
+    public void onClose(@PathParam("uid") String uid) {
+        OnlineUser u = ONLINE_MAP.remove(uid);
+        if (u != null) {
+            log.info("{} 下线", u.getName());
+            broadCast(buildMsg("sys", null, null, u.getName() + " 离开了群聊"));
+            refreshUsers();
+        }
+    }
+
+    @OnError
+    public void onError(@PathParam("uid") String uid, Throwable t) {
+        log.error("uid {} error {}", uid, t.getMessage());
+        removeAndClose(uid);
+    }
 
     @OnMessage
-    public void onMessage(String message, Session session){
-        log.info("收到来自窗口的信息:{}",message);
-        if(session!=null){
-            try {
-                sendMessage(session,message);
-            } catch (IOException e) {
-                log.error("发送消息异常",e);
-            }
+    public void onMessage(String json, @PathParam("uid") String uid) {
+        MsgVo vo;
+        try { vo = JSON.parseObject(json, MsgVo.class); } catch (Exception e) { return; }
+        if (vo == null || vo.getType() == null || vo.getContent() == null) return;
+
+        OnlineUser me = ONLINE_MAP.get(uid);
+        if (me == null) return;
+
+        if ("group".equals(vo.getType())) {
+            broadCast(buildMsg("group", me.getName(), null, vo.getContent()));
+        } else if ("private".equals(vo.getType())) {
+            String msg = buildMsg("private", me.getName(), vo.getTo(), vo.getContent());
+            sendTo(vo.getTo(), msg);
+            sendObj(me.getSession(), msg);   // 回执
         }
     }
 
-    /**
-     * 发生错误
-     */
-    @OnError
-    public void onError(Session session,@PathParam(value = "uid") String uid, Throwable throwable) throws IOException {
-        if (session.isOpen())
-        {
-            session.close();
+    /* ===== 心跳 ===== */
+    private void startPing(Session session) {
+        new Thread(() -> {
+            while (session.isOpen()) {
+                try {
+                    Thread.sleep(30000);
+                    if (session.isOpen()) session.getAsyncRemote().sendPing(ByteBuffer.wrap("PING".getBytes()));
+                } catch (Exception e) {
+                    log.error("ping error {}",e.getMessage());
+                }
+            }
+        }).start();
+    }
+
+    /* ===== DTO ===== */
+    @Data
+    @AllArgsConstructor
+    public static class UserListVo {
+        private String uid;
+        private String name;
+    }
+    @Data
+    @AllArgsConstructor
+    public static class UserListDTO {
+        private String type;
+        private List<UserListVo> list;
+
+        public UserListDTO(List<UserListVo> list){
+            this.list = list;
+            this.type = "userList";
         }
-        log.info("uid {} session {} error {} ",uid,session,throwable);
 
-        SESSIONS.remove(session);
-
-        int cnt = ONLINE_NUM.decrementAndGet();
     }
 }
