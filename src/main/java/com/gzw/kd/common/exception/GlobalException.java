@@ -16,7 +16,7 @@ public class GlobalException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
 
-    private  Integer code;
+    private final Integer code;
 
     public GlobalException(String message,Integer code) {
         super(message);

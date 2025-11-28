@@ -2,6 +2,7 @@ package com.gzw.kd.websocket;
 import com.alibaba.fastjson.JSON;
 import com.gzw.kd.common.entity.MsgVo;
 import com.gzw.kd.common.entity.OnlineUser;
+import com.gzw.kd.common.entity.Room;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -16,13 +17,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
-
+@SuppressWarnings("all")
 @ServerEndpoint("/websocket/{uid}")
 @Component
 @Slf4j
 public class WebsocketServer {
 
     private static final Map<String, OnlineUser> ONLINE_MAP = new ConcurrentHashMap<>();
+
+    private static final Map<String, Room> ROOM_MAP = new ConcurrentHashMap<>();
+
 
     /* ===== 工具 ===== */
     private void removeAndClose(String uid) {
@@ -56,9 +60,14 @@ public class WebsocketServer {
     }
 
     private void refreshUsers() {
-        List<UserListVo> list = ONLINE_MAP.values().stream()
-                .map(u -> new UserListVo(u.getUid(), u.getName())).collect(Collectors.toList());
-        broadCast(JSON.toJSONString(new UserListDTO(list)));
+        List<UserListVo> users = ONLINE_MAP.values().stream()
+                .map(u -> new UserListVo(u.getUid(), u.getName()))
+                .collect(Collectors.toList());
+        List<UserListVo> rooms = ROOM_MAP.values().stream()
+                .map(r -> new UserListVo(r.getRoomId(), "【房间】"+r.getRoomName()))
+                .collect(Collectors.toList());
+        users.addAll(rooms);
+        broadCast(JSON.toJSONString(new UserListDTO(users)));
     }
 
     /* ===== 生命周期 ===== */
@@ -103,12 +112,33 @@ public class WebsocketServer {
         OnlineUser me = ONLINE_MAP.get(uid);
         if (me == null) return;
 
-        if ("group".equals(vo.getType())) {
-            broadCast(buildMsg("group", me.getName(), null, vo.getContent()));
-        } else if ("private".equals(vo.getType())) {
-            String msg = buildMsg("private", me.getName(), vo.getTo(), vo.getContent());
-            sendTo(vo.getTo(), msg);
-            sendObj(me.getSession(), msg);   // 回执
+        /* 只贴 switch 新增部分 */
+        switch (vo.getType()) {
+            case "group":   // 原群聊
+                broadCast(buildMsg("group", me.getName(), null, vo.getContent()));
+                break;
+            case "private": // 原私聊
+                String m = buildMsg("private", me.getName(), vo.getTo(), vo.getContent());
+                sendTo(vo.getTo(), m);
+                sendObj(me.getSession(), m);
+                break;
+
+            case "createRoom":   // 创建房间
+                String rid = createRoom(vo.getContent(), uid);
+                sendObj(me.getSession(), buildMsg("selfRoom", null, uid, rid));
+                refreshUsers();   // 把房间也当作用户列表的一种
+                break;
+
+            case "joinRoom":     // 加入房间
+                boolean ok = joinRoom(vo.getTo(), uid);
+                sendObj(me.getSession(),
+                        buildMsg(ok ? "sys" : "error", null, uid, ok ? "已加入房间" : "房间不存在"));
+                refreshUsers();
+                break;
+
+            case "room":         // 在房间里发言
+                broadcastRoom(vo.getTo(), buildMsg("room", me.getName(), vo.getTo(), vo.getContent()));
+                break;
         }
     }
 
@@ -124,6 +154,39 @@ public class WebsocketServer {
                 }
             }
         }).start();
+    }
+
+
+    /* 推给某个房间所有人 */
+    private void broadcastRoom(String roomId, String json) {
+        Room room = ROOM_MAP.get(roomId);
+        if (room == null) return;
+        room.getMembers().forEach(uid -> sendTo(uid, json));
+    }
+
+    /* 创建房间 */
+    private String createRoom(String roomName, String creatorUid) {
+        String rid = "room_" + System.currentTimeMillis();
+        Room r = new Room(rid, roomName, ConcurrentHashMap.newKeySet());
+        r.getMembers().add(creatorUid);
+        ROOM_MAP.put(rid, r);
+        return rid;
+    }
+
+    /* 加入房间 */
+    private boolean joinRoom(String roomId, String uid) {
+        Room r = ROOM_MAP.get(roomId);
+        if (r == null) return false;
+        r.getMembers().add(uid);
+        return true;
+    }
+
+    /* 离开房间 */
+    private void leaveRoom(String roomId, String uid) {
+        Room r = ROOM_MAP.get(roomId);
+        if (r == null) return;
+        r.getMembers().remove(uid);
+        if (r.getMembers().isEmpty()) ROOM_MAP.remove(roomId);
     }
 
     /* ===== DTO ===== */
