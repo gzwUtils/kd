@@ -30,6 +30,7 @@ public class SmsHandler extends BaseHandler {
 
 
     public SmsHandler() {
+        super();
 
         channelCode = ChannelTypeEnum.SMS.getCode();
 

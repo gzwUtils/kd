@@ -29,7 +29,7 @@ public class ScheduleTask implements SchedulingConfigurer {
     public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
         // 动态使用cron表达式设置循环间隔
         taskRegistrar.addTriggerTask(() -> {
-            new Thread(new MyMusicIndex()).start();
+//            new Thread(new MyMusicIndex()).start();
             log.info("current time {}", LocalDateTime.now());
         }, triggerContext -> {
             // 使用CronTrigger触发器，可动态修改cron表达式来操作循环规则

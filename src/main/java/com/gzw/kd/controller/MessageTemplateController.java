@@ -1,6 +1,7 @@
 package com.gzw.kd.controller;
 
-import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.text.CharSequenceUtil;
+import cn.hutool.core.text.StrPool;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.common.entity.TemplateInfo;
@@ -11,7 +12,7 @@ import io.swagger.annotations.ApiParam;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.annotation.Resource;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -19,15 +20,15 @@ import org.springframework.web.bind.annotation.*;
  * @description： 消息模版
  * @since：2023/5/29 10:34
  */
-
+@AllArgsConstructor
 @Api(tags = "消息模版")
 @RequestMapping("/mt")
 @RestController
 public class MessageTemplateController {
 
 
-    @Resource
-    private MessageTemplateService messageTemplateService;
+
+    private final MessageTemplateService messageTemplateService;
 
     /**
      * 模版新增
@@ -78,11 +79,11 @@ public class MessageTemplateController {
      * 根据Id删除
      * id多个用逗号分隔开
      */
-    @DeleteMapping("delete/{id}")
+    @PostMapping("delete/{id}")
     @ApiOperation("/根据Ids删除")
     public R deleteByIds(@PathVariable("id") String id) {
-        if (StrUtil.isNotBlank(id)) {
-            List<Long> idList = Arrays.stream(id.split(StrUtil.COMMA)).map(Long::valueOf).collect(Collectors.toList());
+        if (CharSequenceUtil.isNotBlank(id)) {
+            List<Long> idList = Arrays.stream(id.split(StrPool.COMMA)).map(Long::valueOf).collect(Collectors.toList());
             messageTemplateService.deleteByIds(idList);
         }
         return R.ok();

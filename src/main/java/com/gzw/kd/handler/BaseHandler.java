@@ -5,22 +5,21 @@ import com.gzw.kd.flowControl.FlowControlFactory;
 import com.gzw.kd.common.entity.TaskInfo;
 import java.util.Objects;
 import javax.annotation.PostConstruct;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author gzw
  * @description：
  * @since：2023/5/24 14:52
  */
+@AllArgsConstructor
 @Slf4j
 public abstract class BaseHandler implements Handler{
 
-    @Autowired
-    private HandlerHolder handlerHolder;
+    private final HandlerHolder handlerHolder;
 
-    @Autowired
-    private FlowControlFactory flowControlFactory;
+    private final FlowControlFactory flowControlFactory;
 
     /**
      * 标识渠道的Code
