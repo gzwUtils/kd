@@ -1,5 +1,6 @@
 package com.gzw.kd.handler;
 
+import com.gzw.kd.common.entity.SendResult;
 import com.gzw.kd.common.entity.TaskInfo;
 import com.gzw.kd.common.entity.TemplateInfo;
 
@@ -11,16 +12,23 @@ import com.gzw.kd.common.entity.TemplateInfo;
 public interface Handler {
 
     /**
-     * 处理器
-     *
-     * @param taskInfo task
+     * 处理消息
+     * @param taskInfo 任务信息
+     * @return 发送结果
      */
-    void doHandler(TaskInfo taskInfo);
+    SendResult doHandler(TaskInfo taskInfo);
 
     /**
      * 撤回消息
-     *
-     * @param templateInfo info
+     * @param templateInfo 模板信息
      */
     void recall(TemplateInfo templateInfo);
+
+    /**
+     * 处理器是否可用
+     * @return 是否可用
+     */
+    default boolean isAvailable() {
+        return true;
+    }
 }

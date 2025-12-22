@@ -1,6 +1,7 @@
 package com.gzw.kd.handler.impl;
 import com.alibaba.fastjson2.JSON;
 import com.google.common.util.concurrent.RateLimiter;
+import com.gzw.kd.common.R;
 import com.gzw.kd.common.entity.FlowControlParam;
 import com.gzw.kd.common.entity.SmsContentModel;
 import com.gzw.kd.common.enums.ChannelTypeEnum;
@@ -30,8 +31,6 @@ public class SmsHandler extends BaseHandler {
 
 
     public SmsHandler() {
-        super();
-
         channelCode = ChannelTypeEnum.SMS.getCode();
 
         // 按照请求限流，默认单机 3 qps
@@ -44,16 +43,48 @@ public class SmsHandler extends BaseHandler {
     @Override
     public boolean handler(TaskInfo taskInfo) {
         Set<String> receivers = taskInfo.getReceiver();
-        for (String receiver : receivers) {
-            SmsContentModel model = JSON.parseObject(taskInfo.getContentModel(), SmsContentModel.class);
-            try {
-                smsUtils.sendMessage(receiver, model.getContent());
-            } catch (Exception e) {
-                log.error("event send error ..........", e);
-            }
-            log.info("testHandler  sendChannel {} businessId {},context {},receiver {}", taskInfo.getSendChannel(), taskInfo.getBusinessId(), model.getContent(), taskInfo.getReceiver());
+        SmsContentModel model = JSON.parseObject(taskInfo.getContentModel(), SmsContentModel.class);
+        String content = model.getContent();
+
+        if (receivers == null || receivers.isEmpty()) {
+            log.warn("没有接收者，跳过短信发送，业务ID: {}", taskInfo.getBusinessId());
+            return true;  // 无接收者视为成功
         }
-        return true;
+
+        boolean allSuccess = true;
+        int successCount = 0;
+        int failCount = 0;
+
+        for (String receiver : receivers) {
+            try {
+                if (smsUtils == null) {
+                    log.error("SMSUtils 未初始化");
+                    return false;
+                }
+
+                // 发送短信
+                R r = smsUtils.sendMessage(receiver, content);
+
+                if (r.getSuccess()) {
+                    successCount++;
+                    log.debug("短信发送成功，接收人: {}", receiver);
+                } else {
+                    failCount++;
+                    allSuccess = false;
+                    log.error("短信发送失败 {}，接收人: {}",r.getMessage(), receiver);
+                }
+            } catch (Exception e) {
+                failCount++;
+                allSuccess = false;
+                log.error("短信发送异常，接收人: {}, 异常: {}", receiver, e.getMessage(), e);
+            }
+        }
+
+        // 统计日志
+        log.info("短信发送完成统计 - 业务ID: {}, 成功: {} 条, 失败: {} 条, 总计: {} 条",
+                taskInfo.getBusinessId(), successCount, failCount, receivers.size());
+
+        return allSuccess;
     }
 
     @Override

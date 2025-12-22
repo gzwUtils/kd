@@ -1,6 +1,7 @@
 package com.gzw.kd.send.action;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.util.StrUtil;
 import com.gzw.kd.common.Constants;
 import com.gzw.kd.common.R;
@@ -39,7 +40,7 @@ public class PreParamCheckAction implements BusinessProcess<SendTaskModel> {
 
         // 2.过滤 receiver=null 的messageParam
         List<MessageParam> resultMessageParamList = messageParamList.stream()
-                .filter(messageParam -> !StrUtil.isBlank(messageParam.getReceiver()))
+                .filter(messageParam -> !CharSequenceUtil.isBlank(messageParam.getReceiver()))
                 .collect(Collectors.toList());
         if (CollUtil.isEmpty(resultMessageParamList)) {
             context.setNeedBreak(true).setResponse(R.setResult(ResultCodeEnum.PARAM_ABSENT));

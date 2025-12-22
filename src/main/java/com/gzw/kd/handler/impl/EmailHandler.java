@@ -4,7 +4,9 @@ import com.google.common.util.concurrent.RateLimiter;
 import com.gzw.kd.common.entity.*;
 import com.gzw.kd.common.enums.ChannelTypeEnum;
 import com.gzw.kd.common.enums.RateLimitStrategy;
+import com.gzw.kd.flowControl.FlowControlFactory;
 import com.gzw.kd.handler.BaseHandler;
+import com.gzw.kd.handler.HandlerHolder;
 import com.gzw.kd.mail.MailUtil;
 import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class EmailHandler extends BaseHandler {
 
-    public EmailHandler() {
+    public EmailHandler(HandlerHolder handlerHolder, FlowControlFactory flowControlFactory) {
         channelCode = ChannelTypeEnum.EMAIL.getCode();
 
         // 按照请求限流，默认单机 1 qps
