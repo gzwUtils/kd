@@ -76,7 +76,7 @@ public class RedisLockAspect {
 
         } catch (InterruptedException e) {
             log.error("interrupt exception rollback transaction",e);
-            throw new GlobalException("interrupt exception please send request again",ResultCodeEnum.Failed.getCode());
+            throw new GlobalException("interrupt exception please send request again",ResultCodeEnum.FAIL.getCode());
         }catch (GlobalException e){
             log.error("error please check ",e);
             throw new GlobalException(e.getMessage(),ResultCodeEnum.UNKNOWN_ERROR.getCode());

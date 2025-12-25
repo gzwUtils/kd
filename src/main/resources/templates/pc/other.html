@@ -146,12 +146,22 @@
                 });
             },
             exports(){
-                axios.post('/pc/export').then(res => {
-                    let blob = new Blob([res], { type: "application/vnd.ms-excel" });
-                    let objectUrl = URL.createObjectURL(blob);
-                    window.location.href = objectUrl;
-                    this.$message.success("导出成功");
-                });
+               axios.post('/pc/export', null, {
+                        responseType: 'blob'
+                  }).then(res => {
+                // 获取文件名，可以从响应头中获取
+            const fileName = res.headers['content-disposition']
+        ? decodeURIComponent(res.headers['content-disposition'].split('filename=')[1])
+        : 'export.xlsx';
+         // 创建下载
+         const blob = new Blob([res.data]);
+         const link = document.createElement('a');
+         link.href = URL.createObjectURL(blob);
+         link.download = fileName;
+         link.click();
+        URL.revokeObjectURL(link.href);
+        this.$message.success("导出成功");
+});
             },
             testRedisLock(){
                 if(this.result === ''){

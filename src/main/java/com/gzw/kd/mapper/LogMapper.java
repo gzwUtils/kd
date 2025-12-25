@@ -3,6 +3,7 @@ package com.gzw.kd.mapper;
 
 
 import com.gzw.kd.common.entity.Log;
+import com.gzw.kd.vo.input.LogSearchInput;
 import com.gzw.kd.vo.output.LogExportOutput;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ import java.util.List;
 public interface LogMapper {
 
     //导出日志信息
-    List<LogExportOutput> getLogInfo(LocalDateTime time);
+    List<LogExportOutput> getLogInfo(LogSearchInput param);
 
     /**
      * 获取操作记录

@@ -1,16 +1,15 @@
 package com.gzw.kd.export;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.StrUtil;
+import com.gzw.kd.common.enums.ResultCodeEnum;
+import com.gzw.kd.common.exception.GlobalException;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
 
-import static com.gzw.kd.common.Constants.CONTENT_DISPOSITION_NAME;
-import static com.gzw.kd.common.Constants.CONTENT_DISPOSITION_VALUE;
+import static com.gzw.kd.common.Constants.*;
 
 /**
  * @author gzw
@@ -45,12 +44,12 @@ public class ExportFileMeta {
      * @param response HttpServletResponse
      */
     public void writeResponse(final HttpServletResponse response) throws IOException {
-        if (!this.isSucceed) {
-            throw new RuntimeException("Export file failed");
+        if (Boolean.FALSE.equals(this.isSucceed)) {
+            throw new GlobalException(ResultCodeEnum.EXPORT_FILE_ERROR);
         }
         response.setContentType(this.contentType);
         response.setHeader(CONTENT_DISPOSITION_NAME, CONTENT_DISPOSITION_VALUE +
-                URLEncoder.encode(FileUtil.mainName(file), "UTF-8") + StrUtil.DOT + FileUtil.extName(file));
+                 file.getName() +XLSX_EXPORT_FILE_SUFFIX);
         FileUtil.writeToStream(file, response.getOutputStream());
     }
 }

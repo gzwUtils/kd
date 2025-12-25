@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kd邮件</title>
+    <style>
+        /* 基础样式 */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* 邮件容器 */
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* 邮件头部 */
+        .email-header {
+            background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .company-logo {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .email-title {
+            font-size: 22px;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        /* 邮件内容 */
+        .email-body {
+            padding: 30px;
+        }
+        
+        .greeting {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #3a7bd5;
+        }
+        
+        .content {
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        
+        .highlight-box {
+            background-color: #f0f7ff;
+            border-left: 4px solid #3a7bd5;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .action-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3a7bd5 0%, #00d2ff 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        /* 邮件底部 */
+        .email-footer {
+            background-color: #f8f9fa;
+            padding: 25px 30px;
+            border-top: 1px solid #eaeaea;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .footer-links a {
+            color: #3a7bd5;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        .social-icons {
+            margin: 15px 0;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin: 0 8px;
+            color: #666;
+            font-size: 18px;
+        }
+        
+        .copyright {
+            font-size: 13px;
+            color: #888;
+            margin-top: 20px;
+        }
+        
+        /* 响应式设计 */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                margin: 10px;
+                border-radius: 6px;
+            }
+            
+            .email-body, .email-footer {
+                padding: 20px;
+            }
+            
+            .email-title {
+                font-size: 20px;
+            }
+            
+            .content {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- 邮件头部 -->
+        <div class="email-header">
+            <div class="company-logo">TechCorp</div>
+            <h1 class="email-title">重要通知：${title}</h1>
+        </div>
+
+        <!-- 邮件正文 -->
+        <div class="email-body">
+            <#if name?exists><p class="greeting">尊敬的:${name}</p></#if>
+
+            <div class="content">
+                <#if content?exists><p>${content}</p></#if>
+
+
+                <#if url?exists><p>${url}</p></#if>
+
+                <p>感谢您一直以来的支持</p>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="#" class="action-button">立即体验新功能</a>
+            </div>
+
+            <div class="content">
+                <p>祝您工作顺利！</p>
+                <p>${sendTime}</p>
+            </div>
+        </div>
+
+        <!-- 邮件底部 -->
+        <div class="email-footer">
+            <div style="text-align: center;">
+                <div class="footer-links">
+                    <#if url?exists>
+                        <a href="${url}">官方网站</a> |
+                    <#else>
+                        <a href="#">官方网站</a>
+                    </#if>
+                        <a href="#">帮助中心</a> |
+                        <a href="#">隐私政策</a> |
+                        <a href="#">退订邮件</a>
+                </div>
+
+                <div class="social-icons">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">📷</a>
+                    <a href="#">💼</a>
+                </div>
+
+                <p>本邮件由系统自动发送，请勿直接回复。<br>
+                如有疑问，请联系：support@techcorp.com</p>
+
+                <p class="copyright">©kd.<br>
+                地址: 北京市昌平区朱辛庄</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

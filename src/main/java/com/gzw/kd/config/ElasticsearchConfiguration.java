@@ -9,12 +9,16 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.io.IOException;
+
 import static com.gzw.kd.common.Constants.*;
 import static com.gzw.kd.common.enums.ResultCodeEnum.END_POINT_ABSENT;
 
@@ -113,10 +117,26 @@ public class ElasticsearchConfiguration {
                 return httpClientBuilder;
             });
             log.info("restHighLevelClient build 创建成功 ------------------------------------------------------");
-            return new RestHighLevelClient(builder);
+            RestHighLevelClient client = new RestHighLevelClient(builder);
+            ping(client);
+            return client;
         } catch (GlobalException e) {
             log.error("restHighLevelClient build 创建失败 {}", e.getMessage(), e);
         }
         return null;
+    }
+
+    private static void ping(RestHighLevelClient client){
+        boolean pingResult = false;
+        try {
+            pingResult = client.ping(RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            log.error("ES连接测试异常 {}",e.getMessage(),e);
+        }
+        if (pingResult) {
+            log.info("ES连接测试成功");
+        } else {
+            log.error("ES连接测试失败");
+        }
     }
 }

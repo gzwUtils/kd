@@ -1,9 +1,13 @@
 package com.gzw.kd.mail;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.map.MapUtil;
+import com.gzw.kd.common.entity.EmailContentModel;
 import com.gzw.kd.common.utils.FreemarkerUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import javax.mail.internet.MimeMessage;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,21 +47,24 @@ public class MailSend {
 	}
 
 
-	public void sendEmail(String subject, String content, String[] toEmails,boolean html,String path) {
+	public void sendEmail(EmailContentModel model, String[] toEmails, boolean html, String path) {
 		javaMailSenderConfig();
 		MimeMessage message = javaMailSender.createMimeMessage();
 		MimeMessageHelper messageHelper;
+		String htmlContent = null;
 		try {
 			if(html){
-				Map<String, Object> map = new HashMap<>();
-				map.put("message",content);
-				content = FreemarkerUtils.freeMarkerRender(map, "/src/main/resources/templates/"+path);
+				Map<String, Object> map = BeanUtil.beanToMap(model, MapUtil.newHashMap(), false, false);
+				map.put("sendTime", LocalDateTime.now());
+				htmlContent = FreemarkerUtils.freeMarkerRender(map, "/src/main/resources/templates/"+path);
+			} else {
+				htmlContent = model.getContent();
 			}
 			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			messageHelper.setFrom(SYSTEM_MAIL_ACCOUNT);
 			messageHelper.setTo(toEmails);
-			messageHelper.setSubject(subject);
-			messageHelper.setText(content, html);
+			messageHelper.setSubject(model.getTitle());
+			messageHelper.setText(htmlContent, html);
 			messageHelper.setSentDate(new Date());
 			javaMailSender.send(message);
 		} catch (Exception e) {

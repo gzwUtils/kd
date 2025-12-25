@@ -6,6 +6,9 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.system.SystemUtil;
 import com.gzw.kd.export.BigExcelWriterNew;
 import com.gzw.kd.export.ExportSheet;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Objects;
 import static com.gzw.kd.common.Constants.XLSX_MAX_EXPORT_ROW_SIZE;
@@ -69,6 +72,29 @@ public interface CommonExportService {
      */
     default String defaultStoragePath(String fileNameAndSuffix) {
         return FILE_STORAGE_PATH + fileNameAndSuffix;
+    }
+
+    /**
+     * 指定文件存储路径
+     *
+     * @param fileNameAndSuffix 文件名
+     * @return 文件存储路径
+     */
+    default String storagePath(String path,String fileNameAndSuffix) {
+
+        // 生成日期目录
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String dateDir = dateFormat.format(System.currentTimeMillis());
+        String projectPath = System.getProperty("user.dir");
+        // 完整目录路径
+        String fullDir = projectPath +File.separator + path + File.separator + dateDir;
+        FileUtil.mkdir(fullDir);
+
+        // 生成时间前缀的文件名
+        SimpleDateFormat timeFormat = new SimpleDateFormat("mm:ss");
+        String timePrefix = timeFormat.format(System.currentTimeMillis());
+
+        return fullDir + File.separator + timePrefix + "_" + fileNameAndSuffix;
     }
 
 

@@ -4,11 +4,22 @@
     <sql id="Base_Column_List">
         id, params, status, errorMsg, `type`, fromMenu, creator, create_time createTime, updater, update_time updateTime, exportName, numberOfSuccesses, numberOfFailed,file_path filePath
     </sql>
+    <sql id="Base_Column_List_1">
+        id, params, status, errorMsg, `type`, creator, create_time createTime, updater, update_time updateTime, exportName, numberOfSuccesses, numberOfFailed,file_path filePath
+    </sql>
     <select id="selectAll" parameterType="int" resultType="com.gzw.kd.common.entity.AsyncTasksEntity">
         select
         <include refid="Base_Column_List" />
         from async_task
         where status = #{status} limit #{size}
+    </select>
+
+
+    <select id="fetchAllTasks" parameterType="java.lang.String" resultType="com.gzw.kd.common.entity.AsyncTasksEntity">
+        select
+        <include refid="Base_Column_List_1" />
+        from async_task
+        where creator = #{creator}
     </select>
 
     <insert id="insertOne" parameterType="com.gzw.kd.common.entity.AsyncTasksEntity">

@@ -4,6 +4,8 @@ import com.gzw.kd.common.entity.AsyncTasksEntity;
 import com.gzw.kd.common.enums.AsyncTaskStatusEnum;
 import com.gzw.kd.common.enums.AsyncTaskTypeEnum;
 import com.gzw.kd.vo.output.AsyncTaskOutput;
+import com.gzw.kd.vo.output.AsyncTaskVo;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -52,5 +54,14 @@ public interface AsyncTaskLogService {
      * @return 未处理的异步任务
      */
     List<AsyncTasksEntity> fetchUnCompletedTasks(int size);
+
+
+    /**
+     * 获取用户的异步任务
+     *
+     * @param userName 用户信息
+     * @return 异步任务
+     */
+    List<AsyncTaskVo> fetchAllTasks(String userName);
 
 }

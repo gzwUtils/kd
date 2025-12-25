@@ -37,4 +37,13 @@ public interface AsyncTasksLogMapper {
      */
 
     List<AsyncTasksEntity> selectAll(int status,int size);
+
+
+    /**
+     * 获取用户的异步任务
+     *
+     * @param creator 用户信息
+     * @return 异步任务
+     */
+    List<AsyncTasksEntity> fetchAllTasks(String creator);
 }

@@ -14,15 +14,15 @@ public interface LogService  {
     /**
      * 日志导出
      * @param time time
-     * @return
+     * @return res
      */
-    public ExportFileMeta export(LocalDateTime time );
+    ExportFileMeta export(LocalDateTime time);
 
 
     /**
      * 获取操作记录
-     * @param name
-     * @return
+     * @param name req
+     * @return res
      */
     List<Log> getAllOperation(String name);
 }

@@ -25,4 +25,14 @@ public enum AsyncTaskStatusEnum{
         this.code = code;
         this.desc = desc;
     }
+
+
+    public static String getByCode(Integer code) {
+        for (AsyncTaskStatusEnum value : values()) {
+            if (value.getCode() == code) {
+                return value.getDesc();
+            }
+        }
+        return null;
+    }
 }

@@ -29,13 +29,14 @@ public enum ResultCodeEnum {
     HTTP_TIMESTAMP_NULL(false,20009,"http 请求时间戳为空"),
     HTTP_TIMESTAMP_EXPIRE(false,20010,"http 请求时间已失效"),
     HTTP_SIGN_ERROR(false,20011,"http 请求签名异常"),
-    NoHandler_Found(false,20012,"路径不存在，请检查路径是否正确"),
-    DuplicateKey(false,20013,"已存在该记录"),
+    NO_HANDLER_FOUND(false,20012,"路径不存在，请检查路径是否正确"),
+    DUPLICATE_KEY(false,20013,"已存在该记录"),
     USER_STOP(false,20014,"用户被禁用 请联系管理员"),
     FILE_NOT_EXIST(false,20015,"文件不存在"),
     SIGN_ERROR(false,20016,"加密签名异常"),
     ID_GENERATOR_ERROR(false,20017,"id generator error"),
-    Failed(false, 20018,"服务繁忙（1），请稍后重试"),
+    FAIL(false, 20018,"服务繁忙（1），请稍后重试"),
+    EXPORT_FILE_ERROR(false,20019,"导出文件异常"),
 
 
     /**

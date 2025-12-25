@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>异步导出记录查询</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
+    <style>
+        :root {
+            --primary-color: #4a6bff;
+            --success-color: #06d6a0;
+            --warning-color: #ffd166;
+            --danger-color: #ef476f;
+            --info-color: #118ab2;
+            --light-bg: #f8f9fa;
+            --border-color: #dee2e6;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fb;
+            color: #333;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+        
+        .header-container {
+            background: linear-gradient(135deg, var(--primary-color), #6a8cff);
+            color: white;
+            border-radius: 12px;
+            padding: 24px 30px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .header-container h1 {
+            font-weight: 600;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .header-container p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        .card-custom {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 24px;
+            overflow: hidden;
+        }
+        
+        .card-custom .card-header {
+            background-color: white;
+            border-bottom: 1px solid var(--border-color);
+            font-weight: 600;
+            padding: 18px 24px;
+            font-size: 18px;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            border-radius: 0 0 12px 12px;
+        }
+        
+        .table-custom {
+            margin-bottom: 0;
+        }
+        
+        .table-custom thead th {
+            background-color: #f8fafc;
+            border-bottom-width: 1px;
+            font-weight: 600;
+            color: #495057;
+            padding: 16px 12px;
+            white-space: nowrap;
+        }
+        
+        .table-custom tbody td {
+            padding: 16px 12px;
+            vertical-align: middle;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .table-custom tbody tr:hover {
+            background-color: rgba(74, 107, 255, 0.04);
+        }
+        
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .status-0 {
+            background-color: #e9ecef;
+            color: #6c757d;
+        }
+        
+        .status-1 {
+            background-color: rgba(255, 209, 102, 0.15);
+            color: #e6a700;
+        }
+        
+        .status-2 {
+            background-color: rgba(6, 214, 160, 0.15);
+            color: #06a178;
+        }
+        
+        .status-3 {
+            background-color: rgba(239, 71, 111, 0.15);
+            color: #d4335e;
+        }
+        
+        .task-id {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .action-btn {
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .action-btn.view {
+            background-color: rgba(74, 107, 255, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filter-container {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .filter-title {
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #495057;
+            font-size: 18px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .empty-state i {
+            font-size: 64px;
+            color: #ced4da;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h4 {
+            color: #6c757d;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .empty-state p {
+            color: #adb5bd;
+            max-width: 400px;
+            margin: 0 auto 24px;
+        }
+
+        .error-detail {
+            background-color: #fff5f5;
+            border-left: 4px solid var(--danger-color);
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .error-detail.show {
+            display: block;
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 10px;
+            margin-top: 8px;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #6a8cff);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(74, 107, 255, 0.2);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .alert-custom {
+            border-radius: 10px;
+            border: none;
+            box-shadow: var(--card-shadow);
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 20px;
+                text-align: center;
+            }
+
+            .filter-container .row > div {
+                margin-bottom: 12px;
+            }
+
+            .table-custom thead {
+                display: none;
+            }
+
+            .table-custom tbody tr {
+                display: block;
+                margin-bottom: 20px;
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                padding: 16px;
+            }
+
+            .table-custom tbody td {
+                display: flex;
+                justify-content: space-between;
+                padding: 12px 0;
+                border: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .table-custom tbody td:last-child {
+                border-bottom: none;
+            }
+
+            .table-custom tbody td::before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: #495057;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 页面标题 -->
+    <div class="header-container">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1><i class="fas fa-tasks me-2"></i>异步导出记录查询</h1>
+                <p>查看和管理您的异步导出任务记录</p>
+            </div>
+            <div>
+                <button class="btn btn-light" onclick="loadTasks()">
+                    <i class="fas fa-sync-alt me-1"></i>刷新数据
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 筛选条件 -->
+    <div class="filter-container">
+        <div class="filter-title">
+            <i class="fas fa-filter me-2"></i>筛选条件
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-3">
+                <label class="form-label">任务状态</label>
+                <select class="form-select" id="statusFilter">
+                    <option value="">全部状态</option>
+                    <option value="0">未处理</option>
+                    <option value="1">处理中</option>
+                    <option value="2">处理完成</option>
+                    <option value="3">处理失败</option>
+                </select>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <label class="form-label">任务类型</label>
+                <select class="form-select" id="typeFilter">
+                    <option value="">全部类型</option>
+                    <option value="0">全量导出</option>
+                    <option value="1">条件导出</option>
+                </select>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <label class="form-label">创建者</label>
+                <input type="text" class="form-control" id="creatorFilter" placeholder="输入创建者账号">
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3 d-flex align-items-end">
+                <button class="btn btn-primary w-100" onclick="applyFilters()">
+                    <i class="fas fa-search me-1"></i>搜索
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载指示器 -->
+    <div class="loading-spinner" id="loadingSpinner">
+        <div class="spinner"></div>
+        <p>正在加载任务数据...</p>
+    </div>
+
+    <!-- 错误提示 -->
+    <div class="alert alert-danger alert-custom" id="errorAlert" style="display: none;">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        <span id="errorMessage"></span>
+    </div>
+
+    <!-- 任务列表 -->
+    <div class="card card-custom" id="taskListCard" style="display: none;">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <span><i class="fas fa-list me-2"></i>导出任务列表</span>
+            <span class="badge bg-primary" id="taskCount">0 个任务</span>
+        </div>
+        <div class="table-container">
+            <table class="table table-custom">
+                <thead>
+                <tr>
+                    <th>任务ID</th>
+                    <th>任务类型</th>
+                    <th>状态</th>
+                    <th>创建者</th>
+                    <th>创建时间</th>
+                    <th>更新时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody id="taskTableBody">
+                <!-- 数据将通过JavaScript动态加载 -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 空状态 -->
+    <div id="emptyState" class="empty-state" style="display: none;">
+        <i class="fas fa-clipboard-list"></i>
+        <h4>暂无导出任务记录</h4>
+        <p>当前没有找到符合条件的异步导出任务记录，您可以尝试调整筛选条件。</p>
+        <button class="btn btn-primary" onclick="resetFilters()">
+            <i class="fas fa-redo me-1"></i>重置筛选条件
+        </button>
+    </div>
+</div>
+
+<!-- 任务详情模态框 -->
+<div class="modal fade" id="taskDetailModal" tabindex="-1" aria-labelledby="taskDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="taskDetailModalLabel">任务详情</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>任务ID:</strong> <span id="detailId"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>创建者:</strong> <span id="detailCreator"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>任务类型:</strong> <span id="detailType"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>当前状态:</strong> <span id="detailStatus"></span>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>创建时间:</strong> <span id="detailCreateTime"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <strong>更新时间:</strong> <span id="detailUpdateTime"></span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <strong>任务参数:</strong>
+                    <div class="mt-2 p-3 bg-light rounded" id="detailParams"></div>
+                </div>
+                <div class="mb-3">
+                    <strong>错误信息:</strong>
+                    <div class="mt-2 p-3 bg-light rounded" id="detailErrorMsg">无</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script>
+    // 状态映射
+    const statusMap = {
+        "0": { text: "未处理", class: "status-0" },
+        "1": { text: "处理中", class: "status-1" },
+        "2": { text: "已完成", class: "status-2" },
+        "3": { text: "失败", class: "status-3" }
+    };
+
+    // 类型映射
+    const typeMap = {
+        "0": "全量导出",
+        "1": "条件导出"
+    };
+
+    // 当前展示的数据
+    let currentData = [];
+
+    // 初始化页面
+    document.addEventListener('DOMContentLoaded', function() {
+        loadTasks();
+        setupMobileView();
+    });
+
+    // 加载任务数据
+    function loadTasks() {
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const errorAlert = document.getElementById('errorAlert');
+        const taskListCard = document.getElementById('taskListCard');
+        const emptyState = document.getElementById('emptyState');
+
+        // 显示加载状态
+        loadingSpinner.style.display = 'block';
+        errorAlert.style.display = 'none';
+        taskListCard.style.display = 'none';
+        emptyState.style.display = 'none';
+
+        // 调用后端接口
+        axios.post('/pc/asyncExportRecordQuery')
+            .then(response => {
+                loadingSpinner.style.display = 'none';
+
+                // 检查响应结构
+                if (response.data && response.data.code === 20000) {
+                    const data = response.data.data;
+
+                    // 检查数据格式
+                    if (data && data.asyncTasksEntities && Array.isArray(data.asyncTasksEntities)) {
+                        currentData = data.asyncTasksEntities;
+                        renderTable(currentData);
+                    } else {
+                        showError('返回数据格式不正确，请检查接口响应');
+                        showEmptyState();
+                    }
+                } else {
+                    const errorMsg = response.data.message || '未知错误';
+                    showError('请求失败: ' + errorMsg);
+                    showEmptyState();
+                }
+            })
+            .catch(error => {
+                loadingSpinner.style.display = 'none';
+
+                if (error.response) {
+                    // 服务器返回了错误状态码
+                    const status = error.response.status;
+                    const message = error.response.data.message || '未知错误';
+                    showError('服务器错误: ' + status + ' - ' + message);
+                } else if (error.request) {
+                    // 请求发送了但没有收到响应
+                    showError('网络错误: 无法连接到服务器');
+                } else {
+                    // 请求配置出错
+                    showError('请求配置错误: ' + error.message);
+                }
+
+                showEmptyState();
+            });
+    }
+
+    // 显示错误信息
+    function showError(message) {
+        const errorAlert = document.getElementById('errorAlert');
+        const errorMessage = document.getElementById('errorMessage');
+
+        errorMessage.textContent = message;
+        errorAlert.style.display = 'block';
+
+        // 5秒后自动隐藏错误提示
+        setTimeout(() => {
+            errorAlert.style.display = 'none';
+        }, 5000);
+    }
+
+    // 显示空状态
+    function showEmptyState() {
+        const emptyState = document.getElementById('emptyState');
+        emptyState.style.display = 'block';
+    }
+
+    // 渲染表格
+    function renderTable(data) {
+        const tableBody = document.getElementById('taskTableBody');
+        const emptyState = document.getElementById('emptyState');
+        const taskListCard = document.getElementById('taskListCard');
+        const taskCount = document.getElementById('taskCount');
+
+        // 更新任务数量
+        taskCount.textContent = data.length + ' 个任务';
+
+        if (data.length === 0) {
+            tableBody.innerHTML = '';
+            emptyState.style.display = 'block';
+            taskListCard.style.display = 'none';
+            return;
+        }
+
+        emptyState.style.display = 'none';
+        taskListCard.style.display = 'block';
+
+        let tableHTML = '';
+
+        data.forEach(task => {
+            const status = statusMap[task.status] || { text: "未知状态", class: "status-0" };
+            const type = typeMap[task.type] || "未知类型";
+            const createTime = formatDateTime(task.createTime);
+            const updateTime = formatDateTime(task.updateTime);
+
+            tableHTML += '<tr>' +
+                '<td data-label="任务ID">' +
+                    '<span class="task-id">' + task.id + '</span>' +
+                '</td>' +
+                '<td data-label="任务类型">' + type + '</td>' +
+                '<td data-label="状态">' +
+                    '<span class="status-badge ' + status.class + '">' + status.text + '</span>' +
+                    (task.status === "1" ? '<div class="progress-container"><div class="progress-bar" style="width: 65%"></div></div>' : '') +
+                    (task.status === "3" && task.errorMsg ? '<div class="error-detail" id="error-' + task.id + '">' + task.errorMsg + '</div>' : '') +
+                '</td>' +
+                '<td data-label="创建者">' + task.creator + '</td>' +
+                '<td data-label="创建时间">' + createTime + '</td>' +
+                '<td data-label="更新时间">' + updateTime + '</td>' +
+                '<td data-label="操作">' +
+                    '<div class="d-flex flex-wrap gap-2">' +
+                        '<button class="action-btn view" onclick="viewTaskDetail(' + task.id + ')">' +
+                            '<i class="fas fa-eye me-1"></i>详情' +
+                        '</button>' +
+                    '</div>' +
+                '</td>' +
+            '</tr>';
+        });
+
+        tableBody.innerHTML = tableHTML;
+
+        // 为错误状态添加点击显示详情功能
+        data.filter(task => task.status === "3" && task.errorMsg).forEach(task => {
+            const row = document.querySelector('tr:has(.task-id:contains("' + task.id + '"))');
+            if (row) {
+                const statusCell = row.querySelector('td:nth-child(3)');
+                const statusBadge = statusCell.querySelector('.status-badge');
+                statusBadge.style.cursor = 'pointer';
+                statusBadge.onclick = function() {
+                    const errorDetail = document.getElementById('error-' + task.id);
+                    if (errorDetail) {
+                        errorDetail.classList.toggle('show');
+                    }
+                };
+            }
+        });
+    }
+
+    // 查看任务详情
+    function viewTaskDetail(taskId) {
+        const task = currentData.find(t => t.id === taskId);
+        if (!task) return;
+
+        const status = statusMap[task.status] || { text: "未知状态", class: "status-0" };
+        const type = typeMap[task.type] || "未知类型";
+
+        document.getElementById('detailId').textContent = task.id;
+        document.getElementById('detailType').textContent = type;
+        document.getElementById('detailStatus').innerHTML = '<span class="status-badge ' + status.class + '">' + status.text + '</span>';
+        document.getElementById('detailCreator').textContent = task.creator;
+        document.getElementById('detailCreateTime').textContent = formatDateTime(task.createTime);
+        document.getElementById('detailUpdateTime').textContent = formatDateTime(task.updateTime);
+
+        // 格式化参数显示
+        let paramsContent = task.params;
+        try {
+            const paramsObj = JSON.parse(task.params);
+            paramsContent = JSON.stringify(paramsObj, null, 2);
+        } catch (e) {
+            // 如果不是JSON，保持原样显示
+        }
+        document.getElementById('detailParams').textContent = paramsContent;
+
+        // 错误信息
+        document.getElementById('detailErrorMsg').textContent = task.errorMsg || '无';
+
+        // 显示模态框
+        const modal = new bootstrap.Modal(document.getElementById('taskDetailModal'));
+        modal.show();
+    }
+
+    // 应用筛选条件
+    function applyFilters() {
+        const statusFilter = document.getElementById('statusFilter').value;
+        const typeFilter = document.getElementById('typeFilter').value;
+        const creatorFilter = document.getElementById('creatorFilter').value.toLowerCase();
+
+        let filteredData = currentData;
+
+        // 如果没有数据，先加载
+        if (filteredData.length === 0) {
+            loadTasks();
+            return;
+        }
+
+        if (statusFilter) {
+            filteredData = filteredData.filter(task => task.status === statusFilter);
+        }
+
+        if (typeFilter) {
+            filteredData = filteredData.filter(task => task.type === typeFilter);
+        }
+
+        if (creatorFilter) {
+            filteredData = filteredData.filter(task =>
+                task.creator && task.creator.toLowerCase().includes(creatorFilter)
+            );
+        }
+
+        renderTable(filteredData);
+    }
+
+    // 重置筛选条件
+    function resetFilters() {
+        document.getElementById('statusFilter').value = '';
+        document.getElementById('typeFilter').value = '';
+        document.getElementById('creatorFilter').value = '';
+        renderTable(currentData);
+    }
+
+    // 格式化日期时间
+    function formatDateTime(dateTimeStr) {
+        if (!dateTimeStr) return '未知时间';
+
+        try {
+            const date = new Date(dateTimeStr);
+            if (isNaN(date.getTime())) {
+                return dateTimeStr; // 如果不是有效日期，返回原始字符串
+            }
+
+            return date.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+        } catch (e) {
+            return dateTimeStr;
+        }
+    }
+
+    // 设置移动端视图
+    function setupMobileView() {
+        // 为移动端添加表头标签
+        const tableHeaders = document.querySelectorAll('.table-custom thead th');
+        const tableCells = document.querySelectorAll('.table-custom tbody td');
+
+        if (window.innerWidth <= 768 && tableHeaders.length > 0) {
+            tableCells.forEach((cell, index) => {
+                const headerIndex = index % tableHeaders.length;
+                const headerText = tableHeaders[headerIndex].textContent;
+                cell.setAttribute('data-label', headerText);
+            });
+        }
+    }
+
+    // 窗口大小变化时重新设置移动端视图
+    window.addEventListener('resize', setupMobileView);
+</script>
+</body>
+</html>

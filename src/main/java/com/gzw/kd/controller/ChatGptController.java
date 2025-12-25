@@ -7,7 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
-import javax.annotation.Resource;
+import lombok.AllArgsConstructor;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Recover;
 import org.springframework.retry.annotation.Retryable;
@@ -24,10 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "gpt")
 @RestController
 @RequestMapping("/chatGpt")
+@AllArgsConstructor
 public class ChatGptController {
 
-    @Resource
-    private ChartGptService chartGptService;
+
+    private final ChartGptService chartGptService;
 
     /**
      * openAI GPT-3
@@ -47,6 +48,6 @@ public class ChatGptController {
     @SuppressWarnings("unused")
     @Recover
     public R fallback() {
-        return R.setResult(ResultCodeEnum.Failed);
+        return R.setResult(ResultCodeEnum.FAIL);
     }
 }

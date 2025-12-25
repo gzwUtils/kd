@@ -2,17 +2,47 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.gzw.kd.mapper.LogMapper" >
 
-  <select id="getLogInfo"   resultType="com.gzw.kd.vo.output.LogExportOutput">
-      SELECT id, username, operation,  create_time createTime,ip,location,`desc`, `result` FROM log
-      <if test="time!=null">
-          where create_time &lt; #{time}
-      </if>
-  </select>
-
 
     <select id="getAllOperation"   resultType="com.gzw.kd.common.entity.Log">
         SELECT id, username, operation,  create_time createTime,ip,location,`desc`, `result` FROM log
-         <if test="name!='admin'"> where username =#{name} </if>
+         <if test="name!='admin'">
+             where username =#{name}
+         </if>
+        order by create_time desc
+    </select>
+
+
+    <select id="getLogInfo"   resultType="com.gzw.kd.vo.output.LogExportOutput">
+        SELECT id, username, operation,  create_time createTime,ip,location,`desc`, `result` FROM log
+        <where>
+        <if test="idGte!=null">
+             id &gt;#{idGte}
+        </if>
+        <if test="idLte!=null">
+            and  id &lt;#{idLte}
+        </if>
+        <if test="createTimeStart!=null">
+            and  create_time &gt; #{createTimeStart}
+        </if>
+        <if test="createsTimeEnd!=null">
+            and create_time &lt; #{createsTimeEnd}
+        </if>
+        <if test="result!=null">
+            and result = #{result}
+        </if>
+        <if test="operation!=null">
+            and operation = #{operation}
+        </if>
+        <if test="location!=null">
+            and location = #{location}
+        </if>
+        <if test="ip!=null">
+            and ip = #{ip}
+        </if>
+       <if test="userName!=null">
+           and userName = #{userName}
+       </if>
+        </where>
         order by create_time desc
     </select>
 

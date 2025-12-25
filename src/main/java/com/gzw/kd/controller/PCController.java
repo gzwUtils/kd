@@ -28,6 +28,7 @@ import com.gzw.kd.scheduletask.ScheduleTask;
 import com.gzw.kd.service.*;
 import com.gzw.kd.vo.input.LogSearchInput;
 import com.gzw.kd.vo.input.OperatorLogInput;
+import com.gzw.kd.vo.output.AsyncTaskVo;
 import com.gzw.kd.vo.output.EsLogSearchIndex;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -219,6 +220,11 @@ public class PCController {
         return "/pc/phoneLogin";
     }
 
+    @RequestMapping(value = "/asyncTask",method = RequestMethod.GET)
+    public String asyncTask() {
+        return "/pc/asyncTask";
+    }
+
 
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
@@ -383,7 +389,7 @@ public class PCController {
                 if (dataUser.getStatus() == UserStatusEnum.STOP.getStatus()) {
                     return R.setResult(ResultCodeEnum.USER_STOP);
                 }
-                return R.setResult(ResultCodeEnum.DuplicateKey);
+                return R.setResult(ResultCodeEnum.DUPLICATE_KEY);
             }
             String upperCase = MD5Util.md5(user.getPassword()).toUpperCase();
             User admin = new User().setCreateTime(LocalDateTime.now()).setStatus(UserStatusEnum.START.getStatus()).setPassword(upperCase)
@@ -755,8 +761,22 @@ public class PCController {
 
 
     /**
+     * 异步导出记录查询
+     */
+    @OperatorLog(value = "异步导出记录查询",description = "异步导出记录查询")
+    @ResponseBody
+    @PostMapping("/asyncExportRecordQuery")
+    public R asyncExportRecordQuery(HttpServletRequest request) throws IOException {
+        Operator operator = (Operator) request.getSession().getAttribute(LOGIN_USER_SESSION_KEY);
+        List<AsyncTaskVo> asyncTasksEntities = asyncTaskLogService.fetchAllTasks(operator.getAccount());
+        return R.ok().data("asyncTasksEntities",asyncTasksEntities);
+    }
+
+
+    /**
      * 验证码发送
      */
+    @OperatorLog(value = "验证码发送",description = "验证码发送")
     @Resubmit
     @ResponseBody
     @PostMapping("/phoneCheck")
@@ -928,7 +948,8 @@ public class PCController {
     @PostMapping("/sendEmailMessage")
     @ResponseBody
     public R sendEmailMessage(@RequestParam("subject") String subject,@RequestParam("email") String email,@RequestParam("message") String  message) throws Exception {
-        MailUtil.getMailSend().sendEmail(subject,message,new String[]{email},false,"pc/email.html");
+        EmailContentModel build = new EmailContentModel().builder().content(message).title(subject).build();
+        MailUtil.getMailSend().sendEmail(build,new String[]{email},true,"pc/mail.html");
         return R.ok();
     }
 

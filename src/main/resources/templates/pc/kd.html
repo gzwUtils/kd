@@ -1,174 +1,917 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8"/>
-    <title>简易群聊/私聊/房间</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易聊天室</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body{display:flex;height:100vh;margin:0;font:14px/1.4 sans-serif;background:#f5f5f5;}
-        aside{width:200px;background:#2c3e50;color:#fff;display:flex;flex-direction:column;}
-        aside h3{margin:0;padding:10px;background:#34495e;font-size:14px;text-align:center;}
-        .panel{flex:1;overflow-y:auto;padding:4px 0;display:none;}
-        .panel.active{display:block;}
-        .panel li{padding:6px 10px;cursor:pointer;}
-        .panel li:hover{background:#34495e;}
-        .panel li.active{background:#1abc9c;}
-        section{flex:1;display:flex;flex-direction:column;background:#fff;}
-        header{padding:8px 10px;border-bottom:1px solid #ddd;font-size:16px;}
-        #chatBody{flex:1;padding:8px;overflow-y:auto;}
-        #msgInput{flex:1;padding:6px;border:1px solid #ccc;border-radius:3px;}
-        .chat-footer{display:flex;padding:6px;border-top:1px solid #ddd;gap:6px;}
-        button{padding:6px 12px;border:none;background:#1abc9c;color:#fff;border-radius:3px;cursor:pointer;}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        /* 防 Chrome 空数组预览 */
-        .panel:empty::before,
-        .panel li:only-child[style*="color:#999"]::before{
-            content:' ';
-            display:inline-block;
-            width:1px;
-            height:1px;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .chat-container {
+            width: 900px;
+            height: 85vh;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* 左侧用户列表 */
+        .sidebar {
+            width: 250px;
+            background: #f8f9fa;
+            border-right: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-header {
+            padding: 20px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .user-details h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .user-details .status {
+            font-size: 12px;
+            color: #28a745;
+        }
+
+        .chat-type-selector {
+            padding: 15px 20px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .chat-tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 8px 0;
+            border: none;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #495057;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .user-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+        }
+
+        .user-list-title {
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .user-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-bottom: 5px;
+        }
+
+        .user-item:hover {
+            background: #e9ecef;
+        }
+
+        .user-item.active {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 3px solid #667eea;
+        }
+
+        .user-item .avatar {
+            width: 36px;
+            height: 36px;
+            font-size: 16px;
+        }
+
+        .user-item .user-name {
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* 右侧聊天区域 */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 20px;
+            background: white;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-title {
+            font-size: 18px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            word-wrap: break-word;
+        }
+
+        .message.received {
+            background: white;
+            align-self: flex-start;
+            border-top-left-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .message.sent {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            align-self: flex-end;
+            border-top-right-radius: 5px;
+        }
+
+        .message.system {
+            align-self: center;
+            background: #e9ecef;
+            color: #6c757d;
+            font-size: 12px;
+            padding: 8px 16px;
+            border-radius: 12px;
+            max-width: 90%;
+            text-align: center;
+        }
+
+        .message-time {
+            font-size: 11px;
+            color: #adb5bd;
+            margin-top: 4px;
+            text-align: right;
+        }
+
+        .message.sent .message-time {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .message-sender {
+            font-size: 12px;
+            color: #6c757d;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .message-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #dee2e6;
+            border-radius: 12px;
+            font-size: 14px;
+            resize: none;
+            height: 44px;
+            line-height: 20px;
+            font-family: inherit;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .send-btn {
+            padding: 0 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .send-btn:active {
+            transform: translateY(0);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #6c757d;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .empty-state h4 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .chat-container {
+                width: 95%;
+                height: 95vh;
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                height: 40%;
+            }
+
+            .chat-area {
+                height: 60%;
+            }
+        }
+
+        /* 连接状态指示器 */
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .status-connected {
+            background: #28a745;
+            color: white;
+        }
+
+        .status-disconnected {
+            background: #dc3545;
+            color: white;
+        }
+
+        .status-connecting {
+            background: #ffc107;
+            color: #212529;
         }
     </style>
 </head>
 <body>
+<!-- 连接状态指示器 -->
+<div id="connectionStatus" class="connection-status status-disconnected" style="display: none;">
+    <i class="fas fa-circle"></i>
+    <span>连接中...</span>
+</div>
 
-<aside>
-    <h3>模式</h3>
-    <div class="panel active" id="panelGroup">
-        <li class="active" onclick="switchTarget('group','群聊')">群聊</li>
-    </div>
-    <div class="panel" id="panelPrivate">
-        
-    </div>
-    <div class="panel" id="panelRoom"></div>
-    <div style="border-top:1px solid #34495e;padding:6px;display:flex;gap:4px;">
-        <button onclick="createRoom()">新建房间</button>
-        <button onclick="joinRoom()">加入房间</button>
-    </div>
-</aside>
+<div class="chat-container">
+    <!-- 左侧用户列表 -->
+    <div class="sidebar">
+        <div class="user-header">
+            <div class="user-info">
+                <div class="avatar" id="userAvatar"></div>
+                <div class="user-details">
+                    <h3 id="userName">用户</h3>
+                    <div class="status">离线</div>
+                </div>
+            </div>
+        </div>
 
-<section>
-    <header id="chatTitle">群聊</header>
-    <div id="chatBody"></div>
-    <div class="chat-footer">
-        <input id="msgInput" placeholder="输入消息，回车发送"/>
-        <button onclick="sendMsg()">发送</button>
+        <div class="chat-type-selector">
+            <div class="chat-tabs">
+                <button class="tab-btn active" onclick="switchChatType('group')">群聊</button>
+                <button class="tab-btn" onclick="switchChatType('private')">私聊</button>
+            </div>
+        </div>
+
+        <div class="user-list">
+            <div class="user-list-title" id="userListTitle">在线用户 (0)</div>
+            <div id="userList">
+                <div class="empty-state">
+                    <p>等待连接...</p>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
+
+    <!-- 右侧聊天区域 -->
+    <div class="chat-area">
+        <div class="chat-header">
+            <div class="avatar" id="chatAvatar">群</div>
+            <div class="chat-title" id="chatTitle">群聊</div>
+        </div>
+
+        <div class="chat-body" id="chatBody">
+            <div class="empty-state" id="emptyChatState">
+                <i class="fas fa-comments"></i>
+                <h4>欢迎来到聊天室</h4>
+                <p>选择左侧的用户开始聊天，或直接在群聊中发言</p>
+            </div>
+            <div class="message-container" id="messageContainer" style="display: none;"></div>
+        </div>
+
+        <div class="message-input-container">
+            <div class="input-group">
+                    <textarea
+                            class="message-input"
+                            id="messageInput"
+                            placeholder="输入消息..."
+                            rows="1"
+                            onkeydown="handleKeyDown(event)"
+                            disabled
+                    ></textarea>
+                <button class="send-btn" onclick="sendMessage()" disabled>发送</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
-    /* ---------- 工具 ---------- */
-    const $   = id => document.getElementById(id);
-    const uuid= () => 'u_' + Math.random().toString(36).slice(2);
+    // 配置
+    var WS_HOST = window.location.hostname;
+    var WS_PORT = window.location.port || '8092';
+    var WS_PATH = '/websocket/';
 
-    /* ---------- 初始化 ---------- */
-    const uid = '${Session["user_key"].account}' + ':' + uuid();
-    localStorage.setItem('chat-uid', uid);
+    // 状态管理
+    var currentUser = null;
+    var currentChatType = 'group';
+    var currentTarget = 'group';
+    var ws = null;
+    var userList = [];
 
-    const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const ws       = new WebSocket(`${protocol}//127.0.0.1:8092/websocket/`+uid);
+    // 连接状态
+    var connectionState = 'disconnected';
 
-    let target    = 'group';
-    let activeTab = 'group';
+    // 初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        // 从session获取当前登录账户
+        // 注意：这里需要根据您的实际情况获取用户信息
+        // 假设用户信息已经在session中，通过服务器端渲染传递到前端
+        var userAccount = getCurrentUserAccount();
 
-    const panels  = {
-        group  : $('panelGroup'),
-        private: $('panelPrivate'),
-        room   : $('panelRoom')
-    };
+        if (!userAccount) {
+            alert('请先登录');
+            window.location.href = '/login'; // 跳转到登录页面
+            return;
+        }
 
-    /* ---------- 消息入口 ---------- */
-    ws.onmessage = e => {
-        const obj = JSON.parse(e.data);
+        // 生成唯一标识符
+        var uniqueId = generateUniqueId();
+        var userId = userAccount + ':' + uniqueId;
 
-        if (obj.type === 'userList') {
-            const arr = obj.list || [];
-            panels.group.innerHTML   = '<li class="active" onclick="switchTarget(\'group\',\'群聊\')">群聊</li>';
-            panels.private.innerHTML = '';
-            panels.room.innerHTML    = '';
-            if (arr.length === 0) {
-                panels.private.innerHTML = '<li style="color:#999;cursor:default">暂无其他用户</li>';
-                panels.room.innerHTML    = '<li style="color:#999;cursor:default">暂无房间</li>';
-            } else {
-                arr.forEach(u => {
-                    if (u.uid.startsWith('room_')) {
-                        panels.room.innerHTML += `<li onclick="switchTarget('${u.uid}','${u.name}')">${u.name}</li>`;
-                    } else if (u.uid !== 'group') {
-                        panels.private.innerHTML += `<li onclick="switchTarget('${u.uid}','${u.name}')">${u.name}</li>`;
+        currentUser = {
+            id: userId,
+            name: userAccount,
+            account: userAccount
+        };
+
+        // 更新UI显示
+        document.getElementById('userName').textContent = currentUser.name;
+        document.getElementById('userAvatar').textContent = getInitials(currentUser.name);
+
+        // 连接WebSocket
+        connectWebSocket();
+
+        // 初始化事件监听
+        initEventListeners();
+
+        // 显示连接状态
+        updateConnectionStatus('connecting');
+    });
+
+    // 获取当前用户账户（需要根据实际情况实现）
+    function getCurrentUserAccount() {
+        // 方法1: 从隐藏字段获取（服务器端渲染）
+        var accountElement = document.getElementById('currentUserAccount');
+        if (accountElement && accountElement.value) {
+            return accountElement.value;
+        }
+
+        // 方法2: 从localStorage获取
+        var storedAccount = localStorage.getItem('userAccount');
+        if (storedAccount) {
+            return storedAccount;
+        }
+
+        // 方法3: 如果以上都没有，返回默认值（仅用于演示）
+        // 实际项目中应该要求用户登录
+        return '用户' + Math.floor(Math.random() * 1000);
+    }
+
+    // 生成唯一标识符
+    function generateUniqueId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+    }
+
+    // 获取用户名称首字母
+    function getInitials(name) {
+        if (!name || name.length === 0) return 'U';
+        return name.charAt(0).toUpperCase();
+    }
+
+    // 更新连接状态显示
+    function updateConnectionStatus(state) {
+        connectionState = state;
+        var statusElement = document.getElementById('connectionStatus');
+        var statusText = '';
+        var statusClass = '';
+
+        switch(state) {
+            case 'connected':
+                statusText = '已连接';
+                statusClass = 'status-connected';
+                break;
+            case 'connecting':
+                statusText = '连接中...';
+                statusClass = 'status-connecting';
+                break;
+            case 'disconnected':
+                statusText = '已断开';
+                statusClass = 'status-disconnected';
+                break;
+        }
+
+        statusElement.innerHTML = '<i class="fas fa-circle"></i><span>' + statusText + '</span>';
+        statusElement.className = 'connection-status ' + statusClass;
+        statusElement.style.display = 'block';
+    }
+
+    // 连接WebSocket
+    function connectWebSocket() {
+        try {
+            // 构建WebSocket URL
+            var protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            var wsUrl = protocol + '//' + WS_HOST + ':' + WS_PORT + WS_PATH + currentUser.id;
+
+            console.log('正在连接WebSocket: ' + wsUrl);
+            ws = new WebSocket(wsUrl);
+
+            ws.onopen = function() {
+                console.log('WebSocket连接已建立');
+                updateConnectionStatus('connected');
+                addSystemMessage('已连接到聊天服务器');
+
+                // 启用输入框和发送按钮
+                document.getElementById('messageInput').disabled = false;
+                document.querySelector('.send-btn').disabled = false;
+
+                // 更新用户状态显示
+                document.querySelector('.user-details .status').textContent = '在线';
+                document.querySelector('.user-details .status').style.color = '#28a745';
+            };
+
+            ws.onmessage = function(event) {
+                handleWebSocketMessage(event.data);
+            };
+
+            ws.onclose = function(event) {
+                console.log('WebSocket连接已关闭，代码:', event.code, '原因:', event.reason);
+                updateConnectionStatus('disconnected');
+                addSystemMessage('连接已断开');
+
+                // 禁用输入框和发送按钮
+                document.getElementById('messageInput').disabled = true;
+                document.querySelector('.send-btn').disabled = true;
+
+                // 更新用户状态显示
+                document.querySelector('.user-details .status').textContent = '离线';
+                document.querySelector('.user-details .status').style.color = '#dc3545';
+
+                // 3秒后尝试重连
+                setTimeout(function() {
+                    if (connectionState !== 'connected') {
+                        updateConnectionStatus('connecting');
+                        connectWebSocket();
                     }
-                });
+                }, 3000);
+            };
+
+            ws.onerror = function(error) {
+                console.error('WebSocket错误:', error);
+                updateConnectionStatus('disconnected');
+                addSystemMessage('连接错误');
+            };
+        } catch (error) {
+            console.error('连接WebSocket失败:', error);
+            updateConnectionStatus('disconnected');
+            addSystemMessage('连接失败，请检查服务器地址');
+        }
+    }
+
+    // 处理WebSocket消息
+    function handleWebSocketMessage(data) {
+        try {
+            var message = JSON.parse(data);
+
+            switch(message.type) {
+                case 'selfInfo':
+                    // 自己的信息
+                    currentUser.name = message.content || currentUser.name;
+                    document.getElementById('userName').textContent = currentUser.name;
+                    document.getElementById('userAvatar').textContent = getInitials(currentUser.name);
+                    break;
+
+                case 'userList':
+                    // 更新用户列表
+                    updateUserList(message.list || []);
+                    break;
+
+                case 'group':
+                case 'private':
+                case 'room':
+                    // 聊天消息
+                    addMessage({
+                        from: message.from,
+                        content: message.content,
+                        time: message.time,
+                        type: message.type === 'group' || message.type === 'room' ? 'received' :
+                              (message.to === currentUser.id ? 'received' : 'sent')
+                    });
+                    break;
+
+                case 'sys':
+                    // 系统消息
+                    addSystemMessage(message.content);
+                    break;
+
+                case 'error':
+                    // 错误消息
+                    addSystemMessage('错误: ' + message.content);
+                    break;
+
+                default:
+                    console.log('未知消息类型:', message.type);
+            }
+        } catch (error) {
+            console.error('解析消息失败:', error, data);
+        }
+    }
+
+    // 更新用户列表
+    function updateUserList(users) {
+        userList = users;
+        var userListElement = document.getElementById('userList');
+        var userListTitle = document.getElementById('userListTitle');
+
+        // 更新标题
+        var onlineCount = users.length;
+        userListTitle.textContent = '在线用户 (' + onlineCount + ')';
+
+        // 清空现有列表
+        userListElement.innerHTML = '';
+
+        if (users.length === 0) {
+            userListElement.innerHTML = '<div class="empty-state"><p>暂无其他用户</p></div>';
+            return;
+        }
+
+        // 添加群聊选项
+        var groupItem = document.createElement('div');
+        groupItem.className = 'user-item' + (currentTarget === 'group' ? ' active' : '');
+        groupItem.innerHTML = '<div class="avatar" style="background: #4a6bff;">群</div><div class="user-name">群聊</div>';
+        groupItem.onclick = function() {
+            selectChatTarget('group', '群聊');
+        };
+        userListElement.appendChild(groupItem);
+
+        // 添加用户列表
+        for (var i = 0; i < users.length; i++) {
+            var user = users[i];
+            if (user.uid === currentUser.id) continue; // 跳过自己
+
+            // 过滤掉房间（根据您的后端代码，房间的uid以"room_"开头）
+            if (user.uid && user.uid.startsWith('room_')) continue;
+
+            var userItem = document.createElement('div');
+            userItem.className = 'user-item' + (currentTarget === user.uid ? ' active' : '');
+            userItem.innerHTML = '<div class="avatar" style="background: #' + generateColor(user.uid) + ';">' + getInitials(user.name) + '</div><div class="user-name">' + user.name + '</div>';
+            userItem.onclick = (function(uid, name) {
+                return function() {
+                    selectChatTarget(uid, name);
+                };
+            })(user.uid, user.name);
+            userListElement.appendChild(userItem);
+        }
+
+        // 如果没有其他用户（除了自己），显示提示
+        var hasOtherUsers = userListElement.children.length > 1; // 群聊+至少一个其他用户
+        if (!hasOtherUsers) {
+            userListElement.innerHTML += '<div class="empty-state" style="padding: 20px 0; font-size: 12px;"><p>暂无其他在线用户</p></div>';
+        }
+    }
+
+    // 生成颜色
+    function generateColor(str) {
+        if (!str) return '4a6bff';
+        var hash = 0;
+        for (var i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        var color = (hash & 0x00FFFFFF).toString(16).toUpperCase();
+        return '00000'.substring(0, 6 - color.length) + color;
+    }
+
+    // 切换聊天类型
+    function switchChatType(type) {
+        currentChatType = type;
+
+        // 更新标签按钮状态
+        var buttons = document.querySelectorAll('.tab-btn');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+        }
+        event.target.classList.add('active');
+    }
+
+    // 选择聊天目标
+    function selectChatTarget(targetId, targetName) {
+        currentTarget = targetId;
+
+        // 更新UI选中状态
+        var items = document.querySelectorAll('.user-item');
+        for (var i = 0; i < items.length; i++) {
+            items[i].classList.remove('active');
+        }
+        event.target.closest('.user-item').classList.add('active');
+
+        // 更新聊天标题
+        document.getElementById('chatTitle').textContent = targetName;
+        document.getElementById('chatAvatar').textContent = targetId === 'group' ? '群' : getInitials(targetName);
+
+        // 显示消息容器
+        document.getElementById('emptyChatState').style.display = 'none';
+        document.getElementById('messageContainer').style.display = 'block';
+
+        // 聚焦输入框
+        document.getElementById('messageInput').focus();
+    }
+
+    // 发送消息
+    function sendMessage() {
+        if (!ws || ws.readyState !== WebSocket.OPEN) {
+            addSystemMessage('连接未就绪，无法发送消息');
+            return;
+        }
+
+        var input = document.getElementById('messageInput');
+        var content = input.value.trim();
+
+        if (!content) {
+            return;
+        }
+
+        // 构建消息
+        var message = {
+            type: currentTarget === 'group' ? 'group' : 'private',
+            to: currentTarget === 'group' ? null : currentTarget,
+            content: content
+        };
+
+        // 发送消息
+        ws.send(JSON.stringify(message));
+
+        // 添加到聊天界面
+        if (currentTarget === 'group') {
+            // 群聊消息显示为自己发送的
+            addMessage({
+                from: '我',
+                content: content,
+                time: Date.now(),
+                type: 'sent'
+            });
+        }
+
+        // 清空输入框
+        input.value = '';
+        autoResizeTextarea(input);
+    }
+
+    // 添加消息到聊天界面
+    function addMessage(msg) {
+        var container = document.getElementById('messageContainer');
+
+        var messageElement = document.createElement('div');
+        var messageClass = 'message ' + (msg.type === 'sent' ? 'sent' : 'received');
+        messageElement.className = messageClass;
+
+        var time = new Date(msg.time).toLocaleTimeString('zh-CN', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        if (msg.type === 'sent') {
+            // 自己发送的消息
+            messageElement.innerHTML = '<div class="message-content">' + escapeHtml(msg.content) + '</div><div class="message-time">' + time + '</div>';
+        } else {
+            // 接收到的消息
+            messageElement.innerHTML = '<div class="message-sender">' + msg.from + '</div><div class="message-content">' + escapeHtml(msg.content) + '</div><div class="message-time">' + time + '</div>';
+        }
+
+        container.appendChild(messageElement);
+
+        // 滚动到底部
+        var chatBody = document.getElementById('chatBody');
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // 添加系统消息
+    function addSystemMessage(content) {
+        var container = document.getElementById('messageContainer');
+
+        var messageElement = document.createElement('div');
+        messageElement.className = 'message system';
+        messageElement.textContent = content;
+
+        container.appendChild(messageElement);
+
+        // 滚动到底部
+        var chatBody = document.getElementById('chatBody');
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    // 处理键盘事件
+    function handleKeyDown(event) {
+        if (event.key === 'Enter' && !event.shiftKey) {
+            event.preventDefault();
+            sendMessage();
+        }
+
+        // 自动调整文本框高度
+        autoResizeTextarea(event.target);
+    }
+
+    // 自动调整文本框高度
+    function autoResizeTextarea(textarea) {
+        textarea.style.height = 'auto';
+        var newHeight = Math.min(textarea.scrollHeight, 120);
+        textarea.style.height = newHeight + 'px';
+    }
+
+    // HTML转义
+    function escapeHtml(text) {
+        var div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // 初始化事件监听器
+    function initEventListeners() {
+        var textarea = document.getElementById('messageInput');
+        textarea.addEventListener('input', function() {
+            autoResizeTextarea(this);
+        });
+    }
+
+    // 手动重连
+    function reconnect() {
+        if (connectionState === 'connected') {
+            alert('已经连接了');
+            return;
+        }
+
+        updateConnectionStatus('connecting');
+        if (ws) {
+            try {
+                ws.close();
+            } catch (e) {
+                console.error('关闭连接时出错:', e);
             }
         }
 
-        if (['group', 'private', 'room'].includes(obj.type)) {
-            appendMsg(obj.from, obj.content, obj.time);
-        }
-        if (obj.type === 'sys') {
-            appendMsg('系统', obj.content, obj.time);
-        }
-        if (obj.type === 'selfRoom') {
-            appendMsg('系统', `已创建房间：${obj.content}`, Date.now());
-        }
-    };
-
-    ws.onclose = () => appendMsg('系统', '连接已断开', Date.now());
-    ws.onerror = e => console.error('ws error', e);
-
-    /* ---------- 发送 ---------- */
-    function sendMsg() {
-        if (ws.readyState !== WebSocket.OPEN) {
-            alert('WebSocket 未连接');
-            return;
-        }
-        const txt = $('msgInput').value.trim();
-        if (!txt) return;
-        const msg = {
-            type: activeTab === 'group' ? 'group' : activeTab === 'private' ? 'private' : 'room',
-            to: target,
-            content: txt
-        };
-        ws.send(JSON.stringify(msg));
-        appendMsg('我', txt, Date.now());
-        $('msgInput').value = '';
-    }
-    $('msgInput').addEventListener('keyup', e => { if (e.key === 'Enter') sendMsg(); });
-
-    /* ---------- 面板切换 ---------- */
-    function switchTarget(uid, name) {
-        target = uid;
-        $('chatTitle').textContent = name;
-        if (uid.startsWith('room_')) activeTab = 'room';
-        else if (uid === 'group') activeTab = 'group';
-        else activeTab = 'private';
-        document.querySelectorAll('li').forEach(li => li.classList.remove('active'));
-        if (event && event.target) event.target.classList.add('active');
+        setTimeout(connectWebSocket, 100);
     }
 
-    /* ---------- 房间 ---------- */
-    function createRoom() {
-        const name = prompt('房间名：');
-        if (name && ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ type: 'createRoom', content: name }));
-        }
-    }
-    function joinRoom() {
-        const rid = prompt('房间号（room_xxx）：');
-        if (rid && ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify({ type: 'joinRoom', to: rid }));
+    // 断开连接（测试用）
+    function disconnect() {
+        if (ws && ws.readyState === WebSocket.OPEN) {
+            ws.close();
         }
     }
 
-    /* ---------- 辅助 ---------- */
-    function appendMsg(from, content, time) {
-        const t = new Date(time).toLocaleTimeString();
-        $('chatBody').insertAdjacentHTML('beforeend',
-            `<div><b>[${t}] ${from}:</b> ${content}</div>`);
-        $('chatBody').scrollTop = $('chatBody').scrollHeight;
-    }
-
-    /* ---------- 面板标签切换 ---------- */
-    document.querySelectorAll('.panel').forEach(p =>
-        p.addEventListener('click', () => activeTab = p.id.replace('panel', '').toLowerCase())
-    );
+    // 导出函数供调试
+    window.reconnect = reconnect;
+    window.disconnect = disconnect;
 </script>
+
+<!-- 服务器端传递用户信息的隐藏字段（需要服务器端渲染） -->
+<input type="hidden" id="currentUserAccount" value="${Session['user_key'].account}" />
 </body>
 </html>

@@ -26,7 +26,7 @@ import java.util.Optional;
 public class FileInfoInit extends AbstractCache {
 
     private static final String DOWNLOAD_PATH_PREFIX = "download?path=";
-    private static final int FILENAME_PREFIX_LENGTH = 6;
+    private static final int FILENAME_PREFIX_LENGTH = 5;
 
     @Resource
     private Cache<String, Object> caffeineCache;
@@ -41,6 +41,7 @@ public class FileInfoInit extends AbstractCache {
             String fullPath = projectPath + baseDir + File.separator;
             List<FileOutput> fileList = new ArrayList<>();
             scanFiles(new File(fullPath), fileList);
+            fileList.sort((o1, o2) -> o2.getUploadTime().compareTo(o1.getUploadTime()));
             caffeineCache.put(Constants.UPLOAD_FILE, fileList);
             log.info("文件信息初始化成功，共加载 {} 个文件", fileList.size());
         } catch (Exception e) {
@@ -92,7 +93,7 @@ public class FileInfoInit extends AbstractCache {
                     .orElse("unknown");
 
             FileOutput output = new FileOutput()
-                    .setAttachName(name.substring(FILENAME_PREFIX_LENGTH))
+                    .setAttachName(name.substring(FILENAME_PREFIX_LENGTH+1))
                     .setAttachSize(String.valueOf(file.length()))
                     .setUploadTime(parentName + " " + name.substring(0, FILENAME_PREFIX_LENGTH))
                     .setAttachUrl(DOWNLOAD_PATH_PREFIX + parentName + "@" + name);

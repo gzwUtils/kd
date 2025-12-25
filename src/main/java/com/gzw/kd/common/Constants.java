@@ -574,7 +574,19 @@ public interface Constants {
 
     public final static String XLSX_EXPORT_FILE_SUFFIX=".xlsx";
 
-    public final static String XLSX_DOWNLOAD_CONTENT_TYPE="application/vnd.ms-excel";
+    public final static String XLS_EXPORT_FILE_SUFFIX=".xls";
+
+    /**
+     * xlsx导出文件下载的content-type
+     */
+    public final static String XLSX_DOWNLOAD_CONTENT_TYPE="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+
+    /**
+     * xls导出文件下载的content-type
+     */
+    public final static String XLS_DOWNLOAD_CONTENT_TYPE = "application/vnd.ms-excel";
+
 
     public final static String DOWNLOAD_FILE_PREFIX="kd";
     /**

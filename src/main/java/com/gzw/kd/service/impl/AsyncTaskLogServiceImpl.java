@@ -1,5 +1,6 @@
 package com.gzw.kd.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.alibaba.fastjson2.JSON;
 import com.gzw.kd.common.entity.AsyncTasksEntity;
@@ -10,12 +11,14 @@ import com.gzw.kd.common.utils.ContextUtil;
 import com.gzw.kd.export.AsyncTaskLogService;
 import com.gzw.kd.mapper.AsyncTasksLogMapper;
 import com.gzw.kd.vo.output.AsyncTaskOutput;
+import com.gzw.kd.vo.output.AsyncTaskVo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import static cn.hutool.core.date.DatePattern.PURE_DATETIME_PATTERN;
 import static com.gzw.kd.common.Constants.*;
@@ -88,5 +91,18 @@ public class AsyncTaskLogServiceImpl implements AsyncTaskLogService {
     @Override
     public List<AsyncTasksEntity> fetchUnCompletedTasks(int size) {
         return asyncTasksLogMapper.selectAll(AsyncTaskStatusEnum.UNTREATED.getCode(),size);
+    }
+
+    @Override
+    public List<AsyncTaskVo> fetchAllTasks(String userName) {
+        List<AsyncTasksEntity> asyncTasksEntities = asyncTasksLogMapper.fetchAllTasks(userName);
+        List<AsyncTaskVo> result = new ArrayList<>();
+        AsyncTaskVo asyncTaskVo;
+        for(AsyncTasksEntity asyncTasksEntity:asyncTasksEntities){
+            asyncTaskVo = new AsyncTaskVo();
+            BeanUtil.copyProperties(asyncTasksEntity,asyncTaskVo);
+            result.add(asyncTaskVo);
+        }
+        return result;
     }
 }

@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import static com.gzw.kd.common.Constants.XLSX_DOWNLOAD_CONTENT_TYPE;
-import static com.gzw.kd.common.Constants.XLSX_EXPORT_FILE_SUFFIX;
+
+import static com.gzw.kd.common.Constants.*;
 
 /**
  * @author 高志伟

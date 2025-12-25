@@ -22,4 +22,6 @@ public class LogExportOutput extends CommonExportOutput{
 
     private int  id;
 
+    private String desc;
+
 }

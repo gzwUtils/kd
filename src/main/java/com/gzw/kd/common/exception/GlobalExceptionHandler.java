@@ -107,7 +107,7 @@ public class GlobalExceptionHandler {
         if(mailIsEnabled){
             MailUtil.getMailSend().sendEmail(path,e.getMessage(),mails,mailtoHtml);
         }
-        return R.setResult(ResultCodeEnum.NoHandler_Found);
+        return R.setResult(ResultCodeEnum.NO_HANDLER_FOUND);
     }
 
     @ExceptionHandler(DuplicateKeyException.class)
@@ -117,6 +117,6 @@ public class GlobalExceptionHandler {
         if(mailIsEnabled){
             MailUtil.getMailSend().sendEmail(path,e.getMessage(),mails,mailtoHtml);
         }
-        return R.setResult(ResultCodeEnum.DuplicateKey);
+        return R.setResult(ResultCodeEnum.DUPLICATE_KEY);
     }
 }

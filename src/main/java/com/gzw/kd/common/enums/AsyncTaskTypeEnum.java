@@ -26,6 +26,17 @@ public enum AsyncTaskTypeEnum {
     }
 
 
+    public static String getDescByCode(Integer code) {
+        AsyncTaskTypeEnum[] values = AsyncTaskTypeEnum.values();
+        for (AsyncTaskTypeEnum taskTypeEnum : values) {
+            if (taskTypeEnum.getCode().equals(code)) {
+                return taskTypeEnum.getDesc();
+            }
+        }
+        return null;
+    }
+
+
     public static AsyncTaskTypeEnum getEnumByCode(Integer code) {
         AsyncTaskTypeEnum[] values = AsyncTaskTypeEnum.values();
         for (AsyncTaskTypeEnum taskTypeEnum : values) {
