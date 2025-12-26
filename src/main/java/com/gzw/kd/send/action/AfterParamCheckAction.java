@@ -14,6 +14,7 @@ import com.gzw.kd.send.SendTaskModel;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +30,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AfterParamCheckAction implements BusinessProcess<SendTaskModel> {
 
-    public static final HashMap<Integer, String> CHANNEL_REGEX_EXP = new HashMap<>();
+    protected static final Map<Integer, String> CHANNEL_REGEX_EXP = new HashMap<>();
 
     static {
         CHANNEL_REGEX_EXP.put(IdType.PHONE.getCode(), Constants.PHONE_REGEX_EXP);

@@ -27,6 +27,7 @@ public class SendServiceImpl implements SendService {
     public R send(SendInput sendInput) {
         SendTaskModel sendTaskModel = SendTaskModel.builder()
                 .messageTemplateId(sendInput.getMessageTemplateId())
+                .expectPushTime(sendInput.getExpectPushTime())
                 .messageParamList(Collections.singletonList(sendInput.getMessageParam()))
                 .build();
 

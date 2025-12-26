@@ -20,6 +20,11 @@
        </if>
     </select>
 
+    <select id="findAllByAccount" resultType="com.gzw.kd.common.entity.TemplateInfo">
+        SELECT id,name,msg_status msgStatus ,cron_task_id cronTaskId,cron_crowd_path cronCrowdPath,id_type idType,send_channel sendChannel,template_type templateType, msg_type msgType,shield_type shieldType,msg_content  msgContent,send_account sendAccount, expect_push_time expectPushTime,is_deleted isDeleted ,creator,updator,created,updated  from  message_template
+            where send_account = #{account}
+    </select>
+
 
     <select id="findAllByIds" resultType="com.gzw.kd.common.entity.TemplateInfo">
         SELECT id,name,msg_status msgStatus ,cron_task_id cronTaskId,cron_crowd_path cronCrowdPath,id_type idType,send_channel sendChannel,template_type templateType, msg_type msgType,shield_type shieldType,msg_content  msgContent,send_account sendAccount, expect_push_time expectPushTime,is_deleted isDeleted ,creator,updator,created,updated  from  message_template

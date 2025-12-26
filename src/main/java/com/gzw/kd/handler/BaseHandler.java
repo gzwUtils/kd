@@ -4,6 +4,7 @@ import com.gzw.kd.common.entity.FlowControlParam;
 import com.gzw.kd.common.entity.SendResult;
 import com.gzw.kd.common.entity.TaskInfo;
 import com.gzw.kd.flowControl.FlowControlFactory;
+import com.gzw.kd.service.MessageRecordService;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import javax.annotation.PostConstruct;
@@ -23,6 +24,10 @@ public abstract class BaseHandler implements Handler {
 
     @Resource
     private FlowControlFactory flowControlFactory;
+
+    @Resource
+    private MessageRecordService messageRecordService;
+
 
     /**
      * 标识渠道的Code，子类初始化时指定
@@ -92,6 +97,8 @@ public abstract class BaseHandler implements Handler {
         result.setChannelCode(channelCode);
         result.setHandlerName(handlerName);
         result.setEnabled(enabled);
+
+        long startTime = System.currentTimeMillis();
         // 检查处理器是否启用
         if (!enabled) {
             result.setSuccess(false);
@@ -100,16 +107,30 @@ public abstract class BaseHandler implements Handler {
             return result;
         }
 
-        long startTime = System.currentTimeMillis();
-
         try {
             // 流量控制
             flowControl(taskInfo);
 
+            Long recordId = messageRecordService.createRecord(taskInfo);
+
+            taskInfo.setRecordId(recordId);
             // 执行具体处理
             boolean success = handler(taskInfo);
 
             long executeTime = System.currentTimeMillis() - startTime;
+
+            // 3. 更新记录状态
+            if (recordId != null) {
+                // 计算成功失败数量（根据具体业务）
+                int receiverCount = (taskInfo.getReceiver() != null && !taskInfo.getReceiver().isEmpty())
+                        ? taskInfo.getReceiver().size()
+                        : 1;
+
+                int successCount = success ? receiverCount : 0;
+                int failCount = success ? 0 : receiverCount;
+
+                messageRecordService.updateStatus(recordId, success, successCount, failCount);
+            }
             result.setExecuteTime(executeTime);
             result.setSuccess(success);
 

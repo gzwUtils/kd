@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.MessageRecordMapper">
+
+    <select id="selectById" parameterType="long" resultType="com.gzw.kd.common.entity.MessageRecord">
+        select *
+        from message_record
+        where id = #{id, jdbcType=BIGINT}
+    </select>
+
+
+    <select id="selectByBizId" parameterType="java.lang.String" resultType="com.gzw.kd.common.entity.MessageRecord">
+        select *
+        from message_record
+        where biz_id = #{bizId}
+    </select>
+
+
+    <select id="selectByTemplateId" parameterType="long" resultType="com.gzw.kd.common.entity.MessageRecord">
+        select biz_id as bizId, template_id as templateId, channel_type as channelType, message_type as messageType,
+        receiver, receiver_count, title, content,
+        delay_minutes as delayMinutes, schedule_time as scheduleTime, retry_count as retryCount,
+        status, success_count, fail_count,
+        send_time as sendTime, create_time as createTime
+        from message_record
+        where template_id = #{templateId, jdbcType=BIGINT}
+    </select>
+
+    <insert id="insertRecord" parameterType="com.gzw.kd.common.entity.MessageRecord" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO message_record (
+        biz_id, template_id, channel_type, message_type,
+        receiver, receiver_count, title, content,
+        delay_minutes, schedule_time, retry_count,
+        status, success_count, fail_count,
+        send_time, create_time
+        ) VALUES (
+        #{bizId}, #{templateId}, #{channelType}, #{messageType},
+        #{receiver}, #{receiverCount}, #{title}, #{content},
+        #{delayMinutes}, #{scheduleTime}, #{retryCount},
+        #{status}, #{successCount}, #{failCount},
+        #{sendTime}, NOW()
+        )
+    </insert>
+
+
+    <update id="updateStatus">
+        UPDATE message_record SET
+        status = #{status},
+        send_time = #{sendTime}
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+
+    <update id="updateStatistics">
+        UPDATE message_record SET
+        success_count = #{successCount},
+        fail_count = #{failCount}
+        WHERE id = #{id, jdbcType=BIGINT}
+    </update>
+
+
+    <update id="incrementRetryCount">
+        UPDATE message_record SET
+        retry_count = retry_count + 1
+        WHERE id = #{id}
+    </update>
+</mapper>

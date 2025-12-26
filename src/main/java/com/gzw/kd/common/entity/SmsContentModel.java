@@ -1,10 +1,10 @@
 package com.gzw.kd.common.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import lombok.experimental.SuperBuilder;
 
 /**
  * @author gzw
@@ -15,13 +15,8 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @Data
 @Accessors(chain = true)
-@Builder
+@SuperBuilder
 public class SmsContentModel extends ContentModel{
-
-    /**
-     * 短信发送内容
-     */
-    private String content;
 
     /**
      * 短信发送链接

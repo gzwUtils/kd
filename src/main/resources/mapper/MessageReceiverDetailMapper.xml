@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gzw.kd.mapper.MessageReceiverDetailMapper">
+
+    <select id="selectByRecordId" parameterType="long" resultType="com.gzw.kd.common.entity.MessageReceiverDetail">
+        SELECT * FROM message_receiver_detail WHERE record_id = #{recordId}
+    </select>
+
+
+    <select id="countUnread" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM message_receiver_detail
+        WHERE receiver = #{receiver} AND read_status = 0
+    </select>
+
+
+    <insert id="insertDetail" parameterType="com.gzw.kd.common.entity.MessageReceiverDetail">
+        INSERT INTO message_receiver_detail (
+        record_id, receiver, read_status, read_time, create_time
+        ) VALUES (
+        #{recordId}, #{receiver}, #{readStatus}, #{readTime}, NOW()
+        )
+    </insert>
+
+    <insert id="batchInsert" parameterType="com.gzw.kd.common.entity.MessageReceiverDetail">
+        INSERT INTO message_receiver_detail (record_id, receiver, read_status, create_time) VALUES
+        <foreach collection='list' item='item' separator=','>
+        (#{item.recordId}, #{item.receiver}, 0, NOW())
+        </foreach>
+    </insert>
+
+
+    <update id="markAsRead">
+        UPDATE message_receiver_detail SET
+        read_status = 1, read_time = NOW()
+        WHERE id = #{id} AND receiver = #{receiver}
+    </update>
+
+</mapper>

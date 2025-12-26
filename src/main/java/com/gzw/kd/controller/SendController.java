@@ -2,12 +2,16 @@ package com.gzw.kd.controller;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
 import com.gzw.kd.send.service.SendService;
+import com.gzw.kd.service.MessageRecordService;
 import com.gzw.kd.vo.input.BatchSendInput;
 import com.gzw.kd.vo.input.SendInput;
+import com.gzw.kd.vo.output.SendRecordVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author gzw
@@ -21,6 +25,10 @@ public class SendController {
 
     @Resource
     private SendService sendService;
+
+
+    @Resource
+    private MessageRecordService messageRecordService;
 
 
 
@@ -51,5 +59,17 @@ public class SendController {
     }
 
 
+    /**
+     * 查询发送记录
+     *
+     * @return result
+     */
+
+    @ApiOperation(value = "查询发送记录", notes = "查询发送记录")
+    @PostMapping("/queryMessageRecord")
+    public R queryMessageRecord() {
+        List<SendRecordVo> sendRecordVos = messageRecordService.selectByAccount();
+        return R.ok().data("sendRecordVos", sendRecordVos);
+    }
 
 }

@@ -2,10 +2,13 @@ package com.gzw.kd.controller;
 
 import cn.hutool.core.text.CharSequenceUtil;
 import cn.hutool.core.text.StrPool;
+import com.gzw.kd.common.Constants;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.annotation.OperatorLog;
+import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.entity.TemplateInfo;
 import com.gzw.kd.service.MessageTemplateService;
+import com.gzw.kd.vo.output.TemplateVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -14,6 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author gzw
@@ -107,4 +112,17 @@ public class MessageTemplateController {
         return messageTemplateService.stopCronTask(id);
     }
 
+
+
+    /**
+     * 查询用户模版
+     */
+    @PostMapping("/findAllByAccount")
+    @ApiOperation("/查询用户模版")
+    @OperatorLog(value = "查询用户模版", description = "查询用户模版")
+    public R findAllByAccount(HttpServletRequest request) {
+        Operator operator = (Operator) request.getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
+        List<TemplateVo> allByAccount = messageTemplateService.findAllByAccount(operator.getAccount());
+        return R.ok().data("templateInfos", allByAccount);
+    }
 }

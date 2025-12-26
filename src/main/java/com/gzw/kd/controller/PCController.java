@@ -225,6 +225,11 @@ public class PCController {
         return "/pc/asyncTask";
     }
 
+    @RequestMapping(value = "/messageSend",method = RequestMethod.GET)
+    public String messageSend() {
+        return "/pc/send";
+    }
+
 
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request) {
@@ -948,8 +953,8 @@ public class PCController {
     @PostMapping("/sendEmailMessage")
     @ResponseBody
     public R sendEmailMessage(@RequestParam("subject") String subject,@RequestParam("email") String email,@RequestParam("message") String  message) throws Exception {
-        EmailContentModel build = new EmailContentModel().builder().content(message).title(subject).build();
-        MailUtil.getMailSend().sendEmail(build,new String[]{email},true,"pc/mail.html");
+        EmailContentModel contentModel = new EmailContentModel().builder().title(subject).content(message).build();
+        MailUtil.getMailSend().sendEmail(contentModel,new String[]{email},true,"pc/mail.html");
         return R.ok();
     }
 

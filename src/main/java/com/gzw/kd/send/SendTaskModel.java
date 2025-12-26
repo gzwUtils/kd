@@ -4,6 +4,8 @@ import com.gzw.kd.common.entity.MessageParam;
 import com.gzw.kd.common.entity.TaskInfo;
 import com.gzw.kd.common.entity.TemplateInfo;
 import java.util.List;
+
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -22,6 +24,15 @@ public class SendTaskModel extends ProcessModel{
      * 消息模板Id
      */
     private Long messageTemplateId;
+
+
+    /**
+     * 推送消息的时间
+     * 0：立即发送 30：30分钟后发送
+     * else：crontab 表达式
+     */
+    @ApiModelProperty(value = "推送消息的时间 0 立即发送,crontab")
+    private String expectPushTime;
 
     /**
      * 请求参数

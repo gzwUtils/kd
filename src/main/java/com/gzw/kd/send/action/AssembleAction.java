@@ -8,7 +8,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.google.common.base.Throwables;
-import static com.gzw.kd.common.Constants.LINK_NAME;
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.entity.ContentModel;
 import com.gzw.kd.common.entity.MessageParam;
@@ -28,6 +27,8 @@ import java.util.*;
 import javax.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
+import static com.gzw.kd.common.Constants.*;
 
 /**
  * @author gzw
@@ -81,6 +82,7 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
 
         for (MessageParam messageParam : messageParamList) {
 
+
             TaskInfo taskInfo = TaskInfo.builder()
                     .messageTemplateId(templateInfo.getId())
                     .businessId(SnowFlakeIdUtils.generatorId())
@@ -92,6 +94,7 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
                     .shieldType(templateInfo.getShieldType())
                     .sendAccount(templateInfo.getSendAccount())
                     .contentModel(getContentModelValue(templateInfo, messageParam)).build();
+            taskInfo.parseExpectPushTime(sendTaskModel.getExpectPushTime() == null ? templateInfo.getExpectPushTime() : sendTaskModel.getExpectPushTime());
 
             taskInfoList.add(taskInfo);
         }

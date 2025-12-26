@@ -6,19 +6,20 @@ import com.gzw.kd.common.R;
 import com.gzw.kd.common.XxlJobConstant;
 import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.entity.XxlJobInfo;
-import com.gzw.kd.common.enums.MessageStatusEnum;
-import com.gzw.kd.common.enums.ResultCodeEnum;
-import com.gzw.kd.common.enums.TemplateStatusEnum;
-import com.gzw.kd.common.enums.TemplateType;
+import com.gzw.kd.common.enums.*;
 import com.gzw.kd.common.utils.ContextUtil;
 import com.gzw.kd.common.utils.XxlJobUtils;
 import com.gzw.kd.mapper.MessageTemplateMapper;
 import com.gzw.kd.common.entity.TemplateInfo;
 import com.gzw.kd.service.CronTaskService;
 import com.gzw.kd.service.MessageTemplateService;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.annotation.Resource;
+
+import com.gzw.kd.vo.output.TemplateVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -74,7 +75,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
     public void copy(Long id) {
         TemplateInfo info = messageTemplateMapper.selectById(Math.toIntExact(id));
         if (Objects.nonNull(info)) {
-            TemplateInfo clone = ObjectUtil.clone(info).setId(null).setCronTaskId(null);
+            TemplateInfo clone = ObjectUtil.clone(info).setId(null);
             Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
             clone.setCreator(operator.getAccount()).setCreated((int) System.currentTimeMillis());
             messageTemplateMapper.registerTemplate(clone);
@@ -140,6 +141,22 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
         messageTemplateMapper.updateTemplateInfo(clone);
         cronTaskService.stopCronTask(info.getCronTaskId());
         return R.ok();
+    }
+
+    @Override
+    public List<TemplateVo> findAllByAccount(String account) {
+        List<TemplateInfo> allByAccount = messageTemplateMapper.findAllByAccount(account);
+        List<TemplateVo> list = new ArrayList<>();
+         allByAccount.forEach(p->{
+            TemplateVo vo = new TemplateVo();
+            BeanUtils.copyProperties(p,vo);
+            vo.setType(EnumUtils.getDescriptionByCode(p.getMsgType(), MessageContentTypeEnum.class));
+            vo.setContent(p.getMsgContent());
+            vo.setName(p.getName());
+            vo.setStatus(EnumUtils.getDescriptionByCode(p.getMsgStatus(), MessageStatusEnum.class));
+            list.add(vo);
+        });
+        return list;
     }
 
 

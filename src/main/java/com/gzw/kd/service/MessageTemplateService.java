@@ -2,6 +2,8 @@ package com.gzw.kd.service;
 
 import com.gzw.kd.common.R;
 import com.gzw.kd.common.entity.TemplateInfo;
+import com.gzw.kd.vo.output.TemplateVo;
+
 import java.util.List;
 
 /**
@@ -74,4 +76,12 @@ public interface MessageTemplateService {
      * @return result
      */
     R stopCronTask(Long id);
+
+
+    /**
+     * 查询模版列表
+     * @param account  用户
+     * @return list
+     */
+    List<TemplateVo> findAllByAccount(String  account);
 }

@@ -66,4 +66,12 @@ public interface MessageTemplateMapper {
      * @return int
      */
     Integer deleteTemplateInfo (List<TemplateInfo> templateInfo);
+
+
+    /**
+     * 查询模版列表
+     * @param account  用户
+     * @return list
+     */
+    List<TemplateInfo> findAllByAccount(String  account);
 }
