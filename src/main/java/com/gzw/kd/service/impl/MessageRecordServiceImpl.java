@@ -3,12 +3,10 @@ package com.gzw.kd.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.gzw.kd.common.Constants;
 import com.gzw.kd.common.entity.*;
-import com.gzw.kd.common.enums.ChannelTypeEnum;
-import com.gzw.kd.common.enums.EnumUtils;
-import com.gzw.kd.common.enums.MessageSendTypeEnum;
-import com.gzw.kd.common.enums.MessageStatusEnum;
+import com.gzw.kd.common.enums.*;
 import com.gzw.kd.common.utils.ContextUtil;
 import com.gzw.kd.mapper.MessageRecordMapper;
+import com.gzw.kd.mapper.UserMapper;
 import com.gzw.kd.service.MessageRecordService;
 import com.gzw.kd.service.MessageTemplateService;
 import com.gzw.kd.vo.output.SendRecordVo;
@@ -16,10 +14,10 @@ import com.gzw.kd.vo.output.TemplateVo;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import static com.gzw.kd.common.enums.MessageSendTypeEnum.BROADCAST;
 
 @Slf4j
 @AllArgsConstructor
@@ -33,6 +31,9 @@ public class MessageRecordServiceImpl implements MessageRecordService {
     private final MessageTemplateService messageTemplateService;
 
 
+    private final UserMapper userMapper;
+
+
     @Override
     public Long createRecord(TaskInfo taskInfo) {
         try {
@@ -41,18 +42,22 @@ public class MessageRecordServiceImpl implements MessageRecordService {
             messageRecord.setTemplateId(taskInfo.getMessageTemplateId());
             messageRecord.setChannelType(ChannelTypeEnum.getDescription(taskInfo.getSendChannel()));
 
+            // 过滤掉空值
+            Set<String> collected = taskInfo.getReceiver().stream()
+                    .filter(r -> r != null && !r.trim().isEmpty())
+                    .collect(Collectors.toSet());
             // 消息类型
-            if (taskInfo.getReceiver() == null || taskInfo.getReceiver().isEmpty() || taskInfo.getReceiver().toString().isEmpty()) {
-                messageRecord.setMessageType(MessageSendTypeEnum.BROADCAST.getCode());
-            } else if (taskInfo.getReceiver().size() == 1) {
+            if (collected.isEmpty()) {
+                messageRecord.setMessageType(BROADCAST.getCode());
+            } else if (collected.size() == 1) {
                 messageRecord.setMessageType(MessageSendTypeEnum.SINGLE.getCode());
-                messageRecord.setReceiver(taskInfo.getReceiver().iterator().next());
+                messageRecord.setReceiver(collected.iterator().next());
             } else {
                 messageRecord.setMessageType(MessageSendTypeEnum.BATCH.getCode());
-                messageRecord.setReceiver(taskInfo.getReceiver().iterator().next());
+                messageRecord.setReceiver(String.join(",", collected));
             }
 
-            messageRecord.setReceiverCount(taskInfo.getReceiver() != null ? taskInfo.getReceiver().size() : 0);
+            messageRecord.setReceiverCount(collected.isEmpty() ? "all" : String.valueOf(collected.size()));
             ContentModel contentModel = JSON.parseObject(taskInfo.getContentModel(), ContentModel.class);
             messageRecord.setContent(contentModel.getContent());
 
@@ -104,23 +109,89 @@ public class MessageRecordServiceImpl implements MessageRecordService {
 
     @Override
     public List<SendRecordVo> selectByAccount() {
-        List<SendRecordVo> result = new ArrayList<>();
-        Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
-        List<TemplateVo> allByAccount = messageTemplateService.findAllByAccount(operator.getAccount());
-        allByAccount.forEach(info -> {
-            List<MessageRecord> messageRecords = messageRecordMapper.selectByTemplateId(info.getId());
-            messageRecords.forEach(record -> {
-                SendRecordVo vo = new SendRecordVo();
-                vo.setTemplateId(info.getId());
-                vo.setTime(record.getSendTime());
-                vo.setStatus(EnumUtils.getDescriptionByCode(record.getStatus(), MessageStatusEnum.class));
-                vo.setReceiver(record.getReceiver());
-                result.add(vo);
-            });
-        });
+        Operator operator = (Operator) ContextUtil.getHttpRequest().getSession()
+                .getAttribute(Constants.LOGIN_USER_SESSION_KEY);
 
-        return result;
+        // 1. 查询用户模板
+        List<TemplateVo> templates = messageTemplateService.findAllByAccount(operator.getAccount());
+        if (templates.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        // 2. 查询所有消息记录
+        List<Long> templateIds = templates.stream()
+                .map(TemplateVo::getId)
+                .collect(Collectors.toList());
+
+        List<MessageRecord> records = new ArrayList<>();
+        templateIds.forEach(t -> {
+            List<MessageRecord> messageRecords = messageRecordMapper.selectByTemplateId(t);
+            records.addAll(messageRecords);
+        });
+        Map<Long, TemplateVo> templateMap = templates.stream()
+                .collect(Collectors.toMap(TemplateVo::getId, Function.identity()));
+
+        // 3. 转换结果
+
+        return records.stream()
+                .map(messageRecord -> convertToVo(messageRecord, templateMap.get(messageRecord.getTemplateId())))
+                .sorted((a, b) -> b.getTime().compareTo(a.getTime()))
+                .collect(Collectors.toList());
     }
 
 
+    /**
+     * 转换单个记录
+     */
+    private SendRecordVo convertToVo(MessageRecord messageRecord, TemplateVo template) {
+        SendRecordVo vo = new SendRecordVo();
+        vo.setTemplateId(messageRecord.getTemplateId());
+        vo.setTime(messageRecord.getSendTime());
+        vo.setStatus(EnumUtils.getDescriptionByCode(messageRecord.getStatus(), MessageStatusEnum.class));
+        vo.setId(messageRecord.getId());
+        // 设置接收者显示
+        if (messageRecord.getReceiver() == null || messageRecord.getReceiver().isEmpty()) {
+            vo.setReceiver(BROADCAST.getDescription());
+        } else if (IdType.USER_ID.getCode().equals(Integer.valueOf(template.getIdType()))) {
+            // 用户类型，查询用户信息
+            String receiverDisplay = formatUserReceiver(messageRecord.getReceiver());
+            vo.setReceiver(receiverDisplay);
+        } else {
+            // 其他类型，直接显示
+            vo.setReceiver(messageRecord.getReceiver());
+        }
+
+        return vo;
+    }
+
+
+    /**
+     * 格式化用户接收者
+     */
+    private String formatUserReceiver(String receiver) {
+        if (receiver == null || receiver.isEmpty()) {
+            return "无接收者";
+        }
+
+        String[] ids = receiver.split(",");
+        List<String> displayNames = new ArrayList<>();
+
+        for (String id : ids) {
+            String trimmedId = id.trim();
+            if (!trimmedId.isEmpty()) {
+                try {
+                    int userId = Integer.parseInt(trimmedId);
+                    User user = userMapper.getUserById(userId);
+                    if (user != null) {
+                        displayNames.add(user.getAccount());
+                    } else {
+                        displayNames.add("未知用户" + userId);
+                    }
+                } catch (Exception e) {
+                    displayNames.add(trimmedId);
+                }
+            }
+        }
+        return String.join(", ", displayNames);
+    }
 }

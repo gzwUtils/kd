@@ -154,6 +154,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
             vo.setContent(p.getMsgContent());
             vo.setName(p.getName());
             vo.setStatus(EnumUtils.getDescriptionByCode(p.getMsgStatus(), MessageStatusEnum.class));
+            vo.setIdType(String.valueOf(p.getIdType()));
             list.add(vo);
         });
         return list;

@@ -10,7 +10,7 @@ CREATE TABLE `message_record` (
 
   -- 接收者（简化：只存主要接收者或第一个）
   `receiver` varchar(200) DEFAULT NULL COMMENT '接收者标识',
-  `receiver_count` int(11) DEFAULT '0' COMMENT '接收者总数',
+  `receiver_count` varchar(16) DEFAULT '0' COMMENT '接收者总数',
 
   -- 消息内容
   `title` varchar(200) DEFAULT '' COMMENT '消息标题',

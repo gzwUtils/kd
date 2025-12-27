@@ -3,6 +3,7 @@ package com.gzw.kd.mapper;
 
 import com.gzw.kd.common.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -16,6 +17,12 @@ import java.util.List;
 public interface UserMapper {
 
     User getUserByName(String  account)throws  Exception;
+
+
+    User getUserById(int  id)throws  Exception;
+
+
+    List<User> getUsersByIds(@Param("ids") List<String> ids);
 
     User getUserByNameAndPhone(String  account,String phone)throws  Exception;
 

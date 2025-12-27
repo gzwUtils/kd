@@ -18,16 +18,27 @@ public enum MessageContentTypeEnum implements BaseEnum{
     /**
      * 通知类消息
      */
-    NOTICE(10, "通知类消息", "notice"),
+    NOTICE(10, "系统通知", "notice"),
     /**
      * 营销类消息
      */
-    MARKETING(20, "营销类消息", "marketing"),
+    MARKETING(20, "营销", "marketing"),
     /**
      * 验证码消息
      */
-    AUTH_CODE(30, "验证码消息", "auth_code"),
+    AUTH_CODE(30, "验证码", "auth_code"),
 
+
+    /**
+     * 安全告警类消息
+     */
+    ALERT_CODE(40, "告警", "alert_code"),
+
+
+    /**
+     * 更新公告
+     */
+     UPDATE_NOTICE(50, "更新公告", "update_notice"),
     ;
 
     /**

@@ -38,4 +38,10 @@ public class TemplateVo {
      */
 
     private String status;
+
+    /**
+     * id 类型
+     */
+
+    private String idType;
 }

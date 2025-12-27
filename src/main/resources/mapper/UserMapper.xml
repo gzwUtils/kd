@@ -6,6 +6,20 @@
       SELECT id, password,email, account, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  account=#{account}
   </select>
 
+    <select id="getUserById"   resultType="com.gzw.kd.common.entity.User">
+        SELECT id, password,email, account, phone, create_time createTime, status, update_time as
+        updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  id=#{id} or phone= #{id} or email= #{id}
+    </select>
+
+
+    <select id="getUsersByIds"   resultType="com.gzw.kd.common.entity.User">
+        SELECT id, account, nickname, phone, email
+        FROM user WHERE id IN
+        <foreach collection='ids' item='id' open='(' separator=',' close=')'>"
+        #{id}
+        </foreach>
+    </select>
+
     <select id="getUserByNameAndPhone"   resultType="com.gzw.kd.common.entity.User">
         SELECT id, password, account,email, phone, create_time createTime, status, update_time as updateTime,is_admin isAdmin,error_retry errorRetry  FROM user where  account=#{account} and  phone=#{phone}
     </select>
