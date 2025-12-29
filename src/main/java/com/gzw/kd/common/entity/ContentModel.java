@@ -22,4 +22,16 @@ public class ContentModel {
      * 发送内容
      */
     private String content;
+
+
+    /**
+     * 标题
+     */
+    private String title;
+
+
+    /**
+     * 邮件发送时间
+     */
+    private String sendTime;
 }

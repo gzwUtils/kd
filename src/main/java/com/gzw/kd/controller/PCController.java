@@ -172,6 +172,12 @@ public class PCController {
         return "/pc/kd";
     }
 
+
+    @RequestMapping(value = "/message",method = RequestMethod.GET)
+    public String message() {
+        return "/pc/message";
+    }
+
     @RequestMapping(value = "/userInfo",method = RequestMethod.GET)
     public String userInfo() {
         return "/pc/userInfo";

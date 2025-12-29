@@ -878,11 +878,6 @@
                 }
             }
 
-            // 如果API没有数据，从localStorage获取
-            if (historyData.length === 0) {
-                historyData = JSON.parse(localStorage.getItem('sendHistory') || '[]');
-            }
-
             if (historyData.length === 0) {
                 historyList.innerHTML =
                     '<div class="text-center py-4 text-muted">' +

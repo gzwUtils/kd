@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消息中心</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            width: 220px;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .sidebar h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .filter-btn {
+            width: 100%;
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border: none;
+            border-radius: 6px;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-btn:hover {
+            background: #f5f5f5;
+        }
+
+        .filter-btn.active {
+            background: #e8f4ff;
+            color: #1890ff;
+            font-weight: 500;
+        }
+
+        .filter-btn i {
+            margin-right: 8px;
+            width: 18px;
+        }
+
+        .badge {
+            margin-left: auto;
+            background: #1890ff;
+            color: white;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 12px;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .action-btn.primary {
+            background: #1890ff;
+            color: white;
+        }
+
+        .action-btn.secondary {
+            background: #f5f5f5;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .header {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .search-box {
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            background: #f5f5f5;
+            border-radius: 6px;
+            padding: 8px 12px;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            padding: 0 8px;
+        }
+
+        /* 消息列表 */
+        .messages-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .messages-list {
+            flex: 1;
+            overflow-y: auto;
+            min-height: 300px; /* 确保有最小高度 */
+        }
+
+        .message-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #f5f5f5;
+            cursor: pointer;
+            display: block !important; /* 强制显示 */
+            visibility: visible !important; /* 强制可见 */
+        }
+
+        .message-item:hover {
+            background: #f9f9f9;
+        }
+
+        .message-item.unread {
+            background: #f8fbff;
+        }
+
+        .message-item.selected {
+            background: #e8f4ff;
+            border-left: 3px solid #1890ff;
+        }
+
+        .message-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .message-title {
+            font-weight: 500;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .unread-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #1890ff;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .message-time {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .message-content {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.4;
+            margin-bottom: 8px;
+            word-break: break-word;
+        }
+
+        .message-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: white;
+        }
+
+        .tag-notice { background: #1890ff; }
+        .tag-alert_code { background: #ff4d4f; }
+        .tag-marketing { background: #52c41a; }
+
+        /* 加载状态 */
+        .loading {
+            padding: 40px;
+            text-align: center;
+            color: #999;
+        }
+
+        .empty {
+            padding: 60px 20px;
+            text-align: center;
+            color: #999;
+        }
+
+        .empty i {
+            font-size: 40px;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+
+        /* 消息详情弹层 */
+        .message-detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .message-detail-container {
+            background: white;
+            border-radius: 12px;
+            width: 600px;
+            max-width: 90%;
+            max-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .detail-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .detail-header h3 {
+            color: #2c3e50;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-btn:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .detail-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .detail-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .detail-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+        }
+
+        .detail-meta {
+            display: flex;
+            gap: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #f0f0f0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .detail-tag {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .message-detail-container {
+                width: 95%;
+                max-height: 90vh;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <h2><i class="fas fa-bell"></i> 消息中心</h2>
+
+        <button class="filter-btn active" data-type="all">
+            <i class="fas fa-inbox"></i> 全部消息
+            <span class="badge">0</span>
+        </button>
+        <button class="filter-btn" data-type="unread">
+            <i class="fas fa-envelope"></i> 未读消息
+            <span class="badge">0</span>
+        </button>
+        <button class="filter-btn" data-type="system">
+            <i class="fas fa-cog"></i> 系统通知
+            <span class="badge">0</span>
+        </button>
+        <button class="filter-btn" data-type="security">
+            <i class="fas fa-shield-alt"></i> 安全提醒
+            <span class="badge">0</span>
+        </button>
+
+        <button class="action-btn primary" id="markAllRead">
+            <i class="fas fa-check-double"></i> 全部已读
+        </button>
+        <button class="action-btn secondary" id="clearAll">
+            <i class="fas fa-trash-alt"></i> 清空消息
+        </button>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content">
+        <div class="header">
+            <h1>消息列表</h1>
+            <p id="messageCount">加载中...</p>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="搜索消息...">
+            </div>
+        </div>
+
+        <div class="messages-container">
+            <div class="messages-header">
+                <h3 id="listTitle">全部消息</h3>
+                <select id="sortSelect" style="padding: 5px 10px; border-radius: 4px; border: 1px solid #ddd;">
+                    <option value="newest">最新优先</option>
+                    <option value="oldest">最早优先</option>
+                </select>
+            </div>
+
+            <div class="messages-list" id="messagesList">
+                <div class="loading">加载中...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 消息详情弹层 -->
+    <div class="message-detail-overlay" id="messageDetailOverlay">
+        <div class="message-detail-container">
+            <div class="detail-header">
+                <h3><i class="fas fa-file-alt"></i> 消息详情</h3>
+                <button class="close-btn" id="closeDetail">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="detail-content" id="detailContent">
+                <!-- 详情内容会动态加载 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 配置信息
+    const API_BASE_URL = '/api/messages';
+    const CURRENT_USER_ID = getCurrentUserId();
+
+    // DOM元素
+    const messagesList = document.getElementById('messagesList');
+    const messageCount = document.getElementById('messageCount');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const searchInput = document.getElementById('searchInput');
+    const sortSelect = document.getElementById('sortSelect');
+    const markAllReadBtn = document.getElementById('markAllRead');
+    const clearAllBtn = document.getElementById('clearAll');
+    const listTitle = document.getElementById('listTitle');
+
+    // 消息详情相关DOM
+    const messageDetailOverlay = document.getElementById('messageDetailOverlay');
+    const detailContent = document.getElementById('detailContent');
+    const closeDetailBtn = document.getElementById('closeDetail');
+
+    // 状态
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let currentSort = 'newest';
+    let messagesData = [];
+    let selectedMessageId = null;
+
+    // 获取当前用户ID
+    function getCurrentUserId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('userId') || localStorage.getItem('userId') || '1';
+    }
+
+    // 获取token
+    function getToken() {
+        return localStorage.getItem('token') || '';
+    }
+
+    // API调用
+    async function callApi(endpoint, options = {}) {
+        try {
+            const token = getToken();
+            const headers = {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': 'Bearer ' + token }),
+                ...options.headers
+            };
+
+            const response = await fetch(API_BASE_URL + endpoint, {
+                headers: headers,
+                ...options
+            });
+
+            if (!response.ok) {
+                throw new Error('HTTP错误: ' + response.status);
+            }
+
+            const result = await response.json();
+
+            if (result.code !== 20000) {
+                throw new Error(result.message || '请求失败');
+            }
+
+            return result.data;
+        } catch (error) {
+            console.error('API调用失败:', error);
+            throw error;
+        }
+    }
+
+    // 获取消息列表 - 使用POST请求
+    async function getMessages() {
+        try {
+            messagesList.innerHTML = '<div class="loading">加载中...</div>';
+
+            // 构建查询参数
+            const queryDTO = {
+                type: getApiTypeFromFilter(currentFilter),
+                search: currentSearch || null,
+                sort: currentSort,
+                page: 1,
+                pageSize: 50
+            };
+
+            // 过滤掉null值
+            Object.keys(queryDTO).forEach(function(key) {
+                if (queryDTO[key] === null) {
+                    delete queryDTO[key];
+                }
+            });
+
+            const data = await callApi('/list', {
+                method: 'POST',
+                body: JSON.stringify(queryDTO)
+            });
+
+            if (data && data.list.list) {
+                messagesData = data.list.list;
+                renderMessages();
+                updateMessageCount();
+                updateListTitle();
+            } else {
+                showEmpty();
+            }
+        } catch (error) {
+            messagesList.innerHTML = '<div class="empty">加载失败，请重试</div>';
+            console.error('获取消息失败:', error);
+        }
+    }
+
+    // 将筛选类型转换为API类型
+    function getApiTypeFromFilter(filter) {
+        const filterMap = {
+            'all': null,
+            'unread': null,
+            'system': 'notice',
+            'security': 'alert_code'
+        };
+        return filterMap[filter] || null;
+    }
+
+    // 获取消息统计
+    async function getMessageCount() {
+        try {
+            const data = await callApi('/count');
+            return data ? data.count : null;
+        } catch (error) {
+            console.error('获取统计失败:', error);
+            return null;
+        }
+    }
+
+    // 渲染消息列表 - 使用纯字符串拼接
+    function renderMessages() {
+        if (!messagesData || messagesData.length === 0) {
+            showEmpty();
+            return;
+        }
+
+        // 根据当前筛选条件进一步过滤
+        let filteredMessages = messagesData;
+
+        // 如果是未读筛选，过滤出未读消息
+        if (currentFilter === 'unread') {
+            filteredMessages = [];
+            for (let i = 0; i < messagesData.length; i++) {
+                if (messagesData[i].unread) {
+                    filteredMessages.push(messagesData[i]);
+                }
+            }
+        }
+
+        if (filteredMessages.length === 0) {
+            showEmpty();
+            return;
+        }
+
+        let html = '';
+        for (let i = 0; i < filteredMessages.length; i++) {
+            const msg = filteredMessages[i];
+            const timeStr = formatTime(msg.time);
+            const tagClass = 'tag-' + msg.type;
+            const unreadClass = msg.unread ? 'unread' : '';
+            const selectedClass = selectedMessageId === msg.id ? 'selected' : '';
+
+            // 构建消息项的HTML字符串
+            html += '<div class="message-item ' + unreadClass + ' ' + selectedClass + '" data-id="' + msg.id + '">' +
+                       '<div class="message-top">' +
+                           '<div class="message-title">';
+
+            // 根据未读状态添加红点
+            if (msg.unread) {
+                html += '<span class="unread-dot"></span>';
+            }
+
+            html += (msg.title || msg.tag) +
+                       '</div>' +
+                       '<div class="message-time">' + timeStr + '</div>' +
+                    '</div>' +
+                    '<div class="message-content">' + msg.content + '</div>' +
+                    '<span class="message-tag ' + tagClass + '">' + msg.tag + '</span>' +
+                '</div>';
+        }
+
+        messagesList.innerHTML = html;
+
+        // 添加点击事件
+        const messageItems = document.querySelectorAll('.message-item');
+        for (let i = 0; i < messageItems.length; i++) {
+            messageItems[i].addEventListener('click', async function() {
+                const id = parseInt(this.getAttribute('data-id'));
+                const message = findMessageById(id);
+
+                if (message) {
+                    // 更新选中状态
+                    const allItems = document.querySelectorAll('.message-item');
+                    for (let j = 0; j < allItems.length; j++) {
+                        allItems[j].classList.remove('selected');
+                    }
+                    this.classList.add('selected');
+                    selectedMessageId = id;
+
+                    // 显示消息详情
+                    showMessageDetail(message);
+
+                    // 如果是未读消息，标记为已读
+                    if (message.unread) {
+                        const success = await markAsRead(id);
+                        if (success) {
+                            message.unread = false;
+                            this.classList.remove('unread');
+                            updateBadges();
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    // 根据ID查找消息
+    function findMessageById(id) {
+        for (let i = 0; i < messagesData.length; i++) {
+            if (messagesData[i].id == id) {
+                return messagesData[i];
+            }
+        }
+        return null;
+    }
+
+    // 显示消息详情弹层
+    function showMessageDetail(message) {
+        const timeStr = formatTime(message.time);
+        const tagClass = 'tag-' + message.type;
+
+        let html = '<div class="detail-title">' + (message.title || '无标题') + '</div>' +
+                   '<div class="detail-text">' + message.content + '</div>' +
+                   '<div class="detail-meta">' +
+                       '<div><i class="far fa-clock"></i> 时间：' + timeStr + '</div>' +
+                       '<div><i class="far fa-envelope"></i> 类型：<span class="' + tagClass + ' detail-tag">' + message.tag + '</span></div>';
+
+        if (message.channelType) {
+            html += '<div><i class="fas fa-broadcast-tower"></i> 渠道：' + message.channelType + '</div>';
+        }
+
+        html += '</div>';
+
+        detailContent.innerHTML = html;
+        messageDetailOverlay.style.display = 'flex';
+    }
+
+    // 标记为已读
+    async function markAsRead(id) {
+        try {
+            const readDTO = {
+                id: id
+            };
+
+            await callApi('/read', {
+                method: 'POST',
+                body: JSON.stringify(readDTO)
+            });
+            return true;
+        } catch (error) {
+            console.error('标记已读失败:', error);
+            return false;
+        }
+    }
+
+    // 标记全部为已读
+    async function markAllAsRead() {
+        try {
+            await callApi('/read-all', {
+                method: 'POST',
+                body: JSON.stringify({})
+            });
+            return true;
+        } catch (error) {
+            console.error('标记全部已读失败:', error);
+            return false;
+        }
+    }
+
+    // 清空消息
+    async function clearAllMessages() {
+        try {
+            await callApi('/clear-all', {
+                method: 'DELETE'
+            });
+            return true;
+        } catch (error) {
+            console.error('清空消息失败:', error);
+            return false;
+        }
+    }
+
+    // 格式化时间
+    function formatTime(timeStr) {
+        try {
+            const date = new Date(timeStr);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+            if (diffHours < 1) {
+                const diffMins = Math.floor(diffMs / (1000 * 60));
+                return diffMins + '分钟前';
+            } else if (diffHours < 24) {
+                return diffHours + '小时前';
+            } else if (diffDays < 7) {
+                return diffDays + '天前';
+            } else {
+                return date.toLocaleDateString('zh-CN') + ' ' + date.toLocaleTimeString('zh-CN', {hour: '2-digit', minute:'2-digit'});
+            }
+        } catch (e) {
+            return timeStr;
+        }
+    }
+
+    // 更新消息计数
+    async function updateMessageCount() {
+        try {
+            const count = await getMessageCount();
+            if (count) {
+                messageCount.textContent = '共 ' + count.total + ' 条消息，' + count.unread + ' 条未读';
+                updateBadges(count);
+            }
+        } catch (error) {
+            messageCount.textContent = '获取统计失败';
+        }
+    }
+
+    // 更新列表标题
+    function updateListTitle() {
+        const titleMap = {
+            'all': '全部消息',
+            'unread': '未读消息',
+            'system': '系统通知',
+            'security': '安全提醒'
+        };
+        listTitle.textContent = titleMap[currentFilter] || '消息列表';
+    }
+
+    // 更新徽章
+    function updateBadges(count) {
+        if (!count) return;
+
+        const allBadge = document.querySelector('[data-type="all"] .badge');
+        const unreadBadge = document.querySelector('[data-type="unread"] .badge');
+        const systemBadge = document.querySelector('[data-type="system"] .badge');
+        const securityBadge = document.querySelector('[data-type="security"] .badge');
+
+        if (allBadge) allBadge.textContent = count.total || 0;
+        if (unreadBadge) unreadBadge.textContent = count.unread || 0;
+        if (systemBadge) systemBadge.textContent = count.system || 0;
+        if (securityBadge) securityBadge.textContent = count.security || 0;
+    }
+
+    // 显示空状态
+    function showEmpty() {
+        const emptyText = {
+            'all': '暂无消息',
+            'unread': '暂无未读消息',
+            'system': '暂无系统通知',
+            'security': '暂无安全提醒'
+        };
+
+        messagesList.innerHTML = '<div class="empty">' +
+            '<i class="fas fa-envelope-open-text"></i>' +
+            '<p>' + (emptyText[currentFilter] || '暂无消息') + '</p>' +
+        '</div>';
+    }
+
+    // 初始化事件
+    function initEvents() {
+        // 筛选按钮
+        for (let i = 0; i < filterButtons.length; i++) {
+            filterButtons[i].addEventListener('click', function() {
+                for (let j = 0; j < filterButtons.length; j++) {
+                    filterButtons[j].classList.remove('active');
+                }
+                this.classList.add('active');
+                currentFilter = this.getAttribute('data-type');
+                selectedMessageId = null; // 重置选中状态
+                getMessages();
+            });
+        }
+
+        // 搜索
+        let searchTimer;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(searchTimer);
+            searchTimer = setTimeout(function() {
+                currentSearch = searchInput.value;
+                selectedMessageId = null; // 重置选中状态
+                getMessages();
+            }, 300);
+        });
+
+        // 排序
+        sortSelect.addEventListener('change', function() {
+            currentSort = this.value;
+            selectedMessageId = null; // 重置选中状态
+            getMessages();
+        });
+
+        // 全部已读
+        markAllReadBtn.addEventListener('click', async function() {
+            if (confirm('确定标记所有消息为已读吗？')) {
+                try {
+                    await markAllAsRead();
+                    selectedMessageId = null; // 重置选中状态
+                    getMessages();
+                } catch (error) {
+                    alert('操作失败');
+                }
+            }
+        });
+
+        // 清空消息
+        clearAllBtn.addEventListener('click', async function() {
+            if (confirm('确定清空所有消息吗？')) {
+                try {
+                    await clearAllMessages();
+                    selectedMessageId = null; // 重置选中状态
+                    getMessages();
+                } catch (error) {
+                    alert('操作失败');
+                }
+            }
+        });
+
+        // 关闭详情弹层
+        closeDetailBtn.addEventListener('click', function() {
+            messageDetailOverlay.style.display = 'none';
+        });
+
+        // 点击弹层背景关闭
+        messageDetailOverlay.addEventListener('click', function(e) {
+            if (e.target === this) {
+                messageDetailOverlay.style.display = 'none';
+            }
+        });
+
+        // ESC键关闭弹层
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && messageDetailOverlay.style.display === 'flex') {
+                messageDetailOverlay.style.display = 'none';
+            }
+        });
+    }
+
+    // 页面加载
+    document.addEventListener('DOMContentLoaded', function() {
+        getMessages();
+        initEvents();
+    });
+</script>
+</body>
+</html>

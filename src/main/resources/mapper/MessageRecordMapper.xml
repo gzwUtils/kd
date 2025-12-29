@@ -16,14 +16,14 @@
     </select>
 
 
-    <select id="selectByTemplateId" parameterType="long" resultType="com.gzw.kd.common.entity.MessageRecord">
+    <select id="selectByTemplateId"  resultType="com.gzw.kd.common.entity.MessageRecord">
         select biz_id as bizId, template_id as templateId, channel_type as channelType, message_type as messageType,
         receiver, receiver_count, title, content,
         delay_minutes as delayMinutes, schedule_time as scheduleTime, retry_count as retryCount,
         status, success_count, fail_count,
         send_time as sendTime, create_time as createTime
         from message_record
-        where template_id = #{templateId, jdbcType=BIGINT}
+        where template_id = #{templateId, jdbcType=BIGINT} and (receiver = #{userId, jdbcType=VARCHAR} or receiver = #{phone} or receiver = #{email} or message_type = 1)
     </select>
 
     <insert id="insertRecord" parameterType="com.gzw.kd.common.entity.MessageRecord" useGeneratedKeys="true" keyProperty="id">
@@ -64,4 +64,208 @@
         retry_count = retry_count + 1
         WHERE id = #{id}
     </update>
+
+    <resultMap id="MessageRecordMap" type="com.gzw.kd.common.entity.MessageRecord">
+        <id column="id" property="id"/>
+        <result column="biz_id" property="bizId"/>
+        <result column="template_id" property="templateId"/>
+        <result column="channel_type" property="channelType"/>
+        <result column="message_type" property="messageType"/>
+        <result column="receiver" property="receiver"/>
+        <result column="receiver_count" property="receiverCount"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="delay_minutes" property="delayMinutes"/>
+        <result column="schedule_time" property="scheduleTime"/>
+        <result column="retry_count" property="retryCount"/>
+        <result column="status" property="status"/>
+        <result column="success_count" property="successCount"/>
+        <result column="fail_count" property="failCount"/>
+        <result column="send_time" property="sendTime"/>
+        <result column="create_time" property="createTime"/>
+        <result column="read_status" property="readStatus"/>
+        <result column="read_time" property="readTime"/>
+    </resultMap>
+
+    <!-- 根据ID和用户查询消息详情 -->
+    <select id="selectByIdAndUser" resultMap="MessageRecordMap">
+        SELECT
+        mr.*,
+        mrd.read_status,
+        mrd.read_time
+        FROM
+        doc.message_record mr
+        LEFT JOIN doc.message_receiver_detail mrd ON mr.id = mrd.record_id AND mrd.receiver = #{userId}
+        WHERE
+        mr.id = #{id}
+        AND mr.status = 60
+    </select>
+
+    <!-- 查询用户消息列表（动态SQL） -->
+    <select id="selectUserMessages" resultMap="MessageRecordMap" parameterType="com.gzw.kd.vo.input.MessageQueryInput">
+        SELECT
+        mr.*,
+        mrd.read_status,
+        mrd.read_time
+        FROM
+        doc.message_record mr
+        inner JOIN doc.message_template mt ON mr.template_id = mt.id
+        left JOIN doc.message_receiver_detail mrd ON mr.id = mrd.record_id and mrd.receiver = #{userId}
+        WHERE
+        (mr.receiver = #{userId} or mr.message_type = 1 or mr.receiver = #{phone} or mr.receiver = #{email})
+        AND mr.status = 60
+        <if test="type != null and type != 'all'">
+            <choose>
+                <when test="type == 'unread'">
+                    AND mrd.read_status = 0
+                </when>
+                <when test="type == 'notice'">
+                    AND mt.msg_type = 10
+                </when>
+                <when test="type == 'alert_code'">
+                    AND mt.msg_type = 40
+                </when>
+                <when test="type == 'update_notice'">
+                    AND mt.msg_type = 50
+                </when>
+                <when test="type == 'marketing'">
+                    AND mt.msg_type = 20
+                </when>
+            </choose>
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (
+            mr.title LIKE CONCAT('%', #{keyword}, '%')
+            OR mr.content LIKE CONCAT('%', #{keyword}, '%')
+            )
+        </if>
+        <choose>
+            <when test="sortBy == 'oldest'">
+                ORDER BY mr.create_time ASC
+            </when>
+            <otherwise>
+                ORDER BY mr.create_time DESC
+            </otherwise>
+        </choose>
+    </select>
+
+    <!-- 统计用户消息数量 -->
+    <select id="countUserMessages" resultType="java.lang.Integer" parameterType="com.gzw.kd.vo.input.MessageQueryInput">
+        SELECT
+        COUNT(*)
+        FROM
+        doc.message_record mr
+        left JOIN doc.message_receiver_detail mrd ON mr.id = mrd.record_id
+        WHERE
+        (mr.receiver = #{userId} or mr.receiver = #{phone} or mr.receiver = #{email} or mr.message_type = 1)
+        AND mr.status = 60
+        <if test="filterType != null and filterType != 'all'">
+            <choose>
+                <when test="filterType == 'unread'">
+                    AND mrd.read_status = 0
+                </when>
+                <when test="filterType == 'system'">
+                    AND mr.message_type = 10
+                </when>
+                <when test="filterType == 'security'">
+                    AND mr.message_type = 40
+                </when>
+                <when test="filterType == 'update'">
+                    AND mr.message_type = 50
+                </when>
+            </choose>
+        </if>
+        <if test="keyword != null and keyword != ''">
+            AND (
+            mr.title LIKE CONCAT('%', #{keyword}, '%')
+            OR mr.content LIKE CONCAT('%', #{keyword}, '%')
+            )
+        </if>
+    </select>
+
+    <!-- 统计总消息数 -->
+    <select id="countByUser" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        doc.message_record mr
+        WHERE
+        (mr.receiver = #{userId} or mr.receiver = #{phone} or mr.receiver = #{email} or mr.message_type = 1)
+        AND mr.status = 60
+    </select>
+
+    <!-- 统计未读消息数 -->
+    <select id="countUnreadByUser" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        doc.message_record mr
+        left JOIN doc.message_receiver_detail mrd ON mr.id = mrd.record_id
+        WHERE
+        (mr.receiver = #{userId} or mr.receiver = #{phone} or mr.receiver = #{email} or mr.message_type = 1)
+        AND mr.status = 60
+        AND (mrd.read_status = 0 or mrd.read_status is null)
+    </select>
+
+    <!-- 统计系统通知数 -->
+    <select id="countSystemByUser" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        doc.message_record mr
+        inner join doc.message_template mt on mr.template_id = mt.id
+        WHERE
+        (mr.receiver = #{userId} or mr.receiver = #{phone} or mr.receiver = #{email} or mr.message_type = 1)
+        AND mr.status = 60
+        AND mt.msg_type = 10
+    </select>
+
+    <!-- 统计告警消息数 -->
+    <select id="countSecurityByUser" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        doc.message_record mr
+        inner join doc.message_template mt on mr.template_id = mt.id
+        WHERE
+        (mr.receiver = #{userId} or mr.receiver = #{phone} or mr.receiver = #{email} or mr.message_type = 1)
+        AND mr.status = 60
+        AND mt.msg_type = 40
+    </select>
+
+    <!-- 统计公告消息数 -->
+    <select id="countUpdateByUser" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        doc.message_record mr
+        inner join doc.message_template mt on mr.template_id = mt.id
+        WHERE
+        (mr.receiver = #{userId} or mr.receiver = #{phone} or mr.receiver = #{email} or mr.message_type = 1)
+        AND mr.status = 60
+        AND mt.msg_type = 50
+    </select>
+
+    <!-- 更新阅读状态 -->
+    <insert id="updateReadStatus">
+        INSERT INTO doc.message_receiver_detail
+        (record_id, receiver, read_status, read_time, create_time)
+        VALUES(#{recordId}, #{receiver}, 1, NOW(), NOW());
+    </insert>
+
+    <!-- 删除用户消息 -->
+    <delete id="deleteUserMessage">
+        DELETE FROM
+        doc.message_record
+        WHERE
+        id = #{recordId}
+    </delete>
+
+    <!-- 删除用户所有消息 -->
+    <delete id="deleteAllUserMessages">
+        DELETE FROM
+        doc.message_record
+        WHERE
+        receiver = #{receiver} or receiver = #{phone} or receiver = #{email}
+    </delete>
 </mapper>

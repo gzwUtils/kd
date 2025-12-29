@@ -26,4 +26,10 @@ public class MessageRecord {
     private Integer failCount;         // 失败数量
     private Date sendTime;             // 发送时间
     private Date createTime;           // 创建时间
+
+
+
+    // 关联字段
+    private Integer readStatus;
+    private Date readTime;
 }

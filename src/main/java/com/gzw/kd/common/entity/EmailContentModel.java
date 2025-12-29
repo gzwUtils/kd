@@ -17,27 +17,19 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class EmailContentModel extends  ContentModel {
 
-    /**
-     * 标题
-     */
-    private String title;
 
-    /**
-     * 邮件附件链接
-     */
-    private String url;
-
-
-    /**
-     * 邮件发送时间
-     */
-    private String sendTime;
 
 
     /**
      * 邮件发送用户
      */
     private String name;
+
+
+    /**
+     * 邮件附件链接
+     */
+    private String url;
 
 
 }
