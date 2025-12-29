@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消息模板管理</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 头部 */
+        .header {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header h1 i {
+            color: #1890ff;
+        }
+
+        /* 操作栏 */
+        .action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 300px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #1890ff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #40a9ff;
+        }
+
+        .btn-success {
+            background: #52c41a;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #73d13d;
+        }
+
+        .btn-danger {
+            background: #ff4d4f;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #ff7875;
+        }
+
+        .btn-default {
+            background: #f5f5f5;
+            color: #666;
+            border: 1px solid #ddd;
+        }
+
+        .btn-default:hover {
+            background: #e8f4ff;
+            border-color: #1890ff;
+            color: #1890ff;
+        }
+
+        /* 表格容器 */
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* 表格样式 */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            background: #fafafa;
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 500;
+            color: #2c3e50;
+            border-bottom: 1px solid #eee;
+            white-space: nowrap;
+        }
+
+        .table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f5f5f5;
+            vertical-align: top;
+        }
+
+        .table tbody tr:hover {
+            background: #f9f9f9;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-active { background: #f6ffed; color: #52c41a; } /* 启用 */
+        .status-inactive { background: #fff7e6; color: #fa8c16; } /* 停用 */
+
+        .type-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: white;
+            margin: 2px;
+        }
+
+        .type-system { background: #1890ff; }
+        .type-marketing { background: #722ed1; }
+        .type-alert { background: #52c41a; }
+        .type-verification { background: #fa8c16; }
+        .type-announcement { background: #f5222d; }
+
+        .idtype-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            background: #e6f7ff;
+            color: #1890ff;
+            margin: 2px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .action-btn-edit {
+            background: #e6f7ff;
+            color: #1890ff;
+        }
+
+        .action-btn-delete {
+            background: #fff1f0;
+            color: #f5222d;
+        }
+
+        .action-btn-view {
+            background: #f6ffed;
+            color: #52c41a;
+        }
+
+        .action-btn-copy {
+            background: #fff7e6;
+            color: #fa8c16;
+        }
+
+        .action-btn-start {
+            background: #f6ffed;
+            color: #52c41a;
+        }
+
+        .action-btn-stop {
+            background: #fff1f0;
+            color: #f5222d;
+        }
+
+        /* 分页 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #eee;
+        }
+
+        .pagination-btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            min-width: 36px;
+            margin: 0 3px;
+        }
+
+        .pagination-btn:hover:not(.disabled) {
+            background: #f5f5f5;
+        }
+
+        .pagination-btn.active {
+            background: #1890ff;
+            color: white;
+            border-color: #1890ff;
+        }
+
+        .pagination-btn.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .pagination-info {
+            color: #666;
+            font-size: 14px;
+            margin-right: 15px;
+            align-self: center;
+        }
+
+        /* 模态框 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-container {
+            background: white;
+            border-radius: 8px;
+            width: 800px;
+            max-width: 90%;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            color: #2c3e50;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        /* 表单样式 */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #2c3e50;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #1890ff;
+            box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: #999;
+            margin-top: 4px;
+        }
+
+        .required::after {
+            content: ' *';
+            color: #f5222d;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.3;
+        }
+
+        /* 消息内容预览 */
+        .msg-preview {
+            background: #f5f5f5;
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 8px;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        /* JSON格式化 */
+        .json-key {
+            color: #92278f;
+            font-weight: bold;
+        }
+
+        .json-string {
+            color: #3ab54a;
+        }
+
+        .json-number {
+            color: #25aae2;
+        }
+
+        .json-boolean {
+            color: #f98280;
+        }
+
+        .json-null {
+            color: #f1592a;
+        }
+
+        /* 响应式 */
+        @media (max-width: 1200px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .action-bar {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .search-input {
+                flex: 1;
+            }
+
+            .table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .action-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部 -->
+    <div class="header">
+        <h1><i class="fas fa-envelope"></i> 消息模板管理</h1>
+        <p id="templateCount">加载中...</p>
+    </div>
+
+    <!-- 操作栏 -->
+    <div class="action-bar">
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="搜索模板名称...">
+            <button class="btn btn-primary" id="searchBtn">
+                <i class="fas fa-search"></i> 搜索
+            </button>
+            <button class="btn btn-default" id="resetBtn">
+                <i class="fas fa-redo"></i> 重置
+            </button>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button class="btn btn-default" id="filterActiveBtn" data-status="active">
+                <i class="fas fa-play-circle"></i> 启用中
+            </button>
+            <button class="btn btn-default" id="filterInactiveBtn" data-status="inactive">
+                <i class="fas fa-stop-circle"></i> 已停用
+            </button>
+            <button class="btn btn-success" id="addBtn">
+                <i class="fas fa-plus"></i> 新增模板
+            </button>
+        </div>
+    </div>
+
+    <!-- 模板列表 -->
+    <div class="table-container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th style="width: 50px;">ID</th>
+                <th style="width: 150px;">模板名称</th>
+                <th style="width: 100px;">状态</th>
+                <th style="width: 100px;">类型</th>
+                <th style="width: 100px;">ID类型</th>
+                <th style="width: 150px;">消息内容</th>
+                <th style="width: 150px;">创建者</th>
+                <th style="width: 120px;">创建时间</th>
+                <th style="width: 200px;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="templateList">
+            <!-- 数据会动态加载 -->
+            <tr>
+                <td colspan="9">
+                    <div class="empty-state">
+                        <i class="fas fa-envelope"></i>
+                        <p>暂无模板数据</p>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 分页 -->
+    <div class="pagination" id="pagination" style="display: none;">
+        <span class="pagination-info" id="paginationInfo">第1页，共1页</span>
+        <button class="pagination-btn" id="firstPage" title="第一页"><i class="fas fa-angle-double-left"></i></button>
+        <button class="pagination-btn" id="prevPage" title="上一页"><i class="fas fa-angle-left"></i></button>
+        <div id="pageNumbers"></div>
+        <button class="pagination-btn" id="nextPage" title="下一页"><i class="fas fa-angle-right"></i></button>
+        <button class="pagination-btn" id="lastPage" title="最后一页"><i class="fas fa-angle-double-right"></i></button>
+    </div>
+</div>
+
+<!-- 新增/编辑模态框 -->
+<div class="modal-overlay" id="templateModal">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3><i class="fas fa-edit"></i> <span id="modalTitle">新增消息模板</span></h3>
+            <button class="modal-close" id="closeModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <form id="templateForm">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label class="form-label required">模板名称</label>
+                        <input type="text" class="form-control" name="name" required maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">状态</label>
+                        <select class="form-control" name="msg_status" required>
+                            <option value="10">新建</option>
+                            <option value="20">停用</option>
+                            <option value="30" selected>启用</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">消息类型</label>
+                        <select class="form-control" name="msg_type" required>
+                            <option value="10">系统通知</option>
+                            <option value="20">营销消息</option>
+                            <option value="30">验证码消息</option>
+                            <option value="40">告警</option>
+                            <option value="50">公告</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">发送渠道</label>
+                        <select class="form-control" name="send_channel" required>
+                            <option value="10">IM</option>
+                            <option value="20">Push</option>
+                            <option value="30">短信</option>
+                            <option value="40">Email</option>
+                            <option value="50">公众号</option>
+                            <option value="60">小程序</option>
+                            <option value="70">企业微信</option>
+                            <option value="80">钉钉机器人</option>
+                            <option value="90">钉钉工作通知</option>
+                            <option value="100">企业微信机器人</option>
+                            <option value="110">飞书机器人</option>
+                            <option value="115">飞书应用消息</option>
+                            <option value="120" selected>站内信</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">ID类型</label>
+                        <select class="form-control" name="id_type" required>
+                            <option value="10">系统用户ID</option>
+                            <option value="20">did</option>
+                            <option value="30" selected>手机号</option>
+                            <option value="40">openId</option>
+                            <option value="50">email</option>
+                            <option value="60">企业微信userId</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">模板类型</label>
+                        <select class="form-control" name="template_type" required>
+                            <option value="10">运营类</option>
+                            <option value="20">技术类接口调用</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">屏蔽类型</label>
+                        <select class="form-control" name="shield_type" required>
+                            <option value="10" selected>夜间不屏蔽</option>
+                            <option value="20">夜间屏蔽</option>
+                            <option value="30">夜间屏蔽(次日早上9点发送)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="form-label required">消息内容 (JSON格式)</label>
+                        <textarea class="form-control" name="msg_content" rows="10" required maxlength="4096"></textarea>
+                        <div class="form-hint">
+                            请使用JSON格式，支持占位符：${variableName}<br>
+                            示例：{"content": "亲爱的${name}，您的验证码是${code}，请在10分钟内使用。"}
+                        </div>
+                        <div class="msg-preview" id="msgPreview">
+                            <!-- JSON预览 -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">定时任务ID</label>
+                        <input type="number" class="form-control" name="cron_task_id" min="0" value="0">
+                        <div class="form-hint">xxl-job-admin返回的任务ID</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">期望发送时间</label>
+                        <input type="text" class="form-control" name="expect_push_time" maxlength="100" value="0">
+                        <div class="form-hint">
+                            0:立即发送<br>
+                            定时任务以及周期任务:cron表达式<br>
+                            示例：0 30 9 * * ? (每天9:30执行)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">发送账号</label>
+                        <input type="text" class="form-control" name="send_account" required maxlength="20" value="admin">
+                        <div class="form-hint">同一渠道下可配置多个发送账号</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label required">创建者</label>
+                        <input type="text" class="form-control" name="creator" required maxlength="45" value="admin">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">更新者</label>
+                        <input type="text" class="form-control" name="updator" maxlength="45" value="admin">
+                    </div>
+                </div>
+
+                <input type="hidden" name="id" id="templateId">
+                <input type="hidden" name="is_deleted" value="0">
+                <input type="hidden" name="cron_crowd_path" value="">
+            </form>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-primary" id="saveBtn">
+                <i class="fas fa-save"></i> 保存模板
+            </button>
+            <button class="btn btn-default" id="cancelBtn">
+                取消
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 查看详情模态框 -->
+<div class="modal-overlay" id="detailModal">
+    <div class="modal-container" style="width: 700px;">
+        <div class="modal-header">
+            <h3><i class="fas fa-eye"></i> 模板详情</h3>
+            <button class="modal-close" id="closeDetailModal">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div id="detailContent">
+                <!-- 详情内容会动态加载 -->
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-default" id="closeDetailBtn">关闭</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // API配置
+    const API_BASE_URL = '/mt';
+
+    // DOM元素
+    const templateList = document.getElementById('templateList');
+    const templateCount = document.getElementById('templateCount');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const filterActiveBtn = document.getElementById('filterActiveBtn');
+    const filterInactiveBtn = document.getElementById('filterInactiveBtn');
+    const addBtn = document.getElementById('addBtn');
+    const pagination = document.getElementById('pagination');
+    const paginationInfo = document.getElementById('paginationInfo');
+    const pageNumbers = document.getElementById('pageNumbers');
+    const firstPageBtn = document.getElementById('firstPage');
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const lastPageBtn = document.getElementById('lastPage');
+
+    // 模态框相关
+    const templateModal = document.getElementById('templateModal');
+    const detailModal = document.getElementById('detailModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const templateForm = document.getElementById('templateForm');
+    const templateId = document.getElementById('templateId');
+    const closeModal = document.getElementById('closeModal');
+    const closeDetailModal = document.getElementById('closeDetailModal');
+    const saveBtn = document.getElementById('saveBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const closeDetailBtn = document.getElementById('closeDetailBtn');
+    const msgPreview = document.getElementById('msgPreview');
+
+    // 状态
+    let currentPage = 1;
+    let pageSize = 10;
+    let totalPages = 1;
+    let totalItems = 0;
+    let isLoading = false;
+    let currentSearch = '';
+    let currentFilter = 'all'; // all, active, inactive
+    let editingTemplate = null;
+
+    // 映射数据
+    const statusMap = {
+        '10': { text: '新建', class: 'status-inactive' },
+        '20': { text: '停用', class: 'status-inactive' },
+        '30': { text: '启用', class: 'status-active' },
+        '启用': { text: '启用', class: 'status-active' },
+        '停用': { text: '停用', class: 'status-inactive' }
+    };
+
+    const typeMap = {
+        '10': { text: '系统通知', class: 'type-system' },
+        '20': { text: '营销', class: 'type-marketing' },
+        '30': { text: '验证码', class: 'type-verification' },
+        '40': { text: '告警', class: 'type-alert' },
+        '50': { text: '公告', class: 'type-announcement' },
+        '系统通知': { text: '系统通知', class: 'type-system' },
+        '营销': { text: '营销', class: 'type-marketing' },
+        '告警': { text: '告警', class: 'type-alert' }
+    };
+
+    const idTypeMap = {
+        '10': '系统用户ID',
+        '20': 'did',
+        '30': '手机号',
+        '40': 'openId',
+        '50': 'email',
+        '60': '企业微信userId'
+    };
+
+    const channelMap = {
+        '10': 'IM',
+        '20': 'Push',
+        '30': '短信',
+        '40': 'Email',
+        '50': '公众号',
+        '60': '小程序',
+        '70': '企业微信',
+        '80': '钉钉机器人',
+        '90': '钉钉工作通知',
+        '100': '企业微信机器人',
+        '110': '飞书机器人',
+        '115': '飞书应用消息',
+        '120': '站内信'
+    };
+
+    // API调用
+    async function callApi(endpoint, options) {
+        try {
+            const token = localStorage.getItem('token') || '';
+            var headers = {
+                'Content-Type': 'application/json'
+            };
+
+            if (token) {
+                headers['Authorization'] = 'Bearer ' + token;
+            }
+
+            if (options && options.headers) {
+                for (var key in options.headers) {
+                    headers[key] = options.headers[key];
+                }
+            }
+
+            var requestOptions = {
+                headers: headers
+            };
+
+            if (options) {
+                for (var key in options) {
+                    if (key !== 'headers') {
+                        requestOptions[key] = options[key];
+                    }
+                }
+            }
+
+            const response = await fetch(API_BASE_URL + endpoint, requestOptions);
+
+            if (!response.ok) {
+                throw new Error('HTTP错误: ' + response.status);
+            }
+
+            const result = await response.json();
+
+            if (result.code !== 20000 && result.code !== 200) {
+                throw new Error(result.message || '请求失败');
+            }
+
+            return result.data || result;
+        } catch (error) {
+            console.error('API调用失败:', error);
+            throw error;
+        }
+    }
+
+    // 获取模板列表
+    async function getTemplates() {
+        if (isLoading) return;
+
+        isLoading = true;
+
+        try {
+            templateList.innerHTML = '<tr><td colspan="9"><div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>加载中...</p></div></td></tr>';
+
+            // 根据您的接口，使用/findAllByAccount获取当前用户的模板
+            const data = await callApi('/findAllByAccount', {
+                method: 'POST'
+            });
+
+            if (data && data.templateInfos && data.templateInfos.length > 0) {
+                var items = data.templateInfos;
+
+                // 应用筛选
+                var filteredItems = items;
+                if (currentFilter === 'active') {
+                    filteredItems = items.filter(function(item) {
+                        return item.status === '启用';
+                    });
+                } else if (currentFilter === 'inactive') {
+                    filteredItems = items.filter(function(item) {
+                        return item.status === '停用';
+                    });
+                }
+
+                // 应用搜索
+                if (currentSearch) {
+                    filteredItems = filteredItems.filter(function(item) {
+                        return item.name.toLowerCase().includes(currentSearch.toLowerCase());
+                    });
+                }
+
+                totalItems = filteredItems.length;
+                totalPages = Math.ceil(totalItems / pageSize);
+
+                // 分页处理
+                var startIndex = (currentPage - 1) * pageSize;
+                var endIndex = Math.min(startIndex + pageSize, totalItems);
+                var pagedItems = filteredItems.slice(startIndex, endIndex);
+
+                renderTemplateList(pagedItems);
+                updatePagination();
+                updateTemplateCount(items.length);
+            } else {
+                showEmptyState();
+                updateTemplateCount(0);
+            }
+        } catch (error) {
+            templateList.innerHTML = '<tr><td colspan="9"><div class="empty-state"><i class="fas fa-exclamation-triangle"></i><p>加载失败，请重试</p></div></td></tr>';
+            console.error('获取模板列表失败:', error);
+            templateCount.textContent = '加载失败';
+        } finally {
+            isLoading = false;
+        }
+    }
+
+    // 渲染模板列表
+    function renderTemplateList(templates) {
+        if (templates.length === 0) {
+            showEmptyState();
+            return;
+        }
+
+        var html = '';
+
+        for (var i = 0; i < templates.length; i++) {
+            var template = templates[i];
+            var status = statusMap[template.status] || { text: '未知', class: '' };
+            var type = typeMap[template.type] || { text: '未知', class: '' };
+            var idTypeText = idTypeMap[template.idType] || template.idType || '未知';
+
+            // 格式化内容预览
+            var contentPreview = template.content || '';
+            try {
+                var contentObj = JSON.parse(contentPreview);
+                contentPreview = JSON.stringify(contentObj, null, 2);
+                if (contentPreview.length > 100) {
+                    contentPreview = contentPreview.substring(0, 100) + '...';
+                }
+            } catch (e) {
+                if (contentPreview.length > 100) {
+                    contentPreview = contentPreview.substring(0, 100) + '...';
+                }
+            }
+
+            html += '<tr data-id="' + template.id + '">' +
+                    '<td>' + template.id + '</td>' +
+                    '<td>' +
+                    '<div style="font-weight: 500;">' + template.name + '</div>' +
+                    '</td>' +
+                    '<td><span class="status-badge ' + status.class + '">' + status.text + '</span></td>' +
+                    '<td><span class="type-badge ' + type.class + '">' + type.text + '</span></td>' +
+                    '<td><span class="idtype-badge">' + idTypeText + '</span></td>' +
+                    '<td><div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + contentPreview + '</div></td>' +
+                    '<td>admin</td>' +
+                    '<td>-</td>' +
+                    '<td>' +
+                    '<div class="action-buttons">' +
+                    '<button class="action-btn action-btn-view" onclick="viewTemplate(' + template.id + ')" title="查看">' +
+                    '<i class="fas fa-eye"></i>' +
+                    '</button>' +
+                    '<button class="action-btn action-btn-edit" onclick="editTemplate(' + template.id + ')" title="编辑">' +
+                    '<i class="fas fa-edit"></i>' +
+                    '</button>' +
+                    '<button class="action-btn action-btn-copy" onclick="copyTemplate(' + template.id + ')" title="复制">' +
+                    '<i class="fas fa-copy"></i>' +
+                    '</button>' +
+                    '<button class="action-btn action-btn-delete" onclick="deleteTemplate(' + template.id + ')" title="删除">' +
+                    '<i class="fas fa-trash"></i>' +
+                    '</button>' +
+                    '</div>' +
+                    '</td>' +
+                    '</tr>';
+        }
+
+        templateList.innerHTML = html;
+    }
+
+    // 显示空状态
+    function showEmptyState() {
+        templateList.innerHTML = '<tr>' +
+                                '<td colspan="9">' +
+                                '<div class="empty-state">' +
+                                '<i class="fas fa-envelope"></i>' +
+                                '<p>暂无模板数据</p>' +
+                                '</div>' +
+                                '</td>' +
+                                '</tr>';
+        pagination.style.display = 'none';
+    }
+
+    // 更新模板计数
+    function updateTemplateCount(count) {
+        templateCount.textContent = '共 ' + count + ' 个模板';
+    }
+
+    // 更新分页
+    function updatePagination() {
+        if (totalPages <= 1) {
+            pagination.style.display = 'none';
+            return;
+        }
+
+        pagination.style.display = 'flex';
+        paginationInfo.textContent = '第' + currentPage + '页，共' + totalPages + '页';
+
+        // 更新按钮状态
+        firstPageBtn.disabled = currentPage === 1;
+        prevPageBtn.disabled = currentPage === 1;
+        nextPageBtn.disabled = currentPage === totalPages;
+        lastPageBtn.disabled = currentPage === totalPages;
+
+        if (currentPage === 1) {
+            firstPageBtn.classList.add('disabled');
+            prevPageBtn.classList.add('disabled');
+        } else {
+            firstPageBtn.classList.remove('disabled');
+            prevPageBtn.classList.remove('disabled');
+        }
+
+        if (currentPage === totalPages) {
+            nextPageBtn.classList.add('disabled');
+            lastPageBtn.classList.add('disabled');
+        } else {
+            nextPageBtn.classList.remove('disabled');
+            lastPageBtn.classList.remove('disabled');
+        }
+
+        // 渲染页码按钮
+        var pageHtml = '';
+        var startPage = Math.max(1, currentPage - 2);
+        var endPage = Math.min(totalPages, startPage + 4);
+
+        for (var i = startPage; i <= endPage; i++) {
+            var activeClass = '';
+            if (i === currentPage) {
+                activeClass = 'active';
+            }
+            pageHtml += '<button class="pagination-btn ' + activeClass + '" data-page="' + i + '">' + i + '</button>';
+        }
+
+        pageNumbers.innerHTML = pageHtml;
+
+        // 为页码按钮添加事件
+        var pageBtns = pageNumbers.querySelectorAll('.pagination-btn');
+        for (var i = 0; i < pageBtns.length; i++) {
+            pageBtns[i].addEventListener('click', function() {
+                var page = parseInt(this.getAttribute('data-page'));
+                goToPage(page);
+            });
+        }
+    }
+
+    // 跳转到指定页面
+    function goToPage(page) {
+        if (page < 1 || page > totalPages || page === currentPage || isLoading) return;
+        currentPage = page;
+        getTemplates();
+    }
+
+    // 查看模板详情
+    async function viewTemplate(id) {
+        try {
+            // 由于您的接口没有直接获取单个模板的接口，我们先获取所有模板然后筛选
+            const data = await callApi('/findAllByAccount', {
+                method: 'POST'
+            });
+
+            if (data && data.templateInfos) {
+                var template = data.templateInfos.find(function(t) {
+                    return t.id === id;
+                });
+
+                if (template) {
+                    showTemplateDetail(template);
+                } else {
+                    alert('模板不存在');
+                }
+            }
+        } catch (error) {
+            console.error('获取模板详情失败:', error);
+            alert('获取模板详情失败');
+        }
+    }
+
+    // 显示模板详情
+    function showTemplateDetail(template) {
+        var status = statusMap[template.status] || { text: '未知', class: '' };
+        var type = typeMap[template.type] || { text: '未知', class: '' };
+        var idTypeText = idTypeMap[template.idType] || template.idType || '未知';
+
+        // 格式化JSON内容
+        var formattedContent = template.content || '';
+        try {
+            var contentObj = JSON.parse(formattedContent);
+            formattedContent = syntaxHighlight(JSON.stringify(contentObj, null, 2));
+        } catch (e) {
+            formattedContent = syntaxHighlight(formattedContent);
+        }
+
+        var html = '<div class="form-grid">' +
+                   '<div class="form-group">' +
+                   '<label class="form-label">模板ID</label>' +
+                   '<div class="form-control" style="background: #f5f5f5;">' + template.id + '</div>' +
+                   '</div>' +
+                   '<div class="form-group">' +
+                   '<label class="form-label">模板名称</label>' +
+                   '<div class="form-control" style="background: #f5f5f5;">' + template.name + '</div>' +
+                   '</div>' +
+                   '<div class="form-group">' +
+                   '<label class="form-label">状态</label>' +
+                   '<div class="form-control" style="background: #f5f5f5;">' +
+                   '<span class="status-badge ' + status.class + '">' + status.text + '</span>' +
+                   '</div>' +
+                   '</div>' +
+                   '<div class="form-group">' +
+                   '<label class="form-label">类型</label>' +
+                   '<div class="form-control" style="background: #f5f5f5;">' +
+                   '<span class="type-badge ' + type.class + '">' + type.text + '</span>' +
+                   '</div>' +
+                   '</div>' +
+                   '<div class="form-group">' +
+                   '<label class="form-label">ID类型</label>' +
+                   '<div class="form-control" style="background: #f5f5f5;">' + idTypeText + '</div>' +
+                   '</div>' +
+                   '<div class="form-group full-width">' +
+                   '<label class="form-label">消息内容</label>' +
+                   '<div class="msg-preview">' + formattedContent + '</div>' +
+                   '</div>' +
+                   '</div>';
+
+        document.getElementById('detailContent').innerHTML = html;
+        detailModal.style.display = 'flex';
+    }
+
+    // JSON语法高亮
+    function syntaxHighlight(json) {
+        if (typeof json !== 'string') {
+            json = JSON.stringify(json, null, 2);
+        }
+
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function(match) {
+            var cls = 'json-number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'json-key';
+                } else {
+                    cls = 'json-string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'json-boolean';
+            } else if (/null/.test(match)) {
+                cls = 'json-null';
+            }
+
+            // 高亮占位符
+            match = match.replace(/\$\{[^}]+\}/g, function(placeholder) {
+                return '<span style="color: #1890ff; font-weight: bold;">' + placeholder + '</span>';
+            });
+
+            return '<span class="' + cls + '">' + match + '</span>';
+        });
+    }
+
+    // 编辑模板
+    async function editTemplate(id) {
+        try {
+            // 获取所有模板然后筛选
+            const data = await callApi('/findAllByAccount', {
+                method: 'POST'
+            });
+
+            if (data && data.templateInfos) {
+                var template = data.templateInfos.find(function(t) {
+                    return t.id === id;
+                });
+
+                if (template) {
+                    showEditModal(template);
+                } else {
+                    alert('模板不存在');
+                }
+            }
+        } catch (error) {
+            console.error('获取模板失败:', error);
+            alert('获取模板失败');
+        }
+    }
+
+    // 显示编辑模态框
+    function showEditModal(template) {
+        editingTemplate = template;
+        modalTitle.textContent = '编辑消息模板';
+        templateId.value = template.id;
+
+        // 填充表单数据
+        var form = templateForm;
+
+        // 基本字段
+        form.elements.name.value = template.name || '';
+
+        // 状态映射
+        if (template.status === '启用') {
+            form.elements.msg_status.value = '30';
+        } else if (template.status === '停用') {
+            form.elements.msg_status.value = '20';
+        } else {
+            form.elements.msg_status.value = '10';
+        }
+
+        // 类型映射
+        if (template.type === '系统通知') {
+            form.elements.msg_type.value = '10';
+        } else if (template.type === '营销') {
+            form.elements.msg_type.value = '20';
+        } else if (template.type === '告警') {
+            form.elements.msg_type.value = '40';
+        } else {
+            form.elements.msg_type.value = '10';
+        }
+
+        // 其他字段使用默认值
+        form.elements.id_type.value = template.idType || '30';
+        form.elements.msg_content.value = template.content || '';
+
+        // 更新预览
+        updateMsgPreview();
+
+        templateModal.style.display = 'flex';
+    }
+
+    // 新增模板
+    function showAddModal() {
+        editingTemplate = null;
+        modalTitle.textContent = '新增消息模板';
+        templateForm.reset();
+        templateId.value = '';
+
+        // 设置默认值
+        var form = templateForm;
+        form.elements.msg_status.value = '30';
+        form.elements.msg_type.value = '10';
+        form.elements.send_channel.value = '120'; // 站内信
+        form.elements.id_type.value = '30'; // 手机号
+        form.elements.template_type.value = '10'; // 运营类
+        form.elements.shield_type.value = '10'; // 夜间不屏蔽
+        form.elements.send_account.value = 'admin';
+        form.elements.creator.value = 'admin';
+        form.elements.updator.value = 'admin';
+        form.elements.cron_task_id.value = '0';
+        form.elements.expect_push_time.value = '0';
+
+        // 清空预览
+        msgPreview.innerHTML = '';
+
+        templateModal.style.display = 'flex';
+    }
+
+    // 更新消息预览
+    function updateMsgPreview() {
+        var msgContent = templateForm.elements.msg_content.value;
+
+        if (msgContent.trim()) {
+            try {
+                // 尝试解析JSON
+                var contentObj = JSON.parse(msgContent);
+                var formatted = syntaxHighlight(JSON.stringify(contentObj, null, 2));
+                msgPreview.innerHTML = formatted;
+            } catch (e) {
+                // 如果不是有效的JSON，直接显示
+                msgPreview.textContent = msgContent;
+            }
+        } else {
+            msgPreview.innerHTML = '<span style="color: #999;">请输入消息内容查看预览...</span>';
+        }
+    }
+
+    // 复制模板
+    async function copyTemplate(id) {
+        if (!confirm('确定复制这个模板吗？')) return;
+
+        try {
+            await callApi('/copy/' + id, {
+                method: 'POST'
+            });
+            alert('复制成功');
+            getTemplates();
+        } catch (error) {
+            console.error('复制模板失败:', error);
+            alert('复制失败');
+        }
+    }
+
+    // 删除模板
+    async function deleteTemplate(id) {
+        if (!confirm('确定删除这个模板吗？')) return;
+
+        try {
+            await callApi('/delete/' + id, {
+                method: 'POST'
+            });
+            alert('删除成功');
+            getTemplates();
+        } catch (error) {
+            console.error('删除模板失败:', error);
+            alert('删除失败');
+        }
+    }
+
+    // 保存模板
+    async function saveTemplate() {
+        // 验证表单
+        if (!templateForm.checkValidity()) {
+            templateForm.reportValidity();
+            return;
+        }
+
+        var formData = new FormData(templateForm);
+        var data = {};
+        for (var pair of formData.entries()) {
+            data[pair[0]] = pair[1];
+        }
+
+        // 转换数字字段
+        var numericFields = [
+            'msg_status', 'cron_task_id', 'id_type', 'send_channel',
+            'template_type', 'msg_type', 'shield_type', 'is_deleted'
+        ];
+
+        for (var i = 0; i < numericFields.length; i++) {
+            var field = numericFields[i];
+            if (data[field] !== undefined) {
+                data[field] = parseInt(data[field]) || 0;
+            }
+        }
+
+        // 验证消息内容是否为有效JSON
+        try {
+            if (data.msg_content) {
+                JSON.parse(data.msg_content);
+            }
+        } catch (e) {
+            alert('消息内容必须是有效的JSON格式');
+            return;
+        }
+
+        try {
+            // 根据您的接口，使用/save接口保存模板
+            await callApi('/save', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+
+            alert(data.id ? '更新成功' : '创建成功');
+            templateModal.style.display = 'none';
+            getTemplates();
+        } catch (error) {
+            console.error('保存模板失败:', error);
+            alert('保存失败: ' + (error.message || '未知错误'));
+        }
+    }
+
+    // 初始化事件
+    function initEvents() {
+        // 搜索
+        searchBtn.addEventListener('click', function() {
+            currentSearch = searchInput.value;
+            currentPage = 1;
+            getTemplates();
+        });
+
+        // 回车搜索
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                currentSearch = searchInput.value;
+                currentPage = 1;
+                getTemplates();
+            }
+        });
+
+        // 重置
+        resetBtn.addEventListener('click', function() {
+            searchInput.value = '';
+            currentSearch = '';
+            currentPage = 1;
+            getTemplates();
+        });
+
+        // 筛选
+        filterActiveBtn.addEventListener('click', function() {
+            currentFilter = 'active';
+            currentPage = 1;
+            filterActiveBtn.classList.add('btn-primary');
+            filterInactiveBtn.classList.remove('btn-primary');
+            filterInactiveBtn.classList.add('btn-default');
+            getTemplates();
+        });
+
+        filterInactiveBtn.addEventListener('click', function() {
+            currentFilter = 'inactive';
+            currentPage = 1;
+            filterInactiveBtn.classList.add('btn-primary');
+            filterActiveBtn.classList.remove('btn-primary');
+            filterActiveBtn.classList.add('btn-default');
+            getTemplates();
+        });
+
+        // 新增模板
+        addBtn.addEventListener('click', showAddModal);
+
+        // 分页按钮
+        firstPageBtn.addEventListener('click', function() {
+            goToPage(1);
+        });
+
+        prevPageBtn.addEventListener('click', function() {
+            goToPage(currentPage - 1);
+        });
+
+        nextPageBtn.addEventListener('click', function() {
+            goToPage(currentPage + 1);
+        });
+
+        lastPageBtn.addEventListener('click', function() {
+            goToPage(totalPages);
+        });
+
+        // 消息内容变化时更新预览
+        templateForm.elements.msg_content.addEventListener('input', updateMsgPreview);
+
+        // 保存模板
+        saveBtn.addEventListener('click', saveTemplate);
+
+        // 关闭模态框
+        closeModal.addEventListener('click', function() {
+            templateModal.style.display = 'none';
+        });
+
+        closeDetailModal.addEventListener('click', function() {
+            detailModal.style.display = 'none';
+        });
+
+        closeDetailBtn.addEventListener('click', function() {
+            detailModal.style.display = 'none';
+        });
+
+        cancelBtn.addEventListener('click', function() {
+            templateModal.style.display = 'none';
+        });
+
+        // 点击模态框背景关闭
+        var modals = [templateModal, detailModal];
+        for (var i = 0; i < modals.length; i++) {
+            modals[i].addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+        }
+
+        // ESC键关闭模态框
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (templateModal.style.display === 'flex') {
+                    templateModal.style.display = 'none';
+                }
+                if (detailModal.style.display === 'flex') {
+                    detailModal.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    // 页面加载
+    document.addEventListener('DOMContentLoaded', function() {
+        getTemplates();
+        initEvents();
+    });
+</script>
+</body>
+</html>

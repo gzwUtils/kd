@@ -183,6 +183,10 @@ public class PCController {
         return "/pc/userInfo";
     }
 
+    @RequestMapping(value = "/template",method = RequestMethod.GET)
+    public String template() {
+        return "/pc/template";
+    }
 
     @RequestMapping(value = "/uploadFile",method = RequestMethod.GET)
     public String uploadFile() {

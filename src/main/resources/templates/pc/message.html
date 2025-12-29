@@ -16,12 +16,13 @@
         body {
             background-color: #f5f7fa;
             color: #333;
+            height: 100vh;
             overflow: hidden;
         }
 
         .container {
             display: flex;
-            min-height: 100vh;
+            height: 100vh;
             padding: 20px;
             gap: 20px;
         }
@@ -33,6 +34,8 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            height: calc(100vh - 40px);
+            overflow-y: auto;
         }
 
         .sidebar h2 {
@@ -105,6 +108,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            height: calc(100vh - 40px);
         }
 
         .header {
@@ -112,6 +116,7 @@
             border-radius: 8px;
             padding: 20px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            flex-shrink: 0;
         }
 
         .header h1 {
@@ -125,24 +130,7 @@
             font-size: 14px;
         }
 
-        .search-box {
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            background: #f5f5f5;
-            border-radius: 6px;
-            padding: 8px 12px;
-        }
-
-        .search-box input {
-            flex: 1;
-            border: none;
-            background: none;
-            outline: none;
-            padding: 0 8px;
-        }
-
-        /* 消息列表 */
+        /* 消息列表容器 */
         .messages-container {
             background: white;
             border-radius: 8px;
@@ -150,6 +138,8 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            min-height: 0; /* 重要：防止flex子元素溢出 */
+            overflow: hidden; /* 防止内容溢出 */
         }
 
         .messages-header {
@@ -158,20 +148,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-shrink: 0;
         }
 
+        /* 消息列表 - 修正高度问题 */
         .messages-list {
             flex: 1;
             overflow-y: auto;
-            min-height: 300px; /* 确保有最小高度 */
+            min-height: 0;
+            position: relative;
         }
 
         .message-item {
             padding: 15px 20px;
             border-bottom: 1px solid #f5f5f5;
             cursor: pointer;
-            display: block !important; /* 强制显示 */
-            visibility: visible !important; /* 强制可见 */
+            transition: background-color 0.2s;
         }
 
         .message-item:hover {
@@ -207,11 +199,13 @@
             background: #1890ff;
             border-radius: 50%;
             margin-right: 8px;
+            flex-shrink: 0;
         }
 
         .message-time {
             color: #999;
             font-size: 13px;
+            flex-shrink: 0;
         }
 
         .message-content {
@@ -239,18 +233,106 @@
             padding: 40px;
             text-align: center;
             color: #999;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .empty {
             padding: 60px 20px;
             text-align: center;
             color: #999;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .empty i {
             font-size: 40px;
             margin-bottom: 15px;
             opacity: 0.3;
+        }
+
+        /* 分页样式 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+            flex-shrink: 0;
+            background: white;
+        }
+
+        .pagination-btn {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            min-width: 36px;
+            margin: 0 3px;
+        }
+
+        .pagination-btn:hover:not(.disabled) {
+            background: #f5f5f5;
+        }
+
+        .pagination-btn.active {
+            background: #1890ff;
+            color: white;
+            border-color: #1890ff;
+        }
+
+        .pagination-btn.disabled {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .pagination-info {
+            color: #666;
+            font-size: 14px;
+            margin-right: 15px;
+            align-self: center;
+        }
+
+        /* 加载更多样式 */
+        .load-more {
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #eee;
+            flex-shrink: 0;
+            background: white;
+        }
+
+        .load-more-btn {
+            padding: 8px 20px;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .load-more-btn:hover:not(:disabled) {
+            background: #e8f4ff;
+            border-color: #1890ff;
+        }
+
+        .load-more-btn:disabled {
+            color: #999;
+            cursor: not-allowed;
         }
 
         /* 消息详情弹层 */
@@ -285,6 +367,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .detail-header h3 {
@@ -292,7 +375,10 @@
             font-size: 18px;
             display: flex;
             align-items: center;
-            gap: 10px;
+        }
+
+        .detail-header h3 i {
+            margin-right: 10px;
         }
 
         .close-btn {
@@ -337,11 +423,16 @@
 
         .detail-meta {
             display: flex;
-            gap: 20px;
             padding-top: 15px;
             border-top: 1px solid #f0f0f0;
             color: #666;
             font-size: 14px;
+            flex-wrap: wrap;
+        }
+
+        .detail-meta div {
+            margin-right: 20px;
+            margin-bottom: 10px;
         }
 
         .detail-tag {
@@ -355,13 +446,35 @@
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
+                height: auto;
+                padding: 10px;
             }
+
             .sidebar {
                 width: 100%;
+                height: auto;
+                margin-bottom: 10px;
             }
+
+            .main-content {
+                height: auto;
+            }
+
+            .messages-container {
+                height: 500px;
+            }
+
             .message-detail-container {
                 width: 95%;
                 max-height: 90vh;
+            }
+
+            .detail-meta {
+                flex-direction: column;
+            }
+
+            .detail-meta div {
+                margin-right: 0;
             }
         }
     </style>
@@ -402,10 +515,6 @@
         <div class="header">
             <h1>消息列表</h1>
             <p id="messageCount">加载中...</p>
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="搜索消息...">
-            </div>
         </div>
 
         <div class="messages-container">
@@ -419,6 +528,21 @@
 
             <div class="messages-list" id="messagesList">
                 <div class="loading">加载中...</div>
+            </div>
+
+            <!-- 分页容器 -->
+            <div class="pagination" id="pagination" style="display: none;">
+                <span class="pagination-info" id="paginationInfo">第1页，共1页</span>
+                <button class="pagination-btn" id="firstPage" title="第一页"><i class="fas fa-angle-double-left"></i></button>
+                <button class="pagination-btn" id="prevPage" title="上一页"><i class="fas fa-angle-left"></i></button>
+                <div id="pageNumbers"></div>
+                <button class="pagination-btn" id="nextPage" title="下一页"><i class="fas fa-angle-right"></i></button>
+                <button class="pagination-btn" id="lastPage" title="最后一页"><i class="fas fa-angle-double-right"></i></button>
+            </div>
+
+            <!-- 加载更多容器 -->
+            <div class="load-more" id="loadMore" style="display: none;">
+                <button class="load-more-btn" id="loadMoreBtn">加载更多</button>
             </div>
         </div>
     </div>
@@ -448,11 +572,21 @@
     const messagesList = document.getElementById('messagesList');
     const messageCount = document.getElementById('messageCount');
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const searchInput = document.getElementById('searchInput');
     const sortSelect = document.getElementById('sortSelect');
     const markAllReadBtn = document.getElementById('markAllRead');
     const clearAllBtn = document.getElementById('clearAll');
     const listTitle = document.getElementById('listTitle');
+    const pagination = document.getElementById('pagination');
+    const paginationInfo = document.getElementById('paginationInfo');
+    const pageNumbers = document.getElementById('pageNumbers');
+    const loadMore = document.getElementById('loadMore');
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+    // 分页相关DOM
+    const firstPageBtn = document.getElementById('firstPage');
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const lastPageBtn = document.getElementById('lastPage');
 
     // 消息详情相关DOM
     const messageDetailOverlay = document.getElementById('messageDetailOverlay');
@@ -461,10 +595,20 @@
 
     // 状态
     let currentFilter = 'all';
-    let currentSearch = '';
     let currentSort = 'newest';
     let messagesData = [];
     let selectedMessageId = null;
+
+    // 分页状态
+    let currentPage = 1;
+    let pageSize = 10;
+    let totalPages = 1;
+    let totalItems = 0;
+    let isLoading = false;
+    let hasMore = false;
+
+    // 分页模式
+    let paginationMode = 'pagination';
 
     // 获取当前用户ID
     function getCurrentUserId() {
@@ -478,19 +622,36 @@
     }
 
     // API调用
-    async function callApi(endpoint, options = {}) {
+    async function callApi(endpoint, options) {
         try {
             const token = getToken();
-            const headers = {
-                'Content-Type': 'application/json',
-                ...(token && { 'Authorization': 'Bearer ' + token }),
-                ...options.headers
+            var headers = {
+                'Content-Type': 'application/json'
             };
 
-            const response = await fetch(API_BASE_URL + endpoint, {
-                headers: headers,
-                ...options
-            });
+            if (token) {
+                headers['Authorization'] = 'Bearer ' + token;
+            }
+
+            if (options && options.headers) {
+                for (var key in options.headers) {
+                    headers[key] = options.headers[key];
+                }
+            }
+
+            var requestOptions = {
+                headers: headers
+            };
+
+            if (options) {
+                for (var key in options) {
+                    if (key !== 'headers') {
+                        requestOptions[key] = options[key];
+                    }
+                }
+            }
+
+            const response = await fetch(API_BASE_URL + endpoint, requestOptions);
 
             if (!response.ok) {
                 throw new Error('HTTP错误: ' + response.status);
@@ -509,49 +670,100 @@
         }
     }
 
-    // 获取消息列表 - 使用POST请求
-    async function getMessages() {
-        try {
-            messagesList.innerHTML = '<div class="loading">加载中...</div>';
+    // 获取消息列表
+    async function getMessages(page) {
+        if (isLoading) return;
 
-            // 构建查询参数
-            const queryDTO = {
+        isLoading = true;
+        if (page !== undefined) {
+            currentPage = page;
+        } else {
+            currentPage = 1;
+        }
+
+        try {
+            if (currentPage === 1) {
+                messagesList.innerHTML = '<div class="loading">加载中...</div>';
+            } else if (paginationMode === 'loadmore') {
+                loadMoreBtn.disabled = true;
+                loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 加载中...';
+            }
+
+            var queryDTO = {
                 type: getApiTypeFromFilter(currentFilter),
-                search: currentSearch || null,
                 sort: currentSort,
-                page: 1,
-                pageSize: 50
+                page: currentPage,
+                pageSize: pageSize
             };
 
             // 过滤掉null值
-            Object.keys(queryDTO).forEach(function(key) {
+            var keys = Object.keys(queryDTO);
+            for (var i = 0; i < keys.length; i++) {
+                var key = keys[i];
                 if (queryDTO[key] === null) {
                     delete queryDTO[key];
                 }
-            });
+            }
 
             const data = await callApi('/list', {
                 method: 'POST',
                 body: JSON.stringify(queryDTO)
             });
 
-            if (data && data.list.list) {
-                messagesData = data.list.list;
+            console.log('API返回数据:', data); // 调试用
+
+            if (data && data.list) {
+                var listData = data.list;
+                var items = listData.list || listData;
+
+                console.log('消息数据:', items); // 调试用
+
+                if (currentPage === 1) {
+                    messagesData = items;
+                } else {
+                    messagesData = messagesData.concat(items);
+                }
+
+                if (listData.total !== undefined && listData.pages !== undefined) {
+                    totalItems = listData.total;
+                    totalPages = listData.pages;
+                    hasMore = currentPage < totalPages;
+                } else {
+                    totalItems = items.length;
+                    totalPages = Math.ceil(totalItems / pageSize);
+                    hasMore = items.length === pageSize;
+                }
+
                 renderMessages();
+                updatePagination();
                 updateMessageCount();
                 updateListTitle();
             } else {
-                showEmpty();
+                console.log('没有数据或数据结构异常');
+                if (currentPage === 1) {
+                    showEmpty();
+                }
             }
         } catch (error) {
-            messagesList.innerHTML = '<div class="empty">加载失败，请重试</div>';
             console.error('获取消息失败:', error);
+            if (currentPage === 1) {
+                messagesList.innerHTML = '<div class="empty">加载失败，请重试</div>';
+            }
+        } finally {
+            isLoading = false;
+            if (paginationMode === 'loadmore') {
+                loadMoreBtn.disabled = false;
+                loadMoreBtn.textContent = '加载更多';
+                if (!hasMore) {
+                    loadMore.style.display = 'none';
+                }
+            }
         }
     }
 
     // 将筛选类型转换为API类型
     function getApiTypeFromFilter(filter) {
-        const filterMap = {
+        var filterMap = {
             'all': null,
             'unread': null,
             'system': 'notice',
@@ -571,20 +783,18 @@
         }
     }
 
-    // 渲染消息列表 - 使用纯字符串拼接
+    // 渲染消息列表
     function renderMessages() {
         if (!messagesData || messagesData.length === 0) {
             showEmpty();
             return;
         }
 
-        // 根据当前筛选条件进一步过滤
-        let filteredMessages = messagesData;
+        var filteredMessages = messagesData;
 
-        // 如果是未读筛选，过滤出未读消息
         if (currentFilter === 'unread') {
             filteredMessages = [];
-            for (let i = 0; i < messagesData.length; i++) {
+            for (var i = 0; i < messagesData.length; i++) {
                 if (messagesData[i].unread) {
                     filteredMessages.push(messagesData[i]);
                 }
@@ -596,71 +806,147 @@
             return;
         }
 
-        let html = '';
-        for (let i = 0; i < filteredMessages.length; i++) {
-            const msg = filteredMessages[i];
-            const timeStr = formatTime(msg.time);
-            const tagClass = 'tag-' + msg.type;
-            const unreadClass = msg.unread ? 'unread' : '';
-            const selectedClass = selectedMessageId === msg.id ? 'selected' : '';
+        var html = '';
+        for (var i = 0; i < filteredMessages.length; i++) {
+            var msg = filteredMessages[i];
+            var timeStr = formatTime(msg.time);
+            var tagClass = 'tag-' + (msg.type || 'notice');
+            var unreadClass = msg.unread ? 'unread' : '';
+            var selectedClass = selectedMessageId === msg.id ? 'selected' : '';
 
-            // 构建消息项的HTML字符串
             html += '<div class="message-item ' + unreadClass + ' ' + selectedClass + '" data-id="' + msg.id + '">' +
                        '<div class="message-top">' +
                            '<div class="message-title">';
 
-            // 根据未读状态添加红点
             if (msg.unread) {
                 html += '<span class="unread-dot"></span>';
             }
 
-            html += (msg.title || msg.tag) +
+            html += (msg.title || msg.tag || '无标题') +
                        '</div>' +
                        '<div class="message-time">' + timeStr + '</div>' +
                     '</div>' +
-                    '<div class="message-content">' + msg.content + '</div>' +
-                    '<span class="message-tag ' + tagClass + '">' + msg.tag + '</span>' +
+                    '<div class="message-content">' + (msg.content || '') + '</div>' +
+                    '<span class="message-tag ' + tagClass + '">' + (msg.tag || '通知') + '</span>' +
                 '</div>';
         }
 
         messagesList.innerHTML = html;
 
-        // 添加点击事件
-        const messageItems = document.querySelectorAll('.message-item');
-        for (let i = 0; i < messageItems.length; i++) {
-            messageItems[i].addEventListener('click', async function() {
-                const id = parseInt(this.getAttribute('data-id'));
-                const message = findMessageById(id);
+        var messageItems = document.querySelectorAll('.message-item');
+        for (var i = 0; i < messageItems.length; i++) {
+            messageItems[i].addEventListener('click', function() {
+                var id = parseInt(this.getAttribute('data-id'));
+                var message = findMessageById(id);
 
                 if (message) {
-                    // 更新选中状态
-                    const allItems = document.querySelectorAll('.message-item');
-                    for (let j = 0; j < allItems.length; j++) {
+                    var allItems = document.querySelectorAll('.message-item');
+                    for (var j = 0; j < allItems.length; j++) {
                         allItems[j].classList.remove('selected');
                     }
                     this.classList.add('selected');
                     selectedMessageId = id;
 
-                    // 显示消息详情
                     showMessageDetail(message);
 
-                    // 如果是未读消息，标记为已读
                     if (message.unread) {
-                        const success = await markAsRead(id);
-                        if (success) {
-                            message.unread = false;
-                            this.classList.remove('unread');
-                            updateBadges();
-                        }
+                        markAsRead(id).then(function(success) {
+                            if (success) {
+                                message.unread = false;
+                                var item = document.querySelector('.message-item[data-id="' + id + '"]');
+                                if (item) {
+                                    item.classList.remove('unread');
+                                }
+                                updateBadges();
+                            }
+                        });
                     }
                 }
             });
         }
     }
 
+    // 更新分页组件
+    function updatePagination() {
+        if (totalPages <= 1) {
+            pagination.style.display = 'none';
+            loadMore.style.display = 'none';
+            return;
+        }
+
+        if (totalPages <= 10) {
+            paginationMode = 'pagination';
+            pagination.style.display = 'flex';
+            loadMore.style.display = 'none';
+            renderPageNumbers();
+        } else {
+            paginationMode = 'loadmore';
+            pagination.style.display = 'none';
+            loadMore.style.display = 'block';
+        }
+
+        paginationInfo.textContent = '第' + currentPage + '页，共' + totalPages + '页';
+
+        firstPageBtn.disabled = currentPage === 1;
+        prevPageBtn.disabled = currentPage === 1;
+        nextPageBtn.disabled = currentPage === totalPages;
+        lastPageBtn.disabled = currentPage === totalPages;
+
+        if (currentPage === 1) {
+            firstPageBtn.classList.add('disabled');
+            prevPageBtn.classList.add('disabled');
+        } else {
+            firstPageBtn.classList.remove('disabled');
+            prevPageBtn.classList.remove('disabled');
+        }
+
+        if (currentPage === totalPages) {
+            nextPageBtn.classList.add('disabled');
+            lastPageBtn.classList.add('disabled');
+        } else {
+            nextPageBtn.classList.remove('disabled');
+            lastPageBtn.classList.remove('disabled');
+        }
+    }
+
+    // 渲染页码按钮
+    function renderPageNumbers() {
+        var html = '';
+        var startPage = Math.max(1, currentPage - 2);
+        var endPage = Math.min(totalPages, startPage + 4);
+
+        if (endPage - startPage < 4) {
+            startPage = Math.max(1, endPage - 4);
+        }
+
+        for (var i = startPage; i <= endPage; i++) {
+            var activeClass = '';
+            if (i === currentPage) {
+                activeClass = 'active';
+            }
+            html += '<button class="pagination-btn ' + activeClass + '" data-page="' + i + '">' + i + '</button>';
+        }
+
+        pageNumbers.innerHTML = html;
+
+        var pageBtns = pageNumbers.querySelectorAll('.pagination-btn');
+        for (var i = 0; i < pageBtns.length; i++) {
+            pageBtns[i].addEventListener('click', function() {
+                var page = parseInt(this.getAttribute('data-page'));
+                goToPage(page);
+            });
+        }
+    }
+
+    // 跳转到指定页面
+    function goToPage(page) {
+        if (page < 1 || page > totalPages || page === currentPage || isLoading) return;
+        getMessages(page);
+    }
+
     // 根据ID查找消息
     function findMessageById(id) {
-        for (let i = 0; i < messagesData.length; i++) {
+        for (var i = 0; i < messagesData.length; i++) {
             if (messagesData[i].id == id) {
                 return messagesData[i];
             }
@@ -670,14 +956,14 @@
 
     // 显示消息详情弹层
     function showMessageDetail(message) {
-        const timeStr = formatTime(message.time);
-        const tagClass = 'tag-' + message.type;
+        var timeStr = formatTime(message.time);
+        var tagClass = 'tag-' + (message.type || 'notice');
 
-        let html = '<div class="detail-title">' + (message.title || '无标题') + '</div>' +
-                   '<div class="detail-text">' + message.content + '</div>' +
+        var html = '<div class="detail-title">' + (message.title || '无标题') + '</div>' +
+                   '<div class="detail-text">' + (message.content || '') + '</div>' +
                    '<div class="detail-meta">' +
                        '<div><i class="far fa-clock"></i> 时间：' + timeStr + '</div>' +
-                       '<div><i class="far fa-envelope"></i> 类型：<span class="' + tagClass + ' detail-tag">' + message.tag + '</span></div>';
+                       '<div><i class="far fa-envelope"></i> 类型：<span class="detail-tag ' + tagClass + '">' + (message.tag || '通知') + '</span></div>';
 
         if (message.channelType) {
             html += '<div><i class="fas fa-broadcast-tower"></i> 渠道：' + message.channelType + '</div>';
@@ -692,7 +978,7 @@
     // 标记为已读
     async function markAsRead(id) {
         try {
-            const readDTO = {
+            var readDTO = {
                 id: id
             };
 
@@ -737,21 +1023,21 @@
     // 格式化时间
     function formatTime(timeStr) {
         try {
-            const date = new Date(timeStr);
-            const now = new Date();
-            const diffMs = now - date;
-            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
-            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            var date = new Date(timeStr);
+            var now = new Date();
+            var diffMs = now - date;
+            var diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            var diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
             if (diffHours < 1) {
-                const diffMins = Math.floor(diffMs / (1000 * 60));
+                var diffMins = Math.floor(diffMs / (1000 * 60));
                 return diffMins + '分钟前';
             } else if (diffHours < 24) {
                 return diffHours + '小时前';
             } else if (diffDays < 7) {
                 return diffDays + '天前';
             } else {
-                return date.toLocaleDateString('zh-CN') + ' ' + date.toLocaleTimeString('zh-CN', {hour: '2-digit', minute:'2-digit'});
+                return date.toLocaleDateString('zh-CN') + ' ' + date.getHours().toString().padStart(2, '0') + ':' + date.getMinutes().toString().padStart(2, '0');
             }
         } catch (e) {
             return timeStr;
@@ -761,7 +1047,7 @@
     // 更新消息计数
     async function updateMessageCount() {
         try {
-            const count = await getMessageCount();
+            var count = await getMessageCount();
             if (count) {
                 messageCount.textContent = '共 ' + count.total + ' 条消息，' + count.unread + ' 条未读';
                 updateBadges(count);
@@ -773,7 +1059,7 @@
 
     // 更新列表标题
     function updateListTitle() {
-        const titleMap = {
+        var titleMap = {
             'all': '全部消息',
             'unread': '未读消息',
             'system': '系统通知',
@@ -786,10 +1072,10 @@
     function updateBadges(count) {
         if (!count) return;
 
-        const allBadge = document.querySelector('[data-type="all"] .badge');
-        const unreadBadge = document.querySelector('[data-type="unread"] .badge');
-        const systemBadge = document.querySelector('[data-type="system"] .badge');
-        const securityBadge = document.querySelector('[data-type="security"] .badge');
+        var allBadge = document.querySelector('[data-type="all"] .badge');
+        var unreadBadge = document.querySelector('[data-type="unread"] .badge');
+        var systemBadge = document.querySelector('[data-type="system"] .badge');
+        var securityBadge = document.querySelector('[data-type="security"] .badge');
 
         if (allBadge) allBadge.textContent = count.total || 0;
         if (unreadBadge) unreadBadge.textContent = count.unread || 0;
@@ -799,7 +1085,7 @@
 
     // 显示空状态
     function showEmpty() {
-        const emptyText = {
+        var emptyText = {
             'all': '暂无消息',
             'unread': '暂无未读消息',
             'system': '暂无系统通知',
@@ -810,80 +1096,87 @@
             '<i class="fas fa-envelope-open-text"></i>' +
             '<p>' + (emptyText[currentFilter] || '暂无消息') + '</p>' +
         '</div>';
+
+        pagination.style.display = 'none';
+        loadMore.style.display = 'none';
     }
 
     // 初始化事件
     function initEvents() {
-        // 筛选按钮
-        for (let i = 0; i < filterButtons.length; i++) {
+        for (var i = 0; i < filterButtons.length; i++) {
             filterButtons[i].addEventListener('click', function() {
-                for (let j = 0; j < filterButtons.length; j++) {
+                for (var j = 0; j < filterButtons.length; j++) {
                     filterButtons[j].classList.remove('active');
                 }
                 this.classList.add('active');
                 currentFilter = this.getAttribute('data-type');
-                selectedMessageId = null; // 重置选中状态
-                getMessages();
+                currentPage = 1;
+                selectedMessageId = null;
+                getMessages(1);
             });
         }
 
-        // 搜索
-        let searchTimer;
-        searchInput.addEventListener('input', function() {
-            clearTimeout(searchTimer);
-            searchTimer = setTimeout(function() {
-                currentSearch = searchInput.value;
-                selectedMessageId = null; // 重置选中状态
-                getMessages();
-            }, 300);
-        });
-
-        // 排序
         sortSelect.addEventListener('change', function() {
             currentSort = this.value;
-            selectedMessageId = null; // 重置选中状态
-            getMessages();
+            currentPage = 1;
+            selectedMessageId = null;
+            getMessages(1);
         });
 
-        // 全部已读
-        markAllReadBtn.addEventListener('click', async function() {
+        markAllReadBtn.addEventListener('click', function() {
             if (confirm('确定标记所有消息为已读吗？')) {
-                try {
-                    await markAllAsRead();
-                    selectedMessageId = null; // 重置选中状态
-                    getMessages();
-                } catch (error) {
+                markAllAsRead().then(function() {
+                    selectedMessageId = null;
+                    getMessages(1);
+                }).catch(function() {
                     alert('操作失败');
-                }
+                });
             }
         });
 
-        // 清空消息
-        clearAllBtn.addEventListener('click', async function() {
+        clearAllBtn.addEventListener('click', function() {
             if (confirm('确定清空所有消息吗？')) {
-                try {
-                    await clearAllMessages();
-                    selectedMessageId = null; // 重置选中状态
-                    getMessages();
-                } catch (error) {
+                clearAllMessages().then(function() {
+                    selectedMessageId = null;
+                    getMessages(1);
+                }).catch(function() {
                     alert('操作失败');
-                }
+                });
             }
         });
 
-        // 关闭详情弹层
+        firstPageBtn.addEventListener('click', function() {
+            goToPage(1);
+        });
+
+        prevPageBtn.addEventListener('click', function() {
+            goToPage(currentPage - 1);
+        });
+
+        nextPageBtn.addEventListener('click', function() {
+            goToPage(currentPage + 1);
+        });
+
+        lastPageBtn.addEventListener('click', function() {
+            goToPage(totalPages);
+        });
+
+        loadMoreBtn.addEventListener('click', function() {
+            if (hasMore && !isLoading) {
+                getMessages(currentPage + 1);
+            }
+        });
+
         closeDetailBtn.addEventListener('click', function() {
             messageDetailOverlay.style.display = 'none';
         });
 
-        // 点击弹层背景关闭
         messageDetailOverlay.addEventListener('click', function(e) {
             if (e.target === this) {
                 messageDetailOverlay.style.display = 'none';
             }
         });
 
-        // ESC键关闭弹层
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && messageDetailOverlay.style.display === 'flex') {
                 messageDetailOverlay.style.display = 'none';
@@ -893,7 +1186,7 @@
 
     // 页面加载
     document.addEventListener('DOMContentLoaded', function() {
-        getMessages();
+        getMessages(1);
         initEvents();
     });
 </script>
