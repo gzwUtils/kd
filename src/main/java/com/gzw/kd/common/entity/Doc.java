@@ -1,10 +1,13 @@
 package com.gzw.kd.common.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import lombok.experimental.Accessors;
+
 import java.time.LocalDateTime;
 /**
  * @author gzw
  */
+@Accessors(chain = true)
 @Data
 public class Doc {
 

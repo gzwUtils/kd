@@ -21,13 +21,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User getUserByName(String username) throws Exception {
+    public User getUserByName(String username) {
         return userMapper.getUserByName(username);
-    }
-
-    @Override
-    public User getUserByNameAndPhone(String username, String phone) throws Exception {
-        return userMapper.getUserByNameAndPhone(username,phone);
     }
 
     @Override
@@ -36,28 +31,28 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Integer registerUser(User user) throws Exception {
+    public Integer registerUser(User user) {
         return userMapper.registerUser(user);
     }
 
     @Override
-    public Integer updatePasswordDocById(User user) throws Exception {
+    public Integer updatePasswordDocById(User user) {
         return userMapper.updatePasswordDocById(user);
     }
 
     @Override
-    public Integer updateStatusByName(String name, int status,int errorRetry) throws Exception {
-        return userMapper.updateStatusByName(name,status,errorRetry);
+    public void updateStatusByName(String name, int status,int errorRetry) {
+         userMapper.updateStatusByName(name,status,errorRetry);
     }
 
     @Override
-    public Integer updateStatusById(String id, int status) throws Exception {
-        return userMapper.updateStatusById(id,status);
+    public void updateStatusById(String id, int status)  {
+         userMapper.updateStatusById(id,status);
     }
 
     @Override
-    public Integer updateErrorByName(String name, int errorRetry) throws Exception {
-        return userMapper.updateErrorByName(name,errorRetry);
+    public void updateErrorByName(String name, int errorRetry) {
+        userMapper.updateErrorByName(name,errorRetry);
     }
 
     @Override

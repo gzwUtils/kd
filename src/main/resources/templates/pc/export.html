@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日志导出系统</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .card {
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+        .card-header {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        .required::after {
+            content: "*";
+            color: #dc3545;
+            margin-left: 4px;
+        }
+        .btn-export {
+            min-width: 120px;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .export-option {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .export-option:hover {
+            border-color: #007bff;
+            background-color: #f8faff;
+        }
+        .export-option.active {
+            border-color: #007bff;
+            background-color: #e8f4ff;
+        }
+        .alert-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+        }
+        .form-group label {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .export-fields-section {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .form-check-input {
+            margin-top: 0.3rem;
+        }
+        .btn-group-export {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 768px) {
+            .btn-group-export {
+                flex-direction: column;
+            }
+            .btn-group-export button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid py-4">
+    <!-- 消息提示容器 -->
+    <div class="alert-container" id="alertContainer"></div>
+
+    <div class="row">
+        <div class="col-12">
+            <h2 class="mb-4"><i class="fas fa-file-export mr-2"></i>日志导出</h2>
+
+            <!-- 导出选项卡片 -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-cogs mr-2"></i>导出选项
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="export-option active" id="syncExportOption">
+                                <h5><i class="fas fa-bolt mr-2"></i>同步导出</h5>
+                                <p class="text-muted mb-0">立即导出，适合数据量较小的情况</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="export-option" id="asyncExportOption">
+                                <h5><i class="fas fa-clock mr-2"></i>异步导出</h5>
+                                <p class="text-muted mb-0">后台处理，适合数据量较大的情况</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 查询条件表单 -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-filter mr-2"></i>查询条件
+                </div>
+                <div class="card-body">
+                    <form id="exportForm">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-calendar-alt mr-1"></i>时间范围</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                </div>
+                                                <input type="date" class="form-control" id="createTimeStart" placeholder="开始时间">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                                </div>
+                                                <input type="date" class="form-control" id="createsTimeEnd" placeholder="结束时间">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-check-circle mr-1"></i>操作结果</label>
+                                    <select class="form-control" id="result">
+                                        <option value="">全部</option>
+                                        <option value="success">成功</option>
+                                        <option value="fail">失败</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-tasks mr-1"></i>操作类型</label>
+                                    <input type="text" class="form-control" id="operation" placeholder="请输入操作类型">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-network-wired mr-1"></i>IP地址</label>
+                                    <input type="text" class="form-control" id="ip" placeholder="请输入IP地址">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-user mr-1"></i>用户名</label>
+                                    <input type="text" class="form-control" id="userName" placeholder="请输入用户名">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-map-marker-alt mr-1"></i>位置</label>
+                                    <input type="text" class="form-control" id="location" placeholder="请输入位置">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><i class="fas fa-hashtag mr-1"></i>ID范围</label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" id="idGte" placeholder="最小ID">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="number" class="form-control" id="idLte" placeholder="最大ID">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 异步导出专用字段 -->
+                            <div class="col-md-6" id="asyncExportNameField" style="display: none;">
+                                <div class="form-group">
+                                    <label class="required"><i class="fas fa-file-signature mr-1"></i>导出文件名</label>
+                                    <input type="text" class="form-control" id="exportFileName" placeholder="请输入导出文件名">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 导出字段选择 -->
+                        <div id="asyncFields" style="display: none;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label><i class="fas fa-database mr-1"></i>数据存储类型</label>
+                                        <select class="form-control" id="metaDataType">
+                                            <option value="">请选择</option>
+                                            <option value="1">类型1</option>
+                                            <option value="2">类型2</option>
+                                            <option value="3">类型3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="required"><i class="fas fa-list mr-1"></i>导出字段</label>
+                                <div class="export-fields-section">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <button type="button" class="btn btn-sm btn-outline-primary mr-2" id="selectAllFields">
+                                                <i class="fas fa-check-square mr-1"></i>全选
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary mr-2" id="deselectAllFields">
+                                                <i class="fas fa-square mr-1"></i>清空
+                                            </button>
+                                            <button type="button" class="btn btn-sm btn-outline-info" id="recommendFields">
+                                                <i class="fas fa-star mr-1"></i>推荐字段
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="row" id="exportFieldsContainer">
+                                        <!-- 导出字段将通过JS动态添加 -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 同步导出字段提示 -->
+                        <div id="syncFieldsTip" class="alert alert-info mt-3">
+                            <i class="fas fa-info-circle mr-2"></i>
+                            <strong>注意：</strong>同步导出将导出所有字段。如需选择特定字段，请使用异步导出。
+                        </div>
+
+                        <div class="mt-4 pt-3 border-top">
+                            <div class="btn-group-export">
+                                <button type="button" class="btn btn-primary btn-export" id="exportBtn">
+                                    <i class="fas fa-file-download mr-2"></i>立即导出
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" id="resetBtn">
+                                    <i class="fas fa-redo mr-2"></i>重置条件
+                                </button>
+                                <button type="button" class="btn btn-success" id="downloadTemplateBtn">
+                                    <i class="fas fa-file-excel mr-2"></i>下载模板
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- 加载提示 -->
+                    <div class="loading" id="loading">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">加载中...</span>
+                        </div>
+                        <p class="mt-2" id="loadingText">正在处理，请稍候...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 异步任务提示 -->
+            <div class="card" id="asyncTaskCard" style="display: none;">
+                <div class="card-header">
+                    <i class="fas fa-history mr-2"></i>异步导出任务
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle mr-2"></i>任务提交成功！</h5>
+                        <p class="mb-0">异步导出任务已提交到后台处理，您可以在系统的"任务管理"页面查看任务进度和下载导出的文件。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 引入Axios -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+    // 页面初始化
+    document.addEventListener('DOMContentLoaded', function() {
+        // 初始化导出字段选项
+        initExportFields();
+
+        // 绑定事件
+        bindEvents();
+
+        // 设置默认导出文件名
+        setDefaultExportFileName();
+
+        // 设置默认日期
+        setDefaultDates();
+    });
+
+    // 设置默认日期（最近7天）
+    function setDefaultDates() {
+        const today = new Date();
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(today.getDate() - 7);
+
+        // 格式化日期为 YYYY-MM-DD
+        const formatDate = function(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return year + '-' + month + '-' + day;
+        };
+
+        document.getElementById('createTimeStart').value = formatDate(sevenDaysAgo);
+        document.getElementById('createsTimeEnd').value = formatDate(today);
+    }
+
+    // 初始化导出字段
+    function initExportFields() {
+        const fields = [
+            { id: 'id', name: 'ID', checked: true },
+            { id: 'createTime', name: '创建时间', checked: true },
+            { id: 'result', name: '操作结果', checked: true },
+            { id: 'operation', name: '操作类型', checked: true },
+            { id: 'location', name: '位置', checked: false },
+            { id: 'ip', name: 'IP地址', checked: true },
+            { id: 'username', name: '用户名', checked: true },
+            { id: 'module', name: '模块', checked: false },
+            { id: 'desc', name: '描述', checked: true }
+        ];
+
+        const container = document.getElementById('exportFieldsContainer');
+        container.innerHTML = '';
+
+        fields.forEach(function(field) {
+            const col = document.createElement('div');
+            col.className = 'col-md-4 col-sm-6 mb-2';
+
+            const checkboxDiv = document.createElement('div');
+            checkboxDiv.className = 'form-check';
+
+            const checkbox = document.createElement('input');
+            checkbox.className = 'form-check-input export-field-checkbox';
+            checkbox.type = 'checkbox';
+            checkbox.id = 'field_' + field.id;
+            checkbox.value = field.id;
+            checkbox.checked = field.checked;
+
+            const label = document.createElement('label');
+            label.className = 'form-check-label';
+            label.htmlFor = 'field_' + field.id;
+            label.textContent = field.name;
+
+            checkboxDiv.appendChild(checkbox);
+            checkboxDiv.appendChild(label);
+            col.appendChild(checkboxDiv);
+            container.appendChild(col);
+        });
+    }
+
+    // 绑定所有事件
+    function bindEvents() {
+        // 导出选项切换
+        document.getElementById('syncExportOption').addEventListener('click', function() {
+            setExportMode('sync');
+        });
+
+        document.getElementById('asyncExportOption').addEventListener('click', function() {
+            setExportMode('async');
+        });
+
+        // 字段选择操作
+        document.getElementById('selectAllFields').addEventListener('click', function() {
+            selectAllFields(true);
+        });
+
+        document.getElementById('deselectAllFields').addEventListener('click', function() {
+            selectAllFields(false);
+        });
+
+        document.getElementById('recommendFields').addEventListener('click', function() {
+            selectRecommendedFields();
+        });
+
+        // 表单操作按钮
+        document.getElementById('resetBtn').addEventListener('click', resetForm);
+        document.getElementById('exportBtn').addEventListener('click', handleExport);
+        document.getElementById('downloadTemplateBtn').addEventListener('click', downloadTemplate);
+    }
+
+    // 设置导出模式
+    function setExportMode(mode) {
+        const syncOption = document.getElementById('syncExportOption');
+        const asyncOption = document.getElementById('asyncExportOption');
+        const asyncFields = document.getElementById('asyncFields');
+        const asyncTaskCard = document.getElementById('asyncTaskCard');
+        const asyncExportNameField = document.getElementById('asyncExportNameField');
+        const syncFieldsTip = document.getElementById('syncFieldsTip');
+        const exportBtn = document.getElementById('exportBtn');
+
+        if (mode === 'sync') {
+            syncOption.classList.add('active');
+            asyncOption.classList.remove('active');
+            asyncFields.style.display = 'none';
+            asyncExportNameField.style.display = 'none';
+            asyncTaskCard.style.display = 'none';
+            syncFieldsTip.style.display = 'block';
+            exportBtn.innerHTML = '<i class="fas fa-file-download mr-2"></i>立即导出';
+        } else {
+            syncOption.classList.remove('active');
+            asyncOption.classList.add('active');
+            asyncFields.style.display = 'block';
+            asyncExportNameField.style.display = 'block';
+            asyncTaskCard.style.display = 'block';
+            syncFieldsTip.style.display = 'none';
+            exportBtn.innerHTML = '<i class="fas fa-paper-plane mr-2"></i>提交异步导出';
+        }
+    }
+
+    // 设置默认导出文件名
+    function setDefaultExportFileName() {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        const dateStr = year + month + day;
+        document.getElementById('exportFileName').value = '日志导出_' + dateStr;
+    }
+
+    // 选择/取消选择所有字段
+    function selectAllFields(select) {
+        const checkboxes = document.querySelectorAll('.export-field-checkbox');
+        for (let i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = select;
+        }
+    }
+
+    // 选择推荐字段
+    function selectRecommendedFields() {
+        const recommendedFields = ['id', 'create_time', 'result', 'operation', 'ip', 'username', 'description'];
+        const checkboxes = document.querySelectorAll('.export-field-checkbox');
+
+        for (let i = 0; i < checkboxes.length; i++) {
+            const checkbox = checkboxes[i];
+            checkbox.checked = recommendedFields.includes(checkbox.value);
+        }
+    }
+
+    // 重置表单
+    function resetForm() {
+        document.getElementById('exportForm').reset();
+        selectAllFields(false);
+        setDefaultExportFileName();
+        setDefaultDates();
+        showAlert('表单已重置', 'info');
+    }
+
+    // 处理导出操作
+    function handleExport() {
+        if (!validateForm()) {
+            return;
+        }
+
+        const syncOption = document.getElementById('syncExportOption');
+        const isSyncMode = syncOption.classList.contains('active');
+
+        if (isSyncMode) {
+            syncExport();
+        } else {
+            asyncExport();
+        }
+    }
+
+    // 表单验证
+    function validateForm() {
+        // 时间范围验证
+        const startTime = document.getElementById('createTimeStart').value;
+        const endTime = document.getElementById('createsTimeEnd').value;
+
+        if (startTime && endTime) {
+            const startDate = new Date(startTime);
+            const endDate = new Date(endTime);
+
+            if (startDate > endDate) {
+                showAlert('开始时间不能晚于结束时间', 'warning');
+                return false;
+            }
+        }
+
+        // ID范围验证
+        const idGte = document.getElementById('idGte').value;
+        const idLte = document.getElementById('idLte').value;
+
+        if (idGte && idLte && parseInt(idGte) > parseInt(idLte)) {
+            showAlert('最小ID不能大于最大ID', 'warning');
+            return false;
+        }
+
+        // 异步导出字段验证
+        const syncOption = document.getElementById('syncExportOption');
+        if (!syncOption.classList.contains('active')) {
+            const exportFileName = document.getElementById('exportFileName').value;
+            if (!exportFileName) {
+                showAlert('请填写导出文件名', 'warning');
+                return false;
+            }
+
+            const checkedFields = document.querySelectorAll('.export-field-checkbox:checked');
+            if (checkedFields.length === 0) {
+                showAlert('请至少选择一个导出字段', 'warning');
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // 同步导出 - 调用 /log/export 接口
+    async function syncExport() {
+        showLoading('正在生成导出文件...');
+
+        try {
+            // 获取选中的导出字段（同步导出导出所有字段）
+            const allFields = [];
+            const checkboxes = document.querySelectorAll('.export-field-checkbox');
+            for (let i = 0; i < checkboxes.length; i++) {
+                allFields.push(checkboxes[i].value);
+            }
+
+            // 构建请求数据
+            const requestData = {
+                createTimeStart: document.getElementById('createTimeStart').value || null,
+                createsTimeEnd: document.getElementById('createsTimeEnd').value || null,
+                result: document.getElementById('result').value || null,
+                operation: document.getElementById('operation').value || null,
+                location: document.getElementById('location').value || null,
+                ip: document.getElementById('ip').value || null,
+                userName: document.getElementById('userName').value || null,
+                idGte: document.getElementById('idGte').value ? parseInt(document.getElementById('idGte').value) : null,
+                idLte: document.getElementById('idLte').value ? parseInt(document.getElementById('idLte').value) : null,
+                exportFields: allFields, // 同步导出包含所有字段
+                metaDataType: null,
+                exportFileName: '同步导出_' + new Date().getTime(),
+                fromMenu: null
+            };
+
+            // 使用Axios发送请求
+            const response = await axios({
+                method: 'post',
+                url: '/pc/export',
+                data: requestData,
+                responseType: 'blob',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                timeout: 300000
+            });
+
+            hideLoading();
+
+            // 处理文件下载
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const defaultFilename = '日志导出_' + year + month + day + '.xlsx';
+
+            const filename = getFilenameFromHeaders(response.headers) || defaultFilename;
+            downloadFile(response.data, filename);
+            showAlert('导出成功！文件开始下载', 'success');
+
+        } catch (error) {
+            hideLoading();
+            handleExportError(error, '导出失败');
+        }
+    }
+
+    // 异步导出 - 调用 /log/asyncExport 接口
+    async function asyncExport() {
+        showLoading('正在提交导出任务...');
+
+        try {
+            // 获取选中的导出字段
+            const checkboxes = document.querySelectorAll('.export-field-checkbox:checked');
+            const exportFields = [];
+            for (let i = 0; i < checkboxes.length; i++) {
+                exportFields.push(checkboxes[i].value);
+            }
+
+            // 构建请求数据
+            const requestData = {
+                createTimeStart: document.getElementById('createTimeStart').value || null,
+                createsTimeEnd: document.getElementById('createsTimeEnd').value || null,
+                result: document.getElementById('result').value || null,
+                operation: document.getElementById('operation').value || null,
+                location: document.getElementById('location').value || null,
+                ip: document.getElementById('ip').value || null,
+                userName: document.getElementById('userName').value || null,
+                idGte: document.getElementById('idGte').value ? parseInt(document.getElementById('idGte').value) : null,
+                idLte: document.getElementById('idLte').value ? parseInt(document.getElementById('idLte').value) : null,
+                exportFields: exportFields,
+                metaDataType: document.getElementById('metaDataType').value ? parseInt(document.getElementById('metaDataType').value) : null,
+                exportFileName: document.getElementById('exportFileName').value,
+                fromMenu: null  // 根据接口修改，这里设置为null
+            };
+
+            // 使用Axios发送请求
+            const response = await axios({
+                method: 'post',
+                url: '/pc/asyncExport',
+                data: requestData,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                timeout: 30000
+            });
+
+            hideLoading();
+
+            if (response.data && response.data.code === 20000) {
+                showAlert('导出任务已成功提交！请到任务管理页面查看进度。', 'success');
+                // 清空表单
+                resetForm();
+            } else {
+                const errorMsg = response.data ? (response.data.message || response.data.msg || '未知错误') : '未知错误';
+                showAlert('提交失败：' + errorMsg, 'error');
+            }
+
+        } catch (error) {
+            hideLoading();
+            handleExportError(error, '提交失败');
+        }
+    }
+
+    // 下载模板
+    async function downloadTemplate() {
+        showLoading('正在下载模板...');
+
+        try {
+            // 使用Axios发送请求
+            const response = await axios({
+                method: 'post',
+                url: '/pc/downloadTemplate',
+                responseType: 'blob',
+                timeout: 30000
+            });
+
+            hideLoading();
+
+            // 处理文件下载
+            const filename = getFilenameFromHeaders(response.headers) || 'template.xlsx';
+            downloadFile(response.data, filename);
+            showAlert('模板下载成功！', 'success');
+
+        } catch (error) {
+            hideLoading();
+            handleExportError(error, '下载失败');
+        }
+    }
+
+    // 处理导出错误
+    function handleExportError(error, defaultMessage) {
+        let errorMessage = defaultMessage;
+
+        if (error.response) {
+            // 服务器响应了错误状态码
+            const status = error.response.status;
+
+            // 尝试从blob响应中读取错误信息
+            if (error.response.data instanceof Blob) {
+                readBlobError(error.response.data, defaultMessage);
+                return;
+            }
+
+            // 如果是JSON响应
+            if (error.response.data) {
+                const data = error.response.data;
+                errorMessage = errorMessage + '：' + (data.message || data.msg || 'HTTP ' + status);
+            } else {
+                errorMessage = errorMessage + '：HTTP ' + status;
+            }
+        } else if (error.request) {
+            // 请求已发送但没有收到响应
+            errorMessage = errorMessage + '：网络错误，请检查网络连接';
+        } else if (error.code === 'ECONNABORTED') {
+            // 请求超时
+            errorMessage = errorMessage + '：请求超时，请稍后重试';
+        } else {
+            // 其他错误
+            errorMessage = errorMessage + '：' + error.message;
+        }
+
+        showAlert(errorMessage, 'error');
+    }
+
+    // 从blob响应中读取错误信息
+    function readBlobError(blobData, defaultMessage) {
+        const reader = new FileReader();
+
+        reader.onload = function() {
+            try {
+                // 尝试解析为JSON
+                const errorData = JSON.parse(reader.result);
+                const errorMsg = errorData.message || errorData.msg || '未知错误';
+                showAlert(defaultMessage + '：' + errorMsg, 'error');
+            } catch (e) {
+                // 如果不是JSON，显示原始文本
+                const text = reader.result;
+                if (text && text.trim()) {
+                    const displayText = text.length > 200 ? text.substring(0, 200) + '...' : text;
+                    showAlert(defaultMessage + '：' + displayText, 'error');
+                } else {
+                    showAlert(defaultMessage + '：服务器错误', 'error');
+                }
+            }
+        };
+
+        reader.onerror = function() {
+            showAlert(defaultMessage + '：无法读取错误信息', 'error');
+        };
+
+        reader.readAsText(blobData);
+    }
+
+    // 从响应头获取文件名
+    function getFilenameFromHeaders(headers) {
+        const contentDisposition = headers['content-disposition'];
+        if (contentDisposition) {
+            // 处理多种格式
+            const matches = contentDisposition.match(/filename\*?=["']?(?:UTF-8[''])?([^;"']+)["']?/i);
+            if (matches && matches[1]) {
+                return decodeURIComponent(matches[1]);
+            }
+
+            // 尝试简单匹配
+            const simpleMatch = contentDisposition.match(/filename=["']?([^;"']+)["']?/i);
+            if (simpleMatch && simpleMatch[1]) {
+                return decodeURIComponent(simpleMatch[1]);
+            }
+        }
+        return null;
+    }
+
+    // 下载文件
+    function downloadFile(blobData, filename) {
+        try {
+            // 检查blob是否有效
+            if (!blobData || blobData.size === 0) {
+                showAlert('下载失败：文件内容为空', 'error');
+                return;
+            }
+
+            const url = window.URL.createObjectURL(blobData);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            a.click();
+
+            // 清理
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+            }, 100);
+        } catch (error) {
+            showAlert('文件下载失败：' + error.message, 'error');
+            console.error('下载文件失败：', error);
+        }
+    }
+
+    // 显示加载状态
+    function showLoading(text) {
+        document.getElementById('loadingText').textContent = text || '正在处理，请稍候...';
+        document.getElementById('loading').style.display = 'block';
+        setButtonsDisabled(true);
+    }
+
+    // 隐藏加载状态
+    function hideLoading() {
+        document.getElementById('loading').style.display = 'none';
+        setButtonsDisabled(false);
+    }
+
+    // 设置按钮禁用状态
+    function setButtonsDisabled(disabled) {
+        const buttonIds = ['exportBtn', 'resetBtn', 'downloadTemplateBtn'];
+
+        for (let i = 0; i < buttonIds.length; i++) {
+            const button = document.getElementById(buttonIds[i]);
+            if (button) {
+                button.disabled = disabled;
+            }
+        }
+    }
+
+    // 显示提示消息
+    function showAlert(message, type) {
+        const alertContainer = document.getElementById('alertContainer');
+
+        // 移除旧的提示（保留最新的3个）
+        const oldAlerts = alertContainer.querySelectorAll('.alert');
+        if (oldAlerts.length > 3) {
+            alertContainer.removeChild(oldAlerts[0]);
+        }
+
+        // 定义图标和颜色
+        const icons = {
+            'success': 'check-circle',
+            'error': 'exclamation-circle',
+            'warning': 'exclamation-triangle',
+            'info': 'info-circle'
+        };
+
+        const alertClasses = {
+            'success': 'success',
+            'error': 'danger',
+            'warning': 'warning',
+            'info': 'info'
+        };
+
+        // 创建提示框
+        const alertDiv = document.createElement('div');
+        const alertClass = alertClasses[type] || 'info';
+        alertDiv.className = 'alert alert-' + alertClass + ' alert-dismissible fade show';
+        alertDiv.role = 'alert';
+
+        const icon = icons[type] || 'info-circle';
+        alertDiv.innerHTML = '<i class="fas fa-' + icon + ' mr-2"></i>' + message +
+            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
+            '<span aria-hidden="true">×</span>' +
+            '</button>';
+
+        // 添加到容器
+        alertContainer.appendChild(alertDiv);
+
+        // 添加关闭事件监听
+        const closeButton = alertDiv.querySelector('.close');
+        if (closeButton) {
+            closeButton.addEventListener('click', function() {
+                alertContainer.removeChild(alertDiv);
+            });
+        }
+
+        // 自动移除
+        setTimeout(function() {
+            if (alertDiv.parentNode === alertContainer) {
+                alertContainer.removeChild(alertDiv);
+            }
+        }, type === 'error' || type === 'warning' ? 5000 : 3000);
+    }
+</script>
+</body>
+</html>

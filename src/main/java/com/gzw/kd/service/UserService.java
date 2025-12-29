@@ -8,24 +8,21 @@ import java.util.List;
 /**
  * @author 高志伟
  */
-@SuppressWarnings("all")
 public interface UserService {
 
-    User getUserByName(String  username)throws  Exception;
-
-    User getUserByNameAndPhone(String  username,String phone)throws  Exception;
+    User getUserByName(String  username);
 
     User getUserByPhone(String  phone);
 
-    Integer registerUser(User user)throws  Exception;
+    Integer registerUser(User user);
 
-    Integer updatePasswordDocById(User user)throws  Exception;
+    Integer updatePasswordDocById(User user);
 
-    Integer updateStatusByName(String name,int status,int errorRetry)throws  Exception;
+    void updateStatusByName(String name,int status,int errorRetry);
 
-    Integer updateStatusById(String id,int status)throws  Exception;
+    void updateStatusById(String id,int status);
 
-    Integer updateErrorByName(String name,int errorRetry)throws  Exception;
+    void updateErrorByName(String name,int errorRetry);
 
     List<String> getAllNames();
 

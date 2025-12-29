@@ -2,8 +2,7 @@ package com.gzw.kd.service;
 
 import com.gzw.kd.common.entity.Log;
 import com.gzw.kd.export.ExportFileMeta;
-
-import java.time.LocalDateTime;
+import com.gzw.kd.vo.input.LogSearchInput;
 import java.util.List;
 
 /**
@@ -13,10 +12,10 @@ public interface LogService  {
 
     /**
      * 日志导出
-     * @param time time
+     * @param logSearchInput param
      * @return res
      */
-    ExportFileMeta export(LocalDateTime time);
+    ExportFileMeta export(LogSearchInput logSearchInput);
 
 
     /**

@@ -39,6 +39,11 @@ public interface Constants {
     String STRING_SEMICOLON = ";";
 
     /**
+     * 斜杠
+     */
+    String FORWARD_SLASH = "/";
+
+    /**
      * 字符串0
      */
     String STRING_ZERO = "0";

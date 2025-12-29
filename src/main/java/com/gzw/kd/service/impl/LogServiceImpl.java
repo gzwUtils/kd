@@ -12,7 +12,6 @@ import com.gzw.kd.vo.input.LogSearchInput;
 import com.gzw.kd.vo.output.LogExportOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import static com.gzw.kd.common.Constants.DOWNLOAD_FILE_PREFIX;
@@ -38,8 +37,8 @@ public class LogServiceImpl implements LogService, CommonExportService {
     }
 
     @Override
-    public ExportFileMeta export(LocalDateTime time) {
-        List<LogExportOutput> outputs = logMapper.getLogInfo(new LogSearchInput());
+    public ExportFileMeta export(LogSearchInput logSearchInput) {
+        List<LogExportOutput> outputs = logMapper.getLogInfo(logSearchInput);
         ExportSheet exportSheet = reportExportCommonService.assembleExportFile(
                 DOWNLOAD_FILE_PREFIX,
                 exportFieldHandlerRegistry.getTest(), outputs, XLSX_MAX_EXPORT_ROW_SIZE);

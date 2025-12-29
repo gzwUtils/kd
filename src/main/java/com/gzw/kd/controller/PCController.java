@@ -2,7 +2,7 @@ package com.gzw.kd.controller;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import cn.hutool.captcha.generator.RandomGenerator;
-import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.StopWatch;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ObjectUtil;
@@ -33,6 +33,8 @@ import com.gzw.kd.vo.output.EsLogSearchIndex;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.io.File;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -49,7 +51,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -57,7 +58,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -68,11 +68,11 @@ import static com.gzw.kd.common.Constants.*;
 /**
  * gzw
  */
+@RequiredArgsConstructor
 @Slf4j
 @Api(tags = "首页")
 @Controller
 @RequestMapping("/pc")
-@SuppressWarnings("all")
 public class PCController {
 
 
@@ -90,158 +90,86 @@ public class PCController {
     @Value("${system.startEsQuery}")
     private  boolean startEsQuery;
 
-    @Resource
-    private OperatorLogIndex operatorLogIndex;
+    // =========== 服务依赖 ===========
+    private final OperatorLogIndex operatorLogIndex;
+    private final DocService docService;
+    private final UserService userService;
+    private final SMSUtils smsUtils;
+    private final ScheduleTask scheduleTask;
+    private final RedisLock redisLock;
+    private final RandomIdGenerator randomIdGenerator;
+    private final WxUserService wxUserService;
+    private final CustomerService customerService;
+    private final ConfigService configService;
+    private final RedisTemplate<String, String> redisTemplate;
+    private final LogService logService;
+    private final AsyncTaskLogService asyncTaskLogService;
+    private final FileUploadUtil fileUploadUtil;
+    private final NoticeService noticeService;
+    private final TemplateService templateService;
+    private final FileInfoInit fileInfoInit;
+    // =========== 常量定义 ===========
+    private static final int REGISTER_REDIS_EXPIRES = 20;
 
-    @Resource
-    DocService m_docService;
+    // =========== 页面跳转方法 ===========
 
-    @Resource
-    UserService userService;
-
-    @Resource
-    SMSUtils smsUtils;
-
-    @Resource
-    ScheduleTask scheduleTask;
-
-    @Resource
-    private RedisLock redisLock;
-
-
-
-    @Resource
-    RandomIdGenerator randomIdGenerator;
-
-    @Resource
-    private WxUserService wxUserService;
-
-
-    @Resource
-    private CustomerService customerService;
-
-    @Resource
-    private ConfigService configService;
-
-    private static LineCaptcha lineCaptcha;
-
-
-    SimpleDateFormat format =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    public  static final int  REGISTER_REDIS_EXPIRES = 20;
-
-    @Resource
-    private RedisTemplate<String,String> redisTemplate;
-
-    @Resource
-    private LogService logService;
-
-    @Resource
-    AsyncTaskLogService asyncTaskLogService;
-
-    @Resource
-    FileUploadUtil fileUploadUtil;
-
-    @Resource
-    NoticeService noticeService;
-
-    @Resource
-    TemplateService templateService;
-
-    @Resource
-    private FileInfoInit fileInfoInit;
-
-
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String login() {
-        return "/pc/login";
-    }
-
-    @RequestMapping(value = "/notice",method = RequestMethod.GET)
-    public String addNotice() {
-        return "/pc/notice";
-    }
-
-    @RequestMapping(value = "/chatGpt",method = RequestMethod.GET)
-    public String chatGpt() {
-        return "/pc/chat";
-    }
-
-    @RequestMapping(value = "/chat",method = RequestMethod.GET)
-    public String chat() {
-        return "/pc/kd";
+    /**
+     * 页面跳转控制器
+     */
+    @GetMapping("/{page}")
+    public String pageRedirect(@PathVariable String page) {
+        switch (page) {
+            case "login":
+                return "/pc/login";
+            case "notice":
+                return "/pc/notice";
+            case "chatGpt":
+                return "/pc/chat";
+            case "chat":
+                return "/pc/kd";
+            case "message":
+                return "/pc/message";
+            case "export":
+                return "/pc/export";
+            case "userInfo":
+                return "/pc/userInfo";
+            case "template":
+                return "/pc/template";
+            case "uploadFile":
+                return "/pc/uploadFile";
+            case "unknown":
+                return "404";
+            case "other":
+                return "/pc/other";
+            case "dc":
+                return "/pc/dc";
+            case "word":
+                return "/pc/word";
+            case "error":
+                return "/error/500";
+            case "register":
+                return "/pc/register";
+            case "phoneLogin":
+                return "/pc/phoneLogin";
+            case "asyncTask":
+                return "/pc/asyncTask";
+            case "messageSend":
+                return "/pc/send";
+            case "index":
+                return "/pc/index";
+            case "info":
+                return "/pc/info";
+            case "pass":
+                return "/pc/pass";
+            case "showAddUi":
+                return "/pc/add";
+            default:
+                return "redirect:/pc/login";
+        }
     }
 
 
-    @RequestMapping(value = "/message",method = RequestMethod.GET)
-    public String message() {
-        return "/pc/message";
-    }
-
-    @RequestMapping(value = "/userInfo",method = RequestMethod.GET)
-    public String userInfo() {
-        return "/pc/userInfo";
-    }
-
-    @RequestMapping(value = "/template",method = RequestMethod.GET)
-    public String template() {
-        return "/pc/template";
-    }
-
-    @RequestMapping(value = "/uploadFile",method = RequestMethod.GET)
-    public String uploadFile() {
-        return "/pc/uploadFile";
-    }
-    @RequestMapping(value = "/unknown",method = RequestMethod.GET)
-    public String unknown() {
-        return "404";
-    }
-
-    @RequestMapping(value = "/other",method = RequestMethod.GET)
-    public String other () {
-
-        return "/pc/other";
-    }
-
-    @RequestMapping(value = "/dc",method = RequestMethod.GET)
-    public String dc () {
-
-        return "/pc/dc";
-    }
-
-    @RequestMapping(value = "/word",method = RequestMethod.GET)
-    public String word () {
-
-        return "/pc/word";
-    }
-
-    @RequestMapping(value = "/error",method = RequestMethod.GET)
-    public String error() {
-        return "/error/500";
-    }
-
-    @RequestMapping(value = "/register",method = RequestMethod.GET)
-    public String register() {
-        return "/pc/register";
-    }
-
-    @RequestMapping(value = "/phoneLogin",method = RequestMethod.GET)
-    public String phoneLogin() {
-        return "/pc/phoneLogin";
-    }
-
-    @RequestMapping(value = "/asyncTask",method = RequestMethod.GET)
-    public String asyncTask() {
-        return "/pc/asyncTask";
-    }
-
-    @RequestMapping(value = "/messageSend",method = RequestMethod.GET)
-    public String messageSend() {
-        return "/pc/send";
-    }
-
-
-    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    @GetMapping(value = "/logout")
     public String logout(HttpServletRequest request) {
         Operator operator = (Operator) request.getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
         SessionContext.getInstance().getSessionMap().remove(operator.getAccount());
@@ -251,7 +179,7 @@ public class PCController {
     }
 
     @Resubmit(limit = 3)
-    @RequestMapping(value = "/addNotice",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/addNotice",produces = "application/json;charset=utf-8")
     @ResponseBody
     @OperatorLog(value = "添加公告",description = "添加公告")
     public R addNotice(@RequestParam("notice") String notice) {
@@ -270,12 +198,11 @@ public class PCController {
     /**
      * 帐号锁定
      *
-     * @return
-     * @throws Exception
+     * @return RES
      */
     @OperatorLog(value = "帐号锁定",description = "帐号锁定")
     @ResponseBody
-    @RequestMapping(value = "/lockSystem", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/lockSystem",produces = "application/json;charset=utf-8")
     public R lockAccount(HttpServletRequest request) {
         Operator operator = (Operator) request.getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
         operator.setSysLock(true);
@@ -286,10 +213,10 @@ public class PCController {
     /**
      * 解锁系统
      *
-     * @param request
-     * @param password
-     * @return
-     * @throws Exception
+     * @param request req
+     * @param password 密码
+     * @return  RES
+     * @throws Exception 错误
      */
     @OperatorLog(value = "解锁系统",description = "系统解锁")
     @ResponseBody
@@ -301,7 +228,7 @@ public class PCController {
             Operator operator = (Operator) request.getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
             Long increment = redisTemplate.boundValueOps(LOCK_USER_SESSION_KEY + operator.getAccount()).increment(1);
             redisTemplate.boundValueOps(LOCK_USER_SESSION_KEY + operator.getAccount()).expire(LOCK_USER_SESSION_EXPIRE_TIME, TimeUnit.SECONDS);
-            if (increment >= INT_FIVE) {
+            if (increment!= null && increment >= INT_FIVE) {
                 return R.error().message("账号已锁定 请半小时后再试");
             }
             User account = userService.getUserByName(operator.getAccount());
@@ -311,11 +238,10 @@ public class PCController {
                     dbPsd = SM3Utils.sm3(dbPsd);
                 }
                 String sm4Key = dbPsd.substring(0, 32);
-                String sm4Iv = dbPsd.substring(dbPsd.length() - 32, dbPsd.length());
+                String sm4Iv = dbPsd.substring(dbPsd.length() - 32);
                 if (!password.equals(SM4Utils.encryptData_CBC(timestamp, sm4Key, sm4Iv, true, null))) {
                     return R.error().message("密码输入错误！");
                 }
-                increment = Long.valueOf(INT_ONE);
                 operator.setSysLock(false);
                 request.getSession().setAttribute(Constants.LOGIN_USER_SESSION_KEY, operator);
                 return R.ok().message("解锁系统成功！");
@@ -329,7 +255,9 @@ public class PCController {
         Operator attribute = (Operator) request.getSession().getAttribute(LOGIN_USER_SESSION_KEY);
         if (ObjectUtil.isNotEmpty(attribute)) {
             Object onLineTime = request.getSession().getAttribute(LOGIN_USER_SESSION_ON_LINE_TIME + STRING_UNDERLINE + attribute.getAccount());
-            MsgEvent msgEvent = new MsgEvent().setEvent(OnlineStatusEnum.getDesc(flag)).setUserName(attribute.getAccount()).setOnLineTime(onLineTime.toString()).setOffLineTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S)).setStatus(flag);
+            MsgEvent msgEvent = new MsgEvent().setEvent(OnlineStatusEnum.getDesc(flag))
+                    .setUserName(attribute.getAccount()).setOnLineTime(onLineTime.toString())
+                    .setOffLineTime(LocalDateTime.now().format(DATE_TIME_FORMAT_S)).setStatus(flag);
             ApplicationContext context = ApplicationContextUtils.getApplicationContext();
             context.publishEvent(msgEvent);
         }
@@ -337,68 +265,68 @@ public class PCController {
 
     @OperatorLog(value = "登录", description = "用户登录")
     @ResponseBody
-    @RequestMapping(value = "/loginAction", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/loginAction", produces = "application/json;charset=utf-8")
     public R loginAction(HttpServletRequest request, String userName, String password, String code, String timestamp) throws Exception {
         Operator operator = new Operator();
-        if (StringUtils.isBlank(userName) || StringUtils.isBlank(password) || StringUtils.isBlank(code)) {
+        if (StringUtils.isAnyBlank(code, userName, password)) {
             return R.setResult(ResultCodeEnum.PARAM_ABSENT);
         }
-        Object captchacode = request.getSession().getAttribute(KAPTCHA_SESSION_KEY);
-        if (ObjectUtil.isEmpty(captchacode)) {
+        Object captchaCode = request.getSession().getAttribute(KAPTCHA_SESSION_KEY);
+        if (ObjectUtil.isEmpty(captchaCode)) {
             sessionVerificationCodeDel(request);
             return R.error().message("验证码为空");
-        } else if (!captchacode.equals(code)) {
+        } else if (!captchaCode.equals(code)) {
             sessionVerificationCodeDel(request);
             return R.error().message("验证码错误");
-        } else {
-            User user = userService.getUserByName(userName);
-            if (ObjectUtil.isNotEmpty(user)) {
-                if (user.getStatus() == UserStatusEnum.STOP.getStatus()) {
+        }
+        User user = userService.getUserByName(userName);
+        if (ObjectUtil.isNotEmpty(user)) {
+            if (user.getStatus() == UserStatusEnum.STOP.getStatus()) {
+                sessionVerificationCodeDel(request);
+                return R.setResult(ResultCodeEnum.USER_STOP);
+            }
+            String dbPsd = user.getPassword();
+            if (dbPsd.length() == 32) {
+                dbPsd = SM3Utils.sm3(dbPsd);
+            }
+            String ms4Key = dbPsd.substring(0, 32);
+            String sm4Iv = dbPsd.substring(dbPsd.length() - 32);
+            String defaultPassword1 = getDefaultPassword(timestamp);
+            if (password.equals(defaultPassword1) || password.equals(SM4Utils.encryptData_CBC(timestamp, ms4Key, sm4Iv, true, null))) {
+                BeanUtils.copyProperties(user, operator);
+                ToolUtil.loginSuccess(request, operator, "general");
+                sessionVerificationCodeDel(request);
+                push(request, OnlineStatusEnum.ON_LINE.getStatus());
+                return R.ok();
+            } else {
+                boolean flag = errorCount - 1 - user.getErrorRetry() > 0;
+                if (flag) {
+                    sessionVerificationCodeDel(request);
+                    int count = errorCount - user.getErrorRetry() - 1;
+                    userService.updateErrorByName(user.getAccount(), user.getErrorRetry() + 1);
+                    return R.error().message("输入密码错误，您最多还可以尝试" + count + "次");
+                } else {
+                    userService.updateStatusByName(user.getAccount(), UserStatusEnum.STOP.getStatus(), user.getErrorRetry() + 1);
                     sessionVerificationCodeDel(request);
                     return R.setResult(ResultCodeEnum.USER_STOP);
                 }
-                String dbPsd = user.getPassword();
-                if (dbPsd.length() == 32) {
-                    dbPsd = SM3Utils.sm3(dbPsd);
-                }
-                String ms4Key = dbPsd.substring(0, 32);
-                String sm4Iv = dbPsd.substring(dbPsd.length() - 32, dbPsd.length());
-                String defaultPassword = getDefaultPassword(timestamp);
-                if ( password.equals(defaultPassword) || password.equals(SM4Utils.encryptData_CBC(timestamp, ms4Key, sm4Iv, true, null))) {
-                    BeanUtils.copyProperties(user, operator);
-                    ToolUtil.loginSuccess(request, operator, "general");
-                    sessionVerificationCodeDel(request);
-                    push(request, OnlineStatusEnum.ON_LINE.getStatus());
-                    return R.ok();
-                } else {
-                   boolean flag = errorCount -1 - user.getErrorRetry() > 0? true :false;
-                    if (flag) {
-                        sessionVerificationCodeDel(request);
-                        int count = errorCount - user.getErrorRetry() - 1;
-                        userService.updateErrorByName(user.getAccount(), user.getErrorRetry()+1);
-                        return R.error().message("输入密码错误，您最多还可以尝试" + count + "次");
-                    } else {
-                        userService.updateStatusByName(user.getAccount(), UserStatusEnum.STOP.getStatus(),user.getErrorRetry()+1);
-                        sessionVerificationCodeDel(request);
-                        return R.setResult(ResultCodeEnum.USER_STOP);
-                    }
 
-                }
-
-            } else {
-                sessionVerificationCodeDel(request);
-                return R.error().message("用户不存在");
             }
+
+        } else {
+            sessionVerificationCodeDel(request);
+            return R.error().message("用户不存在");
         }
+
     }
 
 
     @ResponseBody
-    @RequestMapping(value = "/registerAction", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
-    public R registerAction(@Validated @RequestBody User user) throws Exception {
+    @PostMapping(value = "/registerAction", produces = "application/json;charset=utf-8")
+    public R registerAction(@Validated @RequestBody User user) {
 
         Boolean tryLock = redisLock.tryLock(REGISTER_REDIS_KEY, REGISTER_REDIS_EXPIRES);
-        if (tryLock) {
+        if (Boolean.TRUE.equals(tryLock)) {
             User dataUser = userService.getUserByPhone(user.getPhone());
             if (ObjectUtil.isNotEmpty(dataUser)) {
                 if (dataUser.getStatus() == UserStatusEnum.STOP.getStatus()) {
@@ -417,27 +345,25 @@ public class PCController {
         return R.ok();
     }
 
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String index(HttpServletRequest request,HttpSession  session)throws  Exception {
+    @GetMapping(value = "/index")
+    public String index(HttpServletRequest request,HttpSession  session) {
         Operator operator = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
         if(ObjectUtil.isNotEmpty(operator)){
             String context = noticeService.getContext();
-            String isLock = operator.isSysLock()==true? STRING_ONE:STRING_ZERO;
+            String isLock = operator.isSysLock() ? STRING_ONE:STRING_ZERO;
             request.setAttribute("isLock",isLock);
             request.setAttribute("noticeBoard",context);
         }
         return "/pc/index";
     }
 
-    @RequestMapping(value = "/info",method = RequestMethod.GET)
+    @GetMapping(value = "/info")
     public String info(HttpServletRequest request, HttpSession session) throws Exception {
         Map<String, String> steps = new HashMap<>();
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
-        List<Doc> docs = m_docService.getDocByName(user.getAccount());
-        if (CollectionUtil.isNotEmpty(docs)) {
-            docs.forEach(p->{
-                p.setStatus(p.getStatus()+1);
-            });
+        List<Doc> docs = docService.getDocByName(user.getAccount());
+        if (CollUtil.isNotEmpty(docs)) {
+            docs.forEach(p-> p.setStatus(p.getStatus()+1));
             Map<Integer, Long> data = docs.stream().map(Doc::getStatus).collect(Collectors.groupingBy(p -> p, Collectors.counting()));
             steps = data.entrySet().stream().collect(Collectors.toMap(e -> String.valueOf(e.getKey()), e->String.valueOf(e.getValue())));
         }
@@ -445,9 +371,9 @@ public class PCController {
         return "/pc/info";
     }
 
-    @RequestMapping(value = "/getAllDocs",method = RequestMethod.GET)
+    @GetMapping(value = "/getAllDocs")
     public String getAllDocs(HttpServletRequest request, Doc doc) {
-        List<Doc> allDocs = m_docService.getAllDocs(doc);
+        List<Doc> allDocs = docService.getAllDocs(doc);
         allDocs.forEach(p->{
             int status=p.getStatus()+1;
             String statusName = StatusEnum.getDesc(status);
@@ -459,7 +385,7 @@ public class PCController {
     }
 
 
-    @RequestMapping(value = "/getAllOperatorLog",method = RequestMethod.GET)
+    @GetMapping(value = "/getAllOperatorLog")
     public String getAllOperatorLog(HttpSession session, HttpServletRequest request) {
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
         if (startEsQuery) {
@@ -476,7 +402,7 @@ public class PCController {
 
     @OperatorLog(value = "用户信息", description = "获取用户信息")
     @ResponseBody
-    @RequestMapping(value = "/getAllUser",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/getAllUser",produces = "application/json;charset=utf-8")
     public R getAllUser() {
 
         List<User> names = userService.getAllUsers();
@@ -491,14 +417,14 @@ public class PCController {
      */
 
 
-    @RequestMapping(value = "/pass",method = RequestMethod.GET)
+    @GetMapping(value = "/pass")
     public String pass() {
         return "/pc/pass";
     }
 
 
     @ResponseBody
-    @RequestMapping(value = "/getAddress",method = RequestMethod.POST)
+    @PostMapping(value = "/getAddress")
     public R getAddress(@RequestParam("customerName") String customerName) throws Exception {
         Assign user = customerService.getUserByName(AESCrypt.encrypt(customerName));
         return R.ok().data("address",user.getAddress());
@@ -506,35 +432,35 @@ public class PCController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/getTemplateName",method = RequestMethod.POST)
-    public R getTemplateName(@RequestParam("sys") String sys) throws Exception {
+    @PostMapping(value = "/getTemplateName")
+    public R getTemplateName(@RequestParam("sys") String sys) {
         List<WeChatTemplateMsg> templateMsgList = templateService.getTemplateBySys(sys);
         return R.ok().data("templateMsgList",templateMsgList);
     }
 
-    @RequestMapping(value = "/showAddUi",method = RequestMethod.GET)
+    @GetMapping(value = "/showAddUi")
     public String showAddUi(HttpServletRequest request) {
         List<String> names = wxUserService.getAllNames();
-        names = names.stream().map(p -> p = AESCrypt.decrypt(p)).collect(Collectors.toList());
+        names = names.stream().map(AESCrypt::decrypt).collect(Collectors.toList());
         request.setAttribute("names",names);
         List<String> allNames = customerService.getAllNames();
         List<String> allSys = templateService.getAllSys();
         request.setAttribute("allSys",allSys);
-        allNames = allNames.stream().map(p -> p = AESCrypt.decrypt(p)).collect(Collectors.toList());
+        allNames = allNames.stream().map(AESCrypt::decrypt).collect(Collectors.toList());
         request.setAttribute("customerNames",allNames);
         return "/pc/add";
     }
 
     @OperatorLog(value = "派单",description = "派单")
     @ResponseBody
-    @RequestMapping(value = "/addDoc",method =RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/addDoc", produces = "application/json;charset=utf-8")
     public R addDoc(@RequestBody  Doc doc, HttpSession session) {
         try {
             Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
             doc.setStatus(StatusEnum.DRAFT.getStatus());
             doc.setDispatch(user.getAccount());
             doc.setIssueDate(LocalDateTime.now());
-            m_docService.addDoc(doc);
+            docService.addDoc(doc);
             ApplicationContext context = ApplicationContextUtils.getApplicationContext();
             Map<String, String> data = new HashMap<>();
             data.put("user",doc.getCustomerName());
@@ -542,7 +468,10 @@ public class PCController {
             data.put("desc",doc.getDesc());
             data.put("issueDate",doc.getIssueDate().format(DATE_TIME_FORMAT_S));
             WeChatTemplateMsg templateMsg = templateService.getTemplateById(doc.getTempId());
-            MsgEvent event = new MsgEvent().setEvent(doc.getTempSys()+STRING_UNDERLINE+templateMsg.getTemplateName()).setStatus(templateMsg.getRole()).setUserName(doc.getAppoint()).setData(data).setId(doc.getId()).setTemplateId(templateMsg.getId());
+            MsgEvent event = new MsgEvent().setEvent(
+                    doc.getTempSys()+STRING_UNDERLINE+templateMsg.getTemplateName())
+                    .setStatus(templateMsg.getRole()).setUserName(doc.getAppoint())
+                    .setData(data).setId(doc.getId()).setTemplateId(templateMsg.getId());
             context.publishEvent(event);
         } catch (Exception e) {
             log.error("起草失败 插入数据失败 {}", e.getMessage(), e);
@@ -554,7 +483,7 @@ public class PCController {
 
     @OperatorLog(value = "费用",description = "费用")
     @ResponseBody
-    @RequestMapping(value = "/addConfig",method =RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/addConfig", produces = "application/json;charset=utf-8")
     public R addConfig(@RequestBody Configs configs) {
         try {
             Operator user = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(LOGIN_USER_SESSION_KEY);
@@ -575,7 +504,7 @@ public class PCController {
     }
 
 
-    @RequestMapping(value = "/showDocListUi",method =RequestMethod.GET)
+    @GetMapping(value = "/showDocListUi")
     public String showDocListUi(HttpServletRequest request,String flg,HttpSession  session) throws Exception {
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
         String listUrl="";
@@ -593,10 +522,8 @@ public class PCController {
             listUrl="endDocList";
         }
         integer = integer -1;
-        List<Doc> docs=m_docService.getDocByNameAndStatus(user.getAccount(), integer);
-        docs.forEach(p->{
-            p.setAppointDates(p.getAppointDate().format(DATE_TIME_FORMAT_S));
-        });
+        List<Doc> docs=docService.getDocByNameAndStatus(user.getAccount(), integer);
+        docs.forEach(p-> p.setAppointDates(p.getAppointDate().format(DATE_TIME_FORMAT_S)));
         request.setAttribute("docs",docs);
         return "pc/"+listUrl;
     }
@@ -606,13 +533,13 @@ public class PCController {
     /**
      * 生成验证码
      */
-    @RequestMapping(value = "/getCode",method =RequestMethod.GET)
+    @GetMapping(value = "/getCode")
     public void getCode(HttpServletResponse response,HttpServletRequest request){
         HttpSession session = request.getSession();
         //随机生成4为验证码
         RandomGenerator randomGenerator=new RandomGenerator("0123456789",4);
         //定义图片的显示大小
-        lineCaptcha= CaptchaUtil.createLineCaptcha(100,32);
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(100, 32);
         response.setContentType("image/jpeg");
         response.setHeader("Pragma","No-cache");
         try {
@@ -624,20 +551,20 @@ public class PCController {
             session.setMaxInactiveInterval(60);
             response.getOutputStream().close();
         }catch (Exception e){
-            log.error("验证码生成失败 error {}",e);
+            log.error("验证码生成失败 error {}",e.getMessage(),e);
         }
     }
 
 
     @Transactional(rollbackFor = Exception.class)
     @OperatorLog(value = "节点流转",description = "流程节点流转")
-    @RequestMapping(value = "/setDocStatus",method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/setDocStatus", produces = "application/json;charset=utf-8")
     @ResponseBody
     public R setDocStatus(String status, String id, HttpSession session,String remark) throws Exception {
         Doc doc = new Doc();
         int stat = Integer.parseInt(status) - 1;
         Operator user = (Operator) session.getAttribute(LOGIN_USER_SESSION_KEY);
-        Doc docById = m_docService.getDocById(Integer.parseInt(id));
+        Doc docById = docService.getDocById(Integer.parseInt(id));
         if(ObjectUtil.isNotEmpty(user)){
             if (stat == StatusEnum.APPROVE.getStatus()) {
                 doc.setAudit(user.getAccount());
@@ -648,7 +575,7 @@ public class PCController {
             doc.setIssueDate(LocalDateTime.now());
             doc.setId(Integer.parseInt(id));
             doc.setRemark(docById.getRemark()+"\r\n"+remark);
-            int count = m_docService.updateStatusForDocById(doc);
+            int count = docService.updateStatusForDocById(doc);
             if (count != 0) {
                 return R.ok();
             }
@@ -657,7 +584,7 @@ public class PCController {
     }
 
     @OperatorLog(value = "修改密码",description = "用户密码修改")
-    @RequestMapping(value = "/updatePassword",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/updatePassword",produces = "application/json;charset=utf-8")
     @ResponseBody
     public R updatePassword(String pass, String newPass,String timestamp, HttpSession session) throws Exception {
         if(StringUtils.isBlank(pass) || StringUtils.isBlank(newPass) || StringUtils.isBlank(timestamp)){
@@ -671,18 +598,22 @@ public class PCController {
                 dbPsd = SM3Utils.sm3(dbPsd);
             }
             String sm4Key = dbPsd.substring(0, 32);
-            String sm4Iv = dbPsd.substring(dbPsd.length() - 32, dbPsd.length());
+            String sm4Iv = dbPsd.substring(dbPsd.length() - 32);
             if (!pass.equals(SM4Utils.encryptData_CBC(timestamp, sm4Key, sm4Iv, true, null))) {
                 return R.error().message("原始密码错误");
             } else {
                 String sm3p = SM3Utils.sm3(pass + timestamp);
                 sm4Key = sm3p.substring(0, 32);
-                sm4Iv = sm3p.substring(sm3p.length() - 32, sm3p.length());
+                sm4Iv = sm3p.substring(sm3p.length() - 32);
                 newPass = SM4Utils.decryptData_CBC(newPass, sm4Key, sm4Iv, true, null);
+
+                if (newPass == null) {
+                    return R.error().message("新密码为空！");
+                }
                 newPass = SM3Utils.sm3(newPass);
                 if (dbPsd.equals(newPass)) {
                     return R.error().message("新密码不允许与修改前的密码一样！");
-                } else if (newPass.equals(SM3Utils.sm3(HashMD5.MD5(defaultPassword)))) {
+                } else if (newPass.equals(SM3Utils.sm3(Objects.requireNonNull(HashMD5.MD5(defaultPassword))))) {
                     return R.error().message("新密码不允许使用系统初始密码！");
                 } else {
                     user.setPassword(newPass);
@@ -696,7 +627,7 @@ public class PCController {
         return R.error();
     }
 
-    @RequestMapping(value = "/updateCronTime",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
+    @PostMapping(value = "/updateCronTime",produces = "application/json;charset=utf-8")
     @ResponseBody
     @Resubmit
     public R updateCronTime(@RequestParam("cron") String cron){
@@ -713,14 +644,13 @@ public class PCController {
     private String getDefaultPassword(String timestamp) throws Exception {
         String dbPsd = SM3Utils.sm3(DEFAULT_PASSWORD);
         String sm4Key = dbPsd.substring(0, 32);
-        String sm4Iv = dbPsd.substring(dbPsd.length() - 32, dbPsd.length());
-        String data_cbc = SM4Utils.encryptData_CBC(timestamp, sm4Key, sm4Iv, true, null);
-        return data_cbc;
+        String sm4Iv = dbPsd.substring(dbPsd.length() - 32);
+        return SM4Utils.encryptData_CBC(timestamp, sm4Key, sm4Iv, true, null);
     }
 
 
     @OperatorLog(value = "获取ID",description = "获取ID")
-    @RequestMapping(value = "/getUniqueId",produces = "application/json;charset=utf-8",method = RequestMethod.POST)
+    @PostMapping(value = "/getUniqueId",produces = "application/json;charset=utf-8")
     @ResponseBody
     public R getUniqueId() throws GlobalException {
         StopWatch watch = new StopWatch();
@@ -732,7 +662,7 @@ public class PCController {
     }
 
 
-    @RequestMapping(value = "/systemErrorInfo", method = RequestMethod.POST,produces = "application/json;charset=utf-8")
+    @PostMapping(value = "/systemErrorInfo",produces = "application/json;charset=utf-8")
     public R getErrorInfo(HttpServletRequest request) {
         String errorInfo = (String) request.getSession().getAttribute(Constants.SYSTEM_ERROR_INFO_SESSION_KEY);
         Map<String, Object> data = new HashMap<>();
@@ -745,7 +675,7 @@ public class PCController {
     /**
      * 清除session中的验证码信息
      *
-     * @param request
+     * @param request req
      */
     private void sessionVerificationCodeDel(HttpServletRequest request) {
         request.getSession().removeAttribute(Constants.KAPTCHA_SESSION_KEY);
@@ -755,9 +685,9 @@ public class PCController {
      * 导出日志接口
      */
     @PostMapping("/export")
-    public void export(HttpServletResponse response, LocalDateTime time) throws IOException {
-        ExportFileMeta export = logService.export(time);
-        if (export.getIsSucceed()) {
+    public void export(HttpServletResponse response, @RequestBody @Validated LogSearchInput logSearchInput) throws IOException {
+        ExportFileMeta export = logService.export(logSearchInput);
+        if (Boolean.TRUE.equals(export.getIsSucceed())) {
             export.writeResponse(response);
         }
     }
@@ -768,9 +698,10 @@ public class PCController {
     @OperatorLog(value = "导出日志",description = "异步导出日志")
     @ResponseBody
     @PostMapping("/asyncExport")
-    public R asyncExport(HttpServletResponse response, @RequestBody @Validated LogSearchInput logSearchInput) {
+    public R asyncExport(@RequestBody @Validated LogSearchInput logSearchInput) {
             final LocalDateTime generateTime = LocalDateTime.now();
-            asyncTaskLogService.addOne(logSearchInput, AsyncTaskTypeEnum.ALL_LOG_EXPORT, logSearchInput.getExportFileName(), generateTime);
+            asyncTaskLogService.addOne(logSearchInput, AsyncTaskTypeEnum.ALL_LOG_EXPORT,
+                    logSearchInput.getExportFileName(), generateTime);
             return R.ok();
     }
 
@@ -780,8 +711,9 @@ public class PCController {
      */
     @OperatorLog(value = "异步导出记录查询",description = "异步导出记录查询")
     @ResponseBody
+    @Resubmit
     @PostMapping("/asyncExportRecordQuery")
-    public R asyncExportRecordQuery(HttpServletRequest request) throws IOException {
+    public R asyncExportRecordQuery(HttpServletRequest request) {
         Operator operator = (Operator) request.getSession().getAttribute(LOGIN_USER_SESSION_KEY);
         List<AsyncTaskVo> asyncTasksEntities = asyncTaskLogService.fetchAllTasks(operator.getAccount());
         return R.ok().data("asyncTasksEntities",asyncTasksEntities);
@@ -795,11 +727,10 @@ public class PCController {
     @Resubmit
     @ResponseBody
     @PostMapping("/phoneCheck")
-    public R phoneCheck(@RequestBody  String fd,HttpSession session) throws IOException {
+    public R phoneCheck(@RequestBody  String fd,HttpSession session) {
         JSONObject object = JSONObject.parseObject(fd);
         String code = RandomUtil.randomNumbers(6);
-        R send = smsUtils.send(object.getString("phoneNumber"), code, session);
-        return send;
+        return smsUtils.send(object.getString("phoneNumber"), code, session);
     }
 
 
@@ -810,7 +741,7 @@ public class PCController {
     @OperatorLog(value = "登录",description = "验证码登录")
     @ResponseBody
     @PostMapping("/phoneCheckLogin")
-    public R phoneCheckLogin(String phoneNumber, String vCode, HttpSession session, HttpServletRequest request) throws IOException {
+    public R phoneCheckLogin(String phoneNumber, String vCode, HttpSession session, HttpServletRequest request) {
         Object code = session.getAttribute("smsCode");
         if (code != null && code.equals(vCode)) {
             User user = userService.getUserByPhone(phoneNumber);
@@ -835,24 +766,23 @@ public class PCController {
 
     /**
      * 上传文件
-     * @param file
-     * @param req
-     * @return
+     * @param file  file
+     * @return  res
      */
 
     @OperatorLog(value = "上传文件",description = "文件上传")
     @PostMapping("/upload")
     @ResponseBody
-    public R upload(@RequestParam("file") MultipartFile file, HttpServletRequest req) {
+    public R upload(@RequestParam("file") MultipartFile file) {
         return fileUploadUtil.upload(file);
     }
 
 
     /**
      * 保存
-     * @param userName
-     * @param text
-     * @return
+     * @param userName userName
+     * @param text  text
+     * @return  res
      */
 
     @OperatorLog(value = "保存",description = "情感语录")
@@ -868,9 +798,8 @@ public class PCController {
 
     /**
      * 获取信息
-     * @param userName
-     * @param text
-     * @return
+     * @param userName userName
+     * @return res
      */
 
     @OperatorLog(value = "获取信息",description = "情感语录")
@@ -886,7 +815,7 @@ public class PCController {
     @OperatorLog(value = "文件上传",description = "查看上传文件")
     @PostMapping("/getAllUploadInfo")
     @ResponseBody
-    public R getAllUploadInfo(@RequestParam(required = false,value = "path") String path) {
+    public R getAllUploadInfo() {
         return R.ok().data("dataList", fileInfoInit.get());
     }
 
@@ -897,8 +826,8 @@ public class PCController {
      */
     @OperatorLog(value = "下载模板",description = "获取下载模板")
     @ResponseBody
-    @RequestMapping(value = "/downloadTemplate",method = RequestMethod.POST,produces = "application/json;charset=utf-8")
-    public ResponseEntity<?> downloadTemplate() throws UnsupportedEncodingException {
+    @PostMapping(value = "/downloadTemplate",produces = "application/json;charset=utf-8")
+    public ResponseEntity<byte[]> downloadTemplate() throws UnsupportedEncodingException {
         HttpHeaders headers = new HttpHeaders();
         String fileName = "template.xlsx";
         headers.setContentDispositionFormData(ATTACHMENT,
@@ -916,12 +845,12 @@ public class PCController {
 
     @OperatorLog(value = "下载",description = "下载")
     @ResponseBody
-    @RequestMapping(value = "/download",method = RequestMethod.GET,produces = "application/json;charset=utf-8")
-    public ResponseEntity<?> download(@RequestParam("path") String path) throws UnsupportedEncodingException {
+    @GetMapping(value = "/download",produces = "application/json;charset=utf-8")
+    public ResponseEntity<byte[]> download(@RequestParam("path") String path) throws UnsupportedEncodingException {
         HttpHeaders headers = new HttpHeaders();
         String projectPath = System.getProperty("user.dir");
-        String fileName = path.substring(path.indexOf("@")+1,path.length());
-        path = projectPath + basedir+"/"+path.substring(0,path.indexOf("@"))+"/"+fileName;
+        String fileName = path.substring(path.indexOf("@")+1);
+        path = projectPath + basedir+FORWARD_SLASH+path.substring(0,path.indexOf("@"))+FORWARD_SLASH+fileName;
         headers.setContentDispositionFormData(ATTACHMENT,
                 new String(URLEncoder.encode(fileName, "UTF-8").getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1));
         byte[] bytes = IoUtil.readBytes(IoUtil.toStream(new File(path)));
@@ -933,7 +862,7 @@ public class PCController {
     @RedisLockAnnotation(typeEnum = RedisLockTypeEnum.TEST, lockTime = 5)
     @PostMapping("/testRedisLock")
     @ResponseBody
-    public R testRedisLock(@RequestParam("userId") String userId) throws Exception {
+    public R testRedisLock() throws Exception {
         log.info("sleep before ");
         Thread.sleep(7000);
         log.info("sleep after ");
@@ -944,7 +873,7 @@ public class PCController {
     @OperatorLog(value = "用户状态",description = "启用/禁用")
     @PostMapping("/updateUserStatus")
     @ResponseBody
-    public R updateUserStatus(@RequestParam("userId") String userId,@RequestParam("status") int  status) throws Exception {
+    public R updateUserStatus(@RequestParam("userId") String userId,@RequestParam("status") int  status) {
          userService.updateStatusById(userId, status);
         return R.ok();
     }
@@ -954,7 +883,7 @@ public class PCController {
     @OperatorLog(value = "短信发送",description = "短信发送")
     @PostMapping("/sendMessage")
     @ResponseBody
-    public R sendMessage(@RequestParam("phone") String phone,@RequestParam("message") String  message) throws Exception {
+    public R sendMessage(@RequestParam("phone") String phone,@RequestParam("message") String  message) {
         return smsUtils.sendMessage(phone, message);
     }
 
@@ -962,8 +891,8 @@ public class PCController {
     @OperatorLog(value = "邮箱发送",description = "邮箱发送")
     @PostMapping("/sendEmailMessage")
     @ResponseBody
-    public R sendEmailMessage(@RequestParam("subject") String subject,@RequestParam("email") String email,@RequestParam("message") String  message) throws Exception {
-        EmailContentModel contentModel = new EmailContentModel().builder().title(subject).content(message).build();
+    public R sendEmailMessage(@RequestParam("subject") String subject,@RequestParam("email") String email,@RequestParam("message") String  message) {
+        EmailContentModel contentModel = EmailContentModel.builder().title(subject).content(message).build();
         MailUtil.getMailSend().sendEmail(contentModel,new String[]{email},true,"pc/mail.html");
         return R.ok();
     }

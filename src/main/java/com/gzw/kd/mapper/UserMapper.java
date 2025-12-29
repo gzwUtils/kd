@@ -11,34 +11,33 @@ import java.util.List;
 /**
  * @author 高志伟
  */
-@SuppressWarnings("all")
 @Repository
 @Mapper
 public interface UserMapper {
 
-    User getUserByName(String  account)throws  Exception;
+    User getUserByName(String  account);
 
 
-    User getUserById(int  id)throws  Exception;
+    User getUserById(int  id);
 
 
     List<User> getUsersByIds(@Param("ids") List<String> ids);
 
-    User getUserByNameAndPhone(String  account,String phone)throws  Exception;
+    User getUserByNameAndPhone(String  account,String phone);
 
     User getUserByPhone(String  phone);
 
-    Integer registerUser(User user)throws  Exception;
+    Integer registerUser(User user);
 
-    Integer updatePasswordDocById(User user)throws  Exception;
+    Integer updatePasswordDocById(User user);
 
     List<String> getAllNames();
 
-    Integer updateStatusByName(String account,int status,int errorRetry)throws  Exception;
+    Integer updateStatusByName(String account,int status,int errorRetry);
 
-    Integer updateStatusById(String id,int status)throws  Exception;
+    Integer updateStatusById(String id,int status);
 
-    Integer updateErrorByName(String account,int errorRetry)throws  Exception;
+    Integer updateErrorByName(String account,int errorRetry);
 
     List<User> getAllUsers();
 

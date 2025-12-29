@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import static com.gzw.kd.common.Constants.SMS_SEND_URL;
@@ -17,7 +16,6 @@ import static com.gzw.kd.common.Constants.STRING_TWO;
  * @author 高志伟 短信验证码发送
  */
 @Component
-@SuppressWarnings("all")
 public class SMSUtils {
 
     @Value("${smsAccount}")
@@ -27,7 +25,7 @@ public class SMSUtils {
     private String smsPassword;
 
 
-    public  R send(String phone, String numbers, HttpSession httpSession) throws IOException {
+    public  R send(String phone, String numbers, HttpSession httpSession)   {
         Map<String, Object> map = new HashMap<>();
         map.put("account",account);
         map.put("password",smsPassword);
@@ -45,7 +43,7 @@ public class SMSUtils {
     }
 
 
-    public  R sendMessage(String phone, String message) throws IOException {
+    public  R sendMessage(String phone, String message) {
         Map<String, Object> map = new HashMap<>();
         map.put("account",account);
         map.put("password",smsPassword);
