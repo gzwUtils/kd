@@ -17,8 +17,8 @@
     creator          varchar(45)   default ''  not null comment '创建者',
     updator          varchar(45)   default ''  null comment '更新者',
     is_deleted       tinyint       default 0   not null comment '是否删除：0.不删除 1.删除',
-    created          long           default 0   not null comment '创建时间',
-    updated          long           default 0   null comment '更新时间'
+    created          BIGINT        default 0   not null comment '创建时间',
+    updated          BIGINT        default 0   null comment '更新时间'
     )
     comment '消息模板信息' collate = utf8mb4_unicode_ci;
 
