@@ -118,12 +118,12 @@ public class TemplateInfo implements Serializable {
     /**
      * 创建时间 单位 s
      */
-    private Integer created;
+    private long created;
 
     /**
      * 更新时间 单位s
      */
-    private Integer updated;
+    private long updated;
 
 
 }

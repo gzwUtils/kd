@@ -1,47 +1,21 @@
 package com.gzw.kd.vo.output;
-
-import io.swagger.annotations.ApiModelProperty;
+import com.gzw.kd.common.entity.TemplateInfo;
 import lombok.Data;
 
 
 @Data
-public class TemplateVo {
-
-    /**
-     * 模版id
-     */
-    private Long id;
+public class TemplateVo extends TemplateInfo {
 
 
-    /**
-     * 模板标题
-     */
-    @ApiModelProperty(value = "模板标题")
-    private String name;
-
-
-    /**
-     * 模板内容
-     */
     private String content;
-
-
-    /**
-     * 模版类型
-     */
-
-    private String type;
-
-
-    /**
-     * 状态
-     */
 
     private String status;
 
-    /**
-     * id 类型
-     */
 
-    private String idType;
+    private String type;
+
+    private String account;
+
+
+    private  String createTime;
 }

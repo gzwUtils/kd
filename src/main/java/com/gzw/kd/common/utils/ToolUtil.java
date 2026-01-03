@@ -166,6 +166,19 @@ public class ToolUtil {
         return format.format(date);
     }
 
+
+    /**
+     * long 转 String
+     */
+
+    public static String longToString(long time) {
+        String dateStr = LocalDateTime.ofInstant(
+                Instant.ofEpochMilli(time),
+                ZoneId.of("Asia/Shanghai")
+        ).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        return dateStr;
+    }
+
     /**
      * date 转 String
      *

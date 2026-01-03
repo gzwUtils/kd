@@ -590,7 +590,7 @@
 
                     <div class="form-group">
                         <label class="form-label required">状态</label>
-                        <select class="form-control" name="msg_status" required>
+                        <select class="form-control" name="msgStatus" required>
                             <option value="10">新建</option>
                             <option value="20">停用</option>
                             <option value="30" selected>启用</option>
@@ -599,7 +599,7 @@
 
                     <div class="form-group">
                         <label class="form-label required">消息类型</label>
-                        <select class="form-control" name="msg_type" required>
+                        <select class="form-control" name="msgType" required>
                             <option value="10">系统通知</option>
                             <option value="20">营销消息</option>
                             <option value="30">验证码消息</option>
@@ -610,7 +610,7 @@
 
                     <div class="form-group">
                         <label class="form-label required">发送渠道</label>
-                        <select class="form-control" name="send_channel" required>
+                        <select class="form-control" name="sendChannel" required>
                             <option value="10">IM</option>
                             <option value="20">Push</option>
                             <option value="30">短信</option>
@@ -629,7 +629,7 @@
 
                     <div class="form-group">
                         <label class="form-label required">ID类型</label>
-                        <select class="form-control" name="id_type" required>
+                        <select class="form-control" name="idType" required>
                             <option value="10">系统用户ID</option>
                             <option value="20">did</option>
                             <option value="30" selected>手机号</option>
@@ -641,7 +641,7 @@
 
                     <div class="form-group">
                         <label class="form-label required">模板类型</label>
-                        <select class="form-control" name="template_type" required>
+                        <select class="form-control" name="templateType" required>
                             <option value="10">运营类</option>
                             <option value="20">技术类接口调用</option>
                         </select>
@@ -649,7 +649,7 @@
 
                     <div class="form-group">
                         <label class="form-label required">屏蔽类型</label>
-                        <select class="form-control" name="shield_type" required>
+                        <select class="form-control" name="shieldType" required>
                             <option value="10" selected>夜间不屏蔽</option>
                             <option value="20">夜间屏蔽</option>
                             <option value="30">夜间屏蔽(次日早上9点发送)</option>
@@ -658,7 +658,7 @@
 
                     <div class="form-group full-width">
                         <label class="form-label required">消息内容 (JSON格式)</label>
-                        <textarea class="form-control" name="msg_content" rows="10" required maxlength="4096"></textarea>
+                        <textarea class="form-control" name="msgContent" rows="10" required maxlength="4096"></textarea>
                         <div class="form-hint">
                             请使用JSON格式，支持占位符：${variableName}<br>
                             示例：{"content": "亲爱的${name}，您的验证码是${code}，请在10分钟内使用。"}
@@ -670,13 +670,13 @@
 
                     <div class="form-group">
                         <label class="form-label">定时任务ID</label>
-                        <input type="number" class="form-control" name="cron_task_id" min="0" value="0">
+                        <input type="number" class="form-control" name="cronTaskId" min="0" value="0">
                         <div class="form-hint">xxl-job-admin返回的任务ID</div>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">期望发送时间</label>
-                        <input type="text" class="form-control" name="expect_push_time" maxlength="100" value="0">
+                        <input type="text" class="form-control" name="expectPushTime" maxlength="100" value="0">
                         <div class="form-hint">
                             0:立即发送<br>
                             定时任务以及周期任务:cron表达式<br>
@@ -686,7 +686,7 @@
 
                     <div class="form-group">
                         <label class="form-label required">发送账号</label>
-                        <input type="text" class="form-control" name="send_account" required maxlength="20" value="admin">
+                        <input type="text" class="form-control" name="sendAccount" required maxlength="20" value="admin">
                         <div class="form-hint">同一渠道下可配置多个发送账号</div>
                     </div>
 
@@ -702,8 +702,8 @@
                 </div>
 
                 <input type="hidden" name="id" id="templateId">
-                <input type="hidden" name="is_deleted" value="0">
-                <input type="hidden" name="cron_crowd_path" value="">
+                <input type="hidden" name="isDeleted" value="0">
+                <input type="hidden" name="cronCrowdPath" value="">
             </form>
         </div>
 
@@ -801,7 +801,9 @@
         '50': { text: '公告', class: 'type-announcement' },
         '系统通知': { text: '系统通知', class: 'type-system' },
         '营销': { text: '营销', class: 'type-marketing' },
-        '告警': { text: '告警', class: 'type-alert' }
+        '告警': { text: '告警', class: 'type-alert' },
+        '公告': { text: '公告', class: 'type-announcement' },
+        '验证码': { text: '验证码', class: 'type-verification' }
     };
 
     const idTypeMap = {
@@ -976,8 +978,8 @@
                     '<td><span class="type-badge ' + type.class + '">' + type.text + '</span></td>' +
                     '<td><span class="idtype-badge">' + idTypeText + '</span></td>' +
                     '<td><div style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">' + contentPreview + '</div></td>' +
-                    '<td>admin</td>' +
-                    '<td>-</td>' +
+                    '<td>' + template.creator + '</td>' +
+                    '<td>' + template.createTime + '</td>' +
                     '<td>' +
                     '<div class="action-buttons">' +
                     '<button class="action-btn action-btn-view" onclick="viewTemplate(' + template.id + ')" title="查看">' +
@@ -1227,27 +1229,27 @@
 
         // 状态映射
         if (template.status === '启用') {
-            form.elements.msg_status.value = '30';
+            form.elements.msgStatus.value = '30';
         } else if (template.status === '停用') {
-            form.elements.msg_status.value = '20';
+            form.elements.msgStatus.value = '20';
         } else {
-            form.elements.msg_status.value = '10';
+            form.elements.msgStatus.value = '10';
         }
 
         // 类型映射
         if (template.type === '系统通知') {
-            form.elements.msg_type.value = '10';
+            form.elements.msgType.value = '10';
         } else if (template.type === '营销') {
-            form.elements.msg_type.value = '20';
+            form.elements.msgType.value = '20';
         } else if (template.type === '告警') {
-            form.elements.msg_type.value = '40';
+            form.elements.msgType.value = '40';
         } else {
-            form.elements.msg_type.value = '10';
+            form.elements.msgType.value = '10';
         }
 
         // 其他字段使用默认值
-        form.elements.id_type.value = template.idType || '30';
-        form.elements.msg_content.value = template.content || '';
+        form.elements.idType.value = template.idType || '30';
+        form.elements.msgContent.value = template.content || '';
 
         // 更新预览
         updateMsgPreview();
@@ -1264,17 +1266,17 @@
 
         // 设置默认值
         var form = templateForm;
-        form.elements.msg_status.value = '30';
-        form.elements.msg_type.value = '10';
-        form.elements.send_channel.value = '120'; // 站内信
-        form.elements.id_type.value = '30'; // 手机号
-        form.elements.template_type.value = '10'; // 运营类
-        form.elements.shield_type.value = '10'; // 夜间不屏蔽
-        form.elements.send_account.value = 'admin';
+        form.elements.msgStatus.value = '30';
+        form.elements.msgType.value = '10';
+        form.elements.sendChannel.value = '120'; // 站内信
+        form.elements.idType.value = '30'; // 手机号
+        form.elements.templateType.value = '10'; // 运营类
+        form.elements.shieldType.value = '10'; // 夜间不屏蔽
+        form.elements.sendAccount.value = 'admin';
         form.elements.creator.value = 'admin';
         form.elements.updator.value = 'admin';
-        form.elements.cron_task_id.value = '0';
-        form.elements.expect_push_time.value = '0';
+        form.elements.cronTaskId.value = '0';
+        form.elements.expectPushTime.value = '0';
 
         // 清空预览
         msgPreview.innerHTML = '';
@@ -1284,7 +1286,7 @@
 
     // 更新消息预览
     function updateMsgPreview() {
-        var msgContent = templateForm.elements.msg_content.value;
+        var msgContent = templateForm.elements.msgContent.value;
 
         if (msgContent.trim()) {
             try {
@@ -1349,8 +1351,8 @@
 
         // 转换数字字段
         var numericFields = [
-            'msg_status', 'cron_task_id', 'id_type', 'send_channel',
-            'template_type', 'msg_type', 'shield_type', 'is_deleted'
+            'msgStatus', 'cronTaskId', 'idType', 'sendChannel',
+            'templateType', 'msgType', 'shieldType', 'isDeleted'
         ];
 
         for (var i = 0; i < numericFields.length; i++) {
@@ -1362,8 +1364,8 @@
 
         // 验证消息内容是否为有效JSON
         try {
-            if (data.msg_content) {
-                JSON.parse(data.msg_content);
+            if (data.msgContent) {
+                JSON.parse(data.msgContent);
             }
         } catch (e) {
             alert('消息内容必须是有效的JSON格式');
@@ -1452,7 +1454,7 @@
         });
 
         // 消息内容变化时更新预览
-        templateForm.elements.msg_content.addEventListener('input', updateMsgPreview);
+        templateForm.elements.msgContent.addEventListener('input', updateMsgPreview);
 
         // 保存模板
         saveBtn.addEventListener('click', saveTemplate);

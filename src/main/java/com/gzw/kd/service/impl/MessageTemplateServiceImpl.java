@@ -8,6 +8,7 @@ import com.gzw.kd.common.entity.Operator;
 import com.gzw.kd.common.entity.XxlJobInfo;
 import com.gzw.kd.common.enums.*;
 import com.gzw.kd.common.utils.ContextUtil;
+import com.gzw.kd.common.utils.ToolUtil;
 import com.gzw.kd.common.utils.XxlJobUtils;
 import com.gzw.kd.mapper.MessageTemplateMapper;
 import com.gzw.kd.common.entity.TemplateInfo;
@@ -20,6 +21,7 @@ import java.util.Objects;
 import javax.annotation.Resource;
 
 import com.gzw.kd.vo.output.TemplateVo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -66,7 +68,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
         if(ObjectUtil.isNotEmpty(templateInfo.getId())){
             resetStatus(templateInfo);
         } else {
-            info.setCreator(operator.getAccount()).setCreated((int) millis).setIsDeleted(TemplateStatusEnum.START.getStatus());
+            info.setCreator(operator.getAccount()).setCreated(millis).setIsDeleted(TemplateStatusEnum.START.getStatus());
             messageTemplateMapper.registerTemplate(info);
         }
     }
@@ -77,7 +79,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
         if (Objects.nonNull(info)) {
             TemplateInfo clone = ObjectUtil.clone(info).setId(null);
             Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
-            clone.setCreator(operator.getAccount()).setCreated((int) System.currentTimeMillis());
+            clone.setCreator(operator.getAccount()).setCreated(System.currentTimeMillis());
             messageTemplateMapper.registerTemplate(clone);
         }
     }
@@ -91,7 +93,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
                     if(ObjectUtil.isNotEmpty(p.getCronTaskId())){
                         cronTaskService.deleteCronTask(p.getCronTaskId());
                     }
-                    p.setIsDeleted(TemplateStatusEnum.STOP.getStatus()).setUpdator(operator.getAccount()).setUpdated((int) System.currentTimeMillis());
+                    p.setIsDeleted(TemplateStatusEnum.STOP.getStatus()).setUpdator(operator.getAccount()).setUpdated(System.currentTimeMillis());
                 }
         );
         messageTemplateMapper.deleteTemplateInfo(messageTemplates);
@@ -121,8 +123,8 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
             cronTaskService.startCronTask(taskId);
             Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
             if(ObjectUtil.isNotEmpty(operator)){
-                TemplateInfo clone = ObjectUtil.clone(templateInfo).setMsgStatus(MessageStatusEnum.RUN.getCode()).setCronTaskId(taskId).setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
-                clone.setCreator(operator.getAccount()).setCreated((int) System.currentTimeMillis());
+                TemplateInfo clone = ObjectUtil.clone(templateInfo).setMsgStatus(MessageStatusEnum.RUN.getCode()).setCronTaskId(taskId).setUpdated(DateUtil.currentSeconds());
+                clone.setCreator(operator.getAccount()).setCreated(System.currentTimeMillis());
                 messageTemplateMapper.registerTemplate(clone);
                 return R.ok();
             }
@@ -137,7 +139,7 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
             return R.error().message("模版不存在");
         }
         Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
-        TemplateInfo clone = ObjectUtil.clone(info).setMsgStatus(MessageStatusEnum.STOP.getCode()).setUpdated(Math.toIntExact(DateUtil.currentSeconds())).setUpdator(operator.getAccount());
+        TemplateInfo clone = ObjectUtil.clone(info).setMsgStatus(MessageStatusEnum.STOP.getCode()).setUpdated(DateUtil.currentSeconds()).setUpdator(operator.getAccount());
         messageTemplateMapper.updateTemplateInfo(clone);
         cronTaskService.stopCronTask(info.getCronTaskId());
         return R.ok();
@@ -152,9 +154,8 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
             BeanUtils.copyProperties(p,vo);
             vo.setType(EnumUtils.getDescriptionByCode(p.getMsgType(), MessageContentTypeEnum.class));
             vo.setContent(p.getMsgContent());
-            vo.setName(p.getName());
             vo.setStatus(EnumUtils.getDescriptionByCode(p.getMsgStatus(), MessageStatusEnum.class));
-            vo.setIdType(String.valueOf(p.getIdType()));
+            vo.setCreateTime(ToolUtil.longToString(p.getCreated()));
             list.add(vo);
         });
         return list;
@@ -169,9 +170,9 @@ public class MessageTemplateServiceImpl implements MessageTemplateService {
      */
     private void resetStatus(TemplateInfo templateInfo) {
         Operator operator = (Operator) ContextUtil.getHttpRequest().getSession().getAttribute(Constants.LOGIN_USER_SESSION_KEY);
-        templateInfo.setMsgStatus(MessageStatusEnum.INIT.getCode()).setUpdator(operator.getAccount()).setUpdated(Math.toIntExact(DateUtil.currentSeconds()));
+        templateInfo.setUpdator(operator.getAccount()).setUpdated(DateUtil.currentSeconds());
 
-        if (Objects.nonNull(templateInfo.getCronTaskId()) && TemplateType.CLOCKING.getCode().equals(templateInfo.getTemplateType())) {
+        if (Objects.nonNull(templateInfo.getCronTaskId()) && StringUtils.isNotBlank(templateInfo.getCronCrowdPath())) {
             XxlJobInfo xxlJobInfo = xxlJobUtils.buildXxlJobInfo(templateInfo, XxlJobConstant.EXECUTE_HANDLER_NAME,XxlJobConstant.DESC);
             cronTaskService.saveCronTask(xxlJobInfo);
             cronTaskService.stopCronTask(templateInfo.getCronTaskId());

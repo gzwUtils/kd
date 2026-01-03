@@ -38,7 +38,7 @@ public enum MessageContentTypeEnum implements BaseEnum{
     /**
      * 更新公告
      */
-     UPDATE_NOTICE(50, "更新公告", "update_notice"),
+     UPDATE_NOTICE(50, "公告", "update_notice"),
     ;
 
     /**
