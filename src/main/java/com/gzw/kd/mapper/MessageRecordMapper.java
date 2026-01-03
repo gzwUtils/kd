@@ -51,7 +51,7 @@ public interface MessageRecordMapper {
      * @param templateId 模板ID
      * @return 消息记录
      */
-    List<MessageRecord> selectByTemplateId(Long templateId,@Param("userId") String userId, @Param("email") String email,@Param("phone") String phone);
+    List<MessageRecord> selectByTemplateId(Long templateId);
 
 
     // 根据ID和用户查询消息详情

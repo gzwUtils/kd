@@ -23,7 +23,7 @@
         status, success_count, fail_count,
         send_time as sendTime, create_time as createTime
         from message_record
-        where template_id = #{templateId, jdbcType=BIGINT} and (receiver = #{userId, jdbcType=VARCHAR} or receiver = #{phone} or receiver = #{email} or message_type = 1)
+        where template_id = #{templateId, jdbcType=BIGINT}
     </select>
 
     <insert id="insertRecord" parameterType="com.gzw.kd.common.entity.MessageRecord" useGeneratedKeys="true" keyProperty="id">

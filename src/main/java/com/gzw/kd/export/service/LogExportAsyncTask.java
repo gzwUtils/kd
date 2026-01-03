@@ -5,6 +5,7 @@ import cn.hutool.core.util.IdUtil;
 import cn.hutool.json.JSONUtil;
 import com.alibaba.fastjson2.JSON;
 import com.gzw.kd.common.enums.AsyncTaskTypeEnum;
+import com.gzw.kd.common.enums.EnumUtils;
 import com.gzw.kd.common.enums.ResultCodeEnum;
 import com.gzw.kd.common.exception.GlobalException;
 import com.gzw.kd.common.utils.EsScrollIterable;
@@ -26,7 +27,6 @@ import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.util.*;
 import static com.gzw.kd.common.Constants.*;
-import static com.gzw.kd.common.enums.AsyncTaskTypeEnum.ALL_LOG_EXPORT;
 
 @SuppressWarnings("all")
 @Slf4j
@@ -251,6 +251,6 @@ public class LogExportAsyncTask implements AsyncTaskService, CommonExportService
 
     @Override
     public boolean supportTask(AsyncTaskTypeEnum type) {
-        return type.equals(ALL_LOG_EXPORT);
+        return type.equals(EnumUtils.getEnumByCode(type.getCode(),AsyncTaskTypeEnum.class));
     }
 }

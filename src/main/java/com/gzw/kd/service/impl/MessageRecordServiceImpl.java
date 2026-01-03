@@ -135,7 +135,7 @@ public class MessageRecordServiceImpl implements MessageRecordService {
 
         List<MessageRecord> records = new ArrayList<>();
         templateIds.forEach(t -> {
-            List<MessageRecord> messageRecords = messageRecordMapper.selectByTemplateId(t, String.valueOf(operator.getId()), operator.getEmail(), operator.getPhone());
+            List<MessageRecord> messageRecords = messageRecordMapper.selectByTemplateId(t);
             records.addAll(messageRecords);
         });
         Map<Long, TemplateVo> templateMap = templates.stream()
@@ -315,7 +315,7 @@ public class MessageRecordServiceImpl implements MessageRecordService {
         // 设置接收者显示
         if (messageRecord.getReceiver() == null || messageRecord.getReceiver().isEmpty()) {
             vo.setReceiver(BROADCAST.getDescription());
-        } else if (IdType.USER_ID.getCode().equals(Integer.valueOf(template.getIdType()))) {
+        } else if (IdType.USER_ID.getCode().equals(template.getIdType())) {
             // 用户类型，查询用户信息
             String receiverDisplay = formatUserReceiver(messageRecord.getReceiver());
             vo.setReceiver(receiverDisplay);

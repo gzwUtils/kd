@@ -25,7 +25,7 @@
     <insert id="insertOne" parameterType="com.gzw.kd.common.entity.AsyncTasksEntity">
         INSERT INTO doc.async_task
         (params, status, errorMsg, `type`, fromMenu, creator, create_time, updater, update_time, exportName, numberOfSuccesses, numberOfFailed,file_path)
-        VALUES(#{params}, 0, '', 0, '', #{creator}, #{createTime}, #{updater}, #{updateTime}, #{exportName}, #{numberOfSuccesses}, #{numberOfFailed},#{filePath});
+        VALUES(#{params}, 0, '', #{type}, '', #{creator}, #{createTime}, #{updater}, #{updateTime}, #{exportName}, #{numberOfSuccesses}, #{numberOfFailed},#{filePath});
     </insert>
 
     <update id="updateOne" parameterType="com.gzw.kd.common.entity.AsyncTasksEntity">
