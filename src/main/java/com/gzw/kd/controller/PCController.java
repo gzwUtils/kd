@@ -700,9 +700,56 @@ public class PCController {
     @PostMapping("/asyncExport")
     public R asyncExport(@RequestBody @Validated LogSearchInput logSearchInput) {
             final LocalDateTime generateTime = LocalDateTime.now();
-            asyncTaskLogService.addOne(logSearchInput, AsyncTaskTypeEnum.ALL_LOG_EXPORT,
+
+        AsyncTaskTypeEnum taskType = determineExportType(logSearchInput);
+        asyncTaskLogService.addOne(logSearchInput, taskType,
                     logSearchInput.getExportFileName(), generateTime);
             return R.ok();
+    }
+
+    /**
+     * 判断导出类型：全量导出还是条件导出
+     *
+     * @param logSearchInput 查询条件
+     * @return 导出类型枚举
+     */
+    private AsyncTaskTypeEnum determineExportType(LogSearchInput logSearchInput) {
+        // 判断是否有任何查询条件
+        boolean hasSearchConditions = hasSearchConditions(logSearchInput);
+
+        // 如果有任何查询条件，则是条件导出（增量导出）
+        // 如果没有查询条件，则是全量导出
+        if (hasSearchConditions) {
+            return AsyncTaskTypeEnum.ADD_LOG_EXPORT;
+        } else {
+            return AsyncTaskTypeEnum.ALL_LOG_EXPORT;
+        }
+    }
+
+    /**
+     * 检查是否有查询条件
+     *
+     * @param input 查询参数
+     * @return true: 有查询条件，false: 无查询条件
+     */
+    private boolean hasSearchConditions(LogSearchInput input) {
+        // 检查ID范围查询
+        if (input.getIdGte() != null || input.getIdLte() != null) {
+            return true;
+        }
+
+        // 检查时间范围查询
+        if (StringUtils.isNotBlank(input.getCreateTimeStart())
+                || StringUtils.isNotBlank(input.getCreatesTimeEnd())) {
+            return true;
+        }
+
+        // 检查其他字段查询条件
+        return StringUtils.isNotBlank(input.getResult())
+                || StringUtils.isNotBlank(input.getOperation())
+                || StringUtils.isNotBlank(input.getLocation())
+                || StringUtils.isNotBlank(input.getIp())
+                || StringUtils.isNotBlank(input.getUserName());
     }
 
 
