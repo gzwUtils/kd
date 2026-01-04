@@ -5,11 +5,630 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta name="renderer" content="webkit">
+    <!-- 修复 Permissions-Policy 警告 -->
+    <meta http-equiv="Permissions-Policy" content="unload=()">
     <title>后台服务系统</title>
     <meta name="keywords" content="简单,实用,网站后台,后台管理,管理系统,网站模板"/>
     <meta name="description" content="简单实用网站后台管理系统网站模板下载。"/>
     <link rel="stylesheet" href="/assets/pc/css/pintuer.css">
     <link rel="stylesheet" href="/assets/pc/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 粉色主题样式 */
+      :root {
+          --primary-pink: #f8b0d0;
+          --light-pink: #fff0f6;
+          --medium-pink: #f5c6d6;
+          --dark-pink: #e6a2c0;
+          --accent-pink: #ff69b4;
+      }
+
+      body {
+          font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+          background: linear-gradient(135deg, #ffeff6 0%, #ffe8f0 50%, #ffe0e9 100%);
+          min-height: 100vh;
+          overflow-x: hidden;
+          position: relative;
+      }
+
+      .header.bg-main {
+          background: linear-gradient(135deg,
+              rgba(255, 175, 204, 0.95) 0%,
+              rgba(255, 143, 171, 0.92) 50%,
+              rgba(255, 93, 143, 0.9) 100%) !important;
+          backdrop-filter: blur(15px) saturate(180%);
+          -webkit-backdrop-filter: blur(15px) saturate(180%);
+          border: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow:
+              0 10px 30px rgba(255, 93, 143, 0.25),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          height: 70px;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 1000;
+      }
+
+      .logo h2 {
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          color: white;
+          text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+          font-weight: 600;
+          font-size: 22px;
+          letter-spacing: 0.5px;
+          margin: 0;
+      }
+
+      .radius-circle {
+          border: 3px solid rgba(255, 255, 255, 0.9);
+          box-shadow:
+              0 0 20px rgba(255, 93, 143, 0.5),
+              inset 0 0 20px rgba(255, 255, 255, 0.3);
+          animation: gentlePulse 4s ease-in-out infinite;
+          position: relative;
+      }
+
+      @keyframes gentlePulse {
+          0%, 100% {
+              transform: scale(1);
+              box-shadow:
+                  0 0 20px rgba(255, 93, 143, 0.5),
+                  inset 0 0 20px rgba(255, 255, 255, 0.3);
+          }
+          50% {
+              transform: scale(1.05);
+              box-shadow:
+                  0 0 30px rgba(255, 93, 143, 0.7),
+                  inset 0 0 25px rgba(255, 255, 255, 0.4);
+          }
+      }
+
+      .head-l span {
+          background: rgba(255, 255, 255, 0.15);
+          padding: 8px 15px;
+          border-radius: 20px;
+          backdrop-filter: blur(5px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          transition: all 0.3s ease;
+          font-size: 14px;
+      }
+
+      .head-l span:hover {
+          background: rgba(255, 255, 255, 0.25);
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      .button.bg-red {
+          background: linear-gradient(135deg, #ff5d8f 0%, #ff3d7f 100%);
+          border: none;
+          border-radius: 25px;
+          padding: 8px 20px;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+          box-shadow:
+              0 4px 15px rgba(255, 93, 143, 0.4),
+              inset 0 1px 1px rgba(255, 255, 255, 0.3);
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+          color: white !important;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+      }
+
+      .button.bg-red::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.7s ease;
+      }
+
+      .button.bg-red:hover {
+          transform: translateY(-3px) scale(1.05);
+          box-shadow:
+              0 8px 25px rgba(255, 93, 143, 0.6),
+              inset 0 1px 1px rgba(255, 255, 255, 0.4);
+          color: white;
+      }
+
+      .button.bg-red:hover::before {
+          left: 100%;
+      }
+
+      /* 左侧菜单 */
+      .leftnav {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          border-right: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow:
+              5px 0 30px rgba(0, 0, 0, 0.05),
+              inset 1px 0 0 rgba(255, 255, 255, 0.1);
+          width: 220px;
+          position: fixed;
+          top: 70px;
+          bottom: 0;
+          left: 0;
+          z-index: 999;
+          display: flex;
+          flex-direction: column;
+          transform: translateX(0);
+          transition: all 0.3s ease;
+      }
+
+      .leftnav.collapsed {
+          transform: translateX(-220px);
+      }
+
+      /* 菜单容器 */
+      .menu-container {
+          flex: 1;
+          overflow-y: auto;
+          padding-bottom: 60px;
+      }
+
+      .menu-container::-webkit-scrollbar {
+          width: 6px;
+      }
+
+      .menu-container::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 3px;
+      }
+
+      .menu-container::-webkit-scrollbar-thumb {
+          background: rgba(255, 175, 204, 0.5);
+          border-radius: 3px;
+          transition: background 0.3s ease;
+      }
+
+      .menu-container::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 175, 204, 0.8);
+      }
+
+      .leftnav-title {
+          background: linear-gradient(135deg,
+              rgba(255, 175, 204, 0.9) 0%,
+              rgba(255, 143, 171, 0.85) 100%);
+          color: white;
+          padding: 20px 15px;
+          font-size: 16px;
+          font-weight: 600;
+          letter-spacing: 1px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-shrink: 0;
+      }
+
+      .menu-toggle {
+          background: none;
+          border: none;
+          color: white;
+          font-size: 18px;
+          cursor: pointer;
+          transition: transform 0.3s ease;
+          padding: 5px;
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .menu-toggle:hover {
+          background: rgba(255, 255, 255, 0.2);
+          transform: rotate(180deg);
+      }
+
+      /* 菜单分组 */
+      .menu-group {
+          margin-bottom: 2px;
+          position: relative;
+      }
+
+      .menu-header {
+          color: #ff5d8f;
+          padding: 12px 15px;
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: 0.5px;
+          background: rgba(255, 255, 255, 0.1);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          user-select: none;
+          position: relative;
+      }
+
+      .menu-header:hover {
+          background: rgba(255, 255, 255, 0.15);
+          padding-left: 20px;
+      }
+
+      .menu-header i {
+          margin-right: 8px;
+          font-size: 16px;
+          opacity: 0.8;
+          transition: transform 0.3s ease;
+      }
+
+      /* 折叠箭头样式 */
+      .menu-header .toggle-icon {
+          font-size: 12px;
+          transition: transform 0.3s ease;
+          width: 12px;
+          height: 12px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .menu-header .toggle-icon::before {
+          content: '▼';
+      }
+
+      .menu-header.collapsed .toggle-icon {
+          transform: rotate(-90deg);
+      }
+
+      .menu-header.collapsed .toggle-icon::before {
+          content: '▶';
+      }
+
+      .menu-items {
+          overflow: hidden;
+          transition: max-height 0.4s ease-out;
+      }
+
+      .menu-items:not(.collapsed) {
+          max-height: 500px;
+      }
+
+      .menu-items.collapsed {
+          max-height: 0 !important;
+      }
+
+      .menu-item {
+          margin: 2px 0;
+          position: relative;
+          overflow: hidden;
+      }
+
+      .menu-item::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 3px;
+          height: 100%;
+          background: linear-gradient(to bottom, #ff5d8f, #ffafcc);
+          transform: scaleY(0);
+          transition: transform 0.3s ease;
+      }
+
+      .menu-item:hover::before {
+          transform: scaleY(1);
+      }
+
+      .menu-item a {
+          color: rgba(0, 0, 0, 0.7) !important;
+          padding: 12px 15px 12px 25px;
+          display: block;
+          text-decoration: none;
+          transition: all 0.3s ease;
+          position: relative;
+          border-left: 3px solid transparent;
+          background: transparent;
+          font-size: 14px;
+          font-weight: 500;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+      }
+
+      .menu-item a:hover {
+          background: rgba(255, 255, 255, 0.15);
+          color: #ff5d8f !important;
+          padding-left: 30px;
+          transform: translateX(5px);
+      }
+
+      .menu-item a i {
+          margin-right: 8px;
+          font-size: 14px;
+          transition: all 0.3s ease;
+          min-width: 18px;
+          display: inline-block;
+      }
+
+      .menu-item a:hover i {
+          transform: scale(1.2);
+          color: #ff5d8f;
+      }
+
+      /* 菜单底部操作栏 */
+      .menu-footer {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 15px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          flex-shrink: 0;
+      }
+
+      .collapse-all {
+          background: rgba(255, 93, 143, 0.2);
+          border: 1px solid rgba(255, 93, 143, 0.3);
+          color: #ff5d8f;
+          padding: 8px 15px;
+          border-radius: 20px;
+          font-size: 12px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+      }
+
+      .collapse-all:hover {
+          background: rgba(255, 93, 143, 0.3);
+          transform: translateY(-2px);
+      }
+
+      .menu-status {
+          font-size: 12px;
+          color: rgba(255, 255, 255, 0.7);
+          display: flex;
+          align-items: center;
+          gap: 8px;
+      }
+
+      /* 内容区域 - 重要修复：设置默认状态 */
+      .admin {
+          position: fixed;
+          top: 120px; /* 70px header + 50px bread */
+          left: 230px; /* 默认左边距 */
+          right: 10px;
+          bottom: 10px;
+          transition: all 0.3s ease;
+          width: auto;
+          z-index: 1;
+      }
+
+      .admin.expanded {
+          left: 10px !important; /* 折叠时左边距为10px */
+          right: 10px !important;
+          width: auto !important;
+      }
+
+      iframe {
+          width: 100%;
+          height: 100%;
+          border: none;
+          background: rgba(255, 255, 255, 0.9);
+          border-radius: 10px;
+          box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      }
+
+      /* 面包屑导航 - 修改：使首页和当前语言都靠左 */
+      .bread {
+          background: rgba(255, 255, 255, 0.8);
+          backdrop-filter: blur(10px);
+          padding: 15px 20px;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+          box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+          position: fixed;
+          top: 70px;
+          left: 230px;
+          right: 10px;
+          height: 50px;
+          z-index: 998;
+          display: flex;
+          align-items: center;
+          gap: 15px;
+          transition: all 0.3s ease;
+          border-radius: 10px;
+          flex-wrap: wrap;
+          margin-left:0px;
+      }
+
+      .bread.expanded {
+          left: 0px !important;
+          right: 10px !important;
+      }
+
+      .bread li {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+      }
+
+      .bread a {
+          color: #ff5d8f !important;
+          text-decoration: none;
+          font-weight: 500;
+          padding: 5px 10px;
+          border-radius: 15px;
+          transition: all 0.3s ease;
+          flex-shrink: 0;
+      }
+
+      .bread a:hover {
+          background: rgba(255, 93, 143, 0.1);
+          transform: translateY(-2px);
+      }
+
+      /* 当前语言样式 */
+      .bread .current-language {
+          margin-left: auto;
+          color: #666;
+          font-weight: normal;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          flex-shrink: 0;
+      }
+
+      .bread .current-language i {
+          color: #ff5d8f;
+      }
+
+      /* 菜单切换按钮 */
+      .toggle-menu-btn {
+          position: fixed;
+          top: 85px;
+          left: 235px;
+          z-index: 1001;
+          background: linear-gradient(135deg, #ff5d8f 0%, #ff3d7f 100%);
+          border: none;
+          border-radius: 0 20px 20px 0;
+          width: 25px;
+          height: 35px;
+          color: white;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 2px 0 10px rgba(255, 93, 143, 0.3);
+          transition: all 0.3s ease;
+      }
+
+      .toggle-menu-btn.collapsed {
+          left: 0 !important;
+          border-radius: 0 20px 20px 0;
+      }
+
+      .toggle-menu-btn:hover {
+          width: 30px;
+          box-shadow: 3px 0 15px rgba(255, 93, 143, 0.5);
+      }
+
+      /* 模态框样式 */
+      .modal-header {
+          background-color: var(--light-pink) !important;
+          border-bottom: 1px solid var(--medium-pink) !important;
+      }
+
+      .modal-title {
+          color: #7a3b5a !important;
+      }
+
+      .btn-primary {
+          background-color: var(--accent-pink) !important;
+          border-color: var(--dark-pink) !important;
+      }
+
+      .btn-primary:hover {
+          background-color: #ff1493 !important;
+          border-color: #ff1493 !important;
+      }
+
+      .form-control:focus {
+          border-color: var(--accent-pink) !important;
+          box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25) !important;
+      }
+
+      /* 提示消息样式 */
+      .success-message {
+          width: 300px;
+          height: 40px;
+          text-align: center;
+          background-color: #daf5eb;
+          color: rgba(103,194,58,0.7);
+          position: fixed;
+          left: 50%;
+          top: 5%;
+          margin-left: -150px;
+          margin-top: -20px;
+          line-height: 40px;
+          border-radius: 5px;
+          z-index: 9999;
+      }
+
+      .error-message {
+          width: 300px;
+          height: 40px;
+          text-align: center;
+          background-color: #f5f0e5;
+          color: rgba(238,99,99,0.8);
+          position: fixed;
+          left: 50%;
+          top: 10%;
+          line-height: 40px;
+          margin-left: -150px;
+          margin-top: -20px;
+          border-radius: 5px;
+          z-index: 9999;
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 768px) {
+          .leftnav {
+              transform: translateX(-100%);
+              width: 250px;
+          }
+
+          .leftnav.active {
+              transform: translateX(0);
+          }
+
+          .admin {
+              left: 10px !important;
+              right: 10px !important;
+              width: auto !important;
+          }
+
+          .bread {
+              left: 0px !important;
+              right: 10px !important;
+              height: auto;
+              min-height: 50px;
+              padding: 10px 15px;
+              flex-direction: column;
+              align-items: flex-start;
+          }
+
+          .bread .current-language {
+              margin-left: 0;
+              margin-top: 10px;
+          }
+
+          .toggle-menu-btn {
+              left: 0 !important;
+              border-radius: 0 20px 20px 0;
+          }
+
+          .toggle-menu-btn.active {
+              left: 250px;
+          }
+      }
+    </style>
     <script type="text/javascript" src="/assets/pc/js/jquery.min.js"></script>
     <link href="/assets/pc/css/bootstrap.min.css" rel="stylesheet">
     <script src="/assets/pc/js/bootstrap.min.js"></script>
@@ -22,92 +641,318 @@
     <script type="text/javascript" src="/assets/pc/js/SMAlgoUtil.js"></script>
 </head>
 <body>
+<!-- 菜单切换按钮 -->
+<button class="toggle-menu-btn" id="toggleMenuBtn" title="展开/收起菜单">
+    <i class="fas fa-bars"></i>
+</button>
+
+<!-- 主头部 -->
 <div class="header bg-main">
     <div class="logo margin-big-left fadein-top">
-        <h2 style="height: 30px;margin-top: 10px"><img src="/assets/pc/images/y.jpg" class="radius-circle" height="30" alt=""/>后台服务系统</h2>
+        <h2 style="height: 30px;margin-top: 10px">
+            <img src="/assets/pc/images/y.jpg" class="radius-circle" height="30" alt=""/>
+            后台服务系统
+        </h2>
     </div>
     <div class="head-l"> &nbsp;&nbsp;
-        <span style="font-style: normal;font-size: 15px;color:white;">当前登录用户：<#if Session["user_key"]?exists>${Session["user_key"].account}</#if>
+        <span style="font-style: normal;font-size: 15px;color:white;">
+            当前登录用户：<#if Session["user_key"]?exists>${Session["user_key"].account}</#if>
         </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a class="button button-little bg-red" href="/pc/logout"><span class="icon-power-off"></span> 退出登录</a>
+        <a class="button button-little bg-red" href="/pc/logout"><i class="fas fa-sign-out-alt"></i> 退出登录</a>
     </div>
-    <#if  noticeBoard!=null>
+    <#if noticeBoard?? && noticeBoard != "">
     <div style="float: right;margin-top: 20px;margin-left: 20px">
-        <marquee loop="60" style="font-weight: bolder;font-size: 30px;color: yellowgreen;width: 600px">${noticeBoard}</marquee>
+        <marquee loop="60" style="font-weight: bolder;font-size: 24px;color: white;width: 600px">${noticeBoard}</marquee>
     </div>
-    </#if>
-</div>
-<div class="leftnav">
-    <div class="leftnav-title"><strong><span class="icon-list"></span>菜单列表</strong></div>
-    <h2><span class="icon-user"></span>基本设置</h2>
-    <ul style="display:block">
-        <li><a href="/pc/info" target="right"><span class="icon-caret-right"></span>流转说明</a></li>
-        <li><a href="/pc/pass" target="right"><span class="icon-caret-right"></span>修改密码</a></li>
-        <li><a href="" target="right" onclick="lockSystem()"><span class="icon-caret-right"></span>锁定系统</a></li>
-    </ul>
-    <h2><span class="icon-pencil-square-o"></span>文档管理</h2>
-    <#if Session["user_key"]?exists>
-    <ul  id="menu_list" style="display:block">
-        <#if Session["user_key"].isAdmin == 1>
-           <li><a href="/pc/userInfo" target="right"><span class="icon-caret-right"></span>用户信息</a></li>
-           <li><a href="/pc/showAddUi" target="right"><span class="icon-caret-right"></span>开始</a></li>
-           <li><a href="/pc/getAllDocs" target="right"><span class="icon-caret-right"></span>流转列表</a></li>
-         <#else>
-        <li>
-            <a href="/pc/showDocListUi?flg=2" target="right"><span class="icon-caret-right"></span>待办文档
-            </a>
-        </li>
-        <li>
-            <a href="/pc/showDocListUi?flg=3" target="right"><span class="icon-caret-right"></span>确认
-            </a>
-        </li>
-        <li>
-            <a href="/pc/showDocListUi?flg=4" target="right"><span class="icon-caret-right"></span>结束
-            </a>
-        </li>
-        </#if>
-        <li><a href="/pc/uploadFile" target="right"><span class="icon-caret-right"></span>文件上传</a></li>
-        <li><a href="http://localhost:5173/monitoring" target="_blank"><span class="icon-caret-right"></span>数据同步服务</a></li>
-        <li><a href="/pc/other" target="right"><span class="icon-caret-right"></span>其他</a></li>
-        <li><a href="/pc/export" target="right"><span class="icon-caret-right"></span>导出</a></li>
-        <li><a href="/pc/asyncTask" target="right"><span class="icon-caret-right"></span>异步任务查询</a></li>
-        <li><a href="/pc/template" target="right"><span class="icon-caret-right"></span>消息模版</a></li>
-        <li><a href="/pc/messageSend" target="right"><span class="icon-caret-right"></span>消息推送</a></li>
-        <li><a href="/pc/message" target="right"><span class="icon-caret-right"></span>消息中心</a></li>
-        <li><a href="/pc/word" target="right"><span class="icon-caret-right"></span>word</a></li>
-        <li><a href="/pc/chatGpt" target="right"><span class="icon-caret-right"></span>gpt</a></li>
-        <li><a href="/pc/getAllOperatorLog" target="right"><span class="icon-caret-right"></span>操作记录</a></li>
-        <li><a href="/pc/notice" target="right"><span class="icon-caret-right"></span>公告栏</a></li>
-        <li><a href="/doc.html" target="_blank"><span class="icon-caret-right"></span>接口文档</a></li>
-        <li><a href="/pc/chat" target="right"><span class="icon-caret-right"></span>聊天</a></li>
-        <li><a href="/pc/dc" target="right"><span class="icon-caret-right"></span>点餐</a></li>
-    </ul>
-    </#if>
+</#if>
 </div>
 
-<ul class="bread">
-    <li><a href="/pc/info" target="right" class="icon-home">首页</a></li>
+<!-- 左侧导航 -->
+<div class="leftnav" id="leftNav">
+    <div class="leftnav-title">
+        <span><i class="fas fa-bars"></i> 菜单列表</span>
+        <button class="menu-toggle" id="collapseMenu" title="折叠菜单">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+    </div>
+
+    <!-- 可滚动的菜单容器 -->
+    <div class="menu-container" id="menuContainer">
+        <!-- 基本设置菜单组 -->
+        <div class="menu-group" data-group="basic">
+            <div class="menu-header" onclick="toggleMenuGroup(this)">
+                <span>
+                    <i class="fas fa-cog"></i> 基本设置
+                </span>
+                <span class="toggle-icon"></span>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item">
+                    <a href="/pc/info" target="right" onclick="return handleMenuClick(event)">
+                        <i class="fas fa-info-circle"></i> 流转说明
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/pc/pass" target="right" onclick="return handleMenuClick(event)">
+                        <i class="fas fa-key"></i> 修改密码
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="" target="right" onclick="return handleLockSystem(event)">
+                        <i class="fas fa-lock"></i> 锁定系统
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 文档流转菜单组 -->
+        <div class="menu-group" data-group="document">
+            <div class="menu-header" onclick="toggleMenuGroup(this)">
+                <span>
+                    <i class="fas fa-file-alt"></i> 文档流转
+                </span>
+                <span class="toggle-icon"></span>
+            </div>
+            <div class="menu-items">
+                <#if Session["user_key"]?exists>
+                <#if Session["user_key"].isAdmin == 1>
+                <div class="menu-item">
+                    <a href="/pc/showAddUi" target="right" onclick="return handleMenuClick(event)">
+                        <i class="fas fa-play"></i> 开始流转
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/pc/getAllDocs" target="right" onclick="return handleMenuClick(event)">
+                        <i class="fas fa-list"></i> 流转列表
+                    </a>
+                </div>
+                <#else>
+                <div class="menu-item">
+                    <a href="/pc/showDocListUi?flg=2" target="right" onclick="return handleMenuClick(event)">
+                        <i class="fas fa-tasks"></i> 待办文档
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/pc/showDocListUi?flg=3" target="right" onclick="return handleMenuClick(event)">
+                        <i class="fas fa-check-circle"></i> 确认文档
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a href="/pc/showDocListUi?flg=4" target="right" onclick="return handleMenuClick(event)">
+                        <i class="fas fa-flag-checkered"></i> 结束文档
+                    </a>
+                </div>
+            </#if>
+        </#if>
+    </div>
+</div>
+
+<!-- 用户管理菜单组 -->
+<div class="menu-group" data-group="user">
+    <div class="menu-header" onclick="toggleMenuGroup(this)">
+                <span>
+                    <i class="fas fa-users"></i> 用户管理
+                </span>
+        <span class="toggle-icon"></span>
+    </div>
+    <div class="menu-items">
+        <#if Session["user_key"]?exists && Session["user_key"].isAdmin == 1>
+        <div class="menu-item">
+            <a href="/pc/userInfo" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-user-cog"></i> 用户信息
+            </a>
+        </div>
+    </#if>
+    <div class="menu-item">
+        <a href="/pc/getAllOperatorLog" target="right" onclick="return handleMenuClick(event)">
+            <i class="fas fa-history"></i> 操作记录
+        </a>
+    </div>
+</div>
+</div>
+
+<!-- 文件操作菜单组 -->
+<div class="menu-group" data-group="file">
+    <div class="menu-header" onclick="toggleMenuGroup(this)">
+                <span>
+                    <i class="fas fa-file-upload"></i> 文件操作
+                </span>
+        <span class="toggle-icon"></span>
+    </div>
+    <div class="menu-items">
+        <div class="menu-item">
+            <a href="/pc/uploadFile" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-upload"></i> 文件上传
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="/pc/export" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-download"></i> 数据导出
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="/pc/word" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-file-word"></i> Word处理
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- 任务管理菜单组 -->
+<div class="menu-group" data-group="task">
+    <div class="menu-header" onclick="toggleMenuGroup(this)">
+                <span>
+                    <i class="fas fa-tasks"></i> 任务管理
+                </span>
+        <span class="toggle-icon"></span>
+    </div>
+    <div class="menu-items">
+        <div class="menu-item">
+            <a href="/pc/asyncTask" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-hourglass-half"></i> 异步任务查询
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="http://localhost:5173/monitoring" target="_blank" onclick="return handleExternalLink(event)">
+                <i class="fas fa-sync-alt"></i> 数据同步服务
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- AI智能菜单组 -->
+<div class="menu-group" data-group="ai">
+    <div class="menu-header" onclick="toggleMenuGroup(this)">
+                <span>
+                    <i class="fas fa-robot"></i> AI智能
+                </span>
+        <span class="toggle-icon"></span>
+    </div>
+    <div class="menu-items">
+        <div class="menu-item">
+            <a href="/pc/chatGpt" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-comment-dots"></i> GPT助手
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="/pc/chat" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-comments"></i> 智能聊天
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- 系统工具菜单组 -->
+<div class="menu-group" data-group="tools">
+    <div class="menu-header" onclick="toggleMenuGroup(this)">
+                <span>
+                    <i class="fas fa-tools"></i> 系统工具
+                </span>
+        <span class="toggle-icon"></span>
+    </div>
+    <div class="menu-items">
+        <div class="menu-item">
+            <a href="/pc/other" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-ellipsis-h"></i> 其他功能
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="/pc/dc" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-utensils"></i> 点餐系统
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- 公告文档菜单组 -->
+<div class="menu-group" data-group="notice">
+    <div class="menu-header" onclick="toggleMenuGroup(this)">
+                <span>
+                    <i class="fas fa-bullhorn"></i> 公告文档
+                </span>
+        <span class="toggle-icon"></span>
+    </div>
+    <div class="menu-items">
+        <div class="menu-item">
+            <a href="/pc/notice" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-bell"></i> 公告栏
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="/doc.html" target="_blank" onclick="return handleExternalLink(event)">
+                <i class="fas fa-book"></i> 接口文档
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- 消息管理菜单组 -->
+<div class="menu-group" data-group="message">
+    <div class="menu-header" onclick="toggleMenuGroup(this)">
+                <span>
+                    <i class="fas fa-envelope"></i> 消息管理
+                </span>
+        <span class="toggle-icon"></span>
+    </div>
+    <div class="menu-items">
+        <div class="menu-item">
+            <a href="/pc/template" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-stamp"></i> 消息模版
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="/pc/messageSend" target="right" onclick="return handleMenuClick(event)">
+                <i class="fas fa-paper-plane"></i> 消息推送
+            </a>
+        </div>
+        <div class="menu-item">
+            <a href="/pc/message" target="right" onclick="return handleMessageCenterClick(event)">
+                <i class="fas fa-inbox"></i> 消息中心
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- 菜单底部 -->
+<div class="menu-footer">
+    <button class="collapse-all" onclick="toggleAllMenuGroups()">
+        <i class="fas fa-compress"></i> 全部折叠
+    </button>
+    <div class="menu-status">
+        <i class="fas fa-layer-group"></i>
+        <span id="menuCount">9个菜单组</span>
+    </div>
+</div>
+</div>
+
+<!-- 面包屑导航 - 修改结构 -->
+<ul class="bread" id="breadNav">
+    <li><a href="/pc/info" target="right" class="icon-home" onclick="return handleMenuClick(event)">
+        <i class="fas fa-home"></i> 首页
+    </a></li>
     <li><a href="##" id="a_leader_txt">网站信息</a></li>
-    <li><b>当前语言：</b><span style="color:gray;">中文</span></li>
+    <li class="current-language">
+        <i class="fas fa-language"></i> 当前语言：<span style="color:#666;">中文</span>
+    </li>
 </ul>
 
-
-<div class="admin">
+<!-- 主内容区 -->
+<div class="admin" id="mainContent">
     <iframe scrolling="auto" rameborder="0" src="/pc/info" id="right" name="right" width="100%" height="100%"></iframe>
 </div>
 
-
-<!--锁定系统-->
+<!-- 锁定系统模态框 -->
 <div id="lockSystemModal" class="modal fade " data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
     <input type="hidden" id="isLock" name="isLock" value="${isLock}">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">锁定系统</h4>
+                <h4 class="modal-title"><i class="fas fa-lock"></i> 锁定系统</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" id="lockSystemForm">
-                    <label class="col-lg-4 col-md-4 col-sm-4 control-label">登录密码</label>
+                    <label class="col-lg-4 col-md-4 col-sm-4 control-label"><i class="fas fa-key"></i> 登录密码</label>
                     <div class="form-group">
                         <div class="col-lg-7 col-md-7 col-sm-7">
                             <input type="password" class="form-control" name="lockSystemPassword" id="lockSystemPassword" placeholder="请输入登录密码" />
@@ -116,18 +961,20 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" id="lockSystemLogin" class="btn btn-primary">解锁</button>
+                <button type="button" id="lockSystemLogin" class="btn btn-primary">
+                    <i class="fas fa-unlock"></i> 解锁
+                </button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 提示消息 -->
+<!-- 提示消息模态框 -->
 <div id="DialogHintMessageDiv" class="modal fade bs-example-modal-sm" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">提示消息</h4>
+                <h4 class="modal-title"><i class="fas fa-info-circle"></i> 系统提示</h4>
             </div>
             <div class="modal-body">
                 <div class="form-group">
@@ -139,7 +986,6 @@
 </div>
 
 <script type="text/javascript">
-
     $(function (){
         const isLock = document.getElementById("isLock").value;
         if(isLock === "1"){
@@ -147,75 +993,409 @@
         } else {
             $("#lockSystemModal").modal("hide");
         }
-    })
 
-        // 锁定系统
-		function lockSystem(){
-			$.ajax({
-				type:"post",
-				url:"/pc/lockSystem",
-				dataType: "json",
-				success: function(data){
-					if(data.code === 20000){
-						showMessage(data.message,'success',3000);
-						$("#lockSystemModal").modal();
-						window.location.href = "/pc/index";
-					} else {
-						showMessage(data.message,'error',3000);
-					}
-				}
-			});
-		}
+        // 修复问题：页面加载时立即检查折叠状态并应用
+        initPageLayout();
 
-        //解锁系统
-	    $("#lockSystemLogin").click(function(){
-		     var lockSystemPassword = $("#lockSystemPassword").val();
-		     if(lockSystemPassword === ''){
-		      showMessage('请输入密码','error',5000);
-		      return false;
-		     }
-		     var timestamp = Number(new Date()).toString();
-		     var pad = CryptoJS.MD5(lockSystemPassword).toString().toUpperCase();
-		     var sm3HashHex = SMUtils.SM3(pad);
-		     var key = sm3HashHex.substring(0,32);
-		     var iv = sm3HashHex.substring(sm3HashHex.length - 32,sm3HashHex.length);
-		     lockSystemPassword = SMUtils.SM4EncryptCBC(timestamp,key,iv);
-		     $("#lockSystemPassword").val(lockSystemPassword);
-		        $.ajax({
-			      type:"post",
-			      url:"/pc/unlockSystem",
-			      data:{
-				      password: lockSystemPassword,
-				      timestamp: timestamp
-			       },
-			    success: function(data){
-				    if(data.code === 20000){
-				        showMessage(data.message,'success',5000);
-					    $("#lockSystemModal").modal("hide");
-				    } else {
-					    showMessage(data.message,'error',5000);
-				    }
-			   }
-		});
-	});
+        // 初始化菜单折叠状态
+        initMenuFold();
 
+        // 更新菜单计数
+        updateMenuCount();
 
-	function showMessage(message, type, time) {
-         let str = ''
-         switch (type) {
-             case 'success':
-                 str = '<div class="success-message" style="width: 300px;height: 40px;text-align: center;background-color:#daf5eb;;color: rgba(103,194,58,0.7);position: fixed;left: 50%;top: 5%;margin-left:-150px;margin-top:-20px;line-height: 40px;border-radius: 5px;z-index: 9999">\n' +
-                     '    <span class="mes-text">' + message + '</span></div>'
-                 break;
-             case 'error':
-                 str = '<div class="error-message" style="width: 300px;height: 40px;text-align: center;background-color: #f5f0e5;color: rgba(238,99,99,0.8);position: fixed;left: 50%;top: 10%;line-height: 40px;margin-left:-150px;margin-top:-20px;border-radius: 5px;;z-index: 9999">\n' +
-                     '    <span class="mes-text">' + message + '</span></div>'
-         }
-         $('body').append(str);
-         setTimeout(function () {
-             $('.' + type + '-message').remove();
-         }, time);
-     }
+        // 检查是否有消息中心的URL参数，自动隐藏菜单
+        checkAutoHideMenu();
+
+        // 初始化页面时隐藏左侧菜单
+        hideLeftMenu();
+    });
+
+    // 检查是否需要自动隐藏菜单
+    function checkAutoHideMenu() {
+        const currentUrl = $('#right').attr('src');
+        if (currentUrl && currentUrl.includes('/pc/message')) {
+            // 如果是消息中心页面，自动隐藏左侧菜单
+            hideLeftMenu();
+        }
+    }
+
+    // 隐藏左侧菜单
+    function hideLeftMenu() {
+        const $leftNav = $('#leftNav');
+        const $mainContent = $('#mainContent');
+        const $breadNav = $('#breadNav');
+        const $toggleBtn = $('#toggleMenuBtn');
+
+        // 隐藏菜单
+        $leftNav.addClass('collapsed');
+        $mainContent.addClass('expanded');
+        $breadNav.addClass('expanded');
+        $toggleBtn.addClass('collapsed');
+
+        // 更新按钮位置
+        $toggleBtn.css('left', '0');
+
+        // 保存状态
+        localStorage.setItem('menuCollapsed', 'true');
+    }
+
+    // 显示左侧菜单
+    function showLeftMenu() {
+        const $leftNav = $('#leftNav');
+        const $mainContent = $('#mainContent');
+        const $breadNav = $('#breadNav');
+        const $toggleBtn = $('#toggleMenuBtn');
+
+        // 显示菜单
+        $leftNav.removeClass('collapsed');
+        $mainContent.removeClass('expanded');
+        $breadNav.removeClass('expanded');
+        $toggleBtn.removeClass('collapsed');
+
+        // 更新按钮位置
+        $toggleBtn.css('left', '235px');
+
+        // 保存状态
+        localStorage.setItem('menuCollapsed', 'false');
+    }
+
+    // 初始化页面布局
+    function initPageLayout() {
+        // 检查是否保存了菜单折叠状态
+        const isMenuCollapsed = localStorage.getItem('menuCollapsed') === 'true';
+
+        const $leftNav = $('#leftNav');
+        const $mainContent = $('#mainContent');
+        const $breadNav = $('#breadNav');
+        const $toggleBtn = $('#toggleMenuBtn');
+
+        if (isMenuCollapsed) {
+            // 应用折叠状态
+            $leftNav.addClass('collapsed');
+            $mainContent.addClass('expanded');
+            $breadNav.addClass('expanded');
+            $toggleBtn.addClass('collapsed');
+
+            // 更新按钮位置
+            $toggleBtn.css('left', '0');
+        } else {
+            // 应用展开状态
+            $leftNav.removeClass('collapsed');
+            $mainContent.removeClass('expanded');
+            $breadNav.removeClass('expanded');
+            $toggleBtn.removeClass('collapsed');
+
+            // 更新按钮位置
+            $toggleBtn.css('left', '235px');
+        }
+    }
+
+    // 修复 Permissions-Policy 警告
+    function removeUnloadEvents() {
+        window.onbeforeunload = null;
+        window.onunload = null;
+
+        $('#right').on('load', function() {
+            try {
+                if (this.contentWindow) {
+                    this.contentWindow.onbeforeunload = null;
+                    this.contentWindow.onunload = null;
+                }
+            } catch (e) {
+                // 忽略跨域错误
+            }
+        });
+    }
+
+    // 初始化菜单折叠状态
+    function initMenuFold() {
+        // 从本地存储加载折叠状态
+        const savedState = localStorage.getItem('menuFoldState');
+        if (savedState) {
+            const state = JSON.parse(savedState);
+            state.forEach(groupId => {
+                const $group = $(`.menu-group[data-group="${groupId}"]`);
+                const $items = $group.find('.menu-items');
+                const $header = $group.find('.menu-header');
+
+                // 折叠菜单项
+                $items.addClass('collapsed');
+                $header.addClass('collapsed');
+
+                // 设置实际高度为0
+                $items.css('max-height', '0');
+            });
+        }
+
+        // 绑定菜单切换按钮
+        $('#toggleMenuBtn').on('click', function() {
+            toggleLeftMenu();
+        });
+
+        // 绑定菜单折叠按钮
+        $('#collapseMenu').on('click', function() {
+            toggleLeftMenu();
+        });
+
+        // 初始化菜单折叠状态保存
+        saveMenuFoldState();
+    }
+
+    // 切换左侧菜单
+    function toggleLeftMenu() {
+        const $leftNav = $('#leftNav');
+        const $mainContent = $('#mainContent');
+        const $breadNav = $('#breadNav');
+        const $toggleBtn = $('#toggleMenuBtn');
+
+        if ($leftNav.hasClass('collapsed')) {
+            // 展开菜单
+            $leftNav.removeClass('collapsed');
+            $mainContent.removeClass('expanded');
+            $breadNav.removeClass('expanded');
+            $toggleBtn.removeClass('collapsed');
+
+            // 更新按钮位置
+            $toggleBtn.css('left', '235px');
+
+            // 保存状态
+            localStorage.setItem('menuCollapsed', 'false');
+        } else {
+            // 折叠菜单
+            $leftNav.addClass('collapsed');
+            $mainContent.addClass('expanded');
+            $breadNav.addClass('expanded');
+            $toggleBtn.addClass('collapsed');
+
+            // 更新按钮位置
+            $toggleBtn.css('left', '0');
+
+            // 保存状态
+            localStorage.setItem('menuCollapsed', 'true');
+        }
+    }
+
+    // 切换菜单组 - 点击分组标题时调用
+    function toggleMenuGroup(header) {
+        const $header = $(header);
+        const $items = $header.next('.menu-items');
+
+        if ($items.hasClass('collapsed')) {
+            // 展开菜单
+            expandMenuGroup($items, $header);
+        } else {
+            // 折叠菜单
+            collapseMenuGroup($items, $header);
+        }
+
+        // 保存折叠状态
+        saveMenuFoldState();
+        updateMenuCount();
+    }
+
+    // 展开菜单组
+    function expandMenuGroup($items, $header) {
+        const scrollHeight = $items.prop('scrollHeight');
+        $items.css('max-height', scrollHeight + 'px');
+
+        // 过渡结束后移除max-height
+        $items.one('transitionend', function() {
+            if (!$items.hasClass('collapsed')) {
+                $items.css('max-height', 'none');
+            }
+        });
+
+        $items.removeClass('collapsed');
+        $header.removeClass('collapsed');
+    }
+
+    // 折叠菜单组
+    function collapseMenuGroup($items, $header) {
+        $items.css('max-height', $items.prop('scrollHeight') + 'px');
+
+        // 触发重排
+        $items[0].scrollHeight;
+
+        $items.css('max-height', '0');
+        $items.addClass('collapsed');
+        $header.addClass('collapsed');
+    }
+
+    // 切换所有菜单组
+    function toggleAllMenuGroups() {
+        const $allGroups = $('.menu-group');
+        const $allItems = $('.menu-items');
+        const $allHeaders = $('.menu-header');
+
+        // 检查是否所有都已折叠
+        const allCollapsed = $allItems.not('.collapsed').length === 0;
+
+        if (allCollapsed) {
+            // 展开所有
+            $allItems.each(function() {
+                const $items = $(this);
+                const $header = $items.prev('.menu-header');
+                expandMenuGroup($items, $header);
+            });
+        } else {
+            // 折叠所有
+            $allItems.each(function() {
+                const $items = $(this);
+                const $header = $items.prev('.menu-header');
+                collapseMenuGroup($items, $header);
+            });
+        }
+
+        // 保存折叠状态
+        saveMenuFoldState();
+        updateMenuCount();
+    }
+
+    // 保存菜单折叠状态
+    function saveMenuFoldState() {
+        const collapsedGroups = [];
+        $('.menu-group').each(function() {
+            const groupId = $(this).data('group');
+            const isCollapsed = $(this).find('.menu-items').hasClass('collapsed');
+            if (isCollapsed) {
+                collapsedGroups.push(groupId);
+            }
+        });
+        localStorage.setItem('menuFoldState', JSON.stringify(collapsedGroups));
+    }
+
+    // 更新菜单计数
+    function updateMenuCount() {
+        const totalGroups = $('.menu-group').length;
+        const collapsedGroups = $('.menu-items.collapsed').length;
+        const expandedGroups = totalGroups - collapsedGroups;
+
+        let countText = '';
+        if (collapsedGroups === totalGroups) {
+            countText = '全部折叠';
+        } else if (collapsedGroups === 0) {
+            countText = '全部展开';
+        } else {
+            countText = `${expandedGroups}/${totalGroups} 展开`;
+        }
+
+        $('#menuCount').text(countText);
+    }
+
+    // 处理菜单点击
+    function handleMenuClick(event) {
+        event.preventDefault();
+        const href = $(event.currentTarget).attr('href');
+        if (href && href !== '#') {
+            // 更新iframe
+            $('#right').attr('src', href);
+
+            // 更新面包屑导航
+            const text = $(event.currentTarget).text().trim();
+            $('#a_leader_txt').text(text);
+
+            // 点击任何菜单项时隐藏左侧菜单
+            hideLeftMenu();
+        }
+        return false;
+    }
+
+    // 处理消息中心点击 - 特殊处理
+    function handleMessageCenterClick(event) {
+        return handleMenuClick(event);
+    }
+
+    // 处理外部链接点击
+    function handleExternalLink(event) {
+        event.preventDefault();
+        const href = $(event.currentTarget).attr('href');
+        if (href) {
+            window.open(href, '_blank');
+        }
+        return false;
+    }
+
+    // 处理锁定系统
+    function handleLockSystem(event) {
+        if (event) event.preventDefault();
+        lockSystem();
+        return false;
+    }
+
+    // 锁定系统
+    function lockSystem(){
+        $.ajax({
+            type:"post",
+            url:"/pc/lockSystem",
+            dataType: "json",
+            success: function(data){
+                if(data.code === 20000){
+                    showMessage(data.message,'success',3000);
+                    $("#lockSystemModal").modal();
+                    setTimeout(function() {
+                        window.location.href = "/pc/index";
+                    }, 300);
+                } else {
+                    showMessage(data.message,'error',3000);
+                }
+            }
+        });
+        return false;
+    }
+
+    //解锁系统
+    $("#lockSystemLogin").click(function(){
+        var lockSystemPassword = $("#lockSystemPassword").val();
+        if(lockSystemPassword === ''){
+            showMessage('请输入密码','error',5000);
+            return false;
+        }
+        var timestamp = Number(new Date()).toString();
+        var pad = CryptoJS.MD5(lockSystemPassword).toString().toUpperCase();
+        var sm3HashHex = SMUtils.SM3(pad);
+        var key = sm3HashHex.substring(0,32);
+        var iv = sm3HashHex.substring(sm3HashHex.length - 32,sm3HashHex.length);
+        lockSystemPassword = SMUtils.SM4EncryptCBC(timestamp,key,iv);
+        $("#lockSystemPassword").val(lockSystemPassword);
+        $.ajax({
+            type:"post",
+            url:"/pc/unlockSystem",
+            data:{
+                password: lockSystemPassword,
+                timestamp: timestamp
+            },
+            success: function(data){
+                if(data.code === 20000){
+                    showMessage(data.message,'success',5000);
+                    $("#lockSystemModal").modal("hide");
+                } else {
+                    showMessage(data.message,'error',5000);
+                }
+            }
+        });
+    });
+
+    function showMessage(message, type, time) {
+        let str = ''
+        switch (type) {
+            case 'success':
+                str = '<div class="success-message">\n' +
+                    '    <span class="mes-text">' + message + '</span></div>'
+                break;
+            case 'error':
+                str = '<div class="error-message">\n' +
+                    '    <span class="mes-text">' + message + '</span></div>'
+        }
+        $('body').append(str);
+        setTimeout(function () {
+            $('.' + type + '-message').remove();
+        }, time);
+    }
+
+    // 防止权限策略错误
+    window.addEventListener('beforeunload', function(e) {
+        // 空函数，避免错误
+    });
 </script>
 </body>
 </html>
