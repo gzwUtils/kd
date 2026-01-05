@@ -1,54 +1,769 @@
-
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <title>随机点餐</title>
-</head>
-<style>
-  body {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: url(/assets/pc/images/dc.jpg);
-    background-size: 100% 500%;
-  }
-  #box{background-color:#CCC;width:400px;font:600 24px/3 "";text-align:center;margin:20px auto		;border-radius:12px;}
-  #btn{background-color:#CFF;width:100px;font:14px/2 "";text-align:center;margin:10px 46%		;border-radius:25px;}
-</style>
-<body>
-<div id="box">今天中午想点啥</div>
-<input type="button" id="btn" value="开始">
-</body>
-<script>
-
-  var arr = ["麻辣烫","冒菜","螺蛳粉","手指饼", "鸡蛋灌饼","煎饼","烤冷面","臭豆腐","铁板烧","烧烤","炸鸡"];
-
-  var box = document.getElementById("box")
-  var btn = document.getElementById("btn")
-
-  var i=0;
-  var t;
-
-  btn.onclick = function(){
-    if(i===0){
-      t = setInterval(function(){
-        box.innerHTML = arr[random(0,arr.length-1)];
-      }, 30);
-
-      i = 1;
-      btn.value = "停止"
-    }else{
-      clearInterval(t);
-      i = 0;
-      btn.value = "继续";
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智能点餐助手 - 解决你的午餐选择困难</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
     }
+
+    body {
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+        padding: 20px;
+        background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        border-radius: 15px;
+        color: white;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    h1 i {
+        font-size: 2.8rem;
+    }
+
+    .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .main-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .preference-panel, .recommendation-panel {
+        flex: 1;
+        min-width: 300px;
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .panel-title {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        color: #2c3e50;
+        border-bottom: 3px solid #4facfe;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .preference-item {
+        margin-bottom: 20px;
+    }
+
+    .preference-item label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #444;
+    }
+
+    .slider-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .slider-value {
+        min-width: 40px;
+        text-align: center;
+        font-weight: bold;
+        color: #4facfe;
+    }
+
+    .budget-slider, .spicy-slider {
+        flex: 1;
+        height: 8px;
+        -webkit-appearance: none;
+        background: #e0e0e0;
+        border-radius: 4px;
+        outline: none;
+    }
+
+    .budget-slider::-webkit-slider-thumb, .spicy-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #4facfe;
+        cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    }
+
+    .checkbox-group, .radio-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 8px;
+    }
+
+    .checkbox-item, .radio-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .checkbox-item input, .radio-item input {
+        width: 18px;
+        height: 18px;
+    }
+
+    .recommend-btn {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+        box-shadow: 0 5px 15px rgba(79, 172, 254, 0.3);
+    }
+
+    .recommend-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(79, 172, 254, 0.4);
+    }
+
+    .recommend-btn:active {
+        transform: translateY(0);
+    }
+
+    .recommendation-list {
+        max-height: 400px;
+        overflow-y: auto;
+        padding-right: 10px;
+    }
+
+    .menu-item {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 18px;
+        margin-bottom: 15px;
+        border-left: 5px solid #4facfe;
+        transition: all 0.3s ease;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .menu-item.recommended {
+        background: linear-gradient(to right, #f8f9fa, #e8f4fe);
+        border-left-color: #00c9ff;
+        box-shadow: 0 5px 15px rgba(0, 201, 255, 0.1);
+    }
+
+    .menu-info {
+        flex: 1;
+    }
+
+    .menu-name {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+
+    .menu-desc {
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .menu-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .tag {
+        background: #e0f0ff;
+        color: #4facfe;
+        padding: 3px 10px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .menu-price {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #00c9ff;
+        margin-right: 15px;
+    }
+
+    .order-btn {
+        padding: 8px 15px;
+        background: #4facfe;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .order-btn:hover {
+        background: #00c9ff;
+        transform: translateY(-2px);
+    }
+
+    .order-summary {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        margin-top: 20px;
+    }
+
+    .order-items {
+        margin-top: 15px;
+    }
+
+    .order-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .order-total {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 2px solid #4facfe;
+        color: #2c3e50;
+    }
+
+    .empty-order {
+        text-align: center;
+        color: #999;
+        padding: 30px 0;
+    }
+
+    .clear-order {
+        display: block;
+        margin: 20px auto 0;
+        padding: 10px 20px;
+        background: #ff6b6b;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .clear-order:hover {
+        background: #ff5252;
+    }
+
+    .food-icon {
+        font-size: 1.8rem;
+        margin-right: 10px;
+    }
+
+    .selected {
+        background-color: #e8f4fe;
+    }
+
+    @media (max-width: 768px) {
+        .main-content {
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+    }
+
+    footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #666;
+        font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1><i class="fas fa-robot"></i> 智能点餐助手</h1>
+    <p class="subtitle">告别选择困难！根据您的口味偏好、预算和饮食限制，为您推荐最合适的午餐选择</p>
+  </header>
+
+  <div class="main-content">
+    <div class="preference-panel">
+      <h2 class="panel-title"><i class="fas fa-sliders-h"></i> 设置您的偏好</h2>
+
+      <div class="preference-item">
+        <label for="budget">预算范围 (元): <span id="budget-value">30</span></label>
+        <div class="slider-container">
+          <span class="slider-value">10</span>
+          <input type="range" id="budget" class="budget-slider" min="10" max="100" value="30" step="5">
+          <span class="slider-value">100</span>
+        </div>
+      </div>
+
+      <div class="preference-item">
+        <label for="spicy">辣度偏好:</label>
+        <div class="slider-container">
+          <span class="slider-value">不辣</span>
+          <input type="range" id="spicy" class="spicy-slider" min="0" max="5" value="2" step="1">
+          <span class="slider-value">特辣</span>
+        </div>
+        <div id="spicy-level-text" style="text-align:center; margin-top:5px; color:#4facfe; font-weight:bold;">微辣</div>
+      </div>
+
+      <div class="preference-item">
+        <label>饮食限制:</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="vegetarian" value="vegetarian">
+            <label for="vegetarian">素食</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="vegan" value="vegan">
+            <label for="vegan">严格素食</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="halal" value="halal">
+            <label for="halal">清真</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="gluten-free" value="gluten-free">
+            <label for="gluten-free">无麸质</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="preference-item">
+        <label>菜系偏好:</label>
+        <div class="checkbox-group">
+          <div class="checkbox-item">
+            <input type="checkbox" id="chinese" value="chinese" checked>
+            <label for="chinese">中餐</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="western" value="western" checked>
+            <label for="western">西餐</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="japanese" value="japanese" checked>
+            <label for="japanese">日料</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="korean" value="korean">
+            <label for="korean">韩餐</label>
+          </div>
+          <div class="checkbox-item">
+            <input type="checkbox" id="fastfood" value="fastfood">
+            <label for="fastfood">快餐</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="preference-item">
+        <label>用餐类型:</label>
+        <div class="radio-group">
+          <div class="radio-item">
+            <input type="radio" id="type-quick" name="mealType" value="quick" checked>
+            <label for="type-quick">快速简餐</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="type-balanced" name="mealType" value="balanced">
+            <label for="type-balanced">营养均衡</label>
+          </div>
+          <div class="radio-item">
+            <input type="radio" id="type-hearty" name="mealType" value="hearty">
+            <label for="type-hearty">丰盛正餐</label>
+          </div>
+        </div>
+      </div>
+
+      <button id="recommend-btn" class="recommend-btn">
+        <i class="fas fa-magic"></i> 智能推荐午餐
+      </button>
+    </div>
+
+    <div class="recommendation-panel">
+      <h2 class="panel-title"><i class="fas fa-utensils"></i> 今日推荐</h2>
+      <div id="recommendation-list" class="recommendation-list">
+        <!-- 推荐内容将通过JavaScript动态生成 -->
+      </div>
+    </div>
+  </div>
+
+  <div class="order-summary">
+    <h2 class="panel-title"><i class="fas fa-receipt"></i> 订单摘要</h2>
+    <div id="order-items" class="order-items">
+      <div class="empty-order">暂无点餐项目，请从上方推荐中选择</div>
+    </div>
+    <div id="order-total" class="order-total" style="display:none;">
+      <span>总计:</span>
+      <span id="total-amount">¥0</span>
+    </div>
+    <button id="clear-order" class="clear-order" style="display:none;">
+      <i class="fas fa-trash-alt"></i> 清空订单
+    </button>
+  </div>
+
+  <footer>
+    <p>智能点餐助手 &copy; 2023 | 使用本地存储保存您的偏好设置</p>
+    <p>温馨提示：本推荐仅为参考，实际选择请根据个人情况决定</p>
+  </footer>
+</div>
+
+<script>
+  // 菜单数据库
+  var menuDatabase = [
+      { id: 1, name: "日式照烧鸡排饭", description: "香煎鸡排配照烧酱，搭配米饭和蔬菜沙拉", price: 28, cuisine: "japanese", type: "balanced", spicy: 1, tags: ["日料", "营养均衡", "微辣"], icon: "fa-drumstick-bite" },
+      { id: 2, name: "川味麻辣香锅", description: "自选食材，川式麻辣炒制，香辣过瘾", price: 35, cuisine: "chinese", type: "hearty", spicy: 3, tags: ["中餐", "丰盛正餐", "中辣"], icon: "fa-pepper-hot" },
+      { id: 3, name: "经典牛肉汉堡套餐", description: "厚切牛肉饼配芝士蔬菜，搭配薯条和可乐", price: 32, cuisine: "western", type: "quick", spicy: 0, tags: ["西餐", "快餐", "不辣"], icon: "fa-hamburger" },
+      { id: 4, name: "韩式石锅拌饭", description: "多种蔬菜配牛肉和韩式辣酱，石锅烹饪", price: 26, cuisine: "korean", type: "balanced", spicy: 2, tags: ["韩餐", "营养均衡", "微辣"], icon: "fa-bowl-rice" },
+      { id: 5, name: "素食沙拉碗", description: "新鲜蔬菜配烤豆腐和特制芝麻酱", price: 22, cuisine: "western", type: "balanced", spicy: 0, tags: ["西餐", "素食", "健康"], icon: "fa-leaf" },
+      { id: 6, name: "兰州牛肉拉面", description: "手工拉面配鲜嫩牛肉片和牛肉汤", price: 18, cuisine: "chinese", type: "quick", spicy: 1, tags: ["中餐", "快速简餐", "微辣"], icon: "fa-bowl-food" },
+      { id: 7, name: "日式寿司拼盘", description: "三文鱼、金枪鱼等多种寿司组合", price: 38, cuisine: "japanese", type: "balanced", spicy: 0, tags: ["日料", "营养均衡", "不辣"], icon: "fa-fish" },
+      { id: 8, name: "意式肉酱面", description: "经典意式肉酱配宽面，帕尔马干酪点缀", price: 30, cuisine: "western", type: "balanced", spicy: 0, tags: ["西餐", "营养均衡", "不辣"], icon: "fa-pasta" },
+      { id: 9, name: "麻婆豆腐饭", description: "川味经典麻婆豆腐配米饭", price: 20, cuisine: "chinese", type: "quick", spicy: 4, tags: ["中餐", "快速简餐", "中辣"], icon: "fa-mortar-pestle" },
+      { id: 10, name: "炸鸡套餐", description: "酥脆炸鸡配薯条和可乐", price: 25, cuisine: "fastfood", type: "quick", spicy: 1, tags: ["快餐", "快速简餐", "微辣"], icon: "fa-drumstick-bite" },
+      { id: 11, name: "素食寿司卷", description: "牛油果、黄瓜和胡萝卜卷制的素食寿司", price: 24, cuisine: "japanese", type: "balanced", spicy: 0, tags: ["日料", "素食", "健康"], icon: "fa-carrot" },
+      { id: 12, name: "韩式炸鸡", description: "甜辣口味炸鸡配腌萝卜", price: 30, cuisine: "korean", type: "hearty", spicy: 3, tags: ["韩餐", "丰盛正餐", "中辣"], icon: "fa-drumstick-bite" }
+  ];
+
+  // 订单数据
+  var orderItems = [];
+  var totalAmount = 0;
+
+  // 页面加载时恢复用户偏好
+  document.addEventListener('DOMContentLoaded', function() {
+      loadPreferences();
+      updateSpicyLevelText();
+
+      // 添加事件监听器
+      document.getElementById('budget').addEventListener('input', function() {
+          document.getElementById('budget-value').textContent = this.value;
+          savePreferences();
+      });
+
+      document.getElementById('spicy').addEventListener('input', function() {
+          updateSpicyLevelText();
+          savePreferences();
+      });
+
+      document.getElementById('recommend-btn').addEventListener('click', generateRecommendations);
+
+      // 为所有偏好设置项添加事件监听器
+      var preferenceInputs = document.querySelectorAll('.preference-panel input');
+      for (var i = 0; i < preferenceInputs.length; i++) {
+          preferenceInputs[i].addEventListener('change', savePreferences);
+      }
+
+      // 初始生成推荐
+      generateRecommendations();
+  });
+
+  // 更新辣度文本显示
+  function updateSpicyLevelText() {
+      var spicyValue = parseInt(document.getElementById('spicy').value);
+      var spicyTexts = ["不辣", "微辣", "中辣", "重辣", "特辣", "变态辣"];
+      document.getElementById('spicy-level-text').textContent = spicyTexts[spicyValue];
   }
 
+  // 生成推荐
+  function generateRecommendations() {
+      // 获取用户偏好
+      var budget = parseInt(document.getElementById('budget').value);
+      var spicyPreference = parseInt(document.getElementById('spicy').value);
+      var cuisinePrefs = getSelectedCuisines();
+      var mealType = document.querySelector('input[name="mealType"]:checked').value;
+      var dietaryRestrictions = getDietaryRestrictions();
 
-  function random(a,b){
-    return Math.round(Math.random()*(a-b)+b);
+      // 过滤菜单项
+      var filteredMenu = menuDatabase.filter(function(item) {
+          // 预算过滤
+          if (item.price > budget) return false;
+
+          // 辣度过滤（允许用户选择比偏好更低的辣度）
+          if (item.spicy > spicyPreference + 1) return false;
+
+          // 菜系过滤
+          if (cuisinePrefs.indexOf(item.cuisine) === -1) return false;
+
+          // 用餐类型过滤
+          if (item.type !== mealType) return false;
+
+          // 饮食限制过滤
+          if (dietaryRestrictions.indexOf('vegetarian') !== -1 && item.tags.indexOf('素食') === -1) return false;
+          if (dietaryRestrictions.indexOf('vegan') !== -1 && item.tags.indexOf('素食') === -1) return false;
+          if (dietaryRestrictions.indexOf('halal') !== -1 && item.name.indexOf('猪肉') !== -1) return false;
+
+          return true;
+      });
+
+      // 如果没有匹配项，放宽条件
+      if (filteredMenu.length === 0) {
+          filteredMenu = menuDatabase.filter(function(item) {
+              return item.price <= budget;
+          });
+
+          if (filteredMenu.length === 0) {
+              filteredMenu = menuDatabase.slice(0, 3); // 至少显示3个
+          }
+      }
+
+      // 随机选择3-5个推荐项
+      var shuffled = filteredMenu.sort(function() {
+          return 0.5 - Math.random();
+      });
+      var selected = shuffled.slice(0, Math.min(5, shuffled.length));
+
+      // 显示推荐
+      displayRecommendations(selected);
   }
 
+  // 获取选中的菜系
+  function getSelectedCuisines() {
+      var cuisines = [];
+      var checkboxes = document.querySelectorAll('.preference-panel input[type="checkbox"][id^="chinese"], input[type="checkbox"][id^="western"], input[type="checkbox"][id^="japanese"], input[type="checkbox"][id^="korean"], input[type="checkbox"][id^="fastfood"]');
+
+      for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].checked) {
+              cuisines.push(checkboxes[i].value);
+          }
+      }
+
+      return cuisines;
+  }
+
+  // 获取饮食限制
+  function getDietaryRestrictions() {
+      var restrictions = [];
+      var checkboxes = document.querySelectorAll('.preference-panel input[type="checkbox"][id^="vegetarian"], input[type="checkbox"][id^="vegan"], input[type="checkbox"][id^="halal"], input[type="checkbox"][id^="gluten-free"]');
+
+      for (var i = 0; i < checkboxes.length; i++) {
+          if (checkboxes[i].checked) {
+              restrictions.push(checkboxes[i].value);
+          }
+      }
+
+      return restrictions;
+  }
+
+  // 显示推荐
+  function displayRecommendations(menuItems) {
+      var recommendationList = document.getElementById('recommendation-list');
+      recommendationList.innerHTML = '';
+
+      if (menuItems.length === 0) {
+          recommendationList.innerHTML = '<div class="empty-order">没有找到匹配的菜单，请调整您的偏好设置</div>';
+          return;
+      }
+
+      for (var i = 0; i < menuItems.length; i++) {
+          var item = menuItems[i];
+          var menuItem = document.createElement('div');
+          menuItem.className = 'menu-item' + (i === 0 ? ' recommended' : '');
+
+          // 根据辣度值显示对应的辣度文本
+          var spicyTexts = ["不辣", "微辣", "中辣", "重辣", "特辣", "变态辣"];
+          var spicyTag = spicyTexts[item.spicy] || "不辣";
+
+          // 生成标签HTML
+          var tagsHTML = '';
+          for (var j = 0; j < item.tags.length; j++) {
+              tagsHTML += '<span class="tag">' + item.tags[j] + '</span>';
+          }
+          tagsHTML += '<span class="tag">' + spicyTag + '</span>';
+
+          menuItem.innerHTML = '\
+              <div class="menu-info">\
+                  <div class="menu-name"><i class="fas ' + item.icon + ' food-icon"></i>' + item.name + '</div>\
+                  <div class="menu-desc">' + item.description + '</div>\
+                  <div class="menu-tags">' + tagsHTML + '</div>\
+              </div>\
+              <div class="menu-price">¥' + item.price + '</div>\
+              <button class="order-btn" data-item="' + item.name + '" data-price="' + item.price + '">点餐</button>\
+          ';
+
+          recommendationList.appendChild(menuItem);
+      }
+
+      // 为点餐按钮添加事件监听器
+      var orderButtons = document.querySelectorAll('.order-btn');
+      for (var k = 0; k < orderButtons.length; k++) {
+          orderButtons[k].addEventListener('click', function() {
+              var itemName = this.getAttribute('data-item');
+              var itemPrice = parseInt(this.getAttribute('data-price'));
+              addToOrder(itemName, itemPrice);
+          });
+      }
+  }
+
+  // 添加到订单
+  function addToOrder(itemName, itemPrice) {
+      // 检查是否已存在
+      var existingItem = null;
+      for (var i = 0; i < orderItems.length; i++) {
+          if (orderItems[i].name === itemName) {
+              existingItem = orderItems[i];
+              break;
+          }
+      }
+
+      if (existingItem) {
+          existingItem.quantity += 1;
+      } else {
+          orderItems.push({
+              name: itemName,
+              price: itemPrice,
+              quantity: 1
+          });
+      }
+
+      updateOrderSummary();
+  }
+
+  // 更新订单摘要
+  function updateOrderSummary() {
+      var orderItemsContainer = document.getElementById('order-items');
+      var orderTotal = document.getElementById('order-total');
+      var clearOrderBtn = document.getElementById('clear-order');
+
+      if (orderItems.length === 0) {
+          orderItemsContainer.innerHTML = '<div class="empty-order">暂无点餐项目，请从上方推荐中选择</div>';
+          orderTotal.style.display = 'none';
+          clearOrderBtn.style.display = 'none';
+          return;
+      }
+
+      // 计算总价
+      totalAmount = 0;
+      for (var i = 0; i < orderItems.length; i++) {
+          totalAmount += orderItems[i].price * orderItems[i].quantity;
+      }
+
+      // 生成订单项目列表
+      var orderHTML = '';
+      for (var j = 0; j < orderItems.length; j++) {
+          var item = orderItems[j];
+          orderHTML += '\
+              <div class="order-item">\
+                  <span>' + item.name + ' × ' + item.quantity + '</span>\
+                  <span>¥' + (item.price * item.quantity) + '</span>\
+              </div>\
+          ';
+      }
+
+      orderItemsContainer.innerHTML = orderHTML;
+      document.getElementById('total-amount').textContent = '¥' + totalAmount;
+
+      orderTotal.style.display = 'flex';
+      clearOrderBtn.style.display = 'block';
+
+      // 添加清空订单按钮事件监听器
+      clearOrderBtn.onclick = function() {
+          orderItems = [];
+          updateOrderSummary();
+      };
+  }
+
+  // 保存偏好设置到本地存储
+  function savePreferences() {
+      var preferences = {
+          budget: document.getElementById('budget').value,
+          spicy: document.getElementById('spicy').value,
+          vegetarian: document.getElementById('vegetarian').checked,
+          vegan: document.getElementById('vegan').checked,
+          halal: document.getElementById('halal').checked,
+          glutenFree: document.getElementById('gluten-free').checked,
+          chinese: document.getElementById('chinese').checked,
+          western: document.getElementById('western').checked,
+          japanese: document.getElementById('japanese').checked,
+          korean: document.getElementById('korean').checked,
+          fastfood: document.getElementById('fastfood').checked,
+          mealType: document.querySelector('input[name="mealType"]:checked').value
+      };
+
+      localStorage.setItem('lunchAssistantPrefs', JSON.stringify(preferences));
+  }
+
+  // 从本地存储加载偏好设置
+  function loadPreferences() {
+      var savedPrefs = localStorage.getItem('lunchAssistantPrefs');
+
+      if (savedPrefs) {
+          var preferences = JSON.parse(savedPrefs);
+
+          document.getElementById('budget').value = preferences.budget;
+          document.getElementById('budget-value').textContent = preferences.budget;
+          document.getElementById('spicy').value = preferences.spicy;
+          document.getElementById('vegetarian').checked = preferences.vegetarian;
+          document.getElementById('vegan').checked = preferences.vegan;
+          document.getElementById('halal').checked = preferences.halal;
+          document.getElementById('gluten-free').checked = preferences.glutenFree;
+          document.getElementById('chinese').checked = preferences.chinese;
+          document.getElementById('western').checked = preferences.western;
+          document.getElementById('japanese').checked = preferences.japanese;
+          document.getElementById('korean').checked = preferences.korean;
+          document.getElementById('fastfood').checked = preferences.fastfood;
+
+          // 设置用餐类型
+          var mealTypeInput = document.querySelector('input[name="mealType"][value="' + preferences.mealType + '"]');
+          if (mealTypeInput) {
+              mealTypeInput.checked = true;
+          }
+      }
+  }
 </script>
+</body>
 </html>

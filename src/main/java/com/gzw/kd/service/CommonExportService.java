@@ -91,7 +91,7 @@ public interface CommonExportService {
         FileUtil.mkdir(fullDir);
 
         // 生成时间前缀的文件名
-        SimpleDateFormat timeFormat = new SimpleDateFormat("mm:ss");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
         String timePrefix = timeFormat.format(System.currentTimeMillis());
 
         return fullDir + File.separator + timePrefix + "_" + fileNameAndSuffix;
