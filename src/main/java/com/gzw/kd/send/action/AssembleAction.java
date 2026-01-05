@@ -13,6 +13,7 @@ import com.gzw.kd.common.entity.ContentModel;
 import com.gzw.kd.common.entity.MessageParam;
 import com.gzw.kd.common.enums.BusinessCode;
 import com.gzw.kd.common.enums.ChannelTypeEnum;
+import com.gzw.kd.common.enums.MessageStatusEnum;
 import com.gzw.kd.common.enums.TemplateStatusEnum;
 import com.gzw.kd.common.utils.ContentHolderUtil;
 import com.gzw.kd.common.entity.TaskInfo;
@@ -52,7 +53,7 @@ public class AssembleAction implements BusinessProcess<SendTaskModel> {
 
         try {
             TemplateInfo messageTemplate = messageTemplateService.selectById(messageTemplateId.intValue());
-            if (ObjectUtil.isEmpty(messageTemplate) || messageTemplate.getIsDeleted().equals(TemplateStatusEnum.STOP.getStatus())) {
+            if (ObjectUtil.isEmpty(messageTemplate) || messageTemplate.getIsDeleted().equals(TemplateStatusEnum.STOP.getStatus()) ||messageTemplate.getMsgStatus().equals(MessageStatusEnum.STOP.getCode())) {
                 context.setNeedBreak(true).setResponse(R.error());
                 return;
             }
