@@ -111,16 +111,16 @@ public abstract class BaseHandler implements Handler {
             // 流量控制
             flowControl(taskInfo);
 
-            Long recordId = messageRecordService.createRecord(taskInfo);
+            Long bizId = messageRecordService.createRecord(taskInfo);
 
-            taskInfo.setRecordId(recordId);
+            taskInfo.setRecordId(bizId);
             // 执行具体处理
             boolean success = handler(taskInfo);
 
             long executeTime = System.currentTimeMillis() - startTime;
 
             // 3. 更新记录状态
-            if (recordId != null) {
+            if (bizId != null) {
                 // 计算成功失败数量（根据具体业务）
                 int receiverCount = (taskInfo.getReceiver() != null && !taskInfo.getReceiver().isEmpty())
                         ? taskInfo.getReceiver().size()
@@ -129,7 +129,7 @@ public abstract class BaseHandler implements Handler {
                 int successCount = success ? receiverCount : 0;
                 int failCount = success ? 0 : receiverCount;
 
-                messageRecordService.updateStatus(recordId, success, successCount, failCount);
+                messageRecordService.updateStatus(bizId, success, successCount, failCount);
             }
             result.setExecuteTime(executeTime);
             result.setSuccess(success);

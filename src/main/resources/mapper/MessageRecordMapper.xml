@@ -155,7 +155,7 @@
         COUNT(*)
         FROM
         doc.message_record mr
-        left JOIN doc.message_receiver_detail mrd ON mr.id = mrd.record_id
+        left JOIN doc.message_receiver_detail mrd ON mr.id = mrd.record_id and mrd.receiver = #{userId}
         WHERE
         (mr.receiver = #{userId} or mr.receiver = #{phone} or mr.receiver = #{email} or mr.message_type = 1)
         AND mr.status = 60
@@ -200,7 +200,7 @@
         COUNT(*)
         FROM
         doc.message_record mr
-        left JOIN doc.message_receiver_detail mrd ON mr.id = mrd.record_id
+        left JOIN doc.message_receiver_detail mrd ON mr.id = mrd.record_id and mrd.receiver = #{userId}
         WHERE
         (mr.receiver = #{userId} or mr.receiver = #{phone} or mr.receiver = #{email} or mr.message_type = 1)
         AND mr.status = 60

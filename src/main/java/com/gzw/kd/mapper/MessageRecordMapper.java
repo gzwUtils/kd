@@ -23,7 +23,7 @@ public interface MessageRecordMapper {
     /**
      * 根据业务ID查询
      */
-    MessageRecord selectByBizId(String bizId);
+    List<MessageRecord> selectByBizId(String bizId);
 
 
     /**

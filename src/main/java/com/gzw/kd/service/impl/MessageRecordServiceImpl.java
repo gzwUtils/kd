@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import static com.gzw.kd.common.enums.MessageSendTypeEnum.BROADCAST;
@@ -45,74 +46,121 @@ public class MessageRecordServiceImpl implements MessageRecordService {
 
 
     @Override
+    @Transactional
     public Long createRecord(TaskInfo taskInfo) {
         try {
-            MessageRecord messageRecord = new MessageRecord();
-            messageRecord.setBizId(String.valueOf(taskInfo.getBusinessId()));
-            messageRecord.setTemplateId(taskInfo.getMessageTemplateId());
-            messageRecord.setChannelType(ChannelTypeEnum.getDescription(taskInfo.getSendChannel()));
+            Long bizId = taskInfo.getBusinessId();
 
             // 过滤掉空值
             Set<String> collected = taskInfo.getReceiver().stream()
                     .filter(r -> r != null && !r.trim().isEmpty())
                     .collect(Collectors.toSet());
-            // 消息类型
-            if (collected.isEmpty()) {
-                messageRecord.setMessageType(BROADCAST.getCode());
-            } else if (collected.size() == 1) {
-                messageRecord.setMessageType(MessageSendTypeEnum.SINGLE.getCode());
-                messageRecord.setReceiver(collected.iterator().next());
-            } else {
-                messageRecord.setMessageType(MessageSendTypeEnum.BATCH.getCode());
-                messageRecord.setReceiver(String.join(",", collected));
-            }
 
-            messageRecord.setReceiverCount(collected.isEmpty() ? "all" : String.valueOf(collected.size()));
             ContentModel contentModel = JSON.parseObject(taskInfo.getContentModel(), ContentModel.class);
-            messageRecord.setContent(contentModel.getContent());
-            messageRecord.setTitle(contentModel.getTitle());
+            Date now = new Date();
+            Date scheduleTime = null;
+
             // 延迟信息
-            messageRecord.setDelayMinutes(taskInfo.getDelayMinutes().intValue());
             if (taskInfo.getDelayMinutes() > 0) {
-                messageRecord.setScheduleTime(new Date(System.currentTimeMillis() +
-                        taskInfo.getDelayMinutes() * 60 * 1000));
+                scheduleTime = new Date(System.currentTimeMillis() +
+                        taskInfo.getDelayMinutes() * 60 * 1000);
             }
 
-            messageRecord.setStatus(MessageStatusEnum.SENDING.getCode()); // 发送中
-            messageRecord.setCreateTime(new Date());
+            boolean hasSuccessInsert;
 
-            int result = messageRecordMapper.insertRecord(messageRecord);
-            if (result > 0) {
-                log.info("消息记录创建成功，ID: {}, 业务ID: {}", messageRecord.getId(), messageRecord.getBizId());
-                return messageRecord.getId();
+            // 如果没有接收者（广播消息）
+            if (collected.isEmpty()) {
+                hasSuccessInsert = broad(taskInfo, bizId, contentModel, scheduleTime, now);
             }
-            return 0L;
+            // 有接收者的情况
+            else {
+                hasSuccessInsert = batch(taskInfo, collected, bizId, contentModel, scheduleTime, now);
+
+                log.info("批量消息记录创建完成，业务ID: {}, 接收者数量: {}", bizId, collected.size());
+            }
+
+            // 如果有成功插入的记录，返回业务ID，否则返回null
+            return hasSuccessInsert ? bizId : null;
         } catch (Exception e) {
             log.error("创建消息记录失败，业务ID: {}", taskInfo.getBusinessId(), e);
-            return 0L;
+            return null;
         }
     }
 
+    private boolean batch(TaskInfo taskInfo, Set<String> collected, Long bizId, ContentModel contentModel, Date scheduleTime, Date now) {
+        int successCount = 0;
+        for (String receiver : collected) {
+            MessageRecord messageRecord = new MessageRecord();
+            messageRecord.setBizId(String.valueOf(bizId));
+            messageRecord.setTemplateId(taskInfo.getMessageTemplateId());
+            messageRecord.setChannelType(ChannelTypeEnum.getDescription(taskInfo.getSendChannel()));
+            messageRecord.setMessageType(collected.size() == 1 ?
+                    MessageSendTypeEnum.SINGLE.getCode() :
+                    MessageSendTypeEnum.BATCH.getCode());
+            messageRecord.setReceiverCount(String.valueOf(collected.size()));
+            messageRecord.setReceiver(receiver);
+            messageRecord.setContent(contentModel.getContent());
+            messageRecord.setTitle(contentModel.getTitle());
+            messageRecord.setDelayMinutes(taskInfo.getDelayMinutes().intValue());
+            messageRecord.setScheduleTime(scheduleTime);
+            messageRecord.setStatus(MessageStatusEnum.SENDING.getCode());
+            messageRecord.setCreateTime(now);
+
+            int result = messageRecordMapper.insertRecord(messageRecord);
+            if (result > 0) {
+                successCount++;
+                log.debug("消息记录创建成功，业务ID: {}, 接收者: {}", bizId, receiver);
+            }
+        }
+        return successCount == collected.size() ;
+    }
+
+    private boolean broad(TaskInfo taskInfo, Long bizId, ContentModel contentModel, Date scheduleTime, Date now) {
+        boolean hasSuccessInsert = false;
+        MessageRecord messageRecord = new MessageRecord();
+        messageRecord.setBizId(String.valueOf(bizId));
+        messageRecord.setTemplateId(taskInfo.getMessageTemplateId());
+        messageRecord.setChannelType(ChannelTypeEnum.getDescription(taskInfo.getSendChannel()));
+        messageRecord.setMessageType(BROADCAST.getCode());
+        messageRecord.setReceiverCount("all");
+        messageRecord.setContent(contentModel.getContent());
+        messageRecord.setTitle(contentModel.getTitle());
+        messageRecord.setDelayMinutes(taskInfo.getDelayMinutes().intValue());
+        messageRecord.setScheduleTime(scheduleTime);
+        messageRecord.setStatus(MessageStatusEnum.SENDING.getCode());
+        messageRecord.setCreateTime(now);
+
+        int result = messageRecordMapper.insertRecord(messageRecord);
+        if (result > 0) {
+            hasSuccessInsert = true;
+            log.info("广播消息记录创建成功，业务ID: {}", bizId);
+        }
+        return hasSuccessInsert;
+    }
+
     @Override
-    public boolean updateStatus(Long recordId, boolean success, int successCount, int failCount) {
+    public boolean updateStatus(Long bizId, boolean success, int successCount, int failCount) {
         try {
-            MessageRecord messageRecord = messageRecordMapper.selectById(recordId);
-            if (messageRecord == null) {
-                log.error("消息记录不存在，ID: {}", recordId);
+            List<MessageRecord> messageRecords = messageRecordMapper.selectByBizId(String.valueOf(bizId));
+            if (messageRecords.isEmpty()) {
+                log.error("消息记录不存在，ID: {}", bizId);
                 return false;
             }
-
-            messageRecord.setStatus(success ? MessageStatusEnum.SEND_SUCCESS.getCode() : MessageStatusEnum.SEND_FAIL.getCode());
-            messageRecord.setSuccessCount(successCount);
-            messageRecord.setFailCount(failCount);
-            messageRecord.setSendTime(new Date());
-
-            int result = messageRecordMapper.updateStatistics(recordId, successCount, failCount);
-            messageRecordMapper.updateStatus(recordId, messageRecord.getStatus(), messageRecord.getSendTime());
-
-            return result > 0;
+            AtomicInteger updateCount = new AtomicInteger();
+            messageRecords.forEach(t->{
+                t.setStatus(success ? MessageStatusEnum.SEND_SUCCESS.getCode() : MessageStatusEnum.SEND_FAIL.getCode());
+                t.setSuccessCount(successCount);
+                t.setFailCount(failCount);
+                t.setSendTime(new Date());
+                messageRecordMapper.updateStatistics(t.getId(), successCount, failCount);
+                int result = messageRecordMapper.updateStatus(t.getId(), t.getStatus(), t.getSendTime());
+                if(result > 0){
+                    updateCount.getAndIncrement();
+                }
+            });
+            return updateCount.get() == messageRecords.size();
         } catch (Exception e) {
-            log.error("更新发送结果失败，记录ID: {}", recordId, e);
+            log.error("更新发送结果失败，业务ID: {}", bizId, e);
             return false;
         }
     }
