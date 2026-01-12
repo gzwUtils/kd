@@ -1,2 +1,1 @@
- 2025-08-26 22:46:27.855 [main] DEBUG com.gzw.kd.KdApplication - Running with Spring Boot v2.7.12, Spring v5.3.27
- 2025-08-26 22:46:33.027 [main] DEBUG com.gzw.kd.config.DataSourceConfig - mysql master  druid data-source init...
+ 2026-01-12 21:09:09.773 [main] DEBUG com.gzw.kd.KdApplication - Running with Spring Boot v2.7.12, Spring v5.3.27

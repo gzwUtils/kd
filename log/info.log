@@ -1,4 +1,4 @@
- 2025-08-26 22:46:27.746 [main] INFO  org.springframework.boot.SpringApplication - 
+ 2026-01-12 21:09:09.433 [main] INFO  org.springframework.boot.SpringApplication - 
 
    ___              ____          __      __
   / __|     o O O  |_  /     o O O\ \    / /
@@ -14,21 +14,6 @@ Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道�
 
 
 
- 2025-08-26 22:46:27.822 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
- 2025-08-26 22:46:27.854 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on 192.168.1.9 with PID 40628 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
- 2025-08-26 22:46:27.856 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
- 2025-08-26 22:46:30.655 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Multiple Spring Data modules found, entering strict repository configuration mode
- 2025-08-26 22:46:30.659 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Bootstrapping Spring Data Redis repositories in DEFAULT mode.
- 2025-08-26 22:46:30.738 [main] INFO  o.s.d.r.config.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 52 ms. Found 0 Redis repository interfaces.
- 2025-08-26 22:46:31.150 [main] INFO  o.springframework.cloud.context.scope.GenericScope - BeanFactory id=484e9237-4b5a-31cd-a9b5-2ff158eb33cb
- 2025-08-26 22:46:32.469 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8092 (http)
- 2025-08-26 22:46:32.490 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8092"]
- 2025-08-26 22:46:32.491 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
- 2025-08-26 22:46:32.491 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.75]
- 2025-08-26 22:46:32.765 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
- 2025-08-26 22:46:32.766 [main] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4402 ms
- 2025-08-26 22:46:37.501 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
- 2025-08-26 22:46:37.543 [main] INFO  org.apache.catalina.core.StandardService - Stopping service [Tomcat]
- 2025-08-26 22:46:37.566 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLoggingListener - 
-
-Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+ 2026-01-12 21:09:09.571 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2026-01-12 21:09:09.772 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on 192.168.1.78 with PID 69406 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2026-01-12 21:09:09.775 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"
