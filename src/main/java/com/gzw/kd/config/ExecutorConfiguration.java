@@ -8,6 +8,8 @@ import org.slf4j.MDC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.Callable;
@@ -51,6 +53,59 @@ public class ExecutorConfiguration {
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
         //执行初始化
         executor.initialize();
+        return executor;
+    }
+
+
+
+    /**
+     * 心跳检测线程池
+     */
+    @Bean(name = "heartbeatScheduler")
+    public ThreadPoolTaskScheduler heartbeatScheduler() {
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(2);
+        scheduler.setThreadNamePrefix("ws-heartbeat-");
+        scheduler.setDaemon(true);
+        scheduler.setWaitForTasksToCompleteOnShutdown(true);
+        scheduler.setAwaitTerminationSeconds(30);
+        scheduler.initialize();
+        log.info("WebSocket心跳线程池初始化完成");
+        return scheduler;
+    }
+
+    /**
+     * 清理任务线程池
+     */
+    @Bean(name = "cleanupScheduler")
+    public ThreadPoolTaskScheduler cleanupScheduler() {
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+        scheduler.setPoolSize(1);
+        scheduler.setThreadNamePrefix("ws-cleanup-");
+        scheduler.setDaemon(true);
+        scheduler.setWaitForTasksToCompleteOnShutdown(true);
+        scheduler.setAwaitTerminationSeconds(30);
+        scheduler.initialize();
+        log.info("WebSocket清理线程池初始化完成");
+        return scheduler;
+    }
+
+    /**
+     * 消息处理线程池
+     */
+    @Bean(name = "messageExecutor")
+    public ThreadPoolTaskExecutor messageExecutor() {
+        ThreadPoolTaskExecutor executor = new CustomThreadPollTaskExecutor();
+        executor.setCorePoolSize(4);
+        executor.setMaxPoolSize(8);
+        executor.setQueueCapacity(1000);
+        executor.setKeepAliveSeconds(60);
+        executor.setThreadNamePrefix("ws-message-");
+        executor.setDaemon(true);
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        executor.setAwaitTerminationSeconds(30);
+        executor.initialize();
+        log.info("WebSocket消息线程池初始化完成");
         return executor;
     }
 
