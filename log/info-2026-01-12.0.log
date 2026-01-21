@@ -1,0 +1,19 @@
+ 2026-01-12 21:09:09.433 [main] INFO  org.springframework.boot.SpringApplication - 
+
+   ___              ____          __      __
+  / __|     o O O  |_  /     o O O\ \    / /
+ | (_ |    o        / /     o      \ \/\/ /
+  \___|   TS__[O]  /___|   TS__[O]  \_/\_/
+_|"""""| {======|_|"""""| {======|_|"""""|
+"`-0-0-'./o--000'"`-0-0-'./o--000'"`-0-0-'
+
+B+树 https://www.cs.usfca.edu/~galles/visualization/BPlusTree.html
+
+kd version 0.0.1
+Spring Boot Version: 2.7.12 (v2.7.12) >>>欢迎使用后台管理系统 大道至简 代码玄学<<<
+
+
+
+ 2026-01-12 21:09:09.571 [background-preinit] INFO  org.hibernate.validator.internal.util.Version - HV000001: Hibernate Validator 6.2.5.Final
+ 2026-01-12 21:09:09.772 [main] INFO  com.gzw.kd.KdApplication - Starting KdApplication using Java 1.8.0_181 on 192.168.1.78 with PID 69406 (/Users/gaozhiwei/kd/target/classes started by gaozhiwei in /Users/gaozhiwei/kd)
+ 2026-01-12 21:09:09.775 [main] INFO  com.gzw.kd.KdApplication - The following 1 profile is active: "test"

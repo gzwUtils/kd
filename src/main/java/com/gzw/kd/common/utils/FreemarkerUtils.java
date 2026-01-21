@@ -19,10 +19,17 @@ public class FreemarkerUtils {
     private static Configuration freemarkerCfg = null;
 
     static {
-        freemarkerCfg = new Configuration();
-        //freemarker的模板目录
-        freemarkerCfg.setEncoding(Locale.CHINA, "UTF-8");
-        freemarkerCfg.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
+        try {
+            freemarkerCfg = new Configuration(Configuration.VERSION_2_3_31);
+            // 关键：设置模板加载路径为类路径
+            freemarkerCfg.setClassForTemplateLoading(FreemarkerUtils.class, "/templates/");
+            // 或者使用文件系统路径（如果模板在文件系统中）
+            freemarkerCfg.setEncoding(Locale.CHINA, "UTF-8");
+            freemarkerCfg.setDefaultEncoding("UTF-8");
+            freemarkerCfg.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
+        } catch (Exception e) {
+            log.error("初始化FreeMarker配置失败", e);
+        }
     }
 
     /**

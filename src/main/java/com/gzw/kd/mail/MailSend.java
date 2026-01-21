@@ -32,7 +32,7 @@ public class MailSend {
 			if(html){
 				Map<String, Object> map = new HashMap<>();
 				map.put("message",content+STRING_EMPTY);
-				content = FreemarkerUtils.freeMarkerRender(map, "/src/main/resources/templates/error/500.html");
+				content = FreemarkerUtils.freeMarkerRender(map, "error/500.html");
 			}
 			messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 			messageHelper.setFrom(SYSTEM_MAIL_ACCOUNT);
@@ -56,7 +56,7 @@ public class MailSend {
 			if(html){
 				Map<String, Object> map = BeanUtil.beanToMap(model, MapUtil.newHashMap(), false, false);
 				map.put("sendTime", LocalDateTime.now());
-				htmlContent = FreemarkerUtils.freeMarkerRender(map, "/src/main/resources/templates/"+path);
+				htmlContent = FreemarkerUtils.freeMarkerRender(map, path);
 			} else {
 				htmlContent = model.getContent();
 			}
